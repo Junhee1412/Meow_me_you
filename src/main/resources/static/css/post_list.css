@@ -66,7 +66,7 @@
     rgba(255, 255, 255, 0.15),
     rgba(255, 255, 255, 0)
   );
-  --bs-body-font-family: "Noto Serif KR", serif, 'Noto Sans KR', sans-serif, -apple-system,
+  --bs-body-font-family: 'Noto Sans KR', sans-serif, "Noto Serif KR", serif,  -apple-system,
     BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
     Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   --bs-body-font-size: 1rem;
@@ -336,7 +336,6 @@ img,
 svg {
   vertical-align: middle;
 }
-
 table {
   caption-side: bottom;
   border-collapse: collapse;
@@ -11573,7 +11572,9 @@ footer{
   display: flex;
   align-items: center;
   justify-content: center;
-  
+  font-family: 'Jua', 'Noto Sans KR', sans-serif, "Noto Serif KR", serif, -apple-system,
+  BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
+  Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;;
 }
 .header-card .card {
   width: 900px;
@@ -11610,7 +11611,7 @@ footer{
 #top_dropdown {
   text-align: end;
   margin-top:10px;
-  margin-bottom: -28px;
+  margin:20px 21% 20px 0px;
 }
 
 .pad_4 {
@@ -11630,4 +11631,14 @@ footer{
 
 .card-title{
   margin-top: 100px;
+}
+
+#table_box{
+  width:60%;
+  margin:0 auto;
+}
+
+#search_box{
+  width:70%;
+  margin:0 auto;
 }

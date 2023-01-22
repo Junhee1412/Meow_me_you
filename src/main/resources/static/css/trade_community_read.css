@@ -66,7 +66,7 @@
     rgba(255, 255, 255, 0.15),
     rgba(255, 255, 255, 0)
   );
-  --bs-body-font-family: "Noto Serif KR", serif, 'Noto Sans KR', sans-serif, -apple-system,
+  --bs-body-font-family: 'Noto Sans KR', sans-serif, "Noto Serif KR", serif, -apple-system,
     BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
     Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   --bs-body-font-size: 1rem;
@@ -11554,7 +11554,7 @@ footer.footer .social-link:hover {
 footer{
   font-family: 'Noto Sans KR', sans-serif, "Noto Serif KR", serif, -apple-system,
   BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
-  Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;;
+  Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
 
 
@@ -11574,6 +11574,9 @@ footer{
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: 'Jua', 'Noto Sans KR', sans-serif, "Noto Serif KR", serif, -apple-system,
+  BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
+  Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
 .header-card .card {
   width: 900px;
@@ -11725,8 +11728,4 @@ footer{
   align-items: center;
   justify-content: end;
   margin-bottom: 50px;
-}
-
-.card-title{
-  margin-top: 100px;
 }

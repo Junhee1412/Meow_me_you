@@ -76,6 +76,21 @@
   --bs-body-bg: #fff;
 }
 
+.header-card{
+  font-family: 'Noto Sans KR', sans-serif, "Noto Serif KR", serif, -apple-system,
+    BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+}
+.header-card h3{
+  font-weight: 400;
+}
+section{
+    font-family: 'Noto Sans KR', sans-serif, "Noto Serif KR", serif, -apple-system,
+    BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    font-weight:300;
+}
+
 *,
 *::before,
 *::after {
@@ -10939,7 +10954,6 @@ fieldset:disabled .btn {
 body,
 html {
   width: 100%;
-  height: 100%;
 }
 
 
@@ -11684,7 +11698,7 @@ footer{
 }
 
 section {
-  height: 500px;
+  height: 700px;
   width: 500px;
   margin: 0 auto;
 }
@@ -11698,11 +11712,16 @@ section {
 }
 
 .btn-group{
-
   text-align: center;
   width: 70%;
   margin-top: 10px;
+  place-items: center;
 }
+
 .btn-group .btn{
   margin-top: 10px;
+}
+
+.btn{
+  width:60%;
 }

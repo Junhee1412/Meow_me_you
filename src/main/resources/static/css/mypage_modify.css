@@ -11602,6 +11602,9 @@ footer{
 .insert {
   text-align: center;
   margin-top: 130px;
+  font-family: 'Noto Sans KR', sans-serif, "Jua", "Noto Serif KR", serif, -apple-system,
+  BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
+  Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
 
 .insert .thumb {
@@ -11647,4 +11650,7 @@ footer{
 
 section{
   margin-bottom: 50px;
+  font-family: 'Noto Sans KR', sans-serif, "Jua", "Noto Serif KR", serif, -apple-system,
+  BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
+  Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }

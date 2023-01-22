@@ -11606,6 +11606,9 @@ section {
   height: 750px;
   margin-top: 80px;
   margin-bottom: 100px;
+  font-family: 'Noto Sans KR', sans-serif, "Jua", "Noto Serif KR", serif, -apple-system,
+  BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
+  Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
 
 .martop_30 {

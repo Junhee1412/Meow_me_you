@@ -11590,7 +11590,7 @@ footer{
 }
 
 #sponsor_box {
-  width: 600px;
+  width: 100%;
 }
 .martop_10 {
   margin-top: 10px;
@@ -11629,4 +11629,12 @@ section{
 [type="radio"]:hover {
   box-shadow: 0 0 0 max(4px, 0.2em) lightgray;
   cursor: pointer;
+}
+form{
+  width:400px;
+  margin:0 auto;
+}
+
+#password_info{
+  white-space: nowrap;
 }

@@ -11606,13 +11606,10 @@ footer{
 
 /* 섹션 */
 .sec-header {
-  text-align: center;
   margin-top: 130px;
   margin-bottom: -20px;
   width: 100%;
-  
 }
-
 
 .thumb {
   width: 92px;
@@ -11623,10 +11620,16 @@ footer{
 
 .thumb-wrapper {
   position: relative;
-  display: inline-block;
   margin-bottom: 36px;
+  text-align: center;
 }
-
+#user_info{
+  width:100%;
+  white-space: nowrap;
+}
+.text-area h3{
+  text-align: center;
+}
 .greeting {
   margin-bottom: 10px;
 }
@@ -11634,7 +11637,6 @@ footer{
 .mail {
   padding: 8px 22px 10px 22px;
   background-color: rgba(0, 0, 0, 0.05);
-  display: inline-block;
   border-radius: 20px;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
@@ -11674,12 +11676,14 @@ footer{
   margin-left: -50px;
 }
 #user_info_box {
-  text-align: center;
+  display:flex;
+  justify-content: center;
+  align-items: center;
   width: 60%;
   margin: 0 auto;
 }
 #user_info {
-  text-align: center;
+  width:400px;
   margin: 10px;
 }
 
@@ -11697,6 +11701,8 @@ section {
   margin-top: 30px;
 }
 
-.mail a {
+.mail span {
   text-decoration: none;
+  text-align: left;
 }
+

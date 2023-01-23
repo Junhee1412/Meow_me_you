@@ -11641,12 +11641,6 @@ footer{
   opacity: 0.6;
 }
 
-#community_type {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: center;
-}
 #community_type h5 {
   font-size: xx-large;
 }

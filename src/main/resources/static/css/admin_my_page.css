@@ -89,6 +89,12 @@ section{
     BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
     Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
     font-weight:300;
+    width:100%;
+    height:400px;
+    display: flex;
+    justify-content: center;
+    margin:0 auto;
+    white-space: nowrap;
 }
 
 *,
@@ -11689,20 +11695,19 @@ footer{
 }
 #user_info_box {
   text-align: center;
-  width: 20%;
-  margin: 0 auto;
+  width: 100%;
 }
 #user_info {
   text-align: center;
-  margin: 10px;
+  white-space: nowrap;
 }
 
-section {
-  height: 700px;
-  width: 500px;
-  margin: 0 auto;
-}
 
+.list-group{
+  margin-top:30px;
+  text-align: center;
+  margin:0 20px;
+}
 .martop_30 {
   margin-top: 30px;
 }
@@ -11710,7 +11715,9 @@ section {
 .mail a {
   text-decoration: none;
 }
-
+button :hover{
+  cursor: pointer;
+}
 .btn-group{
   text-align: center;
   width: 70%;

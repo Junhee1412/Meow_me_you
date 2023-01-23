@@ -11574,12 +11574,15 @@ footer{
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: "Jua", 'Noto Sans KR', sans-serif, "Noto Serif KR", serif, -apple-system,
+  BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
+  Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
+
 .header-card .card {
   width: 900px;
   height: 300px;
 }
-
 .bg-crop {
   position: relative;
   width: 900px;
@@ -11606,27 +11609,19 @@ footer{
   font-size: xx-large;
 }
 
-section {
+#user_info {
   width: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.user_delete_btn_group {
+.card-img-overlay {
   display: flex;
+  flex-flow: column;
   align-items: center;
   justify-content: center;
-  margin-top: 30px;
 }
-.user_delete_btn_group button{
-  white-space: nowrap;
-}
-.card-title{
-  margin-top: 100px;
-}
-
 table{
   font-family: 'Noto Sans KR', sans-serif, "Noto Serif KR", serif, -apple-system,
   BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
@@ -11638,15 +11633,29 @@ button{
     BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
     Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
-.header-card{
-  font-family: 'Jua','Noto Sans KR', sans-serif, "Noto Serif KR", serif, -apple-system,
-    BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
-    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-}
 #user_detail_info_box{
   width:300px;
 }
 #user_btn{
   place-items:center;
   white-space:nowrap;
+}
+
+#admin_btn_group{
+  font-family: 'Noto Sans KR', sans-serif, "Noto Serif KR", serif, -apple-system,
+  BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
+  Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-weight:300;
+  width:100%;
+  height:400px;
+  display: flex;
+  justify-content: center;
+  margin:0 auto;
+  white-space: nowrap;
+}
+
+.list-group{
+  margin-top:30px;
+  text-align: center;
+  margin:0 20px;
 }

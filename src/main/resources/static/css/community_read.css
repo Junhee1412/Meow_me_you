@@ -11,8 +11,8 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;500&display=swap');
- 
+@import url("https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;500&display=swap");
+
 :root {
   --bs-blue: #1d809f;
   --bs-indigo: #6610f2;
@@ -37,7 +37,7 @@
   --bs-gray-800: #343a40;
   --bs-gray-900: #212529;
   --bs-primary: #1d809f;
-  --bs-secondary: #ecb807;
+  --bs-secondary: #6c757d;
   --bs-success: #198754;
   --bs-info: #0dcaf0;
   --bs-warning: #ecb807;
@@ -45,7 +45,7 @@
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
   --bs-primary-rgb: 29, 128, 159;
-  --bs-secondary-rgb: 236, 184, 7;
+  --bs-secondary-rgb: 92, 99, 106;
   --bs-success-rgb: 25, 135, 84;
   --bs-info-rgb: 13, 202, 240;
   --bs-warning-rgb: 236, 184, 7;
@@ -66,9 +66,10 @@
     rgba(255, 255, 255, 0.15),
     rgba(255, 255, 255, 0)
   );
-  --bs-body-font-family: "Noto Serif KR", serif, 'Noto Sans KR', sans-serif, -apple-system,
-    BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
-    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  --bs-body-font-family: "Noto Serif KR", serif, "Noto Sans KR", sans-serif,
+    -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,
+    Noto Color Emoji;
   --bs-body-font-size: 1rem;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
@@ -3178,20 +3179,20 @@ fieldset:disabled .btn {
 }
 
 .btn-secondary {
-  color: #000;
-  background-color: #ecb807;
-  border-color: #ecb807;
+  color: #fff;
+  background-color: #5c636a;
+  border-color: #575f65;
 }
 .btn-secondary:hover {
-  color: #000;
-  background-color: #efc32c;
-  border-color: #eebf20;
+  color: #fff;
+  background-color: #5c636a;
+  border-color: #575f65;
 }
 .btn-check:focus + .btn-secondary,
 .btn-secondary:focus {
-  color: #000;
-  background-color: #efc32c;
-  border-color: #eebf20;
+  color: #fff;
+  background-color: #5c636a;
+  border-color: #575f65;
   box-shadow: 0 0 0 0.25rem rgba(201, 156, 6, 0.5);
 }
 .btn-check:checked + .btn-secondary,
@@ -3199,9 +3200,9 @@ fieldset:disabled .btn {
 .btn-secondary:active,
 .btn-secondary.active,
 .show > .btn-secondary.dropdown-toggle {
-  color: #000;
-  background-color: #f0c639;
-  border-color: #eebf20;
+  color: #fff;
+  background-color: #5c636a;
+  border-color: #575f65;
 }
 .btn-check:checked + .btn-secondary:focus,
 .btn-check:active + .btn-secondary:focus,
@@ -3212,9 +3213,9 @@ fieldset:disabled .btn {
 }
 .btn-secondary:disabled,
 .btn-secondary.disabled {
-  color: #000;
-  background-color: #ecb807;
-  border-color: #ecb807;
+  color: #fff;
+  background-color: #5c636a;
+  border-color: #575f65;
 }
 
 .btn-success {
@@ -3493,13 +3494,13 @@ fieldset:disabled .btn {
 }
 
 .btn-outline-secondary {
-  color: #ecb807;
-  border-color: #ecb807;
+  color: #5c636a;
+  border-color: #575f65;
 }
 .btn-outline-secondary:hover {
-  color: #000;
-  background-color: #ecb807;
-  border-color: #ecb807;
+  color: #fff;
+  background-color: #5c636a;
+  border-color: #575f65;
 }
 .btn-check:focus + .btn-outline-secondary,
 .btn-outline-secondary:focus {
@@ -3510,9 +3511,9 @@ fieldset:disabled .btn {
 .btn-outline-secondary:active,
 .btn-outline-secondary.active,
 .btn-outline-secondary.dropdown-toggle.show {
-  color: #000;
-  background-color: #ecb807;
-  border-color: #ecb807;
+  color: #fff;
+  background-color: #5c636a;
+  border-color: #575f65;
 }
 .btn-check:checked + .btn-outline-secondary:focus,
 .btn-check:active + .btn-outline-secondary:focus,
@@ -3523,7 +3524,7 @@ fieldset:disabled .btn {
 }
 .btn-outline-secondary:disabled,
 .btn-outline-secondary.disabled {
-  color: #ecb807;
+  color: #5c636a;
   background-color: transparent;
 }
 
@@ -4213,16 +4214,12 @@ fieldset:disabled .btn {
   border-top-right-radius: 0;
 }
 
-
 .tab-content > .tab-pane {
   display: none;
 }
 .tab-content > .active {
   display: block;
 }
-
-
-
 
 .accordion-button {
   position: relative;
@@ -10996,7 +10993,6 @@ html {
   border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-
 #sidebar-wrapper.active {
   right: 250px;
   width: 250px;
@@ -11096,7 +11092,7 @@ footer.footer .social-link:hover {
       rgba(255, 255, 255, 0.1) 100%
     ),
     url("../img/felix-lindvik-57HqbvgG4Ww-unsplash.jpg");
-    background-position: center center;
+  background-position: center center;
   background-position: 50% 20%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -11195,7 +11191,6 @@ footer.footer .social-link:hover {
   margin-bottom: -10px;
 }
 
-
 /* map */
 .map {
   height: 30rem;
@@ -11215,10 +11210,9 @@ footer.footer .social-link:hover {
 
 /* aside 반응형 */
 
-
 .img_aside {
   position: relative;
-  width:100%;
+  width: 100%;
 }
 
 @media (max-width: 800px) {
@@ -11231,23 +11225,23 @@ footer.footer .social-link:hover {
 .chat_img {
   height: auto;
   overflow: hidden;
-  position:relative;
-  width:100%;
+  position: relative;
+  width: 100%;
 }
 
 #aside_banner {
-  width:100px;
+  width: 100px;
   position: fixed;
   right: 30px;
   top: 20%;
   z-index: 99;
 }
-.img_aside:hover{
-  width:105%;
+.img_aside:hover {
+  width: 105%;
 }
 #chat_btn {
   position: fixed;
-  width:150px;
+  width: 150px;
   right: 30px;
   top: 90%;
   z-index: 99;
@@ -11260,7 +11254,6 @@ footer.footer .social-link:hover {
   width: 250px;
   margin: 0 auto -50px;
 }
-
 
 .adopt_img {
   min-height: 30rem;
@@ -11286,7 +11279,6 @@ footer.footer .social-link:hover {
   }
 }
 
-
 .trade_section {
   padding-top: 3rem;
   padding-bottom: 5rem;
@@ -11301,17 +11293,15 @@ footer.footer .social-link:hover {
   transition: all 0.4s;
   z-index: 997;
   padding: 30px 0;
-   /* 네브바 백그라운드 */
-   background: #fff;    
-   padding: 15px 0;
-   box-shadow: 0px 2px 20px rgba(14, 29, 52, 0.1);
+  /* 네브바 백그라운드 */
+  background: #fff;
+  padding: 15px 0;
+  box-shadow: 0px 2px 20px rgba(14, 29, 52, 0.1);
 }
 
 .navbar a {
   text-decoration: none;
 }
-
-
 
 /*--------------------------------------------------------------
 # Desktop Navigation
@@ -11347,7 +11337,6 @@ footer.footer .social-link:hover {
     transition: 0.3s;
   }
 
-  
   .navbar a i,
   .navbar a:focus i {
     font-size: 12px;
@@ -11358,7 +11347,7 @@ footer.footer .social-link:hover {
   .navbar a:hover,
   .navbar .active,
   .navbar .active:focus,
-  .navbar li:hover>a {
+  .navbar li:hover > a {
     color: #d3d3d3;
   }
 
@@ -11397,14 +11386,11 @@ footer.footer .social-link:hover {
     min-width: 200px;
   }
 
- 
-
   .navbar .dropdown ul a i {
     font-size: 12px;
   }
 
-
-  .navbar .dropdown:hover>ul {
+  .navbar .dropdown:hover > ul {
     opacity: 1;
     top: 100%;
     visibility: visible;
@@ -11416,7 +11402,7 @@ footer.footer .social-link:hover {
     visibility: hidden;
   }
 
-  .navbar .dropdown .dropdown:hover>ul {
+  .navbar .dropdown .dropdown:hover > ul {
     opacity: 1;
     top: 0;
     left: 100%;
@@ -11429,13 +11415,12 @@ footer.footer .social-link:hover {
     left: -90%;
   }
 
-  .navbar .dropdown .dropdown:hover>ul {
+  .navbar .dropdown .dropdown:hover > ul {
     left: -100%;
   }
 }
 
 @media (min-width: 1280px) {
-
   .mobile-nav-show,
   .mobile-nav-hide {
     display: none;
@@ -11492,7 +11477,7 @@ footer.footer .social-link:hover {
   .navbar a:hover,
   .navbar .active,
   .navbar .active:focus,
-  .navbar li:hover>a {
+  .navbar li:hover > a {
     color: #d3d3d3;
   }
 
@@ -11506,7 +11491,7 @@ footer.footer .social-link:hover {
   }
 
   .navbar .get-a-quote:hover,
-  .navbar .get-a-quote:focus:hover{
+  .navbar .get-a-quote:focus:hover {
     color: #fff;
     background: #000;
   }
@@ -11521,8 +11506,8 @@ footer.footer .social-link:hover {
     border: 1px solid #fff;
   }
 
-  .navbar .dropdown>.dropdown-active,
-  .navbar .dropdown .dropdown>.dropdown-active {
+  .navbar .dropdown > .dropdown-active,
+  .navbar .dropdown .dropdown > .dropdown-active {
     display: block;
   }
 
@@ -11565,15 +11550,11 @@ footer.footer .social-link:hover {
   }
 }
 
-
-
-footer{
-  font-family: 'Noto Sans KR', sans-serif, "Noto Serif KR", serif, -apple-system,
-  BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
-  Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;;
+footer {
+  font-family: "Noto Sans KR", sans-serif, "Noto Serif KR", serif, -apple-system,
+    BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
-
-
 
 /* 추가 */
 
@@ -11595,7 +11576,6 @@ footer{
   height: 300px;
 }
 
-
 .bg-crop {
   position: relative;
   width: 900px;
@@ -11612,26 +11592,28 @@ footer{
   opacity: 0.6;
 }
 .bi-heart {
-  font-size: 50px;
-  line-height: 50px;
+  font-size: 40px;
   color: crimson;
 }
-
+#heart_box {
+  margin-left: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
 .bi-heart-fill {
-  font-size: 50px;
-  line-height: 50px;
+  font-size: 40px;
   color: crimson;
 }
-
 .bi:hover {
   cursor: pointer;
 }
 
 .footer-btn-group button {
   margin: 10px;
-  font-family: 'Noto Sans KR', sans-serif, "Noto Serif KR", serif, -apple-system,
-  BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
-  Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-family: "Noto Sans KR", sans-serif, "Noto Serif KR", serif, -apple-system,
+    BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
 #community_type {
   display: flex;
@@ -11660,7 +11642,7 @@ footer{
 .bi-heart,
 .bi-heart-fill {
   margin-left: auto;
-  margin-right: 50px;
+  margin-right: 10px;
 }
 #writer {
   margin-left: 10px;
@@ -11671,18 +11653,19 @@ footer{
   position: relative;
   margin: 50px 21%;
 }
+#button-addon {
+  width: 10%;
+}
+
 #comment_section {
   margin: 0 21%;
 }
 #comment_form {
   width: 88%;
 }
-#button-addon {
-  width: 10%;
-}
 #single_comment {
   display: flex;
-  font-family: 'Noto Sans KR', sans-serif, "Noto Serif KR", serif, -apple-system,
+  font-family: "Noto Sans KR", sans-serif, "Noto Serif KR", serif, -apple-system,
     BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
     Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
@@ -11739,18 +11722,19 @@ a {
 .sec-ma {
   margin-top: -40px;
 }
-.card-title{
+.card-title {
   margin-top: 100px;
 }
 
-.header-card{
-  font-family:'Jua', "Noto Serif KR", serif, 'Noto Sans KR', sans-serif, -apple-system,
-  BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
-  Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+.header-card {
+  font-family: "Jua", "Noto Serif KR", serif, "Noto Sans KR", sans-serif,
+    -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,
+    Noto Color Emoji;
 }
 
-section{
-  font-family: 'Noto Sans KR', sans-serif, "Noto Serif KR", serif, -apple-system,
+section {
+  font-family: "Noto Sans KR", sans-serif, "Noto Serif KR", serif, -apple-system,
     BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
     Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }

@@ -244,7 +244,9 @@
         <div class="profile_box">
           작성자 : 미우미우<br />작성일자 : 2023-01-11 PM:15:56
         </div>
-        <i class="bi bi-heart"></i>
+        <div id="heart_box">
+          <i class="bi bi-heart"></i> <span class="fs-2" id="like_number">111150</span>
+        </div>
 
         <script>
           var i = 0;
@@ -277,138 +279,137 @@
       </p>
     </section>
 
-    <!-- Comments section-->
-    <section class="mb-3 default_margin">
-      <div class="card bg-light">
-        <div class="card-body">
-          <!-- Comment form-->
-          <div class="input-group card-body mb-3">
-            <form class="reply_input">
-              <textarea
-                class="form-control"
-                rows="3"
-                placeholder="댓글을 달아주세요!"
-              ></textarea>
-            </form>
-            <button
-              class="btn btn-outline-primary"
-              type="submit"
-              id="button-addon"
-            >
-              작성
-            </button>
-          </div>
-          <!-- Comment with nested comments-->
-          <div class="flex_box">
-            <div class="d-flex mb-4" id="width_100per">
-              <!-- Single comment-->
-              <div class="flex-shrink-0 single_comment_box">
-                <img
-                  class="rounded-circle"
-                  src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                  alt="..."
-                />
+       <!-- Comments section-->
+       <section class="mb-3" id="comment_section">
+        <div class="card-wi bg-light">
+          <div class="card-body" >
+            <!-- Comment form-->
+            <div class="input-group card-body mb-3" >
+              <form id="comment_form">
+                <textarea
+                  class="form-control"
+                  rows="3"
+                  placeholder="댓글을 달아주세요!"
+                ></textarea>
+              </form>
+              <button
+                class="btn btn-secondary"
+                type="submit"
+                id="button-addon"
+              >
+                작성
+              </button>
+            </div>
+  
+            <!-- Comment with nested comments-->
+            <div id="single_comment">
+              <div class="d-flex mb-4" id="comment_flexbox">
+                <!-- Single comment-->
+                <div class="flex-shrink-0" id="comment_profile_pic">
+                  <img
+                    class="rounded-circle"
+                    src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                    alt="..."
+                  />
+                </div>
+                <div class="ms-3" id="comment_box" >
+                  <div id="comment_user_id">
+                    제주핵주먹<span class="fw-lighter fs-6" id="comment_date"
+                      >2023.01.10 오후 11시</span
+                    >
+                  </div>
+  
+                  <div id="reply_content_box">
+                    <div class="text-break" id="reply_content">reply content</div>
+                  </div>
+                </div>
               </div>
-              <div class="ms-3" id="width_100per">
-                <div class="fw-bold" id="width_80per">
-                  제주핵주먹<span class="fw-lighter fs-6 marleft_20"
-                    >2023.01.10 오후 11시</span
-                  >
-                </div>
-
-                <div class="flex_box">
-                  <div class="text-break" id="reply_content">reply content</div>
-                </div>
+              <div id="reply_button_group">
+                <a class="text-primary" href="#">수정</a>
+                <a class="text-danger" href="#">삭제</a>
               </div>
             </div>
-            <div class="reply_btn_group">
-              <a class="text-primary" href="#">수정</a>
-              <a class="text-danger" href="#">삭제</a>
-            </div>
-          </div>
-
-          <!-- Comment with nested comments-->
-          <div class="flex_box">
-            <div class="d-flex mb-4" id="width_100per">
-              <!-- Single comment-->
-              <div class="flex-shrink-0 single_comment_box">
-                <img
-                  class="rounded-circle"
-                  src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                  alt="..."
-                />
-              </div>
-              <div class="ms-3" id="width_100per">
-                <div class="fw-bold" id="width_80per">
-                  제주핵주먹<span class="fw-lighter fs-6 marleft_20"
-                    >2023.01.10 오후 11시</span
-                  >
+  
+            <!-- Comment with nested comments-->
+            <div id="single_comment">
+              <div class="d-flex mb-4" id="comment_flexbox">
+                <!-- Single comment-->
+                <div class="flex-shrink-0" id="comment_profile_pic">
+                  <img
+                    class="rounded-circle"
+                    src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                    alt="..."
+                  />
                 </div>
-
-                <div class="flex_box">
-                  <div class="text-break" id="reply_content">reply content</div>
+                <div class="ms-3" id="comment_box">
+                  <div id="comment_user_id">
+                    제주핵주먹<span class="fw-lighter fs-6" id="comment_date"
+                      >2023.01.10 오후 11시</span
+                    >
+                  </div>
+  
+                  <div id="reply_content_box">
+                    <div class="text-break" id="reply_content">reply content</div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="reply_btn_group">
-              <a class="text-primary" href="#">수정</a>
-              <a class="text-danger" href="#">삭제</a>
-            </div>
-          </div>
-
-          <!-- Comment with nested comments-->
-          <div class="flex_box">
-            <div class="d-flex mb-4" id="width_100per">
-              <!-- Single comment-->
-              <div class="flex-shrink-0 single_comment_box">
-                <img
-                  class="rounded-circle"
-                  src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                  alt="..."
-                />
-              </div>
-              <div class="ms-3" id="width_100per">
-                <div class="fw-bold" id="width_80per">
-                  제주핵주먹<span class="fw-lighter fs-6 marleft_20"
-                    >2023.01.10 오후 11시</span
-                  >
-                </div>
-
-                <div class="flex_box">
-                  <div class="text-break" id="reply_content">reply content</div>
-                </div>
+              <div id="reply_button_group">
+                <a class="text-primary" href="#">수정</a>
+                <a class="text-danger" href="#">삭제</a>
               </div>
             </div>
-            <div class="reply_btn_group">
-              <a class="text-primary" href="#">수정</a>
-              <a class="text-danger" href="#">삭제</a>
+  
+            <!-- Comment with nested comments-->
+            <div id="single_comment">
+              <div class="d-flex mb-4" id="comment_flexbox">
+                <!-- Single comment-->
+                <div class="flex-shrink-0" id="comment_profile_pic">
+                  <img
+                    class="rounded-circle"
+                    src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                    alt="..."
+                  />
+                </div>
+                <div class="ms-3" id="comment_box">
+                  <div id="comment_user_id">
+                    제주핵주먹<span class="fw-lighter fs-6" id="comment_date"
+                      >2023.01.10 오후 11시</span
+                    >
+                  </div>
+  
+                  <div id="reply_content_box">
+                    <div class="text-break" id="reply_content">reply content</div>
+                  </div>
+                </div>
+              </div>
+              <div id="reply_button_group">
+                <a class="text-primary" href="#">수정</a>
+                <a class="text-danger" href="#">삭제</a>
+              </div>
             </div>
           </div>
         </div>
+      </section>
+  
+      <div class="footer-btn-group" id="list_button_group" >
+        <button type="button" class="btn btn-outline-dark">
+          <i class="bi bi-arrow-left-circle"></i> 이전글
+        </button>
+        <button type="button" class="btn btn-outline-dark">
+          <i class="bi bi-arrow-right-circle"></i> 다음글
+        </button>
       </div>
-    </section>
-
-    <div class="footer-btn-group footer_list_btn_group">
-      <button type="button" class="btn btn-outline-secondary">
-        <i class="bi bi-arrow-left-circle"></i> 이전글
-      </button>
-      <button type="button" class="btn btn-outline-secondary">
-        <i class="bi bi-arrow-right-circle"></i> 다음글
-      </button>
-    </div>
-
-    <div class="footer-btn-group footer_post_btn_group">
-      <button type="button" class="btn btn-outline-primary">
-        <i class="bi bi-pencil-square"></i> 수정하기
-      </button>
-      <button type="button" class="btn btn-outline-danger">
-        <i class="bi bi-trash-fill"></i> 삭제하기
-      </button>
-      <button type="button" class="btn btn-dark">
-        <i class="bi bi-list"></i> 목록으로
-      </button>
-    </div>
-  <!-- section - end -->
+      <div class="footer-btn-group" id="post_button_group">
+        <button type="button" class="btn btn-outline-primary">
+          <i class="bi bi-pencil-square"></i> 수정하기
+        </button>
+        <button type="button" class="btn btn-outline-danger">
+          <i class="bi bi-trash-fill"></i> 삭제하기
+        </button>
+        <button type="button" class="btn btn-outline-dark">
+          <i class="bi bi-list"></i> 목록으로
+        </button>
+      </div>
 
    
    

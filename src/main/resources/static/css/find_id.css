@@ -11624,12 +11624,6 @@ section {
 #find_id_head {
   margin-bottom: 30px;
 }
-.marbot_5 {
-  margin-bottom: 5px;
-}
-.marbot_10 {
-  margin-bottom: 10px;
-}
 .modal-header {
   display: flex;
   justify-content: center;
@@ -11646,15 +11640,6 @@ section {
 }
 #sign_email {
   width: 70%;
-}
-.marleft_1 {
-  margin-left: 1px;
-}
-.martop_30 {
-  margin-top: 30px;
-}
-.martop_20 {
-  margin-top: 20px;
 }
 .form_box {
   display: flex;

@@ -7,25 +7,28 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.UUID;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 //논리명 후원
 @Entity
-@Builder
+@Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="DNTN_MSTR")
+@SequenceGenerator(name="DNTN_CODE_NO_SEQ_GEN", sequenceName="DNTN_CODE_NO_SEQ", initialValue=1, allocationSize=1)
 public class DonateMaster {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="DNTN_CODE_NO_SEQ_GEN")
     @Column(name="DNTN_CODE")
-    private String donateCode;
+    private Long donateCode;
 
     @Column(name="DNTN_BSNS_CODE")
     private String donateBusinessCode;
 
     @Column(name="USER_NO")
-    private UUID userNo;
+    private Long userNo;
 
     @Column(name="DNTN_NAME")
     private String donateName;

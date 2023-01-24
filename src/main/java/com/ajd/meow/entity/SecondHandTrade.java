@@ -20,11 +20,11 @@ import java.util.UUID;
 public class SecondHandTrade {
 
     @Column(name="USER_NO")
-    private UUID userNo;
+    private Long userNo;
 
     @Id
     @Column(name="POST_NO")
-    private String postNo;
+    private Long PostNo;
 
     @NotBlank(message = "금액은 필수 입력 값입니다.")
     @Column(name="PRICE")

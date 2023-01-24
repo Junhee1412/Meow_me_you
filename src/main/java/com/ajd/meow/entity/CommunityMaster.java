@@ -1,30 +1,29 @@
 package com.ajd.meow.entity;
 
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 
 //논리명 커뮤니티글정보
 @Entity
-@Builder
+@Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="CMNTY_MSTR")
+@SequenceGenerator(name="POST_NO_SEQ_GEN", sequenceName="POST_NO_SEQ", initialValue=1, allocationSize=1)
 public class CommunityMaster {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="POST_NO_SEQ_GEN")
     @Column(name="POST_NO")
     private Long postNo;
 
     @Column(name="USER_NO")
-    private UUID userNo;
+    private Long userNo;
 
     @Column(name="CMNTY_ID")
     private String communityId;

@@ -118,17 +118,7 @@
         ><br />
       </div>
 
-      <a
-        href="../img/temp.png"
-        data-btn="regular"
-        data-alt-a="캠페인버튼클릭"
-        data-alt-b="girl22"
-        data-alt-c="quickb1"
-        class="btn_ga_send quicks"
-        id="aside_banner"
-      >
-        <img src="../img/aside.png" class="img_aside" alt="후원하기"
-      /></a>
+
 
       <a
         href="../img/temp.png"
@@ -194,7 +184,7 @@
           class="btn_ga_send quicks"
           id="aside_banner"
         >
-        <img src="../img/aside.png" class="img_aside" alt="후원하기"
+        <img src="../img/aside6.png" class="img_aside" alt="후원하기"
       /></a>
       </div>
       <a
@@ -271,17 +261,24 @@
 
 
     <!-- Map-->
-    <div class="map" id="find_ctr">
-      <iframe
-        src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A&amp;output=embed"
-      ></iframe>
-      <br />
-      <small
-        ><a
-          href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A"
-        ></a
-      ></small>
+    <div class="map_wrap">
+      <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+      <div id="menu_wrap" class="bg_white">
+        <div class="option">
+          <div>
+            <form onsubmit="searchPlaces(); return false;">
+              키워드 : <input type="text" value="서울 동물보호센터" id="keyword" size="15">
+              <button class="serchbtn" type="submit">검색하기</button>
+            </form>
+          </div>
+        </div>
+        <hr>
+        <ul id="placesList"></ul>
+        <div id="pagination"></div>
+      </div>
     </div>
+    <!--    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=680531978ab426a7e809968516cc71d7"></script>-->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=680531978ab426a7e809968516cc71d7&libraries=services"></script>
 
     <!-- Footer-->
     <footer class="py-5 bg-dark">
@@ -299,5 +296,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="../js/index.js"></script>
+    <script src="../js/map.js"></script>
   </body>
 </html>

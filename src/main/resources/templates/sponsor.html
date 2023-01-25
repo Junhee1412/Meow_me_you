@@ -116,10 +116,10 @@
             <img class="mb-4 martop_10" src="../img/logo/logo1.png" alt="" width="300" height="150">
           </a>
         </div>
-        <form>
+        <form action="/donate/createdo" method="post">
           <div class="form-group">
             <label class="form-label mt-1">후원자명 * </label>
-            <input type="text" class="form-control" id="sign_id">
+            <input name="donateName" type="text" class="form-control" id="sign_id">
           </div>
           <div class="bir_wrap">
             <label class="form-label mt-2">생년월일</label>
@@ -168,23 +168,23 @@
   
           후원방법 *
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+            <input class="form-check-input" type="radio" name="donateType" id="inlineRadio1" value="일시후원">
             <label class="form-check-label" for="inlineRadio1">일시후원</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+            <input class="form-check-input" type="radio" name="donateType" id="inlineRadio2" value="정기후원">
             <label class="form-check-label" for="inlineRadio2">정기후원</label>
           </div>
   
           <div class="my-3 ">
             <div class="form-check-inline">결제방법 *
-              <input type="radio" name="payment" value="신용카드" checked>신용카드
+              <input type="radio" name="donateWayCode" value="CRCRD" checked>신용카드
             </div>
             <div class="form-check-inline">
-              <input type="radio" name="payment" value="무통장입금">무통장입금
+              <input type="radio" name="donateWayCode" value="BANK">무통장입금
             </div>
             <div class="form-check-inline">
-              <input type="radio" name="payment" value="계좌이체">계좌이체
+              <input type="radio" name="donateWayCode" value="ACNT">계좌이체
             </div>
           </div>
   

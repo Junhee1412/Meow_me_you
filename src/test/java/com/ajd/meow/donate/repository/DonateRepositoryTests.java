@@ -30,4 +30,11 @@ public class DonateRepositoryTests extends MeowApplicationTests {
 
         DonateMaster TestDonate = donateRepository.save(donatemaster);
     }
+
+    @Test
+    public void read(){
+        DonateMaster donateMaster = new DonateMaster();
+
+        donateMaster.getUserNo();
+    }
 }

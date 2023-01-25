@@ -14,17 +14,17 @@ import java.util.UUID;
 //논리명 사용자정보
 @Entity
 @Getter
-@Builder
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="USER_MSTR")
+@SequenceGenerator(name="USER_NO_SEQ_GEN", sequenceName="USER_NO_SEQ", initialValue=1, allocationSize=1)
 public class UserMaster {
 
     @Id
     @Column(name="USER_NO")
-    @GeneratedValue(generator = "uuids")
-    @GenericGenerator(name= "uuid2", strategy = "uuid")
-    private UUID userNo;
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USER_NO_SEQ_GEN")
+    private Long userNo;
 
     @Column(name="USER_TYPE")
     private String userType;

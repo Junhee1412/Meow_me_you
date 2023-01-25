@@ -9,7 +9,7 @@ import java.util.UUID;
 
 //논리명 댓글
 @Entity
-@Builder
+@Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,11 +17,11 @@ import java.util.UUID;
 public class Reply {
 
     @Column(name="USER_NO")
-    private UUID userNo;
+    private Long userNo;
 
     @Id
     @Column(name="POST_NO")
-    private String postNo;
+    private Long PostNo;
 
     @Column(name = "REPLY_CONTENT")
     private String replyContent;

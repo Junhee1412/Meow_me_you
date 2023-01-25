@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 
 //논리명 신용카드
@@ -21,10 +19,10 @@ public class CreditcardPayment {
 
     @Id
     @Column(name = "DNTN_CODE")
-    private String donateCode;
+    private Long DonateCode;
 
     @Column(name="USER_NO")
-    private UUID userNo;
+    private Long userNo;
 
     @Column(name = "BANK")
     private String bank;

@@ -15,4 +15,6 @@ public class DonateService {
     public void createDonate(DonateMaster donateMaster){
         donateRepository.save(donateMaster);
     }
+
+
 }

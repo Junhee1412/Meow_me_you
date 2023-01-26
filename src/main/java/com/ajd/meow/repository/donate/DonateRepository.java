@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface DonateRepository extends JpaRepository<DonateMaster, String> {
-
-
+public interface DonateRepository extends JpaRepository<DonateMaster, Long> {
+    List<DonateMaster> findByUserNo(Long UserNo);
 }

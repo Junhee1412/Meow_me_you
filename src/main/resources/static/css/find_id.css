@@ -11616,16 +11616,13 @@ footer{
 
 section {
   height: 950px;
+  font-family: 'Noto Sans KR', sans-serif, "Jua", "Noto Serif KR", serif, -apple-system,
+  BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
+  Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
 
 #find_id_head {
   margin-bottom: 30px;
-}
-.marbot_5 {
-  margin-bottom: 5px;
-}
-.marbot_10 {
-  margin-bottom: 10px;
 }
 .modal-header {
   display: flex;
@@ -11643,15 +11640,6 @@ section {
 }
 #sign_email {
   width: 70%;
-}
-.marleft_1 {
-  margin-left: 1px;
-}
-.martop_30 {
-  margin-top: 30px;
-}
-.martop_20 {
-  margin-top: 20px;
 }
 .form_box {
   display: flex;

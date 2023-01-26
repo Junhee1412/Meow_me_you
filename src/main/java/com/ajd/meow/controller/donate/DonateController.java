@@ -23,7 +23,7 @@ public class DonateController {
         donateService.createDonate(donateMaster);
 
         model.addAttribute("message", "님 후원해주셔서 감사합니다!");
-        model.addAttribute("searchUrl", "/donate/list")
+        model.addAttribute("searchUrl", "/donate/list");
         return donateMaster.getDonateName()+ "message";
     }
 }

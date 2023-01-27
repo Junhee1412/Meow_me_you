@@ -2208,6 +2208,7 @@ progress {
 }
 .form-label {
   margin-bottom: 0.5rem;
+  display: block;
 }
 
 .col-form-label {
@@ -11637,4 +11638,37 @@ form{
 
 #password_info{
   white-space: nowrap;
+}
+
+.op{
+ width: 30%;
+}
+
+.form-phone{
+  margin-bottom: 10px;
+}
+
+
+
+
+
+#sign_btn{
+  display: inline; width: 25%; margin-top: -5px; margin-left: -5px;
+}
+
+
+
+#sign_ph{
+  display: inline; 
+  width: 74%;
+}
+
+#sign_phone{
+  width: 25%; 
+  display: inline; 
+  margin-right: -1px;
+}
+
+.marbot_20{
+  margin-bottom: 20px;
 }

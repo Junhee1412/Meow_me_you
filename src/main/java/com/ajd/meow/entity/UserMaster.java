@@ -49,10 +49,6 @@ public class UserMaster {
     @Column(name = "NICK_NAME")
     private String nickName;
 
-    @NotBlank(message = "성별은 필수 입력 값입니다.")
-    @Column(name = "GENDER")
-    private String gender;
-
     @Column(name = "DETAIL_ADDR")
     private String detailAddress;
 

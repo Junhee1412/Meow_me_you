@@ -1,15 +1,12 @@
 package com.ajd.meow.entity;
 
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
-import java.util.UUID;
-
-import static javax.persistence.GenerationType.SEQUENCE;
 
 //논리명 후원
 @Entity
@@ -33,12 +30,28 @@ public class DonateMaster {
     @Column(name="DNTN_NAME")
     private String donateName;
 
-    @Min(value=3000, message = "금액은 3천원 이상가능합니다..")
+    @Min(value=3000, message = "금액은 3천원 이상가능합니다.")
     @Column(name = "DNTN_AMNT")
     private int donateAmount;
 
     @Column(name="DNTN_TYPE")
     private String donateType;
+
+    @NotBlank(message = "통신사는 필수 입력값입니다.")
+    @Column(name = "PHONE_TYPE")
+    private String phoneType;
+
+    @NotBlank(message = "핸드폰번호는 필수 입력 값입니다.")
+    @Column(name = "PHONE_NUM")
+    private String phoneNumber;
+
+    @NotNull(message = "생일은 필수 입력 값입니다.")
+    @Column(name = "BIRTH_DATE")
+    private Date birthDate;
+
+    @NotBlank(message = "성별은 필수 입력 값입니다.")
+    @Column(name = "GENDER")
+    private String gender;
 
     @Column(name="DNTN_WAYCODE")
     private String donateWayCode;
@@ -54,5 +67,4 @@ public class DonateMaster {
 
     @Column(name ="DNTN_STATE_DATE")
     private Date donateStateDate;
-
 }

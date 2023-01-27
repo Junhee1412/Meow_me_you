@@ -2,7 +2,12 @@ package com.ajd.meow.donate.repository;
 
 
 import com.ajd.meow.MeowApplicationTests;
+import com.ajd.meow.entity.AccountTransfer;
+import com.ajd.meow.entity.BankTransfer;
 import com.ajd.meow.entity.DonateMaster;
+import com.ajd.meow.repository.donate.AccountRepository;
+import com.ajd.meow.repository.donate.BankTransferRepository;
+import com.ajd.meow.repository.donate.CreditcardRepository;
 import com.ajd.meow.repository.donate.DonateRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +20,15 @@ public class DonateRepositoryTests extends MeowApplicationTests {
     @Autowired
     private DonateRepository donateRepository;
 
+    @Autowired
+    private BankTransferRepository bankTransferRepository;
+
+    @Autowired
+    private CreditcardRepository creditcardRepository;
+
+    @Autowired
+    private AccountRepository accountRepository;
+
     @Test
     public void create(){
         DonateMaster donatemaster = new DonateMaster();
@@ -22,14 +36,62 @@ public class DonateRepositoryTests extends MeowApplicationTests {
         donatemaster.setDonateBusinessCode("CURE_001");
         donatemaster.setUserNo(1L);
         donatemaster.setDonateName("미유미유");
-        donatemaster.setDonateAmount(30000);
+        donatemaster.setDonateAmount(4000);
         donatemaster.setDonateType("정기후원");
+        donatemaster.setPhoneType("SKT");
+        donatemaster.setPhoneNumber("010-0202-0303");
+        donatemaster.setBirthDate(Date.valueOf("2014-02-02"));
+        donatemaster.setGender("남자");
         donatemaster.setDonateWayCode("ACNT");
         donatemaster.setDonateReceiptState("N");
         donatemaster.setDonateStateCode("BANK_WAIT");
         donatemaster.setDonateDate(Date.valueOf("2014-03-01"));
 
         DonateMaster TestDonate = donateRepository.save(donatemaster);
+
+        BankTransfer bankTransfer = new BankTransfer();
+    }
+
+    @Test
+    public void Bankcreate(){
+        BankTransfer bankTransfer = new BankTransfer();
+
+        bankTransfer.setDonateCode(5L);
+        bankTransfer.setUserNo(1L);
+        bankTransfer.setBank("국민은행");
+        bankTransfer.setAccount("4300-0000-000000");
+
+        BankTransfer newbankTransfer= bankTransferRepository.save(bankTransfer);
+    }
+
+    @Test
+    public void Accountcreate(){
+        DonateMaster donateMaster = new DonateMaster();
+        AccountTransfer accountTransfer = new AccountTransfer();
+
+        donateMaster.setDonateBusinessCode("CURE_001");
+        donateMaster.setUserNo(1L);
+        donateMaster.setDonateName("미유미유");
+        donateMaster.setDonateAmount(6000);
+        donateMaster.setDonateType("정기후원");
+        donateMaster.setPhoneType("SKT");
+        donateMaster.setPhoneNumber("010-0202-0303");
+        donateMaster.setBirthDate(Date.valueOf("2014-02-02"));
+        donateMaster.setGender("남자");
+        donateMaster.setDonateWayCode("ACNT");
+        donateMaster.setDonateReceiptState("N");
+        donateMaster.setDonateStateCode("BANK_WAIT");
+        donateMaster.setDonateDate(Date.valueOf("2014-03-01"));
+
+        DonateMaster TestDonate = donateRepository.save(donateMaster);
+
+        accountTransfer.setDonateCode(donateMaster.getDonateCode());
+        accountTransfer.setAccountPassword(44);
+        accountTransfer.setUserNo(donateMaster.getUserNo());
+        accountTransfer.setAccount("4444-4444-444444");
+        accountTransfer.setBank("신한");
+
+        AccountTransfer accountTransfer1=accountRepository.save(accountTransfer);
     }
 
     @Test

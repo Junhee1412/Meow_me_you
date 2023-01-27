@@ -1,0 +1,39 @@
+diff a/src/main/java/com/ajd/meow/entity/UserMaster.java b/src/main/java/com/ajd/meow/entity/UserMaster.java	(rejected hunks)
+@@ -6,6 +6,7 @@
+ import javax.persistence.*;
+ import javax.validation.constraints.Email;
+ import javax.validation.constraints.NotBlank;
++import javax.validation.constraints.NotNull;
+ import javax.validation.constraints.Pattern;
+ import java.sql.Date;
+ import java.time.LocalDateTime;
+@@ -48,26 +49,16 @@
+     @Column(name = "NICK_NAME")
+     private String nickName;
+ 
+-    @NotBlank(message = "성별은 필수 입력 값입니다.")
+-    @Column(name = "GENDER")
+-    private String gender;
+-
+     @Column(name = "DETAIL_ADDR")
+     private String detailAddress;
+ 
+-    @NotBlank(message = "핸드폰번호는 필수 입력 값입니다.")
+-    @Pattern(regexp="(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,20}",
+-            message = "비밀번호는 영문 대,소문자와 숫자, 특수기호가 적어도 1개 이상씩 포함된 8자 ~ 20자의 비밀번호여야 합니다.")
+-    @Column(name = "PHONE_NUM")
+-    private String phoneNumber;
+-
+     @NotBlank(message = "통신사는 필수 입력값입니다.")
+     @Column(name = "PHONE_TYPE")
+     private String phoneType;
+ 
+-    @NotBlank(message = "생일은 필수 입력 값입니다.")
+-    @Column(name = "BIRTH_DATE")
+-    private Date birthDate;
++    @NotBlank(message = "핸드폰번호는 필수 입력 값입니다.")
++    @Column(name = "PHONE_NUM")
++    private String phoneNumber;
+ 
+     @Column(name = "INTRODUCE")
+     private String introduce;

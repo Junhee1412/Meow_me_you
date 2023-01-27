@@ -6,15 +6,20 @@ import com.ajd.meow.repository.donate.AccountRepository;
 import com.ajd.meow.repository.donate.BankTransferRepository;
 import com.ajd.meow.repository.donate.CreditcardRepository;
 import com.ajd.meow.repository.donate.DonateRepository;
+import com.ajd.meow.repository.donate.DonateRepository;
+import com.ajd.meow.service.donate.DonateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @Controller
 public class DonateController {
 
     @Autowired
     private DonateRepository donateRepository;
+
 
     @Autowired
     private AccountRepository accountRepository;
@@ -24,6 +29,7 @@ public class DonateController {
 
     @Autowired
     private CreditcardRepository creditcardRepository;
+
 
     @GetMapping("/donate/create.meow")
     public String donateCreateForm(){

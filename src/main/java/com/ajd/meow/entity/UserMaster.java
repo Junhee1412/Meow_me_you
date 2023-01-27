@@ -5,7 +5,9 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 //논리명 사용자정보
@@ -48,13 +50,17 @@ public class UserMaster {
     @Column(name = "DETAIL_ADDR")
     private String detailAddress;
 
+    @NotBlank(message = "핸드폰번호는 필수 입력 값입니다.")
+    @Column(name = "PHONE_NUM")
+    private String phoneNumber;
+
     @NotBlank(message = "통신사는 필수 입력값입니다.")
     @Column(name = "PHONE_TYPE")
     private String phoneType;
 
-    @NotBlank(message = "핸드폰번호는 필수 입력 값입니다.")
-    @Column(name = "PHONE_NUM")
-    private String phoneNumber;
+    @NotNull(message = "생일은 필수 입력 값입니다.")
+    @Column(name = "BIRTH_DATE")
+    private Date birthDate;
 
     @Column(name = "INTRODUCE")
     private String introduce;

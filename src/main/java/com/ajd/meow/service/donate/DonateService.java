@@ -39,4 +39,13 @@ public class DonateService {
         return donateRepository.findAll();
     }
 
+    //MyPage 후원내역 보기
+    public List<DonateMaster> donateMyView(Long userNo){
+        return donateRepository.findByUserNo(userNo);
+    }
+
+    //관리자가 후원내역 보기
+    public List<DonateMaster> donateListView(){
+        return donateRepository.findAll();
+    }
 }

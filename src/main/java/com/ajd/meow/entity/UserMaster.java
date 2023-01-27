@@ -1,16 +1,12 @@
 package com.ajd.meow.entity;
 
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.sql.Date;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 //논리명 사용자정보
 @Entity

@@ -10,7 +10,10 @@ import java.sql.Date;
 
 //논리명 후원
 @Entity
-@Data
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name="DNTN_MSTR")
 @SequenceGenerator(name="DNTN_CODE_NO_SEQ_GEN", sequenceName="DNTN_CODE_NO_SEQ", initialValue=1, allocationSize=1)
 public class DonateMaster {

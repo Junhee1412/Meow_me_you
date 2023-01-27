@@ -2208,6 +2208,7 @@ progress {
 }
 .form-label {
   margin-bottom: 0.5rem;
+  display: block;
 }
 
 .col-form-label {
@@ -11609,3 +11610,26 @@ section{
 .marbot_70 {
   margin-bottom: 70px;
 }
+
+
+#sign_email{
+  display: inline; width: 75%;
+}
+
+#sign_btn{
+  display: inline; width: 25%; margin-top: -5px; margin-left: -5px;
+}
+
+
+
+#sign_ph{
+  display: inline; 
+  width: 74%;
+}
+
+#sign_phone{
+  width: 25%; 
+  display: inline; 
+  margin-right: -1px;
+}
+

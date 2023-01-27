@@ -122,21 +122,21 @@
         <form>
           <div class="form-group">
             <label class="form-label mt-1">이름</label>
-            <input type="text" class="form-control" id="sign_nick" disabled>
+            <input type="text" class="form-control" id="sign_nick" name="" disabled>
           </div>
   
           <div class="form-group">
             <label class="form-label mt-1">닉네임</label>
-            <input type="text" class="form-control" id="sign_nick">
+            <input type="text" class="form-control" id="sign_nick" name="" >
           </div>
           <div class="form-group has-success">
             <label class="form-label mt-2">비밀번호</label>
-            <input type="password" class="form-control" id="sign_pwd">
+            <input type="password" class="form-control" id="sign_pwd" name="" >
           </div>
   
           <div class="form-group has-danger">
             <label class="form-label mt-2" for="inputInvalid">비밀번호 재확인</label>
-            <input type="password" class="form-control" id="sign_pwd2">
+            <input type="password" class="form-control" id="sign_pwd2" name="" >
           </div>
   
   
@@ -147,30 +147,26 @@
               <option>여자</option>
             </select>
           </div>
-          <div class="form-group">
-            <label class="form-label mt-2"> 이메일</label>
-            <input type="email" class="form-control" id="sign_email">
+
+
+          <div class="form-group ">
+            <label class="form-label mt-2">핸드폰</label>
+            <select class="form-select" id="sign_phone" >
+              <option>KT</option>
+              <option>LG U+</option>
+              <option>SKT</option>
+            </select>
+            <input type="text" class="form-control " id="sign_ph" name="" >
           </div>
-  
-  
-  
+
           <div class="form-group">
-  
-            <label class="form-label mt-2">핸드폰번호</label>
-            <div class="row" id="selectPay_card">
-              <div class="dropdown col-md-4">
-                <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1"
-                  data-bs-toggle="dropdown" aria-expanded="false">
-                  통신사
-                </button>
-                <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
-                  <li><a class="dropdown-item" href="#">KT</a></li>
-                  <li><a class="dropdown-item" href="#">LG U+</a></li>
-                  <li><a class="dropdown-item" href="#">SKT</a></li>
-                </ul>
-              </div>
-              <input type="text" class="form-control col-md-7">
-            </div>
+            <label class="form-label mt-2">Email*</label>
+            <input type="email" class="form-control" id="sign_email" />
+            <button class="btn btn-outline-success " type="button" id="sign_btn">
+              인증하기
+            </button>
+          </div>
+
             <div class="form-group">
               <label class="form-label mt-2">기타정보</label>
               <input type="text" class="form-control" id="sign_tel">

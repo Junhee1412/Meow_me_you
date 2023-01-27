@@ -2208,6 +2208,7 @@ progress {
 }
 .form-label {
   margin-bottom: 0.5rem;
+  display: block;
 }
 
 .col-form-label {
@@ -11653,4 +11654,27 @@ section{
   font-family: 'Noto Sans KR', sans-serif, "Jua", "Noto Serif KR", serif, -apple-system,
   BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
   Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+}
+
+
+#sign_email{
+  display: inline; 
+  width: 74%;
+}
+#sign_ph{
+  display: inline; 
+  width: 74%;
+}
+
+#sign_phone{
+  width: 25%; 
+  display: inline; 
+  margin-right: -1px;
+}
+
+#sign_btn{
+  display: inline; 
+  width: 25%;
+   margin-top: -5px; 
+   margin-left: -2px;
 }

@@ -58,10 +58,6 @@ public class UserMaster {
     @Column(name = "PHONE_TYPE")
     private String phoneType;
 
-    @NotNull(message = "생일은 필수 입력 값입니다.")
-    @Column(name = "BIRTH_DATE")
-    private Date birthDate;
-
     @Column(name = "INTRODUCE")
     private String introduce;
 

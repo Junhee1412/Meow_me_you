@@ -6,23 +6,10 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:url"
-      content="http://mintable1.cafe24.com/Meow_me_you_front/html/"
-    />
-    <meta property="og:title" content="미유미유" />
-    <meta property="og:description" content="너와 나의 이야기가 펼쳐지는 곳" />
    <link href="../css/bootstrap-icons.css" rel="stylesheet">
     <meta
       property="og:image"
       content="http://mintable1.cafe24.com/Meow_me_you_front/img/kakao_preview.jpg"
-    />
-    <meta
-      property="og:site_name"
-      content="유기묘 커뮤니티에 오신걸 환영합니다!"
     />
     
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
@@ -64,7 +51,7 @@
        
           <!-- Uncomment the line below if you also wish to use an image logo -->
           <!-- <img src="assets/img/logo.png" alt=""> -->
-          <a class="logo d-flex align-items-center" href="/"><img alt="Brand" src="../img/logo/logo4.png"></a>
+          <a class="logo d-flex align-items-center" href="#page-top"><img alt="Brand" src="../img/logo/logo4.png"></a>
         </a>
   
         <i class="mobile-nav-toggle mobile-nav-show bi bi-list "></i>
@@ -113,46 +100,57 @@
       <div class="container" id="sponsor_box">
         <div class="row align-items-center">
           <a class="navbar-brand h1 text-center" href="index.html">
-            <img class="mb-4 mt-1" src="../img/logo/logo1.png" alt="" width="200" height="100">
+            <img class="mb-4 martop_10" src="../img/logo/logo1.png" alt="" width="200" height="100">
           </a>
         </div>
-        <form action="donate/creatdo" method="post">
+        <form>
           <div class="form-group">
             <label class="form-label mt-1">후원자명 * </label>
-            <input name="donateName" type="text" class="form-control" id="sign_id">
+            <input type="text" class="form-control" id="sign_id">
           </div>
           <div class="bir_wrap">
             <label class="form-label mt-2">생년월일</label>
             <div class="bir_yy">
               <span class="ps_box">
-                <input name="yyyy" type="text" class="form-control" id="yy" placeholder="년(4자)" maxlength="4">
+                <input type="text" class="form-control" id="yy" placeholder="년(4자)" maxlength="4">
               </span>
             </div>
             <div class="bir_mm">
               <span class="ps_box focus">
-                <select name="mm" class="form-select" id="mm">
-                  <option value="">월</option>
-                  <option value="01">1</option>
-                  <option value="02">2</option>
-                  <option value="03">3</option>
-                  <option value="04">4</option>
-                  <option value="05">5</option>
-                  <option value="06">6</option>
-                  <option value="07">7</option>
-                  <option value="08">8</option>
-                  <option value="09">9</option>
-                  <option value="10">10</option>
-                  <option value="11">11</option>
-                  <option value="12">12</option>
+                <select class="form-select" id="mm">
+                  <option>월</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                  <option>10</option>
+                  <option>11</option>
+                  <option>12</option>
                 </select>
               </span>
             </div>
             <div class="bir_dd">
               <span class="ps_box">
-                <input name="dd" type="text" class="form-control" id="dd" placeholder="일" maxlength="2">
+                <input type="text" class="form-control" id="dd" placeholder="일" maxlength="2">
               </span>
             </div>
           </div>
+<<<<<<< HEAD
+  
+         
+          <div class="form-group marbot_20">
+            <label class="form-label mt-2" >연락처</label>
+            <select class="form-select" id="sign_phone" >
+              <option>KT</option>
+              <option>LG U+</option>
+              <option>SKT</option>
+            </select>
+=======
  
           <div class="form-group">
             <label class="form-label mt-2">성별</label>
@@ -172,6 +170,7 @@
               <option>LG U+</option>
               <option>SKT</option>
             </select>
+>>>>>>> 03832cebd2768bbad5e2b8be4ec6cf896dd714ba
             <input type="text" class="form-control " id="sign_ph" name="" >
           </div>
   

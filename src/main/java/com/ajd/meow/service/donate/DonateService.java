@@ -1,6 +1,5 @@
 package com.ajd.meow.service.donate;
 
-import com.ajd.meow.entity.CreditcardPayment;
 import com.ajd.meow.entity.DonateMaster;
 import com.ajd.meow.repository.donate.DonateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,19 +29,7 @@ public class DonateService {
     }
 
     //MyPage 후원내역 보기
-    public List<DonateMaster> donateMyView(Long userNo){
-        return donateRepository.findByUserNo(userNo);
-    }
-
-    //관리자가 후원내역 보기
-    public List<DonateMaster> donateListView(){
-        return donateRepository.findAll();
-    }
-
-    //MyPage 후원내역 보기
-    public List<DonateMaster> donateMyView(Long userNo){
-        return donateRepository.findByUserNo(userNo);
-    }
+    public List<DonateMaster> donateMyView(Long UserNo){ return donateRepository.findByUserNo(UserNo); }
 
     //관리자가 후원내역 보기
     public List<DonateMaster> donateListView(){

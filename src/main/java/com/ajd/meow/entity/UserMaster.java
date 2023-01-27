@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.sql.Date;
 import java.time.LocalDateTime;
@@ -56,8 +57,6 @@ public class UserMaster {
     private String detailAddress;
 
     @NotBlank(message = "핸드폰번호는 필수 입력 값입니다.")
-    @Pattern(regexp="(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,20}",
-            message = "비밀번호는 영문 대,소문자와 숫자, 특수기호가 적어도 1개 이상씩 포함된 8자 ~ 20자의 비밀번호여야 합니다.")
     @Column(name = "PHONE_NUM")
     private String phoneNumber;
 
@@ -65,7 +64,7 @@ public class UserMaster {
     @Column(name = "PHONE_TYPE")
     private String phoneType;
 
-    @NotBlank(message = "생일은 필수 입력 값입니다.")
+    @NotNull(message = "생일은 필수 입력 값입니다.")
     @Column(name = "BIRTH_DATE")
     private Date birthDate;
 

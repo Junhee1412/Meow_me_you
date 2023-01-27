@@ -141,25 +141,24 @@
             </div>
           </div>
   
-          <div class="form-group">
-            <label class="form-label mt-2">성별</label>
-            <select class="form-select" id="sign_gender">
-              <option>남자</option>
-              <option>여자</option>
+         
+          <div class="form-group marbot_20">
+            <label class="form-label mt-2" >연락처</label>
+            <select class="form-select" id="sign_phone" >
+              <option>KT</option>
+              <option>LG U+</option>
+              <option>SKT</option>
             </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label mt-2"> 연락처</label>
-            <input type="email" class="form-control" id="sign_email">
+            <input type="text" class="form-control " id="sign_ph" name="" >
           </div>
   
           후원방법 *
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="일시후원" checked>
             <label class="form-check-label" for="inlineRadio1">일시후원</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="정기후원">
             <label class="form-check-label" for="inlineRadio2">정기후원</label>
           </div>
   
@@ -176,42 +175,40 @@
           </div>
   
           <!-- 신용카드 -->
-          <div class="row gy-3 " id="selectPay_card">
-            <div class="dropdown">
-              <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                카드사
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">현대카드</a></li>
-                <li><a class="dropdown-item" href="#">국민은행</a></li>
-                <li><a class="dropdown-item" href="#">기업은행</a></li>
-              </ul>
-            </div>
+          <div class="row gy-3 " id="selectPay_card" >
+        
+            <span>
+              <select class="form-select op" >
+                <option>카드사</option>
+                <option>현대카드</option>
+                <option>국민카드</option>
+                <option>우리카드</option>
+              </select>
+            </span>
   
             <div class="col-md-9">
               <label for="cc-name" class="form-label">이름</label>
-              <input type="text" class="form-control" id="cc-name" placeholder="" required>
+              <input type="text" class="form-control" id="cc-name" name= "" placeholder="" required>
             </div>
   
             <div class="col-md-9">
               <label for="cc-number" class="form-label">카드번호</label>
-              <input type="text" class="form-control" id="cc-number" placeholder="" required>
+              <input type="text" class="form-control" id="cc-number" name= "" placeholder="" required>
             </div>
   
             <div class="col-md-4">
               <label for="cc-expiration" class="form-label">YY/MM</label>
-              <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+              <input type="text" class="form-control" id="cc-expiration" name= "" placeholder="" required>
             </div>
   
             <div class="col-md-4">
               <label for="cc-cvv" class="form-label">CVV</label>
-              <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+              <input type="text" class="form-control" id="cc-cvv" name= "" placeholder="" required>
             </div>
   
             <div class="col-md-6">
               <label for="cc-cvv" class="form-label">비밀번호(두자리)</label>
-              <input type="password" maxlength='2' class="form-control" id="cc-cvv" placeholder="" required>
+              <input type="password" maxlength='2' class="form-control" id="cc-cvv" name= "" placeholder="" required>
               <small class="text-muted" id="password_info">비밀번호 앞 두자리만 입력해주세요</small>
             </div>
           </div>
@@ -220,68 +217,61 @@
           <!--무통장입금  -->
           <div class=" row gy-3 " id="selectPay_noBank">
   
-            <div class="dropdown">
-              <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton1"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                은행목록
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">농협</a></li>
-                <li><a class="dropdown-item" href="#">국민은행</a></li>
-                <li><a class="dropdown-item" href="#">기업은행</a></li>
-              </ul>
-            </div>
+            <span>
+            <select class="form-select op">
+              <option>은행명</option>
+              <option>농협</option>
+              <option>국민은행</option>
+              <option>신한은행</option>
+            </select>
+          </span>
   
   
             <div class="col-md-4">
               <label for="cc-name" class="form-label">입금자명</label>
-              <input type="text" class="form-control" id="cc-name" placeholder="" required>
+              <input type="text" class="form-control" id="cc-name" name= "" placeholder="" required>
             </div>
   
             <div class="col-md-8">
               <label for="cc-name" class="form-label">계좌번호</label>
-              <input type="text" class="form-control" id="cc-name" placeholder="" required>
+              <input type="text" class="form-control" id="cc-name" name= "" placeholder="" required>
             </div>
           </div>
           <!-- 무통장입금 - end  -->
   
           <!-- 계좌이체 -->
           <div class=" row gy-3 " id="selectPay_Bank">
-  
-            <div class="dropdown">
-              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                은행목록
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">농협</a></li>
-                <li><a class="dropdown-item" href="#">국민은행</a></li>
-                <li><a class="dropdown-item" href="#">기업은행</a></li>
-              </ul>
-            </div>
+            <span>
+            <select class="form-select op">
+              <option>은행명</option>
+              <option>농협</option>
+              <option>국민은행</option>
+              <option>신한은행</option>
+            </select>
+          </span>
   
   
             <div class="col-md-4">
               <label for="cc-name" class="form-label">출금자명</label>
-              <input type="text" class="form-control" id="cc-name" placeholder="" required>
+              <input type="text" class="form-control" id="cc-name" name= "" placeholder="" required>
             </div>
   
             <div class="col-md-8">
               <label for="cc-name" class="form-label">계좌번호</label>
-              <input type="text" class="form-control" id="cc-name" placeholder="" required>
+              <input type="text" class="form-control" id="cc-name" name= "" placeholder="" required>
             </div>
   
             <div class="col-md-6">
               <label for="cc-cvv" class="form-label">비밀번호(두자리)</label>
-              <input type="password" maxlength='2' class="form-control" id="cc-cvv" placeholder="" required>
-              <small class="text-muted">비밀번호 앞 두자리만 입력해주세요</small>
+              <input type="password" maxlength='2' class="form-control" id="cc-cvv" name= "" placeholder="" required>
+              <small class="text-muted" id="password_info">비밀번호 앞 두자리만 입력해주세요</small>
             </div>
           </div>
   
           <!-- 계좌이체 -end  -->
           <div class="form-group">
             <label class="form-label mt-1">후원금액 * </label>
-            <input type="text" class="form-control form_info" id="sign_id">
+            <input type="text" class="form-control form_info" id="sign_id" name= "">
             <small class="text-muted martop_10">※ 후원취소, 확정은 마이페이지에서 할 수 있습니다.</small>
             <small class="text-muted">※ 후원취소는 후원일자로 부터 7일 이내에만 가능합니다.</small>
             <small class="text-muted">※ 기부금 영수증이 발급된 후원은 취소할 수 없습니다.</small>

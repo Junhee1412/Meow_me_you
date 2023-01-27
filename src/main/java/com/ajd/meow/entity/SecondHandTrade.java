@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
@@ -26,7 +27,7 @@ public class SecondHandTrade {
     @Column(name="POST_NO")
     private Long PostNo;
 
-    @NotBlank(message = "금액은 필수 입력 값입니다.")
+    @Min(value=3000, message = "금액은 필수 입력 값입니다.")
     @Column(name="PRICE")
     private int price;
 }

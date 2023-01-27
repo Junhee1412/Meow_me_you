@@ -8,7 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Date;
-import java.util.UUID;
+import java.util.List;
+import java.util.Optional;
 
 public class DonateRepositoryTests extends MeowApplicationTests {
     @Autowired
@@ -33,8 +34,39 @@ public class DonateRepositoryTests extends MeowApplicationTests {
 
     @Test
     public void read(){
-        DonateMaster donateMaster = new DonateMaster();
+        Optional<DonateMaster> donateMaster = donateRepository.findById(2L);
 
-        donateMaster.getUserNo();
+        donateMaster.ifPresent(selectDonate ->{
+            System.out.println("CodeName은 " + selectDonate.getDonateName() + "입니다.");
+            System.out.println("DonateCode는 " + selectDonate.getDonateCode() + "입니다.");
+            System.out.println("후원금액은 " + selectDonate.getDonateAmount()+ "입니다.");
+        });
+    }
+
+    @Test
+    public void findbyUserNoReadfromDonate(){
+        List<DonateMaster> donateMaster = donateRepository.findByUserNo(1L);
+        System.out.println(donateMaster.get(1));
+    }
+
+    @Test
+    public void update(){
+        Optional<DonateMaster> donateMaster = donateRepository.findById(3L);
+
+        donateMaster.ifPresent(selectDonate->{
+            selectDonate.setDonateAmount(15000);
+            selectDonate.setDonateName("김현연");
+            selectDonate.setDonateStateCode("DONATE_CNFRM");
+            donateRepository.save(selectDonate);
+        });
+    }
+
+    @Test
+    public void delete(){
+        Optional<DonateMaster> donateMaster = donateRepository.findById(4L);
+
+        donateMaster.ifPresent(deleteDonate->{
+            donateRepository.delete(deleteDonate);
+        });
     }
 }

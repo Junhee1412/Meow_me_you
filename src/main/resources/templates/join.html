@@ -128,8 +128,88 @@
   
           <div class="checkbox mb-3  login_menu">
             <label class="find_info_box">
-              <a href="#">아이디찾기</a>&nbsp;&nbsp;&nbsp;
-              <a href="#">비밀번호 찾기</a>&nbsp;&nbsp;&nbsp;
+              <a href="#" data-toggle="modal"
+              data-target="#myModal">아이디찾기</a>&nbsp;&nbsp;&nbsp;
+
+              <!--  아이디 찾기 Modal -->
+        <div class="modal fade modal-center" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">등록된 이메일로 ID 찾기</h4>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label class="form-label mt-2">이름</label>
+                  <input type="text" class="form-control" id="sign_name" >
+                </div>
+                <div class="form-group">
+                  <label class="form-label mt-2"> 이메일</label>
+                  <div class="form_box">
+                    <input type="text" class="form-control" id="sign_email">
+                    <button type="button" class="btn btn-outline-success ms-1">인증번호</button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label mt-2"> 인증번호</label>
+                  <div class="form_box">
+                    <input type="text" class="form-control" id="sign_email">
+                    <button type="button" class="btn btn-outline-danger ms-1">확인하기</button>
+                  </div>
+                  <div id=find_idpw>
+                  <button class="w-30 btn btn-lg btn-dark mt-4">아이디 찾기</button>
+                </div>
+                </div>
+              </div>
+              <div class="modal-footer mt-3">
+                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 아이디 찾기 modal - end  -->
+              <a href="#" data-toggle="modal"
+              data-target="#myModal1">비밀번호 찾기</a>&nbsp;&nbsp;&nbsp;
+
+              <!--  비밀번호 찾기 Modal -->
+        <div class="modal fade modal-center" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">등록된 이메일로 PassWord 찾기</h4>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label class="form-label mt-2">아이디</label>
+                  <input type="text" class="form-control" id="sign_name">
+                </div>
+                <div class="form-group">
+                  <label class="form-label mt-2"> 이메일</label>
+                  <div class="form_box">
+                    <input type="text" class="form-control" id="sign_email">
+                    <button type="button" class="btn btn-outline-success ms-1">인증번호</button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label mt-2"> 인증번호</label>
+                  <div class="form_box">
+                    <input type="text" class="form-control" id="sign_email">
+                    <button type="button" class="btn btn-outline-danger ms-1">확인하기</button>
+                  </div>
+                  <div id=find_idpw>
+                  <button class="w-30 btn btn-lg btn-dark mt-4" type="submit">비밀번호 찾기</button>
+                </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 비밀번호 찾기 modal - end  -->
               <a href="#">회원가입</a>
             </label>
           </div>

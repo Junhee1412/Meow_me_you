@@ -1,5 +1,6 @@
 package com.ajd.meow.service.donate;
 
+import com.ajd.meow.entity.CreditcardPayment;
 import com.ajd.meow.entity.DonateMaster;
 import com.ajd.meow.repository.donate.DonateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,4 +38,5 @@ public class DonateService {
     public List<DonateMaster> donateListView(){
         return donateRepository.findAll();
     }
+
 }

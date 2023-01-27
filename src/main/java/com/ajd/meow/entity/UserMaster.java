@@ -49,24 +49,16 @@ public class UserMaster {
     @Column(name = "NICK_NAME")
     private String nickName;
 
-    @NotBlank(message = "성별은 필수 입력 값입니다.")
-    @Column(name = "GENDER")
-    private String gender;
-
     @Column(name = "DETAIL_ADDR")
     private String detailAddress;
-
-    @NotBlank(message = "핸드폰번호는 필수 입력 값입니다.")
-    @Column(name = "PHONE_NUM")
-    private String phoneNumber;
 
     @NotBlank(message = "통신사는 필수 입력값입니다.")
     @Column(name = "PHONE_TYPE")
     private String phoneType;
 
-    @NotNull(message = "생일은 필수 입력 값입니다.")
-    @Column(name = "BIRTH_DATE")
-    private Date birthDate;
+    @NotBlank(message = "핸드폰번호는 필수 입력 값입니다.")
+    @Column(name = "PHONE_NUM")
+    private String phoneNumber;
 
     @Column(name = "INTRODUCE")
     private String introduce;

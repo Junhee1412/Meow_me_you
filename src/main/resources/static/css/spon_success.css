@@ -66,7 +66,7 @@
     rgba(255, 255, 255, 0.15),
     rgba(255, 255, 255, 0)
   );
-  --bs-body-font-family: 'Noto Sans KR', sans-serif, "Noto Serif KR", serif,  -apple-system,
+  --bs-body-font-family: 'Noto Sans KR', sans-serif, "Noto Serif KR", serif, -apple-system,
     BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
     Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   --bs-body-font-size: 1rem;
@@ -10939,7 +10939,6 @@ fieldset:disabled .btn {
 body,
 html {
   width: 100%;
-  height: 100%;
 }
 
 
@@ -11566,10 +11565,7 @@ footer{
   height: 65px;
 }
 
-section{
-  height: 1100px;
-  margin-top: 100px;
-}
+
 .bg-light {
   height: 1053px;
   padding-top: 55px;
@@ -11602,10 +11598,31 @@ section{
   padding-left: 10px;
 }
 
+section {
+  height: 900px;
+  margin-top: 100px;
+}
+.marbot_50 {
+  margin-bottom: 50px;
+}
 .martop_10 {
   margin-top: 10px;
 }
+#pw_find_text {
+  text-align: center;
+}
+.marbot_30 {
+  margin-bottom: 30px;
+}
 
-.marbot_70 {
-  margin-bottom: 70px;
+#pw_find_btn_group {
+  width: 100%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#pw_find_btn_group button {
+  width: 150px;
+  margin: 0 20px;
 }

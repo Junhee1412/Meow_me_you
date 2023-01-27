@@ -23,9 +23,9 @@ public class BankTransfer {
     @Column(name="USER_NO")
     private Long userNo;
 
-    @Column(name="BANK")
+    @Column(name="COM_BANK")
     private String bank;
 
-    @Column(name="ACCOUNT")
+    @Column(name="COM_ACCOUNT")
     private String account;
 }

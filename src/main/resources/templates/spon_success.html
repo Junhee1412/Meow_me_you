@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -35,7 +36,7 @@
       type="image/x-icon"
       sizes="16x16"
     />
-    <title>회원가입</title>
+    <title>후원완료</title>
     <!-- Font Awesome icons (free version)-->
     <script
       src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
@@ -53,7 +54,7 @@
       type="text/css"
     />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="../css/sign.css" rel="stylesheet" />
+    <link href="../css/spon_success.css" rel="stylesheet" />
   </head>
 
   <body id="page-top">
@@ -111,85 +112,25 @@
      <!-- section -->
      <section>
       <div class="container py-4">
-        <div class="row align-items-center justify-content-between">
+        <div class="row align-items-center justify-content-between mt-5">
           <a class="navbar-brand h1 text-center" href="index.html">
-            <img class="mb-4 martop_10" src="../img/logo/logo1.png" alt="" width="200" height="100" />
+            <img class="mb-4 mt-1" src="../img/logo/logo1.png" alt="home" width="200" height="100">
           </a>
         </div>
-        <form>
-          <div class="form-group">
-            <label class="form-label mt-1">아이디*</label>
-            <input type="text" class="form-control" id="sign_id" />
-          </div>
-          <div class="form-group">
-            <label class="form-label mt-1">닉네임*</label>
-            <input type="text" class="form-control" id="sign_nick" />
-          </div>
-          <div class="form-group has-success">
-            <label class="form-label mt-2">비밀번호*</label>
-            <input type="password" class="form-control" id="sign_pwd" />
-          </div>
+        <div id="pw_find_text">
+          <h2 class="mt-3">후원완료!!</h2>
+          <h2 th:text="${donate.donatename}">님 후원해주셔서 감사합니다!</h2>
+        </div>
   
-          <div class="form-group has-danger">
-            <label class="form-label mt-2" for="inputInvalid">비밀번호 재확인*</label>
-            <input type="password" class="form-control" id="sign_pwd2" />
-          </div>
-          <div class="form-group">
-            <label class="form-label mt-2">이름*</label>
-            <input type="text" class="form-control" id="sign_name" />
-          </div>
-          <div class="bir_wrap">
-            <label class="form-label mt-2">생년월일*</label>
-            <div class="bir_yy">
-              <span class="ps_box">
-                <input type="text" class="form-control" id="yy" placeholder="년(4자)" maxlength="4" />
-              </span>
-            </div>
-            <div class="bir_mm">
-              <span class="ps_box focus">
-                <select class="form-select" id="mm">
-                  <option>월</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                  <option>11</option>
-                  <option>12</option>
-                </select>
-              </span>
-            </div>
-            <div class="bir_dd">
-              <span class="ps_box">
-                <input type="text" class="form-control" id="dd" placeholder="일" maxlength="2" />
-              </span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label mt-2">성별*</label>
-            <select class="form-select" id="sign_gender">
-              <option>남자</option>
-              <option>여자</option>
-            </select>
-          </div>
+        <div id="pw_find_btn_group">
+          <button class="btn btn-dark btn-lg" type="button">내 후원 보러가기 </button>
+          <button class="btn btn-dark btn-lg" type="button">meow me, you 후원내역 보러가기 </button>
+        </div>
   
-          <div class="form-group">
-            <label class="form-label mt-2">핸드폰번호*</label>
-            <input type="text" class="form-control" id="sign_tel" />
-          </div>
-          <div class="d-grid gap-2">
-            <button class="btn btn-dark btn-lg marbot_70" type="button">
-              가입하기
-            </button>
-          </div>
         </form>
       </div>
     </section>
+    <!-- section - en
   <!-- section - end -->
 
    

@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+
 @Controller
 public class DonateController {
     @Autowired
@@ -37,12 +39,20 @@ public class DonateController {
 
     @PostMapping("/donate/createdo.meow")
     public String donate(DonateMaster donateMaster, BankTransfer bankTransfer, Model model){
+        donateMaster.setDonateDate(Date.valueOf("2014-03-01"));
+        donateMaster.setDonateReceiptState("N");
+        donateMaster.setDonateStateCode("BANK_WAIT");
 
-        donateservice.createDonate(donateMaster, bankTransfer);
+        donateservice.createDonate(donateMaster);
+
+        bankTransfer.setDonateCode(donateMaster.getDonateCode());
+        bankTransfer.setUserNo(donateMaster.getUserNo());
+
+        donateservice.bankTransferDonate(bankTransfer);
 
         model.addAttribute("searchUrl", "/donate/list.meow");
 
-        return "spon_success";
+        return "sponsor";
 
     }
 

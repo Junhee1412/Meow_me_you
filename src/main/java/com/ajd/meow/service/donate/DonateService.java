@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class DonateService {
+public class DonateService implements DonateServiceImpl {
 
     @Autowired
     private DonateRepository donateRepository;
@@ -26,9 +26,11 @@ public class DonateService {
 
 
     //후원하기
-    public void createDonate(DonateMaster donateMaster, BankTransfer bankTransfer){
+    public void createDonate(DonateMaster donateMaster){
         donateRepository.save(donateMaster);
+    }
 
+    public void bankTransferDonate(BankTransfer bankTransfer){
         bankTransferRepository.save(bankTransfer);
     }
 

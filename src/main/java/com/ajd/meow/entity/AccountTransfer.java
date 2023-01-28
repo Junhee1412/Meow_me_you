@@ -23,11 +23,11 @@ public class AccountTransfer {
     @Column(name="USER_NO")
     private Long userNo;
 
-    @Column(name="BANK")
-    private String bank;
+    @Column(name="ACCOUNT_BANK")
+    private String accountBbank;
 
-    @Column(name="ACCOUNT")
-    private String account;
+    @Column(name="ACCOUNT_NUM")
+    private String accountNumber;
 
     @Column(name="ACNT_PASS")
     private int accountPassword;

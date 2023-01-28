@@ -163,7 +163,7 @@
               <option value="LG">LG U+</option>
               <option value="SKT">SKT</option>
             </select>
-            <input name="phoneNumber" type="text" class="form-control " id="sign_ph">
+            <input name="phoneNumber" type="text" class="form-control " id="sign_ph" required>
           </div>
   
           후원방법 *
@@ -192,7 +192,7 @@
           <div class="row gy-3" id="selectPay_card" >
         
             <span>
-              <select name="bank" class="form-select op" >
+              <select name="cardcompany" class="form-select op" >
                 <option value="">카드사</option>
                 <option value="현대카드">현대카드</option>
                 <option value="국민카드">국민카드</option>
@@ -203,7 +203,7 @@
   
             <div class="col-md-12">
               <label for="cc-number" class="form-label">카드번호</label>
-              <input name="account" type="text" class="form-control" id="cc-number" placeholder="">
+              <input name="cardNumber" type="text" class="form-control" id="cc-number" placeholder="">
             </div>
   
             <div class="col-md-6">
@@ -230,9 +230,9 @@
              <span>
               <select name="bank" class="form-select op" >
                 <option value="">은행명</option>
-                <option value="농협">농협</option>
-                <option value="국민은행">국민은행</option>
-                <option value="신한은행">신한은행</option>
+                <option value="NH_001">농협</option>
+                <option value="KB_001">국민은행</option>
+                <option value="SH_001">신한은행</option>
               </select>
             </span>
 
@@ -248,7 +248,7 @@
           <!-- 계좌이체 -->
           <div class=" row gy-3 " id="selectPay_Bank">
             <span>
-            <select name="bank" class="form-select op" >
+            <select name="accountBank" class="form-select op" >
                 <option value="">은행명</option>
                 <option value="농협">농협</option>
                 <option value="국민은행">국민은행</option>
@@ -258,7 +258,7 @@
 
             <div class="col-md-12">
               <label for="cc-name" class="form-label">계좌번호</label>
-              <input name="account" type="text" class="form-control" id="cc-name" placeholder="" >
+              <input name="accountNumber" type="text" class="form-control" id="cc-name" placeholder="" >
             </div>
   
             <div class="col-md-6">

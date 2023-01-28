@@ -1,9 +1,6 @@
 package com.ajd.meow.service.donate;
 
-import com.ajd.meow.entity.BankTransfer;
-import com.ajd.meow.entity.DonateMaster;
-import com.ajd.meow.entity.DonateStateClass;
-import com.ajd.meow.entity.DonateWayClass;
+import com.ajd.meow.entity.*;
 import com.ajd.meow.repository.donate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +29,14 @@ public class DonateService implements DonateServiceImpl {
 
     public void bankTransferDonate(BankTransfer bankTransfer){
         bankTransferRepository.save(bankTransfer);
+    }
+
+    public void creditcardDonate(CreditcardPayment creditcardPayment){
+        creditcardRepository.save(creditcardPayment);
+    }
+
+    public void accountDonate(AccountTransfer accountTransfer){
+        accountRepository.save(accountTransfer);
     }
 
     //후원확정

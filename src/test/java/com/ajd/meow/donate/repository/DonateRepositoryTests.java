@@ -59,7 +59,6 @@ public class DonateRepositoryTests extends MeowApplicationTests {
         bankTransfer.setDonateCode(5L);
         bankTransfer.setUserNo(1L);
         bankTransfer.setBank("국민은행");
-        bankTransfer.setAccount("4300-0000-000000");
 
         BankTransfer newbankTransfer= bankTransferRepository.save(bankTransfer);
     }
@@ -88,7 +87,6 @@ public class DonateRepositoryTests extends MeowApplicationTests {
         accountTransfer.setDonateCode(donateMaster.getDonateCode());
         accountTransfer.setAccountPassword(44);
         accountTransfer.setUserNo(donateMaster.getUserNo());
-        accountTransfer.setAccount("4444-4444-444444");
         accountTransfer.setBank("신한");
 
         AccountTransfer accountTransfer1=accountRepository.save(accountTransfer);

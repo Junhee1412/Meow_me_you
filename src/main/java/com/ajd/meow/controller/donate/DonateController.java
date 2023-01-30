@@ -1,6 +1,8 @@
 package com.ajd.meow.controller.donate;
 
+import com.ajd.meow.entity.AccountTransfer;
 import com.ajd.meow.entity.BankTransfer;
+import com.ajd.meow.entity.CreditcardPayment;
 import com.ajd.meow.entity.DonateMaster;
 import com.ajd.meow.repository.donate.AccountRepository;
 import com.ajd.meow.repository.donate.BankTransferRepository;
@@ -32,82 +34,87 @@ public class DonateController {
     @Autowired
     private DonateService donateservice;
 
+    @GetMapping("/donate.meow")
+    public String donatehome(){
+        return "sponsor_main";
+    }
 
-    @GetMapping("/donate/create.meow")
-    public String donateCreateForm(){
+    @GetMapping("/donatecreate.meow")
+    public String donateCreateForm(DonateMaster donateMaster){
         return "sponsor";
     }
 
-    @RequestMapping("/donate/success/{donateName}.meow")
-    public String donateSuccessPage(@PathVariable String donateName, DonateMaster donateMaster, Model model){
+//    @RequestMapping("/donate/success/{donateName}.meow")
+//    public String donateSuccessPage(@PathVariable String donateName, DonateMaster donateMaster, Model model){
+//
+//        model.addAttribute("msg", "donateName : " + donateName);
+//
+//        return "spon_success";
+//    }
 
-        model.addAttribute("msg", "donateName : " + donateName);
-
+    @GetMapping("/donatesuccess.meow")
+    public String donateSuccess(){
         return "spon_success";
     }
 
-    @PostMapping("/donate/createdo.meow")
-    public String donate(DonateMaster donateMaster, BankTransfer bankTransfer, Model model){
+    @PostMapping("/donatecreatedo.meow")
+    public String donate(DonateMaster donateMaster, BankTransfer bankTransfer, CreditcardPayment creditcardPayment, AccountTransfer accountTransfer, Model model){
+        //신용카드 한도초과, 계좌이체 잔액부족일 경우는 결제 API를 구현하지 않을 예정이기 때문에 주석으로 코드만 작성
         donateMaster.setDonateDate(Date.valueOf(LocalDate.now()));
         donateMaster.setDonateReceiptState("N");
-        donateMaster.setDonateStateCode("BANK_WAIT");
 
         donateservice.createDonate(donateMaster);
+        switch(donateMaster.getDonateWayCode()) {
+            case "BANK":
+                donateservice.updateDonateBankStateCode(donateMaster);
+                donateservice.createDonate(donateMaster);
 
-        bankTransfer.setDonateCode(donateMaster.getDonateCode());
-        bankTransfer.setUserNo(donateMaster.getUserNo());
+                bankTransfer.setDonateCode(donateMaster.getDonateCode());
+                bankTransfer.setUserNo(donateMaster.getUserNo());
+                donateservice.bankTransferDonate(bankTransfer);
+                break;
 
-        donateservice.bankTransferDonate(bankTransfer);
+            case "CRCRD":
+                donateservice.updateDonateCreditStateCode(donateMaster);
+//                if(한도초과일 시){
+//                donateMaster.setDonateStateCode("LIMIT_EXCDD");
+//                donateMaster.setDonateStateCode("DONATE_CPL");
+                donateservice.createDonate(donateMaster);
 
-        model.addAttribute("searchUrl", "/donate/list.meow");
+                creditcardPayment.setDonateCode(donateMaster.getDonateCode());
+                creditcardPayment.setUserNo(donateMaster.getUserNo());
+                donateservice.creditcardDonate(creditcardPayment);
 
-        return "redirect:/donate/create.meow";
+                break;
 
+            case "ACNT":
+                donateservice.updateDonateAccountStateCode(donateMaster);
+//                if(잔액부족일 시){
+//                donateMaster.setDonateStateCode("LCK_BLC");
+//                donateMaster.setDonateStateCode("DONATE_CPL");
+                donateservice.createDonate(donateMaster);
+
+                accountTransfer.setDonateCode(donateMaster.getDonateCode());
+                accountTransfer.setUserNo(donateMaster.getUserNo());
+                donateservice.accountDonate(accountTransfer);
+
+                break;
+            }
+
+            model.addAttribute("donate", donateMaster);
+            return "spon_success";
     }
-//    @PostMapping("/donate/createdo.meow")
-//    public String donate(DonateMaster donateMaster, BankTransfer bankTransfer, Model model){
-//
-//        donateMaster.setDonateDate(Date.valueOf("2014-02-02"));
-//        donateMaster.setDonateReceiptState("N");
-//
-//        switch(donateMaster.getDonateWayCode()){
-//            case "bank":
-//
-//                donateMaster.setDonateStateCode("BANK_WAIT");
-//                donateservice.createDonate(donateMaster);
-//
-//                bankTransfer.setDonateCode(donateMaster.getDonateCode());
-//                bankTransfer.setUserNo(donateMaster.getUserNo());
-//                donateservice.bankTransferDonate(bankTransfer);
-//
-//                model.addAttribute("searchUrl", "/donate/list.meow");
-//                break;
-//        }
-//        return "sponsor";
-//    }
 
-    @GetMapping("/donate/list.meow")
+    @GetMapping("/donatelist.meow")
     public String donatelistForm(Model model){
         model.addAttribute("list", donateservice.donateList());
         return "spon_list";
     }
 
-
-//            case "CRCRD":
-////                if(한도초과일 시){
-////                donateMaster.setDonateStateCode("LIMIT_EXCDD");
-////                donateMaster.setDonateReceiptState("N");
-////                break;}
-//                    donateMaster.setDonateStateCode("DONATE_CPL");
-//                donateservice.createDonate(donateMaster);
-//
-//                creditcardPayment.setDonateCode(donateMaster.getDonateCode());
-//                creditcardPayment.setUserNo(donateMaster.getUserNo());
-//                donateservice.creditcardDonate(creditcardPayment);
-//
-//                model.addAttribute("searchUrl", "/donate/list.meow");
-//                break;
-
-
-
+    @GetMapping("/donatecure_001.meow")
+    public String donatecureForm(DonateMaster donateMaster){
+        donateMaster.setDonateBusinessCode("CURE_001");
+        donateMaster.setUserNo(1L);
+        return "sponsor";
+    }
 }

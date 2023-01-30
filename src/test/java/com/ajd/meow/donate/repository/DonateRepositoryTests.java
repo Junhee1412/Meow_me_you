@@ -85,9 +85,9 @@ public class DonateRepositoryTests extends MeowApplicationTests {
         DonateMaster TestDonate = donateRepository.save(donateMaster);
 
         accountTransfer.setDonateCode(donateMaster.getDonateCode());
-        accountTransfer.setAccountPassword(44);
+        accountTransfer.setAccountPassword(String.valueOf(44));
         accountTransfer.setUserNo(donateMaster.getUserNo());
-        accountTransfer.setBank("신한");
+        accountTransfer.setAccountBank("신한");
 
         AccountTransfer accountTransfer1=accountRepository.save(accountTransfer);
     }
@@ -98,7 +98,7 @@ public class DonateRepositoryTests extends MeowApplicationTests {
 
         donateMaster.ifPresent(selectDonate ->{
             System.out.println("CodeName은 " + selectDonate.getDonateName() + "입니다.");
-            System.out.println("DonateCode는 " + selectDonate.getDonateCode() + "입니다.");
+            System.out.println("donateCode는 " + selectDonate.getDonateCode() + "입니다.");
             System.out.println("후원금액은 " + selectDonate.getDonateAmount()+ "입니다.");
         });
     }

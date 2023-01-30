@@ -27,12 +27,6 @@ public class Reply {
     private String replyContent;
 
     @Column(name="REPLY_USER_NO")
-    private UUID replyUserNo;
-
-    @Column(name="UPDATE_DATE")
-    private LocalDateTime updateReplyDate;
-
-    @Column(name="DELETE_DATE")
-    private LocalDateTime deleteReplyDate;
+    private Long replyUserNo;
 
 }

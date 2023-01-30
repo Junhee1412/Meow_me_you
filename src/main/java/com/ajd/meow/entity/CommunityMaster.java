@@ -41,10 +41,4 @@ public class CommunityMaster {
 
     @Column(name="CRT_DATE")
     private LocalDateTime createPostDate;
-
-    @Column(name="UPDATE_DATE")
-    private LocalDateTime updatePostDate;
-
-    @Column(name = "DELETE_DATE")
-    private LocalDateTime deletePostDate;
 }

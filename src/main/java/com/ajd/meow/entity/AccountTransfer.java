@@ -18,18 +18,18 @@ public class AccountTransfer {
 
     @Id
     @Column(name="DNTN_CODE")
-    private Long DonateCode;
+    private Long donateCode;
 
     @Column(name="USER_NO")
     private Long userNo;
 
     @Column(name="ACCOUNT_BANK")
-    private String accountBbank;
+    private String accountBank;
 
     @Column(name="ACCOUNT_NUM")
     private String accountNumber;
 
     @Column(name="ACNT_PASS")
-    private int accountPassword;
+    private String accountPassword;
 
 }

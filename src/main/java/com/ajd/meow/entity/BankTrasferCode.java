@@ -24,5 +24,5 @@ public class BankTrasferCode {
     private String bank;
 
     @Column(name="COM_ACCOUNT")
-    private String CompanyAccount;
+    private String companyAccount;
 }

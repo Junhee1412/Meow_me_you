@@ -19,7 +19,7 @@ public class CreditcardPayment {
 
     @Id
     @Column(name = "DNTN_CODE")
-    private Long DonateCode;
+    private Long donateCode;
 
     @Column(name="USER_NO")
     private Long userNo;
@@ -31,12 +31,12 @@ public class CreditcardPayment {
     private String cardNumber;
 
     @Column(name = "CVC")
-    private int cvc;
+    private String cvc;
 
     @Column(name = "VLDT_PRD")
-    private int validityPeriod;
+    private String validityPeriod;
 
     @Column(name = "CRCRD_PASS")
-    private int creditcardPassword;
+    private String creditcardPassword;
 
 }

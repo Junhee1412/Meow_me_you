@@ -39,6 +39,18 @@ public class DonateService implements DonateServiceImpl {
         accountRepository.save(accountTransfer);
     }
 
+    public void updateDonateBankStateCode(DonateMaster donateMaster){
+        donateMaster.setDonateStateCode("BANK_WAIT");
+    }
+
+    public void updateDonateCreditStateCode(DonateMaster donateMaster){
+        donateMaster.setDonateStateCode("DONATE_CPL");
+    }
+
+    public void updateDonateAccountStateCode(DonateMaster donateMaster){
+        donateMaster.setDonateStateCode("DONATE_CPL");
+    }
+
     //후원확정
     public DonateMaster confirmDonate(Long donateCode){
         return donateRepository.findById(donateCode).get();

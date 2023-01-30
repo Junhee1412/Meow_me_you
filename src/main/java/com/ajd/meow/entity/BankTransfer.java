@@ -18,7 +18,7 @@ public class BankTransfer {
 
     @Id
     @Column(name="DNTN_CODE")
-    private Long DonateCode;
+    private Long donateCode;
 
     @Column(name="USER_NO")
     private Long userNo;

@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 
 //논리명 중고거래
 @Entity
@@ -24,7 +26,7 @@ public class SecondHandTrade {
     @Column(name="POST_NO")
     private Long PostNo;
 
-    @Min(value=3000, message = "금액은 필수 입력 값입니다.")
+    @Positive(message = "금액은 0원 이상이어야 합니다!")
     @Column(name="PRICE")
     private int price;
 }

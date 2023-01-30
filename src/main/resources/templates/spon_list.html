@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -132,12 +133,12 @@
       <div class="container" id="main_box">
         <table class="table">
           <thead>
-            <tr>
+            <tr th:each="donateMaster:${list}">
               <th scope="col"></th>
               <th scope="col">번호</th>
-              <th scope="col">후원방식</th>
-              <th scope="col" colspan="3">후원방법</th>
-              <th scope="col">후원금액</th>
+              <th th:text=${donateMaster.donateType} scope="col">후원방식</th>
+              <th th:text=${donateMaster.donateWayCode} scope="col" colspan="3">후원방법</th>
+              <th th:text=${donateMaster.donateAmount} scope="col">후원금액</th>
               <th scope="col">영수증발급</th>
               <th scope="col">후원확정</th>
               <th scope="col">후원취소</th>

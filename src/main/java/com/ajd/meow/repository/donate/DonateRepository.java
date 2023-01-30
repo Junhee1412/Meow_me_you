@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface DonateRepository extends JpaRepository<DonateMaster, Long> {
     List<DonateMaster> findByUserNo(Long UserNo);
+
 }

@@ -18,14 +18,11 @@ public class BankTransfer {
 
     @Id
     @Column(name="DNTN_CODE")
-    private Long DonateCode;
+    private Long donateCode;
 
     @Column(name="USER_NO")
     private Long userNo;
 
-    @Column(name="COM_BANK")
+    @Column(name="COM_BANK_CODE")
     private String bank;
-
-    @Column(name="COM_ACCOUNT")
-    private String account;
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -100,7 +100,7 @@
                 <li><a href="#">회원정보 수정하기</a></li>
               </ul>
             </li>
-            <li><a class="get-a-quote" href="#">로그아웃</a></li>
+            <li><a class="get-a-quote" href="logout.meow">로그아웃</a></li>
           </ul>
         </nav>
         <!-- .navbar -->
@@ -115,26 +115,30 @@
       </div>
   
       <div class="text-area">
-        <h3 class="greeting stagger-item">준성이</h3>
+        <h3 class="greeting stagger-item"><p th:text="${user.getNickName()}"></p></h3>
         <div class="desc stagger-item" id="user_info_box">
           <div id="user_info">
             <table class="table">
               <tbody>
                 <tr>
                   <th scope="row">ID</th>
-                  <td> 알잘깔딱센@gmail.com</td>
+                  <td><p th:text="${user.getUserId()}"></p></td>
                 </tr>
                 <tr>
                   <th scope="row">이름</th>
-                  <td>고민호</td>
+                  <td><p th:text="${user.getUserName()}"></p></td>
                 </tr>
                 <tr>
                   <th scope="row">닉네임</th>
-                  <td>마이노</td>
+                  <td><p th:text="${user.getNickName()}"></p></td>
                 </tr>
                 <tr>
-                  <th scope="row">핸드폰번호</th>
-                  <td>010-0000-0000</td>
+                  <th scope="row">핸드폰</th>
+                  <td><p th:text="${user.getPhoneNumber()}"></p></td>
+                </tr>
+                <tr>
+                  <th scope="row">소개</th>
+                  <td><p th:text="${user.getIntroduce()}"></p></td>
                 </tr>
               </tbody>
             </table>
@@ -156,7 +160,7 @@
             <div class="name">내글 모아보기</div>
           </div>
           <div class="right">
-            <a href="#"> <img src="../img/icon/right_arrow.svg" /></a>
+            <a href="myPost.meow"> <img src="../img/icon/right_arrow.svg" /></a>
           </div>
         </li>
   
@@ -193,7 +197,10 @@
   
       <div class="text-center">
         <button class="w-30 btn btn-lg btn-dark mt-4" type="submit">
-          회원정보 변경하기
+          <a href="modifyUser.meow" style="text-decoration:none;">회원정보 변경하기</a>
+        </button>
+        <button class="w-30 btn btn-lg btn-dark mt-4" type="submit">
+          <a href="deleteUser.meow" style="text-decoration:none;">탈퇴하기</a>
         </button>
       </div>
     </section>

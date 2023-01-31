@@ -39,10 +39,7 @@ public class DonateController {
         return "sponsor_main";
     }
 
-    @GetMapping("/donatecreate.meow")
-    public String donateCreateForm(DonateMaster donateMaster){
-        return "sponsor";
-    }
+
 
 //    @RequestMapping("/donate/success/{donateName}.meow")
 //    public String donateSuccessPage(@PathVariable String donateName, DonateMaster donateMaster, Model model){
@@ -57,9 +54,15 @@ public class DonateController {
         return "spon_success";
     }
 
+    @GetMapping("/donatecreate.meow")
+    public String donateCreateForm(DonateMaster donateMaster){
+        return "sponsor";
+    }
+
     @PostMapping("/donatecreatedo.meow")
     public String donate(DonateMaster donateMaster, BankTransfer bankTransfer, CreditcardPayment creditcardPayment, AccountTransfer accountTransfer, Model model){
         //신용카드 한도초과, 계좌이체 잔액부족일 경우는 결제 API를 구현하지 않을 예정이기 때문에 주석으로 코드만 작성
+
         donateMaster.setDonateDate(Date.valueOf(LocalDate.now()));
         donateMaster.setDonateReceiptState("N");
 
@@ -102,6 +105,7 @@ public class DonateController {
             }
 
             model.addAttribute("donate", donateMaster);
+
             return "spon_success";
     }
 
@@ -109,12 +113,5 @@ public class DonateController {
     public String donatelistForm(Model model){
         model.addAttribute("list", donateservice.donateList());
         return "spon_list";
-    }
-
-    @GetMapping("/donatecure_001.meow")
-    public String donatecureForm(DonateMaster donateMaster){
-        donateMaster.setDonateBusinessCode("CURE_001");
-        donateMaster.setUserNo(1L);
-        return "sponsor";
     }
 }

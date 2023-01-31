@@ -112,92 +112,82 @@
      <section>
       <div class="container py-4">
         <div class="row align-items-center justify-content-between">
-          <a class="navbar-brand h1 text-center" href="index.html">
+          <a class="navbar-brand h1 text-center" href="/">
             <img class="mb-4 martop_10" src="../img/logo/logo1.png" alt="" width="200" height="100" />
           </a>
         </div>
-        <form>
+        <iframe name="param" id="xxx" style="display:none"></iframe>
+        <form action="sign_success.meow" method="post">
           <div class="form-group">
             <label class="form-label mt-1">아이디*</label>
-            <input type="text" class="form-control" id="sign_id" name=""/>
+            <form action="emailConfirm" method="post" target="param">
+              <input type="email" class="form-control" id="sign_id" name="userId"/>
+              <button type="submit">중복확인&인증코드보내기</button>
+            </form>
           </div>
           <div class="form-group">
             <label class="form-label mt-1">닉네임*</label>
-            <input type="text" class="form-control" id="sign_nick" name=""/>
+            <input type="text" class="form-control" id="sign_nick" name="nickName"/>
           </div>
           <div class="form-group has-success">
             <label class="form-label mt-2">비밀번호*</label>
-            <input type="password" class="form-control" id="sign_pwd" name=""/>
+            <input type="password" class="form-control" id="sign_pwd" name="userPassword"/>
           </div>
+          <p style="font-size:8px;">※ 비밀번호는 영문 대,소문자와 숫자, 특수기호가 적어도 1개 이상씩 포함된 8자 ~ 20자의 비밀번호여야 합니다.</p>
   
           <div class="form-group has-danger">
             <label class="form-label mt-2" for="inputInvalid">비밀번호 재확인*</label>
-            <input type="password" class="form-control" id="sign_pwd2" name=""/>
+            <input type="password" class="form-control" id="sign_pwd2"/>
           </div>
+          <script type="text/javascript">
+            let pass_word=document.getElementById('sign_pwd');
+            let pass_word_check=document.getElementById('sign_pwd2');
+            function validatePassword(){
+              if(pass_word.value!=pass_word_check.value){
+                pass_word_check.setCustomValidity("비밀번호가 일치하지않습니다.");// Passwords Don't Match
+              }else{pass_word_check.setCustomValidity('');}
+            }
+            //pass_word.onchange=validatePassword;
+            pass_word.onchange=checkcheckpw;
+            pass_word_check.onkeyup=validatePassword;
+            function checkcheckpw(){
+                if(!/^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\W)(?=\S+$).{8,20}$/.test(pass_word.value)){
+                  pass_word.setCustomValidity("영어대소문자,숫자,특수기호 적어도 1개 이상씩 적어야함");
+                }else{pass_word_check.setCustomValidity('');}
+              }
+        </script>
+
           <div class="form-group">
             <label class="form-label mt-2">이름*</label>
-            <input type="text" class="form-control" id="sign_name" name=""/>
+            <input type="text" class="form-control" id="sign_name" name="userName"/>
           </div>
-          <div class="bir_wrap">
-            <label class="form-label mt-2">생년월일*</label>
-            <div class="bir_yy">
-              <span class="ps_box">
-                <input type="text" class="form-control" id="yy" placeholder="년(4자)" maxlength="4" name=""/>
-              </span>
-            </div>
-            <div class="bir_mm">
-              <span class="ps_box focus">
-                <select class="form-select" id="mm">
-                  <option>월</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                  <option>11</option>
-                  <option>12</option>
-                </select>
-              </span>
-            </div>
-            <div class="bir_dd">
-              <span class="ps_box">
-                <input type="text" class="form-control" id="dd" placeholder="일" maxlength="2" />
-              </span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label mt-2">성별*</label>
-            <select class="form-select" id="sign_gender">
-              <option>남자</option>
-              <option>여자</option>
-            </select>
-          </div>
+          
 
           <div class="form-group ">
-            <label class="form-label mt-2">핸드폰</label>
-            <select class="form-select" id="sign_phone" >
-              <option>KT</option>
+            <label class="form-label mt-2">핸드폰*</label>
+            <select class="form-select" id="sign_phone" name="phoneType">
+              <option selected>SKT</option>
               <option>LG U+</option>
-              <option>SKT</option>
+              <option>KT</option>
             </select>
-            <input type="text" class="form-control " id="sign_ph" name="" >
+            <input type="text" class="form-control " id="sign_ph" name="phoneNumber" >
           </div>
 
           <div class="form-group">
-            <label class="form-label mt-2" >Email*</label>
-            <input type="email" class="form-control" id="sign_email"  />
-            <button class="btn btn-outline-success " id="sign_btn" type="button">
-              인증하기
-            </button>
+            <label class="form-label mt-2">소개</label>
+            <textarea type="text" class="form-control" id="introduce" name="introduce"></textarea>
           </div>
 
+<!--          <div class="form-group">-->
+<!--            <label class="form-label mt-2" >Email*</label>-->
+<!--            <input type="email" class="form-control" id="sign_email"  />-->
+<!--            <button class="btn btn-outline-success " id="sign_btn" type="button">-->
+<!--              인증하기-->
+<!--            </button>-->
+<!--          </div>-->
+
           <div class="d-grid gap-2">
-            <button class="btn btn-dark btn-lg marbot_70" type="button">
+            <button class="btn btn-dark btn-lg marbot_70" type="submit">
               가입하기
             </button>
           </div>

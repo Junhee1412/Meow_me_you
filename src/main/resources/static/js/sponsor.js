@@ -141,7 +141,124 @@ document.addEventListener('DOMContentLoaded', () => {
   
   });
 
+      // 결제js TEST
+      // $("input[name='donateWayCode']").change(function(){
+      // 	var test = $("input[name='donateWayCode']:checked").val();
+      // 	alert(test);
+      // });
+
+
+      // 결제 관련 js
+      $(document).ready(function () {
+
+        $('#selectPay_Bank').hide();   // 초깃값 설정
+        $('#selectPay_noBank').hide();	// 초깃값 설정
+
+        $("input[name='donateWayCode']").change(function () {
+          // 계좌이체 결제 선택 시.
+          if ($("input[name='donateWayCode']:checked").val() == 'ACNT') {
+            $('#selectPay_card').hide();
+            $('#selectPay_noBank').hide();
+            $('#selectPay_Bank').show();
+          }
+          // 무통장입금 결제 선택 시.
+          else if ($("input[name='donateWayCode']:checked").val() == 'BANK') {
+            $('#selectPay_card').hide();
+            $('#selectPay_Bank').hide();
+            $('#selectPay_noBank').show();
+          }
+          // 신용카드 결제 선택 시.
+          else if ($("input[name='donateWayCode']:checked").val() == 'CRCRD') {
+            $('#selectPay_Bank').hide();
+            $('#selectPay_noBank').hide();
+            $('#selectPay_card').show();
+          }
+        });
+      });
+
+
 var url_href = window.location.href;
 var url = new URL(url_href);
 var donateCode = url.searchParams.get("donateBusinessCode");
 $('input[name=donateBusinessCode]').attr('value',donateCode);
+
+
+  function autoHypenPhone(str){
+              str = str.replace(/[^0-9]/g, '');
+              var tmp = '';
+              if( str.length < 4){
+                  return str;
+              }else if(str.length < 7){
+                  tmp += str.substr(0, 3);
+                  tmp += '-';
+                  tmp += str.substr(3);
+                  return tmp;
+              }else if(str.length < 11){
+                  tmp += str.substr(0, 3);
+                  tmp += '-';
+                  tmp += str.substr(3, 3);
+                  tmp += '-';
+                  tmp += str.substr(6);
+                  return tmp;
+              }else{
+                  tmp += str.substr(0, 3);
+                  tmp += '-';
+                  tmp += str.substr(3, 4);
+                  tmp += '-';
+                  tmp += str.substr(7);
+                  return tmp;
+              }
+              return str;
+          }
+
+  var cellPhone = document.getElementById('sign_ph');
+  cellPhone.onkeyup = function(event){
+          event = event || window.event;
+          var _val = this.value.trim();
+          this.value = autoHypenPhone(_val) ;
+  }
+
+
+function printdate()  {
+
+    const birthyear = document.getElementById('yy').value;
+    const birthmonth = document.getElementById('mm').value;
+    const birthday = document.getElementById('dd').value;
+    const strbirth = birthyear + birthmonth + birthday;
+
+    document.getElementById("brth").value = strbirth;
+}
+
+function birthdayCheck() {
+   strbirth = document.getElementById("brth").value; // '-' 문자 모두 '' 변경
+
+   const year = Number(strbirth.substr(0, 4)); // 입력한 값의 0~4자리까지 (연)
+   const month = Number(strbirth.substr(4,2)); // 입력한 값의 4번째 자리부터 2자리 숫자 (월)
+   const day = Number(strbirth.substr(6,2)); // 입력한 값 6번째 자리부터 2자리 숫자 (일)
+   const today = new Date(); // 오늘 날짜를 가져옴
+   const yearNow = today.getFullYear(); // 올해 연도 가져옴
+
+   if (strbirth.length <=8) {
+      if (1900 > year || year > yearNow){    // 연도의 경우 1900 보다 작거나 yearNow 보다 크다면 false를 반환합니다.
+         return false;
+      } else if (month < 1 || month > 12) {
+         return false;
+      } else if (day < 1 || day > 31) {
+         return false;
+      } else if ((month==4 || month==6 || month==9 || month==11) && day==31) {
+         return false;
+      } else if (month == 2) { // 2월달일때
+         // 2월 29일(윤년) 체크
+         const isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+         if (day>29 || (day==29 && !isleap)) {
+            return false;
+         } else {
+            return true;
+         } //end of if (day>29 || (day==29 && !isleap))
+      } else {
+         return true;
+      }//end of if
+   } else { // 입력된 생년월일이 8자 초과할때 : false
+      return false;
+   }
+}

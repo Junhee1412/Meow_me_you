@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<!--<html lang="en">-->
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -87,8 +86,16 @@
                 <li><a href="#">캣스타그램</a></li>
               </ul>
             </li>
-            
-            <li><a class="get-a-quote" href="login.meow">로그인</a></li>
+            <li class="dropdown"><a href="mypage/my.meow"><span>마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+              <ul>
+                <li><a href="#">내 글 모아보기</a></li>
+                <li><a href="#">내가 쓴 댓글 모아보기</a></li>
+                <li><a href="#">좋아요 목록 보기</a></li>
+                <li><a href="#">내 후원 목록보기</a></li>
+                <li><a href="#">회원정보 수정하기</a></li>
+              </ul>
+            </li>
+            <li><a class="get-a-quote" href="logout.meow">로그아웃</a></li>
           </ul>
         </nav>
         <!-- .navbar -->

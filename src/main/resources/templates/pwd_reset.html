@@ -111,19 +111,36 @@
      <!-- section -->
      <section class="text-center">
       <main class="form-signin">
-        <form action="login.jsp" method="post">
+        <form action="#" method="post">
           <img class="mb-4 martop_30" src="../img/logo/logo1.png" alt="" width="200" height="100">
           <h1 class="h3 mb-3 fw-normal fs-1 martop_30 padbot_30">비밀번호 변경</h1>
   
           <div class="form-floating">
-            <input type="text" class="form-control marbot_5" id="id" name="" placeholder="아이디 입력...">
+            <input type="text" class="form-control marbot_5" id="id" name="userPassword" placeholder="아이디 입력...">
             <label for="id">새로운 비밀번호</label>
           </div>
   
           <div class="form-floating">
-            <input type="password" class="form-control" id="pwd" name="" placeholder="Password">
+            <input type="password" class="form-control" id="pwd" placeholder="Password">
             <label for="pwd">새로운 비밀번호 확인</label>
           </div>
+          <script type="text/javascript">
+            let pass_word=document.getElementById('id');
+            let pass_word_check=document.getElementById('pwd');
+            function validatePassword(){
+              if(pass_word.value!=pass_word_check.value){
+                pass_word_check.setCustomValidity("비밀번호가 일치하지않습니다.");// Passwords Don't Match
+              }else{pass_word_check.setCustomValidity('');}
+            }
+            //pass_word.onchange=validatePassword;
+            pass_word.onchange=checkcheckpw;
+            pass_word_check.onkeyup=validatePassword;
+            function checkcheckpw(){
+              if(!/^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\W)(?=\S+$).{8,20}$/.test(pass_word.value)){
+                pass_word.setCustomValidity("영어대소문자,숫자,특수기호 적어도 1개 이상씩 적어야함");
+              }else{pass_word_check.setCustomValidity('');}
+            }
+        </script>
   
   
           <button class="w-100 btn btn-lg btn-dark fs-3 marbot_30" type="submit">비밀번호 재설정</button>

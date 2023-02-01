@@ -215,7 +215,7 @@ $('input[name=donateBusinessCode]').attr('value',donateCode);
   cellPhone.onkeyup = function(event){
           event = event || window.event;
           var _val = this.value.trim();
-          this.value = autoHypenPhone(_val) ;
+          this.value = autoHypenPhone(_val);
   }
 
 
@@ -225,35 +225,35 @@ function printdate()  {
     const birthyear = document.getElementById('yy').value;
     const birthmonth = document.getElementById('mm').value;
     const birthday = document.getElementById('dd').value;
-    const strbirth = birthyear + birthmonth + birthday;
+    const objBirth = birthyear + birthmonth + birthday;
 
-    document.getElementById("brth").value = strbirth;
+    document.getElementById("brth").value = objBirth;
 
 }
 
 
-function validBirthDay(strbirth){
-    if(birthdayCheck(strbirth)==false){
-        alert('올바른 생년월일을 입력해주세요.');
-        return false;
-    }
-}
+//function validBirthDay(objBirth){
+//    if(ValidChecked(objBirth)==false){
+//        alert('올바른 생년월일을 입력해주세요.');
+//        return false;
+//    }
+//}
 
 
-function birthdayCheck(strbirth) {
+function ValidChecked() {
 
-   var RegExp = /^[a-zA-Z0-9]{4,12}$/;
    var n_RegExp = /^[가-힣]{2,15}$/;
+   var p_RegExp = /^(?:(010-\d{4})|(01[1|6|7|8|9]-\d{3,4}))-(\d{4})$/;
 
-   var objbirth = document.getElementById("brth").value; // '-' 문자 모두 '' 변경
+   var objBirth = document.getElementById("brth").value;
+   var objName = document.getElementById("sign_name").value;
+   var objPhoneNumber = document.getElementById("sign_ph").value;
 
-
-   const year = Number(objbirth.substr(0, 4)); // 입력한 값의 0~4자리까지 (연)
-   const month = Number(objbirth.substr(4,2)); // 입력한 값의 4번째 자리부터 2자리 숫자 (월)
-   const day = Number(objbirth.substr(6,2)); // 입력한 값 6번째 자리부터 2자리 숫자 (일)
+   const year = Number(objBirth.substr(0, 4)); // 입력한 값의 0~4자리까지 (연)
+   const month = Number(objBirth.substr(4,2)); // 입력한 값의 4번째 자리부터 2자리 숫자 (월)
+   const day = Number(objBirth.substr(6,2)); // 입력한 값 6번째 자리부터 2자리 숫자 (일)
    const today = new Date(); // 오늘 날짜를 가져옴
    const yearNow = today.getFullYear(); // 올해 연도 가져옴
-
 
         //이름 유효성 검사
         if(objName.value ==''){
@@ -264,20 +264,25 @@ function birthdayCheck(strbirth) {
             alert("특수문자,영어,숫자는 사용할수 없습니다. 한글만 입력하여주세요.");
             return false;
         }
-//    생년월일 유효성 검사
-   if (objbirth.length <=8) {
+        //생년월일 유효성 검사
+      if (objBirth.length <=8) {
       if (1900 > year || year > yearNow){    // 연도의 경우 1900 보다 작거나 yearNow 보다 크다면 false를 반환합니다.
+         alert("1900년 이전은 입력할 수 없습니다.");
          return false;
       } else if (month < 1 || month > 12) {
-         return false;
+        alert("월은 1월부터 12월까지 입력할 수 있습니다.");
+        return false;
       } else if (day < 1 || day > 31) {
+        alert("일은 1월부터 31일까지 입력할 수 있습니다.");
          return false;
       } else if ((month==4 || month==6 || month==9 || month==11) && day==31) {
+      alert("일은 1월부터 30일까지 입력할 수 있습니다.");
          return false;
       } else if (month == 2) { // 2월달일때
          // 2월 29일(윤년) 체크
          const isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
          if (day>29 || (day==29 && !isleap)) {
+         alert("일은 1월부터 29일까지 입력할 수 있습니다.");
             return false;
          } else {
             return true;
@@ -286,6 +291,14 @@ function birthdayCheck(strbirth) {
          return true;
       }//end of if
    } else { // 입력된 생년월일이 8자 초과할때 : false
+        alert("생년월일이 유효하지 않습니다.");
       return false;
    }
-}
+   }
+//   휴대폰번호 유효성검사
+//   if(!regExp.test(mbtlnum)){
+//       alert("휴대폰번호가 올바르지 않습니다.");
+//       return false;
+//     }
+//     return true;
+//   }

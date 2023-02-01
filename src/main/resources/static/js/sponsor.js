@@ -241,15 +241,31 @@ function validBirthDay(strbirth){
 
 
 function birthdayCheck(strbirth) {
-   strbirth = document.getElementById("brth").value; // '-' 문자 모두 '' 변경
 
-   const year = Number(strbirth.substr(0, 4)); // 입력한 값의 0~4자리까지 (연)
-   const month = Number(strbirth.substr(4,2)); // 입력한 값의 4번째 자리부터 2자리 숫자 (월)
-   const day = Number(strbirth.substr(6,2)); // 입력한 값 6번째 자리부터 2자리 숫자 (일)
+   var RegExp = /^[a-zA-Z0-9]{4,12}$/;
+   var n_RegExp = /^[가-힣]{2,15}$/;
+
+   var objbirth = document.getElementById("brth").value; // '-' 문자 모두 '' 변경
+
+
+   const year = Number(objbirth.substr(0, 4)); // 입력한 값의 0~4자리까지 (연)
+   const month = Number(objbirth.substr(4,2)); // 입력한 값의 4번째 자리부터 2자리 숫자 (월)
+   const day = Number(objbirth.substr(6,2)); // 입력한 값 6번째 자리부터 2자리 숫자 (일)
    const today = new Date(); // 오늘 날짜를 가져옴
    const yearNow = today.getFullYear(); // 올해 연도 가져옴
 
-   if (strbirth.length <=8) {
+
+        //이름 유효성 검사
+        if(objName.value ==''){
+            alert("이름을 입력해주세요.");
+            return false;
+        }
+        if(!n_RegExp.test(objName.value)){
+            alert("특수문자,영어,숫자는 사용할수 없습니다. 한글만 입력하여주세요.");
+            return false;
+        }
+//    생년월일 유효성 검사
+   if (objbirth.length <=8) {
       if (1900 > year || year > yearNow){    // 연도의 경우 1900 보다 작거나 yearNow 보다 크다면 false를 반환합니다.
          return false;
       } else if (month < 1 || month > 12) {

@@ -14,10 +14,11 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="REPLY")
+@SequenceGenerator(name="REPLY_NO_SEQ_GEN", sequenceName="REPLY_NO_SEQ", initialValue=1, allocationSize=1)
 public class Reply {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="REPLY_NO_SEQ_GEN")
     @Column(name = "REPLY_NO")
     private Long replyNo;
 

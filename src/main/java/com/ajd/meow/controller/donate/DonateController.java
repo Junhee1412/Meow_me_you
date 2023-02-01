@@ -1,9 +1,6 @@
 package com.ajd.meow.controller.donate;
 
-import com.ajd.meow.entity.AccountTransfer;
-import com.ajd.meow.entity.BankTransfer;
-import com.ajd.meow.entity.CreditcardPayment;
-import com.ajd.meow.entity.DonateMaster;
+import com.ajd.meow.entity.*;
 import com.ajd.meow.repository.donate.AccountRepository;
 import com.ajd.meow.repository.donate.BankTransferRepository;
 import com.ajd.meow.repository.donate.CreditcardRepository;
@@ -14,8 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Controller
 public class DonateController {
@@ -39,31 +40,45 @@ public class DonateController {
         return "sponsor_main";
     }
 
-
-
-//    @RequestMapping("/donate/success/{donateName}.meow")
-//    public String donateSuccessPage(@PathVariable String donateName, DonateMaster donateMaster, Model model){
-//
-//        model.addAttribute("msg", "donateName : " + donateName);
-//
-//        return "spon_success";
-//    }
-
     @GetMapping("/donatesuccess.meow")
-    public String donateSuccess(){
+    public String donateSuccess(HttpSession session, Model model){
+
+        UserMaster loginUser=(UserMaster)session.getAttribute("user");
+        model.addAttribute("user",loginUser);
+
         return "spon_success";
     }
 
     @GetMapping("/donatecreate.meow")
-    public String donateCreateForm(DonateMaster donateMaster){
+    public String donateCreateForm(HttpSession session, DonateMaster donateMaster, Model model){
+        UserMaster loginUser=(UserMaster)session.getAttribute("user");
+        model.addAttribute("user",loginUser);
         return "sponsor";
     }
 
     @PostMapping("/donatecreatedo.meow")
-    public String donate(DonateMaster donateMaster, BankTransfer bankTransfer, CreditcardPayment creditcardPayment, AccountTransfer accountTransfer, Model model){
+    public String donate(HttpServletRequest request, HttpSession session, DonateMaster donateMaster, BankTransfer bankTransfer, CreditcardPayment creditcardPayment, AccountTransfer accountTransfer, Model model){
         //신용카드 한도초과, 계좌이체 잔액부족일 경우는 결제 API를 구현하지 않을 예정이기 때문에 주석으로 코드만 작성
 
-        donateMaster.setDonateDate(Date.valueOf(LocalDate.now()));
+        UserMaster loginUser=(UserMaster)session.getAttribute("user");
+        model.addAttribute("user",loginUser);
+
+        String birth = request.getParameter("birthdate");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        Date date = null;
+
+        try {
+            date = (Date) dateFormat.parse(birth);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        Date utilDate = date;
+
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+        donateMaster.setBirthDate(sqlDate);
+        donateMaster.setDonateDate(java.sql.Date.valueOf(LocalDate.now()));
         donateMaster.setDonateReceiptState("N");
 
         donateservice.createDonate(donateMaster);
@@ -106,7 +121,7 @@ public class DonateController {
 
             model.addAttribute("donate", donateMaster);
 
-            return "spon_success";
+            return "donatesuccess.meow";
     }
 
     @GetMapping("/donatelist.meow")

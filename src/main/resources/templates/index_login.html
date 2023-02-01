@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -72,7 +72,7 @@
                 <li><a href="#">후원내역</a></li>
               </ul>
             </li>
-            <li><a href="#">후원하기</a></li>
+            <li><a href="/donate.meow">후원하기</a></li>
             <li class="dropdown"><a href="#"><span>물품거래</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
                 <li><a href="#">무료 나눔</a></li>
@@ -81,7 +81,7 @@
             </li>
             <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="#">분양하기</a></li>
+                <li><a th:href="@{/board/list}">분양하기</a></li>
                 <li><a href="#">분양후기</a></li>
                 <li><a href="#">캣스타그램</a></li>
               </ul>
@@ -176,7 +176,7 @@
 
       <div id="aside_donate">
         <a
-          href="../img/temp.png"
+          href="/donate.meow"
           data-btn="regular"
           data-alt-a="캠페인버튼클릭"
           data-alt-b="girl22"

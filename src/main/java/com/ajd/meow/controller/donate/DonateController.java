@@ -121,7 +121,7 @@ public class DonateController {
 
             model.addAttribute("donate", donateMaster);
 
-            return "donatesuccess.meow";
+            return "/donatesuccess.meow";
     }
 
     @GetMapping("/donatelist.meow")

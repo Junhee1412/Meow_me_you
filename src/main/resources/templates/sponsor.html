@@ -104,7 +104,7 @@
             <img class="mb-4 martop_10" src="../img/logo/logo1.png" alt="" width="200" height="100">
           </a>
         </div>
-        <form action="/donatecreatedo.meow" method="post">
+        <form action="/donatecreatedo.meow" method="post" onsubmit="return validBirthDay();">
           <div class="form-group">
             <label class="form-label mt-1">후원자명 * </label>
             <input name="donateName" type="text" class="form-control" id="sign_id">
@@ -143,16 +143,16 @@
             </div>
             <div class="bir_dd">
               <span class="ps_box">
-                <input onkeyup='printdate()' onblur='birthdayCheck()' type="text" class="form-control" id="dd" placeholder="일" maxlength="2" />
+                <input onkeyup='printdate()' type="text" class="form-control" id="dd" placeholder="일" maxlength="2" />
               </span>
             </div>
-            <input type='text' name="birthdate" id='brth'>
+            <input type='hidden' name="birthdate" id='brth'>
 
           </div>
 
           성별 *
           <div class="form-check form-check-inline mt-2">
-            <input class="form-check-input" type="radio" name="gender" id="inlineRadio3" value="남자">
+            <input class="form-check-input" type="radio" name="gender" id="inlineRadio3" value="남자" checked>
             <label class="form-check-label" for="inlineRadio3">남자</label>
           </div>
           <div class="form-check form-check-inline">

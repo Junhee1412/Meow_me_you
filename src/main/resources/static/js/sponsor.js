@@ -219,6 +219,7 @@ $('input[name=donateBusinessCode]').attr('value',donateCode);
   }
 
 
+
 function printdate()  {
 
     const birthyear = document.getElementById('yy').value;
@@ -227,9 +228,19 @@ function printdate()  {
     const strbirth = birthyear + birthmonth + birthday;
 
     document.getElementById("brth").value = strbirth;
+
 }
 
-function birthdayCheck() {
+
+function validBirthDay(strbirth){
+    if(birthdayCheck(strbirth)==false){
+        alert('올바른 생년월일을 입력해주세요.');
+        return false;
+    }
+}
+
+
+function birthdayCheck(strbirth) {
    strbirth = document.getElementById("brth").value; // '-' 문자 모두 '' 변경
 
    const year = Number(strbirth.substr(0, 4)); // 입력한 값의 0~4자리까지 (연)

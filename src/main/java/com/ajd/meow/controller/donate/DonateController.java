@@ -35,18 +35,6 @@ public class DonateController {
     @Autowired
     private DonateService donateservice;
 
-
-
-
-//    @RequestMapping("/donate/success/{donateName}.meow")
-//    public String donateSuccessPage(@PathVariable String donateName, DonateMaster donateMaster, Model model){
-//
-//        model.addAttribute("msg", "donateName : " + donateName);
-//
-//        return "spon_success";
-//    }
-
-
     @GetMapping("/donate.meow")
     public String donatehome(){
         return "sponsor_main";
@@ -54,8 +42,10 @@ public class DonateController {
 
     @GetMapping("/donatesuccess.meow")
     public String donateSuccess(HttpSession session, Model model){
+
         UserMaster loginUser=(UserMaster)session.getAttribute("user");
         model.addAttribute("user",loginUser);
+
         return "spon_success";
     }
 
@@ -131,7 +121,7 @@ public class DonateController {
 
             model.addAttribute("donate", donateMaster);
 
-            return "redirect:/donatesuccess.meow";
+            return "donatesuccess.meow";
     }
 
     @GetMapping("/donatelist.meow")

@@ -44,6 +44,9 @@ public class CommunityMaster {
     @Column(name="CRT_DATE")
     private LocalDateTime createPostDate;
 
+    @Column(name="VIEW_COUNT")
+    private int viewCount;
+
 
 //    @OrderBy("postNo desc")
 //    @JsonIgnoreProperties({"communityMaster"})

@@ -14,17 +14,12 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="REPLY")
-@SequenceGenerator(name="REPLY_NO_SEQ_GEN", sequenceName="REPLY_NO_SEQ", initialValue=1, allocationSize=1)
 public class Reply {
-
-    @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="REPLY_NO_SEQ_GEN")
-    @Column(name = "REPLY_NO")
-    private Long replyNo;
 
     @Column(name="USER_NO")
     private Long userNo;
 
+    @Id
     @Column(name="POST_NO")
     private Long PostNo;
 
@@ -34,11 +29,4 @@ public class Reply {
     @Column(name="REPLY_USER_NO")
     private Long replyUserNo;
 
-//    @ManyToOne
-//    @JoinColumn(name = "post_no")
-//    private CommunityMaster communityMaster; // 커뮤니티 엔티티
-//
-//    @ManyToOne
-//    @JoinColumn(name = "user_no")
-//    private UserMaster userMaster; // 회원정보 엔티티
 }

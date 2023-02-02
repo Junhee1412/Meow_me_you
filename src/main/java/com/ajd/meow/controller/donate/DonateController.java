@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -57,7 +58,9 @@ public class DonateController {
     }
 
     @PostMapping("/donatecreatedo.meow")
-    public String donate(HttpServletRequest request, HttpSession session, DonateMaster donateMaster, BankTransfer bankTransfer, CreditcardPayment creditcardPayment, AccountTransfer accountTransfer, Model model){
+    public String donate(HttpServletRequest request, HttpSession session, DonateMaster donateMaster,
+                         BankTransfer bankTransfer, CreditcardPayment creditcardPayment, AccountTransfer accountTransfer,
+                         RedirectAttributes redirectAttributes,Model model){
         //신용카드 한도초과, 계좌이체 잔액부족일 경우는 결제 API를 구현하지 않을 예정이기 때문에 주석으로 코드만 작성
 
         UserMaster loginUser=(UserMaster)session.getAttribute("user");
@@ -118,10 +121,8 @@ public class DonateController {
 
                 break;
             }
-
-            model.addAttribute("donate", donateMaster);
-
-            return "/donatesuccess.meow";
+            redirectAttributes.addAttribute("donatename", donateMaster.getDonateName());
+            return "redirect:donatesuccess.meow";
     }
 
     @GetMapping("/donatelist.meow")

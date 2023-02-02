@@ -16,7 +16,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-  
+
     <link
       rel="icon"
       href="../img/favicon/favicon-remove-bg.ico"
@@ -104,7 +104,7 @@
             <img class="mb-4 martop_10" src="../img/logo/logo1.png" alt="" width="200" height="100">
           </a>
         </div>
-        <form action="/donatecreatedo.meow" method="post" onsubmit="return validBirthDay();">
+        <form action="/donatecreatedo.meow" method="post" onsubmit="return ValidChecked();">
           <div class="form-group">
             <label class="form-label mt-1">후원자명 * </label>
             <input name="donateName" type="text" class="form-control" id="sign_name">
@@ -197,7 +197,7 @@
           <div class="row gy-3" id="selectPay_card" >
         
             <span>
-              <select name="cardCompany" class="form-select op" >
+              <select name="cardCompany" class="form-select op creditcard_view" id="cc-company">
                 <option value="">카드사</option>
                 <option value="현대카드">현대카드</option>
                 <option value="국민카드">국민카드</option>
@@ -208,22 +208,22 @@
   
             <div class="col-md-12">
               <label for="cc-number" class="form-label">카드번호</label>
-              <input name="cardNumber" type="text" class="form-control" id="cc-number" placeholder="">
+              <input name="cardNumber" type="text" class="form-control creditcard_view" id="cc-number" placeholder="" maxlength="19">
             </div>
   
             <div class="col-md-6">
               <label for="cc-expiration" class="form-label">YY/MM</label>
-              <input name="validityPeriod" type="text" class="form-control" id="cc-expiration" placeholder="">
+              <input name="validityPeriod" type="text" class="form-control creditcard_view" id="cc-expiration" placeholder="YYMM" maxlength="4">
             </div>
   
             <div class="col-md-6">
               <label for="cc-cvc" class="form-label">CVC</label>
-              <input name="cvc" type="text" class="form-control" id="cc-cvc" placeholder="">
+              <input name="cvc" type="text" class="form-control creditcard_view" id="cc-cvc" placeholder="" maxlength="3">
             </div>
   
             <div class="col-md-6">
-              <label for="cc-cvc" class="form-label">비밀번호(두자리)</label>
-              <input name="creditcardPassword" type="password" maxlength='2' class="form-control" id="cc-cvc" placeholder="">
+              <label for="cc-password" class="form-label">비밀번호(두자리)</label>
+              <input name="creditcardPassword" type="password" maxlength='2' class="form-control creditcard_view" id="cc-password" placeholder="">
               <small class="text-muted" id="password_info">비밀번호 앞 두자리만 입력해주세요</small>
             </div>
           </div>
@@ -233,7 +233,7 @@
           <div class=" row gy-3 " id="selectPay_noBank">
 
              <span>
-              <select name="bank" class="form-select op" >
+              <select name="bank" class="form-select op noBank_view" id="noBankCompany">
                 <option value="">은행명</option>
                 <option value="NH_001">농협</option>
                 <option value="KB_001">국민은행</option>
@@ -253,7 +253,7 @@
           <!-- 계좌이체 -->
           <div class=" row gy-3 " id="selectPay_Bank">
             <span>
-            <select name="accountBank" class="form-select op" >
+            <select name="accountBank" class="form-select op account_view" id="accountCompany">
                 <option value="">은행명</option>
                 <option value="농협">농협</option>
                 <option value="국민은행">국민은행</option>
@@ -262,13 +262,13 @@
           </span>
 
             <div class="col-md-12">
-              <label for="cc-name" class="form-label">계좌번호</label>
-              <input name="accountNumber" type="text" class="form-control" id="cc-name" placeholder="" >
+              <label for="ac-number" class="form-label">계좌번호</label>
+              <input name="accountNumber" type="text" class="form-control account_view" id="ac-number" placeholder="" maxlength="14" >
             </div>
   
             <div class="col-md-6">
-              <label for="cc-cvc" class="form-label">비밀번호(두자리)</label>
-              <input name="accountPassword" type="password" maxlength='2' class="form-control" id="cc-cvc" placeholder="">
+              <label for="ac-password" class="form-label">비밀번호(두자리)</label>
+              <input name="accountPassword" type="password" maxlength='2' class="form-control account_view" id="ac-password" placeholder="">
               <small class="text-muted" id="password_info">비밀번호 앞 두자리만 입력해주세요</small>
             </div>
           </div>
@@ -276,7 +276,7 @@
           <!-- 계좌이체 -end  -->
           <div class="form-group">
             <label class="form-label mt-1">후원금액 * </label>
-            <input type="text" class="form-control form_info" id="sign_amount" name="donateAmount">
+            <input type="text" class="form-control form_info" id="sign_amount" name="donateAmount" oninput="this.value = this.value.replace(/^0+|\D+/g, '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');">
             <small class="text-muted martop_10">※ 후원취소, 확정은 마이페이지에서 할 수 있습니다.</small>
             <small class="text-muted">※ 후원취소는 후원일자로 부터 7일 이내에만 가능합니다.</small>
             <small class="text-muted">※ 기부금 영수증이 발급된 후원은 취소할 수 없습니다.</small>

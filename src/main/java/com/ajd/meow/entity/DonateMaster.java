@@ -33,7 +33,6 @@ public class DonateMaster {
     @Column(name="DNTN_NAME")
     private String donateName;
 
-    @Min(value=3000, message = "금액은 3천원 이상가능합니다.")
     @Column(name = "DNTN_AMNT")
     private int donateAmount;
 

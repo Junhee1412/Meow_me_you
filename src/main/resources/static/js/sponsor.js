@@ -212,6 +212,7 @@ $('input[name=donateBusinessCode]').attr('value',donateCode);
           }
 
   var cellPhone = document.getElementById('sign_ph');
+
   cellPhone.onkeyup = function(event){
           event = event || window.event;
           var _val = this.value.trim();
@@ -231,74 +232,260 @@ function printdate()  {
 
 }
 
-
-//function validBirthDay(objBirth){
-//    if(ValidChecked(objBirth)==false){
-//        alert('올바른 생년월일을 입력해주세요.');
-//        return false;
-//    }
-//}
-
+function removeComma(str){
+		n = parseInt(str.replace(/,/g,""));
+		return n;
+	}
 
 function ValidChecked() {
 
-   var n_RegExp = /^[가-힣]{2,15}$/;
+   var n_RegExp = /^[가-힣a-zA-Z\s]+$/;
    var p_RegExp = /^(?:(010-\d{4})|(01[1|6|7|8|9]-\d{3,4}))-(\d{4})$/;
+   var a_RegExp = /^([3-9]|\w{2,}),000$/;
+   var cN_RegExp = /^(\d{4})-(\d{4})-(\d{4})-(\d{4})$/;
+   var cExpir_RegExp = /^\d{4}$/;
+   var cvc_RegExp = /^\d{3}$/;
+   var pass_RegExp = /^\d{2}$/;
+   var account_RegExp = /^\d{11,14}$/;
 
-   var objBirth = document.getElementById("brth").value;
-   var objName = document.getElementById("sign_name").value;
-   var objPhoneNumber = document.getElementById("sign_ph").value;
+   var objPhone = document.getElementById("sign_ph");
+   var objBirth = document.getElementById("brth");
+   var objName = document.getElementById("sign_name");
+   var objDay = document.getElementById("dd");
+   var objMonth = document.getElementById("mm");
+   var objYear = document.getElementById("yy");
+   var objAmount = document.getElementById("sign_amount");
+   var objCreditNumber = document.getElementById("cc-number");
+   var objCvc = document.getElementById("cc-cvc");
+   var objCreditPassword = document.getElementById("cc-password");
+   var objCreditExpiration = document.getElementById("cc-expiration");
+   var objCreditCompany = document.getElementById("cc-company");
+   var objNoBankCompany = document.getElementById("noBankCompany");
+   var objAccountCompany = document.getElementById("accountCompany");
+   var objAccountNumber = document.getElementById("ac-number");
+   var objAccountPassword = document.getElementById("ac-password");
 
-   const year = Number(objBirth.substr(0, 4)); // 입력한 값의 0~4자리까지 (연)
-   const month = Number(objBirth.substr(4,2)); // 입력한 값의 4번째 자리부터 2자리 숫자 (월)
-   const day = Number(objBirth.substr(6,2)); // 입력한 값 6번째 자리부터 2자리 숫자 (일)
    const today = new Date(); // 오늘 날짜를 가져옴
    const yearNow = today.getFullYear(); // 올해 연도 가져옴
 
-        //이름 유효성 검사
-        if(objName.value ==''){
-            alert("이름을 입력해주세요.");
-            return false;
-        }
-        if(!n_RegExp.test(objName.value)){
-            alert("특수문자,영어,숫자는 사용할수 없습니다. 한글만 입력하여주세요.");
-            return false;
-        }
-        //생년월일 유효성 검사
-      if (objBirth.length <=8) {
-      if (1900 > year || year > yearNow){    // 연도의 경우 1900 보다 작거나 yearNow 보다 크다면 false를 반환합니다.
-         alert("1900년 이전은 입력할 수 없습니다.");
-         return false;
-      } else if (month < 1 || month > 12) {
-        alert("월은 1월부터 12월까지 입력할 수 있습니다.");
+      //이름 유효성 검사
+      if (objName.value == "") {
+        alert("이름을 입력하세요.");
+        objName.focus();
         return false;
-      } else if (day < 1 || day > 31) {
-        alert("일은 1월부터 31일까지 입력할 수 있습니다.");
+      };
+      if (!n_RegExp.test(objName.value)) {
+        alert("이름은 한글과 영어만 입력가능합니다.");
+        objName.focus();
+        return false;
+      };
+
+      //휴대폰번호 유효성검사
+      if (objPhone.value == "") {
+           alert("휴대폰번호를 입력하세요.");
+           objPhone.focus();
+           return false;
+         };
+      if(!p_RegExp.test(objPhone.value)){
+          alert("휴대폰번호가 올바르지 않습니다.");
+          objPhone.focus();
+          return false;
+        };
+
+      // 계좌이체 결제 선택 시.
+      if ($("input[name='donateWayCode']:checked").val() == 'ACNT') {
+
+        document.querySelector('.noBank_view').value = "";
+        document.querySelector('.creditcard_view').value = "";
+
+        //계좌은행 선택 유효성검사
+           if (objAccountCompany.value == "") {
+           alert("은행명을 선택하세요.");
+           objAccountCompany.focus();
+           return false;
+         };
+
+        //계좌번호 입력 유효성 검사
+        if (objAccountNumber.value == "") {
+            alert("계좌번호를 입력하세요.");
+            objAccountNumber.focus();
+            return false;
+          };
+          if (!account_RegExp.test(objAccountNumber.value)) {
+            alert("계좌번호가 유효하지 않습니다!\n국민 : 12, 14자리, 신한 : 11, 12자리, NH : 13자리");
+            objAccountNumber.focus();
+            return false;
+          };
+      }
+
+      // 무통장입금 결제 선택 시.
+      else if ($("input[name='donateWayCode']:checked").val() == 'BANK') {
+        document.querySelector('.creditcard_view').value = "";
+        document.querySelector('.account_view').value = "";
+
+        //무통장입금 은행 유효성 검사
+           if (objNoBankCompany.value == "") {
+           alert("은행명을 선택하세요.");
+           objNoBankCompany.focus();
+           return false;
+         };
+
+      }
+
+      // 신용카드 결제 선택 시.
+
+      else if ($("input[name='donateWayCode']:checked").val() == 'CRCRD') {
+        document.querySelector('.noBank_view').value = "";
+        document.querySelector('.account_view').value = "";
+
+           //카드사 유효성 검사
+           if (objCreditCompany.value == "") {
+           alert("카드사를 선택하세요.");
+           objCreditCompany.focus();
+           return false;
+         };
+
+           //카드번호 유효성 검사
+          if (objCreditNumber.value == "") {
+            alert("카드번호를 입력하세요.");
+            objCreditNumber.focus();
+            return false;
+          };
+          if (!cN_RegExp.test(objCreditNumber.value)) {
+            alert("유효하지 않은 카드번호입니다!");
+            objCreditNumber.focus();
+            return false;
+          };
+
+        //유효기간 유효성 검사
+        if (objCreditExpiration.value == "") {
+        alert("유효기간을 입력하세요.");
+        objCreditExpiration.focus();
+        return false;
+      };
+      if (!cExpir_RegExp.test(objCreditExpiration.value)) {
+        alert("유효기간은 YYMM 형식의 4자리 숫자로 입력해주세요!");
+        objCreditExpiration.focus();
+        return false;
+      };
+
+        //CVC 유효성 검사
+        if (objCvc.value == "") {
+          alert("CVC를 입력하세요.");
+          objCvc.focus();
+          return false;
+        };
+        if (!cvc_RegExp.test(objCvc.value)) {
+          alert("CVC는 숫자 3자리로만 입력 가능합니다.");
+          objCvc.focus();
+          return false;
+        };
+
+        //신용카드 비밀번호 유효성 검사
+        if (objCreditPassword.value == "") {
+          alert("비밀번호를 입력하세요.");
+          objCreditPassword.focus();
+          return false;
+        };
+        if (!pass_RegExp.test(objCreditPassword.value)) {
+          alert("비밀번호는 앞 2자리만 입력해주세요.");
+          objCreditPassword.focus();
+          return false;
+        };
+      };
+
+      //  후원금액 유효성 검사
+      if (objAmount.value == "") {
+        alert("후원금액을 입력하세요.");
+        objAmount.focus();
+        return false;
+      };
+
+      if (!a_RegExp.test(objAmount.value)) {
+        alert("후원금액은 3,000원 이상 1,000원단위 이상으로만 입력 가능합니다.");
+        objAmount.focus();
+        return false;
+        }
+
+        //생년월일 유효성 검사
+      if (objBirth.value.length <=8) {
+      if (1900 > objYear.value || objYear.value > yearNow){    // 연도의 경우 1900 보다 작거나 yearNow 보다 크다면 false를 반환합니다.
+         alert("1900년 이전은 입력할 수 없습니다.");
+         objYear.focus();
          return false;
-      } else if ((month==4 || month==6 || month==9 || month==11) && day==31) {
-      alert("일은 1월부터 30일까지 입력할 수 있습니다.");
+      } else if (objMonth.value == "") {
+        alert("월을 선택해주세요");
+        return false;
+      } else if (objDay.value < 1 || objDay.value > 31) {
+        alert("해당 월은 1일부터 31일까지 입력할 수 있습니다.");
+        objDay.focus();
          return false;
-      } else if (month == 2) { // 2월달일때
+      } else if ((objMonth.value==4 || objMonth.value==6 || objMonth.value==9 || objMonth.value==11) && objDay.value==31) {
+      alert("해당 월은 1일부터 30일까지 입력할 수 있습니다.");
+      objDay.focus();
+         return false;
+      } else if (objMonth.value == 2) { // 2월달일때
          // 2월 29일(윤년) 체크
-         const isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
-         if (day>29 || (day==29 && !isleap)) {
-         alert("일은 1월부터 29일까지 입력할 수 있습니다.");
+         const isleap = (objYear.value % 4 == 0 && (objYear.value % 100 != 0 || objYear.value % 400 == 0));
+         if (objDay.value>29 || (objDay.value==29 && !isleap)) {
+         alert("해당 월은 1일부터 28일까지 입력할 수 있습니다.");
+         objDay.focus();
             return false;
          } else {
             return true;
          } //end of if (day>29 || (day==29 && !isleap))
       } else {
+        document.querySelector("input[name='donateAmount']").value = removeComma(objAmount.value);
          return true;
       }//end of if
    } else { // 입력된 생년월일이 8자 초과할때 : false
         alert("생년월일이 유효하지 않습니다.");
+        objDay.focus();
       return false;
    }
-   }
-//   휴대폰번호 유효성검사
-//   if(!regExp.test(mbtlnum)){
-//       alert("휴대폰번호가 올바르지 않습니다.");
-//       return false;
-//     }
-//     return true;
-//   }
+   document.querySelector("input[name='donateAmount']").value = removeComma(objAmount.value);
+      return true;
+   };
+
+
+//신용카드 오토하이픈
+
+var cardNumber = document.getElementById('cc-number');
+
+cardNumber.onkeyup = function(event){
+    event = event || window.event;
+    var _val = this.value.trim();
+    this.value = autoHypenCard(_val) ;
+};
+
+function autoHypenCard(str){
+    str = str.replace(/[^0-9]/g, '');
+    var tmp = '';
+    if( str.length < 4){
+        return str;
+    }
+    else if(str.length < 8){
+        tmp += str.substr(0, 4);
+        tmp += '-';
+        tmp += str.substr(4,4);
+        return tmp;
+    }else if(str.length < 12){
+        tmp += str.substr(0, 4);
+        tmp += '-';
+        tmp += str.substr(4, 4);
+        tmp += '-';
+        tmp += str.substr(8,4);
+        return tmp;
+    }else if(str.length < 17) {
+
+        tmp += str.substr(0, 4);
+        tmp += '-';
+        tmp += str.substr(4, 4);
+        tmp += '-';
+        tmp += str.substr(8,4);
+        tmp += '-';
+        tmp += str.substr(12,4);
+        return tmp;
+    }
+    return str;
+    };

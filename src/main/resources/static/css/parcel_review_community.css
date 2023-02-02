@@ -4402,9 +4402,9 @@ fieldset:disabled .btn {
   border-color: #1d809f;
 }
 .page-item.disabled .page-link {
-  color: #fff;
+  color: #6c757d;
   pointer-events: none;
-  background-color: #5c636a;
+  background-color: #fff;
   border-color: #dee2e6;
 }
 

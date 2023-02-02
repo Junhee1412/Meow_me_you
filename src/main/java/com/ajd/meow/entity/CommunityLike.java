@@ -22,7 +22,4 @@ public class CommunityLike {
 
     @Column(name="USER_NO")
     private Long userNo;
-
-    @Column(name="LIKE_USER")
-    private Long likeUser;
 }

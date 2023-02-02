@@ -5,6 +5,7 @@ import com.ajd.meow.entity.UserMaster;
 public interface UserService {
     void insertMember(UserMaster user);
     void updateMember(UserMaster user);
+    void updateMemberPassword(UserMaster user);
     void deleteMember(UserMaster user);
 
     long getTotalRowCount(/*UserMaster user*/); //  유저 회원수 조회

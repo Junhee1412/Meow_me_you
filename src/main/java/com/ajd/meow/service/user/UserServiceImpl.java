@@ -25,11 +25,18 @@ public class UserServiceImpl implements UserService{
     public void updateMember(UserMaster user) {
         Optional<UserMaster> useruser=userRepository.findByUserName(user.getUserName());
         useruser.get().setNickName(user.getNickName());
-        useruser.get().setAddress(user.getAddress());
+        useruser.get().setDetailAddress(user.getDetailAddress());
         useruser.get().setPhoneType(user.getPhoneType());
         useruser.get().setPhoneNumber(user.getPhoneNumber());
         useruser.get().setUserPassword(user.getUserPassword());
         useruser.get().setIntroduce(user.getIntroduce());
+        userRepository.save(useruser.get());
+    }
+
+    @Override
+    public void updateMemberPassword(UserMaster user){
+        Optional<UserMaster> useruser=userRepository.findByUserId(user.getUserId());
+        useruser.get().setUserPassword(user.getUserPassword());
         userRepository.save(useruser.get());
     }
 

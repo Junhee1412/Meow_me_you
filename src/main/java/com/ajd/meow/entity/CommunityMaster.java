@@ -1,12 +1,10 @@
 package com.ajd.meow.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
-import java.util.List;
 
 
 //논리명 커뮤니티글정보
@@ -46,11 +44,4 @@ public class CommunityMaster {
 
     @Column(name="VIEW_COUNT")
     private int viewCount;
-
-
-//    @OrderBy("postNo desc")
-//    @JsonIgnoreProperties({"communityMaster"})
-//    @OneToMany(mappedBy = "communityMaster",fetch = FetchType.EAGER)
-//    private List<Reply> replyList;
-
 }

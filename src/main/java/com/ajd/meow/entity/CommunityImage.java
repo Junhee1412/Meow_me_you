@@ -17,9 +17,6 @@ import javax.persistence.*;
 public class CommunityImage {
 
     @Id
-    @Column(name="IMG_NO")
-    private Long imageNo;
-
     @Column(name="POST_NO")
     private Long postNo;
 

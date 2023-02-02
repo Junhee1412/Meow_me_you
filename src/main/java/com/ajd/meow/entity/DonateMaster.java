@@ -67,4 +67,8 @@ public class DonateMaster {
 
     @Column(name="DNTN_DATE")
     private Date donateDate;
+
+    @Column(name ="DNTN_STATE_DATE")
+    private Date donateStateDate;
+
 }

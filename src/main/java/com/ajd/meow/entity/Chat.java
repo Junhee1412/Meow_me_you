@@ -7,11 +7,11 @@ import javax.persistence.*;
 import lombok.*;
 
 //논리명 관리자채팅
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
 @Getter
+@Setter
+@Entity
 @Table(name = "CHAT")
 public class Chat {
 

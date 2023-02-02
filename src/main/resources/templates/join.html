@@ -54,7 +54,7 @@
       type="text/css"
     />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="../css/join.css" rel="stylesheet" />
+    <link href="css/join.css" rel="stylesheet" />
   </head>
 
   <body id="page-top">
@@ -65,7 +65,7 @@
        
           <!-- Uncomment the line below if you also wish to use an image logo -->
           <!-- <img src="assets/img/logo.png" alt=""> -->
-          <a class="logo d-flex align-items-center" href="#page-top"><img alt="Brand" src="../img/logo/logo4.png"></a>
+          <a class="logo d-flex align-items-center" href="#page-top"><img alt="Brand" src="img/logo/logo4.png"></a>
         </a>
   
         <i class="mobile-nav-toggle mobile-nav-show bi bi-list "></i>
@@ -104,7 +104,7 @@
       <main class="form-signin">
         <form th:action="login.meow" method="post">
           <a class="navbar-brand h1 text-center" href="index.html">
-          <img class="mb-4 mt-4" src="../img/logo/logo1.png" alt="" width="200" height="100">
+          <img class="mb-4 mt-4" src="img/logo/logo1.png" alt="" width="200" height="100">
           </a>
           <h1 class="h3 mb-3 fw-normal fs-1 mt-4">로그인</h1>
   
@@ -117,8 +117,9 @@
             <label for="userPassword">비밀번호</label>
           </div>
           <div id="errMsg" style="color:red"><p th:text="${errMsg}"></p></div>
-  
-          <div class="checkbox mb-3  login_menu">
+          <button class="w-100 btn btn-lg btn-dark fs-3" type="submit">로그인</button>
+        </form>
+                  <div class="checkbox mb-3  login_menu">
             <label class="find_info_box">
               <a href="#" data-toggle="modal"
               data-target="#myModal">아이디찾기</a>&nbsp;&nbsp;&nbsp;
@@ -128,38 +129,30 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">등록된 이메일로 ID 찾기</h4>
+                <h4 class="modal-title" id="myModalLabel">아이디 찾기</h4>
               </div>
               <div class="modal-body">
-                <form action="" method="post">
+                
+                <form action="findid.meow" method="post" target="modalparam" onsubmit="return ValidChecked();">
                 <div class="form-group">
                   <label class="form-label mt-2">이름*</label>
-                  <input type="text" class="form-control" id="sign_name" name="userName">
+                  <input type="text" class="form-control" id="sign_name" name="userName" th:value="${name}" required>
                 </div>
                 <div class="form-group ">
                   <label class="form-label mt-2">핸드폰*</label>
-                  <select class="form-select" id="sign_phone" name="phoneType">
-                    <option selected>SKT</option>
-                    <option>LG U+</option>
-                    <option>KT</option>
+                  <select class="form-select" id="sign_phone" name="phoneType" th:value="${type}">
+                    <option th:selected="${type}=='SKT'">SKT</option>
+                    <option th:selected="${type}=='LG U+'">LG U+</option>
+                    <option th:selected="${type}=='KT'">KT</option>
                   </select>
-                  <input type="text" class="form-control " id="sign_ph" name="phoneNumber" >
+                  <input type="text" class="form-control " id="sign_ph" name="phoneNumber" th:value="${number}" required>
                 </div>
 
                 <div id=find_idpw>
-                  <button class="w-30 btn btn-lg btn-dark mt-4">아이디 찾기</button>
+                  <button class="w-30 btn btn-lg btn-dark mt-4" onclick="findID()">아이디 찾기</button>
                 </div>
-                <!--<div class="form-group">
-                  <label class="form-label mt-2"> 인증번호</label>
-                  <div class="form_box">
-                    <input type="text" class="form-control" id="sign_email">
-                    <button type="button" class="btn btn-outline-danger ms-1">확인하기</button>
-                  </div>
-                  <div id=find_idpw>
-                  <button class="w-30 btn btn-lg btn-dark mt-4">아이디 찾기</button>
-                </div>
-                </div>-->
               </form>
+              <iframe name="modalparam" id="xxx" style="display:none"></iframe>
               </div>
               <div class="modal-footer mt-3">
                 <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
@@ -174,55 +167,58 @@
               <!--  비밀번호 찾기 Modal -->
         <div class="modal fade modal-center" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
-            <form action="user/resettingpw.meow" method="post">
             <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">등록된 이메일로 PassWord 찾기</h4>
+                <h4 class="modal-title" id="myModalLabel">비밀번호 재설정하기</h4>
               </div>
               <div class="modal-body">
+                <!--<iframe name="modalparam_" id="xxx" style="display:none"></iframe>-->
+                <form action="resettingpw.meow" method="post" onsubmit="return ValidChecked();">
                 <div class="form-group">
-                  <label class="form-label mt-2">아이디(이메일)</label>
-                  <input type="email" class="form-control" id="sign_name" name="userId">
+                  <label class="form-label mt-2">아이디(이메일)*</label>
+                  <input type="email" class="form-control" id="sign_id" name="userId" required>
                 </div>
                 <div class="form-group">
-                  <label class="form-label mt-2"> 이메일</label>
-                  <div class="form_box">
-                    <input type="text" class="form-control" id="sign_email">
-                    <button type="button" class="btn btn-outline-success ms-1">인증번호</button>
-                  </div>
+                  <label class="form-label mt-2">이름*</label>
+                  <input type="text" class="form-control" id="sign_name" name="userName" required>
+                </div>
+                <div class="form-group ">
+                  <label class="form-label mt-2">핸드폰*</label>
+                  <select class="form-select" id="sign_phone" name="phoneType">
+                    <option selected>SKT</option>
+                    <option>LG U+</option>
+                    <option>KT</option>
+                  </select>
+                  <input type="text" class="form-control " id="sign_ph" name="phoneNumber" required>
                 </div>
 
-                <div class="form-group">
+                <!--<div class="form-group">
                   <label class="form-label mt-2"> 인증번호</label>
                   <div class="form_box">
                     <input type="text" class="form-control" id="sign_email" name="confirmCode">
                     <button type="button" class="btn btn-outline-danger ms-1">확인하기</button>
                   </div>
-                  <div id=find_idpw>
+                </div>-->
+                <div id=find_idpw>
                   <button class="w-30 btn btn-lg btn-dark mt-4" type="submit">비밀번호 찾기</button>
-                </div>
-                </div>
+              </div>
+              </form>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
               </div>
             </div>
-            </form>
           </div>
         </div>
         <!-- 비밀번호 찾기 modal - end  -->
-              <a href="user/sign.meow">회원가입</a>
+              <a href="sign.meow">회원가입</a>
             </label>
           </div>
-
-  
-        </form>
-        <button class="w-100 btn btn-lg btn-dark fs-3" onclick="submit()" type="submit">로그인</button>
-        <button class="w-100 btn btn-lg btn-success fs-3" type="submit">naver</button>
-        <button class="w-100 btn btn-lg btn-warning fs-3" type="submit">kakao</button>
-        <button class="w-100 btn btn-lg btn-danger fs-3" type="submit">Google</button>
+      </main>
     </section>
- 
+    <!--<button class="w-100 btn btn-lg btn-success fs-3" type="submit">naver</button>
+    <button class="w-100 btn btn-lg btn-warning fs-3" type="submit">kakao</button>
+    <button class="w-100 btn btn-lg btn-danger fs-3" type="submit">Google</button>-->
   <!-- section - end -->
 
    
@@ -243,6 +239,6 @@
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="../js/template.js"></script>
+    <script src="js/join.js"></script>
   </body>
 </html>

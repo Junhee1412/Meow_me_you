@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @SessionAttributes("user")
-@RequestMapping("/mypage/*")
 public class MyPageController {
     @Autowired
     private UserService userService;

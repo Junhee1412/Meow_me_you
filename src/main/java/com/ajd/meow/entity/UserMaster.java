@@ -7,8 +7,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 //논리명 사용자정보
 @Entity
@@ -47,8 +45,8 @@ public class UserMaster {
     @Column(name = "NICK_NAME")
     private String nickName;
 
-    @Column(name = "ADDR")
-    private String Address;
+    @Column(name = "DETAIL_ADDR")
+    private String detailAddress;
 
     @NotBlank(message = "통신사는 필수 입력값입니다.")
     @Column(name = "PHONE_TYPE")
@@ -73,6 +71,7 @@ public class UserMaster {
     @Column(name = "USER_JOIN_DATE")
     private LocalDateTime userJoinDate;
 
-//    @OneToMany(mappedBy = "userMaster")
-//    private List<Reply> replyList = new ArrayList<>();
+    @Column(name = "USER_DELETE_DATE")
+    private LocalDateTime userDeleteDate;
+
 }

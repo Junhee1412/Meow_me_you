@@ -232,6 +232,29 @@ function printdate()  {
 
 }
 
+function comma(str) {
+        str = String(str);
+        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+    }
+
+    function uncomma(str) {
+        str = String(str);
+        return str.replace(/[^\d]+/g, '');
+    }
+
+    function inputNumberFormat(obj) {
+        obj.value = comma(uncomma(obj.value));
+    }
+
+    function inputOnlyNumberFormat(obj) {
+        obj.value = onlynumber(uncomma(obj.value));
+    }
+
+    function onlynumber(str) {
+	    str = String(str);
+	    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g,'$1');
+	}
+
 function removeComma(str){
 		n = parseInt(str.replace(/,/g,""));
 		return n;
@@ -241,13 +264,14 @@ function ValidChecked() {
 
    var n_RegExp = /^[가-힣a-zA-Z\s]+$/;
    var p_RegExp = /^(?:(010-\d{4})|(01[1|6|7|8|9]-\d{3,4}))-(\d{4})$/;
-   var a_RegExp = /^([3-9]|\w{2,}),000$/;
+   var a_RegExp = /^([3-9]|\w{2,})000$/;
    var cN_RegExp = /^(\d{4})-(\d{4})-(\d{4})-(\d{4})$/;
    var cExpir_RegExp = /^\d{4}$/;
    var cvc_RegExp = /^\d{3}$/;
    var pass_RegExp = /^\d{2}$/;
    var account_RegExp = /^\d{11,14}$/;
 
+   var objdonateBusinessCode = document.getElementById("donateBusinessCode");
    var objPhone = document.getElementById("sign_ph");
    var objBirth = document.getElementById("brth");
    var objName = document.getElementById("sign_name");
@@ -268,6 +292,13 @@ function ValidChecked() {
    const today = new Date(); // 오늘 날짜를 가져옴
    const yearNow = today.getFullYear(); // 올해 연도 가져옴
 
+      //링크로 바로 오는 것을 방지(사업 선택하고 와야함)
+      if (objdonateBusinessCode.value == "") {
+          alert("후원 홈에서 후원 사업을 선택해주세요.");
+          objdonateBusinessCode.focus();
+          return false;
+        };
+
       //이름 유효성 검사
       if (objName.value == "") {
         alert("이름을 입력하세요.");
@@ -279,6 +310,43 @@ function ValidChecked() {
         objName.focus();
         return false;
       };
+
+        //생년월일 유효성 검사
+      if (objBirth.value == "") {
+        alert("생년월일을 입력하세요.");
+        objBirth.focus();
+        return false;
+      };
+      if (objBirth.value.length <=8) {
+      if (1900 > objYear.value || objYear.value > yearNow){    // 연도의 경우 1900 보다 작거나 yearNow 보다 크다면 false를 반환합니다.
+         alert("1900년 이전은 입력할 수 없습니다.");
+         objYear.focus();
+         return false;
+      } else if (objMonth.value == "") {
+        alert("월을 선택해주세요");
+        return false;
+      } else if (objDay.value < 1 || objDay.value > 31) {
+        alert("해당 월은 1일부터 31일까지 입력할 수 있습니다.");
+        objDay.focus();
+         return false;
+      } else if ((objMonth.value==4 || objMonth.value==6 || objMonth.value==9 || objMonth.value==11) && objDay.value==31) {
+      alert("해당 월은 1일부터 30일까지 입력할 수 있습니다.");
+      objDay.focus();
+         return false;
+      } else if (objMonth.value == 2) { // 2월달일때
+         // 2월 29일(윤년) 체크
+         const isleap = (objYear.value % 4 == 0 && (objYear.value % 100 != 0 || objYear.value % 400 == 0));
+         if (objDay.value>29 || (objDay.value==29 && !isleap)) {
+         alert("해당 월은 1일부터 28일까지 입력할 수 있습니다.");
+         objDay.focus();
+            return false;
+         }
+      }
+   } else { // 입력된 생년월일이 8자 초과할때 : false
+        alert("생년월일이 유효하지 않습니다.");
+        objDay.focus();
+      return false;
+   }
 
       //휴대폰번호 유효성검사
       if (objPhone.value == "") {
@@ -401,48 +469,14 @@ function ValidChecked() {
         return false;
       };
 
-      if (!a_RegExp.test(objAmount.value)) {
+      if (!a_RegExp.test(removeComma(objAmount.value))) {
         alert("후원금액은 3,000원 이상 1,000원단위 이상으로만 입력 가능합니다.");
         objAmount.focus();
         return false;
         }
 
-        //생년월일 유효성 검사
-      if (objBirth.value.length <=8) {
-      if (1900 > objYear.value || objYear.value > yearNow){    // 연도의 경우 1900 보다 작거나 yearNow 보다 크다면 false를 반환합니다.
-         alert("1900년 이전은 입력할 수 없습니다.");
-         objYear.focus();
-         return false;
-      } else if (objMonth.value == "") {
-        alert("월을 선택해주세요");
-        return false;
-      } else if (objDay.value < 1 || objDay.value > 31) {
-        alert("해당 월은 1일부터 31일까지 입력할 수 있습니다.");
-        objDay.focus();
-         return false;
-      } else if ((objMonth.value==4 || objMonth.value==6 || objMonth.value==9 || objMonth.value==11) && objDay.value==31) {
-      alert("해당 월은 1일부터 30일까지 입력할 수 있습니다.");
-      objDay.focus();
-         return false;
-      } else if (objMonth.value == 2) { // 2월달일때
-         // 2월 29일(윤년) 체크
-         const isleap = (objYear.value % 4 == 0 && (objYear.value % 100 != 0 || objYear.value % 400 == 0));
-         if (objDay.value>29 || (objDay.value==29 && !isleap)) {
-         alert("해당 월은 1일부터 28일까지 입력할 수 있습니다.");
-         objDay.focus();
-            return false;
-         } else {
-            return true;
-         } //end of if (day>29 || (day==29 && !isleap))
-      } else {
-        document.querySelector("input[name='donateAmount']").value = removeComma(objAmount.value);
-         return true;
-      }//end of if
-   } else { // 입력된 생년월일이 8자 초과할때 : false
-        alert("생년월일이 유효하지 않습니다.");
-        objDay.focus();
-      return false;
-   }
+
+
    document.querySelector("input[name='donateAmount']").value = removeComma(objAmount.value);
       return true;
    };

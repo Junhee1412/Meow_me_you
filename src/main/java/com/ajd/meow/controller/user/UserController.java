@@ -14,7 +14,6 @@ import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/user/*")
 public class UserController {
     @Autowired
     private UserService userService;

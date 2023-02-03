@@ -28,7 +28,7 @@ public class LoginController {
         if(findUser!=null && findUser.getUserPassword().equals(user.getUserPassword())){
             model.addAttribute("user",findUser);
             if(findUser.getUserType().equals("ADMIN")) {
-                 return "index"; // 어드민 페이지 따로 만드나유
+                 return "index_admin"; // 어드민 페이지 따로 만드나유
             } else {
                 return "index_login"; // 로그인 후 index 페이지
             }

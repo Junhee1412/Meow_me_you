@@ -11638,3 +11638,10 @@ section{
   BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif,
   Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
+
+.page-item.disabled .page-link {
+  color: #fff;
+  pointer-events: none;
+  background-color: #5c636a;
+  border-color: #dee2e6;
+}

@@ -141,36 +141,18 @@ document.addEventListener('DOMContentLoaded', () => {
   
   });
 
-  
-  // function printArea(){
-  //   var initBody = document.body.innerHTML;
-  //   printID1.style.display ="none";
-  //   printID2.style.display ="none";
-  //   window.onbeforeprint= function(){
-  //     document.body.innerHTML=document.getElementById('spon_receopt_box').innerHTML;
-  //   }
-  //   window.onafterprint=function(){
-  //     document.body.innerHTML=initBody;
-  //   }
-  //   window.print();  // 클릭액션 : 버튼클릭시 인쇄창팝업
-  //  };
+    $('#confirm_donate_btn').click(function(e){
+        if (confirm("후원을 정말 확정하시겠습니까?\n후원 상태는 변경되지 않습니다.")){    //확인
+            alert("해당 후원내역은 확정되었습니다!");
+         }else{
+            e.preventDefault();
+        };
+    });
 
-var initBody;
-
-function beforePrint() {
- initBodyHTML = document.body.innerHTML;
- document.body.innerHTML = document.getElementById('spon_receopt_box').innerHTML;
-}
-function afterPrint() { 
- document.body.innerHTML = initBodyHTML;
-}
-function printArea() {
- window.print();
-}
-
-window.onbeforeprint = beforePrint;
-window.onafterprint = afterPrint;
-
-function goBack(){
-    window.history.back();
-}
+    $('#delete_donate_btn').click(function(e){
+        if (confirm("후원 정말 취소하시겠습니까??\n후원 내역은 복구되지 않습니다.")){    //확인
+            alert("해당 후원내역은 삭제되었습니다!");
+         }else{   //취소
+            e.preventDefault();
+        };
+    });

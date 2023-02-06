@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -16,6 +17,8 @@ public interface UserRepository extends JpaRepository<UserMaster, Long> {
     Optional<UserMaster> findByUserId(String userId);
     Optional<UserMaster> findByUserName(String userName);
     Optional<UserMaster> findByNickName(String nickName);
+
+    List<UserMaster> findAllByUserName(String userName);
 
 
     // 중복체크

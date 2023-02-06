@@ -142,6 +142,16 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
+
+  document.getElementById('realresetPW_btn').style.display="none";
+
+
+
+
+
+
+
+
   function autoHypenPhone(str){
     str = str.replace(/[^0-9]/g, '');
     var tmp = '';
@@ -170,12 +180,23 @@ document.addEventListener('DOMContentLoaded', () => {
     return str;
 }
 
-var cellPhone = document.getElementById('sign_ph');
-cellPhone.onkeyup = function(event){
+var cellPhone_find_id = document.getElementById('sign_ph_find_id'); // 아이디찾는모달창에 폰번호
+var cellPhone_reset_pw=document.getElementById('sign_ph_reset_pw'); // 비번재설정하는모달창에 폰번호
+cellPhone_find_id.onkeyup = function(event){
 event = event || window.event;
 var _val = this.value.trim();
 this.value = autoHypenPhone(_val);
 }
+cellPhone_reset_pw.onkeyup = function(event){
+  event = event || window.event;
+  var _val = this.value.trim();
+  this.value = autoHypenPhone(_val);
+}
+
+
+
+
+
 
 
 
@@ -247,6 +268,7 @@ $('#resetPW_btn').click(function(){
   const resetName=$('.resetPWName').val();
   const resettype=$('.resetPWType').val();
   const resetphone=$('.resetPWPhone').val();
+  const finalBTN=$('#realresetPW_btn');
   $.ajax({
     type:'post',
     url:`resettingpw.meow`,
@@ -257,13 +279,26 @@ $('#resetPW_btn').click(function(){
       phoneNumber:resetphone
     },
     success:function(data){
+      console.log(resetid);
       if(data==='none'){
         $('#checkinfo').html('아이디가 존재하지않습니다.')
       }else if(data==='mismatch'){
         $('#checkinfo').html('정보가 일치하지않습니다.')
       }else{
-        location.href=`resetting_pw.meow/${resetid}`;
+        //location.href=`resetting_pw.meow/${resetid}`;
+        $.ajax({
+          type:'post',
+          url:`resetting_pw.meow`,
+          data:{
+            userId:resetid
+          },
+          success:function(data){
+            $('#resetPW_btn').attr('disabled',true);
+            document.getElementById('realresetPW_btn').style.display="block";
+            $('#finalUserId').attr('value',resetid);
+          }
+        })
       }
-    }
+    } // end success:function(data)
   })
 })

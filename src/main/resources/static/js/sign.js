@@ -154,6 +154,7 @@ $('#id-Check-Btn').click(function(){
     success:function(data){
       if(data==='available'){
         alert('사용가능한 아이디입니다.');
+        $('#sign_id_email').attr('readonly',true);
         $('#mail-Check-Btn').attr('disabled',false);
         $('#id-Check-Btn').attr('disabled',true);
       }else{

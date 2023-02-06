@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="http://mintable1.cafe24.com/Meow_me_you_front/html/"
+    />
+    <meta property="og:title" content="미유미유" />
+    <meta property="og:description" content="너와 나의 이야기가 펼쳐지는 곳" />
+   <link href="../css/bootstrap-icons.css" rel="stylesheet">
+    <meta
+      property="og:image"
+      content="http://mintable1.cafe24.com/Meow_me_you_front/img/kakao_preview.jpg"
+    />
+    <meta
+      property="og:site_name"
+      content="유기묘 커뮤니티에 오신걸 환영합니다!"
+    />
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+    crossorigin="anonymous"
+  />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+  
+    <link
+      rel="icon"
+      href="../img/favicon/favicon-remove-bg.ico"
+      type="image/x-icon"
+      sizes="16x16"
+    />
+    <title>후원목록</title>
+    <!-- Font Awesome icons (free version)-->
+    <script
+      src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Simple line icons-->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Google fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="../css/admin_spon_list.css" rel="stylesheet" />
+  </head>
+
+  <body id="page-top">
+    <!-- Navigation-->
+    <header id="header" class="header d-flex align-items-center fixed-top">
+      <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+  
+       
+          <!-- Uncomment the line below if you also wish to use an image logo -->
+          <!-- <img src="assets/img/logo.png" alt=""> -->
+          <a class="logo d-flex align-items-center" href="#page-top"><img alt="Brand" src="../img/logo/logo4.png"></a>
+        </a>
+  
+        <i class="mobile-nav-toggle mobile-nav-show bi bi-list "></i>
+        <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x "></i>
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li class="dropdown"><a href="#"><span>Meow me, you</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+              <ul>
+                <li><a href="#">사업소개</a></li>
+                <li><a href="#">후원내역</a></li>
+              </ul>
+            </li>
+            <li><a href="#">후원하기</a></li>
+            <li class="dropdown"><a href="#"><span>물품거래</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+              <ul>
+                <li><a href="#">무료 나눔</a></li>
+                <li><a href="#">중고 거래</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+              <ul>
+                <li><a href="#">분양하기</a></li>
+                <li><a href="#">분양후기</a></li>
+                <li><a href="#">캣스타그램</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="#"><span>마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+              <ul>
+                <li><a href="#">내 글 모아보기</a></li>
+                <li><a href="#">내가 쓴 댓글 모아보기</a></li>
+                <li><a href="#">좋아요 목록 보기</a></li>
+                <li><a href="#">내 후원 목록보기</a></li>
+                <li><a href="#">회원정보 수정하기</a></li>
+              </ul>
+            </li>
+            <li><a class="get-a-quote" href="#">로그아웃</a></li>
+          </ul>
+        </nav>
+        <!-- .navbar -->
+  
+      </div>
+    </header><!-- End Header -->
+
+     <!-- section -->
+     <div class="header-card">
+      <div class="card bg-crop">
+        <img src="../img/parcel_review_menu.jpg" class="card-img rounded mx-auto d-block bg-menu" alt="커뮤니티설명" />
+        <div class="card-img-overlay" id="community_type">
+          <h5 class="card-title text-dark text-center fs-1">
+            내 후원목록 모아보기
+          </h5>
+          <p class="card-text text-dark text-center fs-3">
+            Meow me you에 후원해주셔서 감사합니다!
+          </p>
+        </div>
+      </div>
+     </div>
+  
+    <section>
+      <div class="container" id="main_box">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">후원자명</th>
+              <th scope="col">후원방식</th>
+              <th scope="col" colspan="3">후원금액</th>
+              <th scope="col">결제방법</th>
+              <th scope="col">후원상태</th>
+              <th scope="col">기부금영수증</th>
+              <th scope="col">후원일자</th>
+              <th scope="col">영수증발급</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="donateList:${list}">
+              <td th:text="${donateList.donateName}"></td>
+              <td th:text="${donateList.donateType}" colspan="3"></td>
+              <td th:text="${#numbers.formatInteger(donateList.donateAmount, 0, 'COMMA')+'원'}"></td>
+              <td th:switch="${donateList.donateWayCode}">
+                <p th:case="'ACNT'">계좌이체</p>
+                <p th:case="'BANK'">무통장입금</p>
+                <p th:case="'CRCRD'">신용카드</p>
+              </td>
+              <td th:switch="${donateList.donateStateCode}">
+                <div th:case="'DONATE_CPL'" >
+                  <a th:href="@{|/donateconfirm.meow?donateCode=${donateList.donateCode}}|" type="button" class="btn btn-outline-success btn-sm" id="confirm_donate_btn">확정</a>
+                  <a th:href="@{|/donatedelete.meow?donateCode=${donateList.donateCode}}|" type="button" class="btn btn-outline-danger btn-sm" id="delete_donate_btn">취소</a>
+                </div>
+                <p th:case="'DONATE_CNFRM'">후원확정</p>
+                <p th:case="'BANK_WAIT'">입금대기중</p>
+                <p th:case="'LCK_BLC'">계좌잔액부족</p>
+                <p th:case="'LIMIT_EXCDD'">한도초과</p>
+              </td>
+              <td>
+                <p th:if="${donateList.donateStateCode}=='DONATE_CNFRM'">가능</p>
+                <p th:unless="${donateList.donateStateCode}=='DONATE_CNFRM'">불가능</p>
+              </td>
+              <td th:text="${donateList.donateDate}"></td>
+              <td>
+                  <a type="button" class="btn btn-outline-success btn-sm" th:href="@{/donateReceipt.meow(id=${donateList.donateCode})}" th:if="${donateList.donateStateCode}=='DONATE_CNFRM'">영수증 발급</a>
+                  <p th:unless="${donateList.donateStateCode}=='DONATE_CNFRM'">발급불가</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </section>
+
+      <!-- 페이지 -->
+      <nav class="marbot_100" aria-label="Page navigation example" >
+        <ul class="pagination">
+          <li class="page-item" th:classappend="${1 == nowPage} ? 'disabled'">
+            <a class="page-link" href="#" aria-label="Previous" th:href="@{/donatelist.meow(page=${startPage-1})}">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item" th:classappend="${1 == nowPage} ? 'disabled'">
+            <a class="page-link" href="#" aria-label="Previous" th:href="@{/donatelist.meow(page=${nowPage-2})}">
+              <span aria-hidden="true">&lt;</span>
+            </a>
+          </li>
+          <li class="page-item" th:classappend="${i == nowPage} ? 'disabled'" th:each="i : ${#numbers.sequence(startPage, endPage)}">
+            <a class="page-link" href="#"  th:href="@{/donatelist.meow(page=${i - 1})}" th:text="${i}">1</a></li>
+
+          <li class="page-item" th:classappend="${endPage == nowPage} ? 'disabled'">
+            <a class="page-link" href="#" aria-label="Next"  th:href="@{/donatelist.meow(page=${nowPage})}">
+              <span aria-hidden="true">&gt;</span>
+            </a>
+          <li class="page-item" th:classappend="${endPage == nowPage} ? 'disabled'">
+            <a class="page-link" href="#" aria-label="Next"  th:href="@{/donatelist.meow(page=${endPage-1})}">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+  <!-- section - end -->
+
+   
+   
+
+    <!-- Footer-->
+    <footer class="py-5 bg-dark">
+      <div class="container px-4">
+        <p class="m-0 text-center text-white">
+          Copyright &copy; Your Website 2023
+        </p>
+      </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top"
+      ><i class="fas fa-angle-up"></i
+    ></a>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="../js/admin_spon_list.js"></script>
+  </body>
+</html>

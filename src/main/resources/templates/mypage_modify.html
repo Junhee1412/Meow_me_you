@@ -112,14 +112,16 @@
      <div class="insert">
       <h3>회원정보수정하기</h3>
       <div class="thumb-wrapper stagger-item">
-        <a href="#"><img class="thumb" src="../img/portfolio-2.jpg" /></a>
+        <a href="#"><img class="thumb" th:src="@{${user.profileImagePath}}" /></a>
       </div>
      </div>
     <!-- 회원가입 -->
     <section>
       <div class="container py-4">
 
-        <form th:action="modifyUser.meow" method="post">
+        <form th:action="modifyUser.meow" method="post" enctype="multipart/form-data">
+          <input type="file" name="file">
+          <input type="hidden" th:value="${user.getUserId()}" name="userId">
           <div class="form-group">
             <label class="form-label mt-1">이름</label>
             <input type="text" class="form-control" id="sign_nick" name="userName" th:value="${user.getUserName()}" disabled>
@@ -132,7 +134,7 @@
           </div>
           <div class="form-group">
             <label class="form-label mt-2">지역</label>
-            <input type="text" class="form-control" id="sign_tel" name="Address" th:value="${user.getAddress()}">
+            <input type="text" class="form-control" id="sign_tel" name="address" th:value="${user.getAddress()}">
           </div>
           <div class="form-group has-success">
             <label class="form-label mt-2">비밀번호</label>

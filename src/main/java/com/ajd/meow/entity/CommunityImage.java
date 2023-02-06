@@ -17,6 +17,7 @@ import javax.persistence.*;
 public class CommunityImage {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="IMG_NO")
     private Long imageNo;
 
@@ -30,11 +31,20 @@ public class CommunityImage {
     private String thumbnailImageAddress;
 
     @Column(name="IMG_ADR")
-    private String imageAddress;
+    private String imgPath;
 
     @Column(name="IMG_NAME")
-    private String imageName;
+    private String imgName;
 
     @Column(name="IMG_SIZE")
     private String imageSize;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_no" ,insertable = false, updatable = false)
+    private CommunityMaster communityMaster; // 커뮤니티 엔티티
+
+    @ManyToOne
+    @JoinColumn(name = "user_no" ,insertable = false, updatable = false)
+    private UserMaster userMaster; // 유저 엔티티
+
 }

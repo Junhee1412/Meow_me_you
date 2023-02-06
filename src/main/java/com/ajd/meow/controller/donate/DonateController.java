@@ -63,7 +63,7 @@ public class DonateController {
     @PostMapping("/donatecreatedo.meow")
     public String donate(HttpServletRequest request, HttpSession session, DonateMaster donateMaster,
                          BankTransfer bankTransfer, CreditcardPayment creditcardPayment, AccountTransfer accountTransfer,
-                         RedirectAttributes redirectAttributes,Model model){
+                         RedirectAttributes redirectAttributes, Model model){
 
         //신용카드 한도초과, 계좌이체 잔액부족일 경우는 결제 API를 구현하지 않을 예정이기 때문에 주석으로 코드만 작성
         UserMaster loginUser=(UserMaster)session.getAttribute("user");
@@ -85,9 +85,10 @@ public class DonateController {
 
         donateMaster.setBirthDate(sqlDate);
         donateMaster.setDonateDate(java.sql.Date.valueOf(LocalDate.now()));
-        donateMaster.setDonateReceiptState("N");
+
 
         donateservice.createDonate(donateMaster);
+
         switch(donateMaster.getDonateWayCode()) {
             case "BANK":
                 donateservice.updateDonateBankStateCode(donateMaster);
@@ -129,7 +130,8 @@ public class DonateController {
     }
 
     @GetMapping("/donatelist.meow")
-    public String donatelistForm(@PageableDefault(page = 0,size = 10, sort = "donateCode", direction = Sort.Direction.DESC) Pageable pageable, HttpSession session, Model model){
+    public String donatelistForm(@PageableDefault(page = 0,size = 10, sort = "donateCode", direction = Sort.Direction.DESC) Pageable pageable,
+                                 HttpSession session, Model model){
         UserMaster loginUser=(UserMaster)session.getAttribute("user");
         model.addAttribute("user",loginUser);
 
@@ -161,4 +163,26 @@ public class DonateController {
         donateservice.confirmDonate(donateCode);
         return "redirect:/donatelist.meow";
     }
+
+
+    @GetMapping("/donateReceipt/{id}.meow")
+    public String donateReceipt(@PathVariable("id") Long donateCode, HttpSession session, Model model) {
+        UserMaster loginUser=(UserMaster)session.getAttribute("user");
+        model.addAttribute("user",loginUser);
+
+
+        model.addAttribute("donateReceipt", donateservice.donateReceipt(donateCode));
+
+        return "donateReceipt";
+    }
+
+    @GetMapping("/donateReceipt.meow")
+    public String donateReceipt(HttpSession session, Model model, Long id){
+        UserMaster loginUser=(UserMaster)session.getAttribute("user");
+        model.addAttribute("user",loginUser);
+
+        model.addAttribute("donateReceipt", donateservice.donateReceipt(id));
+        return "spon_receipt";
+    }
+
 }

@@ -68,7 +68,7 @@ public class CommunityMasterRepositoryTest extends MeowApplicationTests {
 //        communityMaster.ifPresent(selectCommunity ->{
 //            communityMasterRepository.delete(selectCommunity);
 //        });
-//        Optional<CommunityMaster> deleteCommunity = communityRepository.findById(1l);
+//        Optional<CommunityMaster> deleteCommunity = communityMasterRepository.findById(1l);
 //        Assertions.assertFalse(deleteCommunity.isPresent());
     }
 

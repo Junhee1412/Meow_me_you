@@ -84,8 +84,10 @@ public class DonateService implements DonateServiceImpl {
     public Page<DonateMaster> donateList(Pageable pageable){
         return donateRepository.findAll(pageable);
     }
-    //MyPage 후원내역 보기
-    public List<DonateMaster> donateMyView(Long UserNo){ return donateRepository.findByUserNo(UserNo); }
+    // 특정 후원 기부금영수증(상세보기)
+    public DonateMaster donateReceipt(Long donateCode){
+        return donateRepository.findById(donateCode).get();
+    }
 
     //관리자가 후원내역 보기
     public List<DonateMaster> donateList(){

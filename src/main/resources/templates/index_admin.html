@@ -48,7 +48,7 @@
       type="text/css"
     />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="css/index.css" rel="stylesheet" />
+    <link href="../css/index.css" rel="stylesheet" />
   </head>
 
   <body id="page-top">
@@ -59,7 +59,7 @@
        
           <!-- Uncomment the line below if you also wish to use an image logo -->
           <!-- <img src="assets/img/logo.png" alt=""> -->
-          <a class="logo d-flex align-items-center" href="#page-top"><img alt="Brand" src="img/logo/logo4.png"></a>
+          <a class="logo d-flex align-items-center" href="#page-top"><img alt="Brand" src="../img/logo/logo4.png"></a>
         </a>
   
         <i class="mobile-nav-toggle mobile-nav-show bi bi-list "></i>
@@ -68,10 +68,11 @@
           <ul>
             <li class="dropdown"><a href="admin.meow"><span>관리자마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="#">유저 리스트</a></li>
-                <li><a href="#">전체 글</a></li>
-                <li><a href="#">후원 내역</a></li>
-                <li><a href="#">관리자 수정</a></li>
+                <li><a href="admin.meow">관리자마이페이지</a></li>
+                <li><a href="userlist.meow">유저 리스트</a></li>
+                <li><a href="postmanage.meow">전체 글</a></li>
+                <li><a href="donatemanage.meow">후원 내역</a></li>
+                <li><a href="modifyadmin.meow">관리자 수정</a></li>
               </ul>
             </li>
             <li><a class="get-a-quote" href="logout.meow">로그아웃</a></li>
@@ -100,13 +101,15 @@
 
 
       <a
-          href="javascript:openDetail('/chat?id=master')"
-          class="enter_chat"
-          data-toggle="tooltip"
-          data-placement="top" title="Chat"
-          id="chat_btn"
+        href="../img/temp.png"
+        data-btn="regular"
+        data-alt-a="캠페인버튼클릭"
+        data-alt-b="girl22"
+        data-alt-c="quickb1"
+        class="btn_ga_send quicks"
+        id="chat_btn"
       >
-        <img src="img/chat.png" class="chat_img" alt="채팅상담"
+        <img src="../img/chat.png" class="chat_img" alt="채팅상담"
       /></a>
     </section>
     <!-- trade-->
@@ -116,7 +119,7 @@
           
           <div class="col-lg-10">
             <div>
-              <img src="img/second_trade-removebg.png" class="trade_img" alt="중고거래" style="background-size:cover;"
+              <img src="../img/second_trade-removebg.png" class="trade_img" alt="중고거래" style="background-size:cover;"
               />
             </div>
             <h2>중고거래, 무료나눔을 해보세요</h2>
@@ -149,12 +152,11 @@
         <a class="btn btn-outline-light btn-lg fs-5"  style=" border-radius: 25px;" href="#"
           >분양후기 바로가기</a
         >
-      </div>
       </section>
 
       <div id="aside_donate">
         <a
-          href="img/temp.png"
+          href="../img/temp.png"
           data-btn="regular"
           data-alt-a="캠페인버튼클릭"
           data-alt-b="girl22"
@@ -162,11 +164,21 @@
           class="btn_ga_send quicks"
           id="aside_banner"
         >
-        <img src="img/aside6.png" class="img_aside" alt="후원하기"
+        <img src="../img/aside6.png" class="img_aside" alt="후원하기"
       /></a>
       </div>
-
-
+      <a
+        href="../img/temp.png"
+        data-btn="regular"
+        data-alt-a="캠페인버튼클릭"
+        data-alt-b="girl22"
+        data-alt-c="quickb1"
+        class="btn_ga_send quicks"
+        id="chat_btn"
+      >
+        <img src="../img/chat.png" class="chat_img" alt="채팅상담"
+      /></a>
+    </div>
 
     <!-- community -->
     <section class="content-section" id="catstar_commu">
@@ -184,7 +196,7 @@
                   <p class="mb-0">미유와 함께 떠난 당일치기 피크닉</p>
                 </div>
               </div>
-              <img class="img-fluid" src="img/portfolio-1.jpg" alt="..." />
+              <img class="img-fluid" src="../img/portfolio-1.jpg" alt="..." />
             </a>
           </div>
           <div class="col-lg-6">
@@ -195,7 +207,7 @@
                   <p class="mb-0">사랑스러운 우리집 콩이</p>
                 </div>
               </div>
-              <img class="img-fluid" src="img/portfolio-2.jpg" alt="..." />
+              <img class="img-fluid" src="../img/portfolio-2.jpg" alt="..." />
             </a>
           </div>
           <div class="col-lg-6">
@@ -206,7 +218,7 @@
                   <p class="mb-0">우리집 코리 애교 자랑!</p>
                 </div>
               </div>
-              <img class="img-fluid" src="img/portfolio-3.jpg" alt="..." />
+              <img class="img-fluid" src="../img/portfolio-3.jpg" alt="..." />
             </a>
           </div>
           <div class="col-lg-6">
@@ -217,7 +229,7 @@
                   <p class="mb-0">[애플이네] 새 식구 들이는 날</p>
                 </div>
               </div>
-              <img class="img-fluid" src="img/portfolio-4.jpg" alt="..." />
+              <img class="img-fluid" src="../img/portfolio-4.jpg" alt="..." />
             </a>
           </div>
           <a class="btn btn-outline-secondary btn-sm fs-6"
@@ -262,35 +274,8 @@
     ></a>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- bootstrap, jquery -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
-          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
-          crossorigin="anonymous">
     <!-- Core theme JS-->
-    <script src="js/index.js"></script>
-    <script src="js/map.js"></script>
-    <!-- Bootstrap core JS-->
-    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-    <!-- Core JS-->
-    <script src="js/scripts.js"></script>
-    <!-- bootstrap function -->
-    <script type="text/javascript">
-		$(function() {
-			$('[data-toggle="tooltip"]').tooltip();
-		});
-    </script>
-    <!-- button script -->
-    <script type="text/javascript">
-		function openDetail(url) {
-			var width = 768;
-			var height = 650;
-			var left = (window.screen.width - width) / 2;
-			var top = (window.screen.height - height) / 2;
-			window.open(url, 'detail', 'width=' + width +', height='+height +', left='+left +', top='+top +', location=no, status=no, scrollbar=yes');
-		}
-	</script> <!-- 채팅상담 눌렀을때 채팅방 나오게 하는 링크-->
+    <script src="../js/index.js"></script>
+    <script src="../js/map.js"></script>
   </body>
 </html>

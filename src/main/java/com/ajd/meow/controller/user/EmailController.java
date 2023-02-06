@@ -2,32 +2,33 @@ package com.ajd.meow.controller.user;
 
 import com.ajd.meow.service.user.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class EmailController {
+    @Autowired
     private final EmailService emailService;
-    String confirm="";String abc="";
+
+    String confirm="";
+    String email="";
 
     @Autowired
     public EmailController(EmailService emailService){this.emailService=emailService;}
 
-    @PostMapping("/emailConfirm")
-    public void emailConfirm(@RequestParam String email) throws Exception {
-
-        confirm = emailService.sendSimpleMessage(email);
-        //System.out.println(confirm);
-        //return "redirect:/";
+    @GetMapping("emailConfirm.meow/{useremail}")
+    @ResponseBody
+    public String emailConfirm(@PathVariable String useremail) throws Exception {
+        confirm = emailService.sendSimpleMessage(useremail);
+        email=useremail;
+        return confirm;
     }
-    @PostMapping("/checkCode")
-    public void checkCode(@RequestParam String code){
-        //return "check_mail";
-        //System.out.println("code : "+code);System.out.println("confirm : "+confirm);
-        if(confirm.equals(code)){
-            abc="코드 인증 성공!";
-        }else {abc="인증 실패";}
-        System.out.println(abc);
+    @PostMapping("checkCode.meow")
+    public void checkCode(@RequestParam String checkCode, Model model){
+        if(confirm.equals(checkCode)){
+            model.addAttribute("successemail", email);
+        }else {
+            model.addAttribute("nomatchcode","코드가 일치하지않습니다.");
+        }
     }
 }

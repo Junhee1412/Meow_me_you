@@ -7,8 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 //논리명 사용자정보
 @Entity
@@ -61,18 +60,16 @@ public class UserMaster {
     @Column(name = "INTRODUCE")
     private String introduce;
 
-    @Column(name = "USER_PRF")
-    private String userProfile;
-
     @Column(name = "PRF_IMG_NAME")
     private String profileImageName;
 
-    @Column(name = "PRF_IMG_SIZE")
-    private String profileImageSize;
+    @Column(name = "PRF_IMG_PATH")
+    private String profileImagePath;
 
     @Column(name = "USER_JOIN_DATE")
     private LocalDateTime userJoinDate;
 
-//    @OneToMany(mappedBy = "userMaster")
-//    private List<Reply> replyList = new ArrayList<>();
+    @OneToMany(mappedBy = "userMaster" ,orphanRemoval = true)
+    private Set<CommunityMaster> communityMasters;
+
 }

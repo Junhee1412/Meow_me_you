@@ -2,7 +2,38 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="http://mintable1.cafe24.com/Meow_me_you_front/html/"
+    />
+    <meta property="og:title" content="미유미유" />
+    <meta property="og:description" content="너와 나의 이야기가 펼쳐지는 곳" />
+   <link href="../css/bootstrap-icons.css" rel="stylesheet">
+    <meta
+      property="og:image"
+      content="http://mintable1.cafe24.com/Meow_me_you_front/img/kakao_preview.jpg"
+    />
+    <meta
+      property="og:site_name"
+      content="유기묘 커뮤니티에 오신걸 환영합니다!"
+    />
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+    crossorigin="anonymous"
+  />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+  
     <link
       rel="icon"
       href="../img/favicon/favicon-remove-bg.ico"
@@ -10,90 +41,166 @@
       sizes="16x16"
     />
     <title>사업소개</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="../css/business_info.css" />
-  </head>
 
-  <body>
+    <script src="
+    https://cdn.jsdelivr.net/npm/chart.js@4.2.0/dist/chart.umd.min.js
+    "></script><!-- Font Awesome icons (free version)-->
     <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
       crossorigin="anonymous"
     ></script>
+    <!-- Simple line icons-->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="../css/business_info.css" rel="stylesheet" />
+  </head>
 
-    <!-- 가상의 메뉴바 -->
-    <nav
-      class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
-      id="mainNav"
-    >
-      <div class="container px-4">
-        <a class="logo" href="#page-top"
-          ><img alt="Brand" src="../img/logo/logo.png"
-        /></a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarResponsive"
-          aria-controls="navbarResponsive"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link fs-6" href="#about">후원하기</a>
+  <body id="page-top">
+    <!-- Navigation-->
+    <header id="header" class="header d-flex align-items-center fixed-top">
+      <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+  
+       
+          <!-- Uncomment the line below if you also wish to use an image logo -->
+          <!-- <img src="assets/img/logo.png" alt=""> -->
+          <a class="logo d-flex align-items-center" href="#page-top"><img alt="Brand" src="../img/logo/logo4.png"></a>
+        </a>
+  
+        <i class="mobile-nav-toggle mobile-nav-show bi bi-list "></i>
+        <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x "></i>
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li class="dropdown"><a href="#"><span>Meow me, you</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+              <ul>
+                <li><a href="#">사업소개</a></li>
+                <li><a href="#">후원내역</a></li>
+              </ul>
             </li>
-            <li class="nav-item">
-              <a class="nav-link fs-6" href="#services">중고거래</a>
+            <li><a href="#">후원하기</a></li>
+            <li class="dropdown"><a href="#"><span>물품거래</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+              <ul>
+                <li><a href="#">무료 나눔</a></li>
+                <li><a href="#">중고 거래</a></li>
+              </ul>
             </li>
-            <li class="nav-item">
-              <a class="nav-link fs-6" href="#contact">분양하기</a>
+            <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+              <ul>
+                <li><a href="#">분양하기</a></li>
+                <li><a href="#">분양후기</a></li>
+                <li><a href="#">캣스타그램</a></li>
+              </ul>
             </li>
-            <li class="nav-item">
-              <a class="nav-link fs-6" href="#contact">분양후기</a>
+            <li class="dropdown"><a href="#"><span>마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+              <ul>
+                <li><a href="#">내 글 모아보기</a></li>
+                <li><a href="#">내가 쓴 댓글 모아보기</a></li>
+                <li><a href="#">좋아요 목록 보기</a></li>
+                <li><a href="#">내 후원 목록보기</a></li>
+                <li><a href="#">회원정보 수정하기</a></li>
+              </ul>
             </li>
-            <li class="nav-item">
-              <a class="nav-link fs-6" href="#contact">센터찾기</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link fs-6" href="#contact">고객센터</a>
-            </li>
+            <li><a class="get-a-quote" href="#">로그아웃</a></li>
           </ul>
+        </nav>
+        <!-- .navbar -->
+  
+      </div>
+    </header><!-- End Header -->
+
+     <!-- section -->
+ 
+    <section style="margin:150px 0;text-align: center;">
+      <div class="mb-5">
+        <h1 class="mb-3">Meow, me, you</h1>
+        <h5 class="mb-5">너와 나의 이야기가 펼쳐지는 곳</h5>
+        <span class="fs-5">미유미유는 모든 생명의 존엄성이 지켜지는 세상</span><br>
+        <span class="fs-5">외면받는 생명이 생기지 않는 세상을 만들고자 합니다.</span><br>
+        <span class="fs-5">차가운 거리에서 쓸쓸히 죽어가는 아이들의 울음소리와 </span><br>
+        <span class="fs-5">여러분의 따뜻한 마음이 만나는 공간</span><br>
+        <span class="fs-5">서로의 이야기가 펼쳐지는 공간을 만들고자 미유미유를 계획하게 되었습니다.</span><br><br><br><hr>
+      </div>
+      
+      <div class="sa sa-up">
+        <h3 class="mt-5 mb-5">반려동물 양육 여부(%)</h3>
+        <small class="text-muted">아래의 라벨을 클릭하시면 원하는 차트만 볼 수 있습니다.</small><br>
+        <small class="text-muted">정확한 비율을 보고싶으시면 차트에 마우스 커서를 올려주세요</small><br>
+        <canvas id="PET_KEEP" style="margin:0 auto; height:70vh; width:70vw"></canvas>
+        <small class="text-muted">자료 : 문화체육관광부</small><br>
+        <div style="margin:100px 0;">
+          <span class="fs-5">1인가구가 급증함에 따라</span><br>
+          <span class="fs-5">정서적 안정을 반려동물에게서 찾고 있는 사람들이 증가했습니다.</span><br>
+          <span class="fs-5">반려동물을 경험해본 사람은 대한민국 인구의 56.5%입니다.</span><br>
         </div>
       </div>
-    </nav>
+      <hr>
 
-    <!-- 커뮤니티 설명이 있는 맨 위 상단바 -->
-    <header>
-      <div class="card bg-crop">
-        <img
-          src="../img/parcel_review_menu.jpg"
-          class="card-img rounded mx-auto d-block bg-menu"
-          alt="커뮤니티설명"
-        />
-        <div class="card-img-overlay" id="community_type">
-          <h5 class="card-title text-dark text-center fs-1">
-            Meow Me, you 사업소개
-          </h5>
-          <p class="card-text text-dark text-center fs-3">
-            너와 나의 이야기가 펼쳐지는 곳
-          </p>
+      <div class="sa sa-up">
+          <h3 class="mt-5 mb-5">필요하다고 생각하는 반려동물 관련 정책(%)</h3>
+          <small class="text-muted">정확한 비율을 보고싶으시면 차트에 마우스 커서를 올려주세요</small><br>
+          <canvas id="PET_POLICY" style="margin:0 auto; height:70vh; width:70vw"></canvas>
+          <small class="text-muted">자료 : 문화체육관광부</small><br>
+        <div style="margin:100px 0;">
+          <span class="fs-5">대부분의 선진국에서는 유기동물에 대한 처벌을</span><br>
+          <span class="fs-5">아동학대 및 유기에 대한 처벌과 동일 시 합니다.</span><br>
+          <span class="fs-5">어쩌면 우리에게 가장 필요한 것은 성숙한 반려동물 문화가 아닐까요?</span><br>
         </div>
       </div>
-    </header>
+    <hr>
+      <div class="sa sa-up">
+        <h3 class="mt-5 mb-5">최근 5년간 국내 유기동물 보호형태 비율(%)</h3>
+        <small class="text-muted">아래의 라벨을 클릭하시면 원하는 차트만 볼 수 있습니다.</small><br>
+        <small class="text-muted">정확한 비율을 보고싶으시면 차트에 마우스 커서를 올려주세요</small><br>
+        <canvas id="ORG_ANM_PRTC_CHART" style="margin:0 auto; height:70vh; width:70vw"></canvas>
+        <small class="text-muted">자료 : 농림축산검역본부</small><br>
+        <div style="margin:100px 0;">
+          <span class="fs-5">유기동물은 보호소에 입소한 뒤 15일 안에 분양받거나 죽습니다.</span><br>
+          <span class="fs-5">아직도 길가에서 혹은 보호소에서 절반에 가까운 생명들이</span><br>
+          <span class="fs-5">쓸쓸하게 한 번 더 버림 받아 죽어나가고 있습니다.</span><br>
+        </div>
+      </div>
+      <hr>
 
-    
+
+
+        <div class="final_img sa sa-up">
+          <div class="bg-crop">
+            <img
+              src="../img/business_info.png"
+              class="card-img rounded mx-auto d-block bg-menu"
+              alt="커뮤니티설명"
+            />
+            <div class="card-img-overlay">
+             
+            </div>
+          </div>
+         </div>
+
+
+    </section>
+    <div style="display:flex;margin-bottom:100px;">
+      <a type="button" href="/" class="btn btn-light btn-lg" id="foot_home_btn">미유미유 홈으로</a>
+      </div>
 
 
 
+
+
+
+  <!-- section - end -->
+
+   
+   
+
+    <!-- Footer-->
     <footer class="py-5 bg-dark">
       <div class="container px-4">
         <p class="m-0 text-center text-white">
@@ -101,5 +208,13 @@
         </p>
       </div>
     </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top"
+      ><i class="fas fa-angle-up"></i
+    ></a>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="../js/business_info.js"></script>
   </body>
 </html>

@@ -1,7 +1,9 @@
 package com.ajd.meow.controller.community;
 
+import com.ajd.meow.entity.CommunityImage;
 import com.ajd.meow.entity.CommunityMaster;
 import com.ajd.meow.entity.UserMaster;
+import com.ajd.meow.repository.community.CommunityImageRepository;
 import com.ajd.meow.service.community.CommunityMasterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,6 +13,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,28 +24,36 @@ public class CommunityMasterController {
     @Autowired
     private CommunityMasterService communityMasterService;
 
+    @Autowired
+    private CommunityImageRepository communityImageRepository;
+
+
+
     @GetMapping("/board/write") //localhost:8080/board/write 작성시 이동
     public String boardWriteForm(HttpSession session, Model model){
         UserMaster loginUser=(UserMaster)session.getAttribute("user");
         model.addAttribute("user",loginUser);
+
 
         return "community/insertBoard";
     }
 
 
     @PostMapping("/board/writepro")
-    public String boardWritePro(HttpSession session, Model model, CommunityMaster communityMaster){
+    public String boardWritePro(HttpSession session, Model model, CommunityMaster communityMaster, MultipartFile file,CommunityImage communityImage) throws  Exception{
 
         UserMaster loginUser=(UserMaster)session.getAttribute("user");
         model.addAttribute("user",loginUser);
 
-        communityMasterService.write(communityMaster);
+
+        communityMasterService.write(communityMaster,communityImage,file);
         return "redirect:/board/list";
     }
 
 
     @GetMapping("/board/list")
-    public String boardList(@PageableDefault(page = 0,size = 12, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable, HttpSession session, Model model){
+    public String boardList(@PageableDefault(page = 0,size = 12, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable, HttpSession session, Model model
+    ,CommunityImage communityImage){
         UserMaster loginUser=(UserMaster)session.getAttribute("user");
         model.addAttribute("user",loginUser);
 
@@ -58,6 +70,8 @@ public class CommunityMasterController {
         model.addAttribute("maxPage",10);
 
 
+
+
         return "community/getBoardList";
     }
 
@@ -66,8 +80,20 @@ public class CommunityMasterController {
         UserMaster loginUser=(UserMaster)session.getAttribute("user");
         model.addAttribute("user",loginUser);
 
-        model.addAttribute("board", communityMasterService.boardView(postNo));
 
+
+
+        if(communityMasterService.commuImg(postNo) != null ) {
+            model.addAttribute("board", communityMasterService.boardView(postNo));
+            model.addAttribute("cimg", communityMasterService.commuImg(postNo).getImgPath());
+
+        }else {
+
+            model.addAttribute("board", communityMasterService.boardView(postNo));
+
+        }
+
+//        System.out.println("asdfasdfasdfasdfasdf" +communityMasterService.commuImg(postNo).getImgPath() );
         return "community/getBoard";
     }
 
@@ -88,7 +114,7 @@ public class CommunityMasterController {
     }
 
     @PostMapping("/board/update/{postNo}")
-    public String boardUpdate(@PathVariable("postNo") Long postNo, HttpSession session, CommunityMaster communityMaster ,Model model) {
+    public String boardUpdate(@PathVariable("postNo") Long postNo, HttpSession session, CommunityMaster communityMaster , Model model, MultipartFile file , CommunityImage communityImage) throws Exception {
         UserMaster loginUser=(UserMaster)session.getAttribute("user");
         model.addAttribute("user",loginUser);
         CommunityMaster boardTemp = communityMasterService.boardView(postNo);
@@ -98,7 +124,7 @@ public class CommunityMasterController {
         model.addAttribute("message", "글 수정 완료.");
         model.addAttribute("SearchUrl", "/board/list");
 
-        communityMasterService.boardUpdate(boardTemp);
+        communityMasterService.write(boardTemp,communityImage,file);
 
         return "community/boardMessage";
   }

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -41,7 +40,7 @@
       type="image/x-icon"
       sizes="16x16"
     />
-    <title>후원목록</title>
+    <title>내 글 목록 보기</title>
     <!-- Font Awesome icons (free version)-->
     <script
       src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
@@ -59,7 +58,7 @@
       type="text/css"
     />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="../css/spon_list.css" rel="stylesheet" />
+    <link href="../css/post_list.css" rel="stylesheet" />
   </head>
 
   <body id="page-top">
@@ -77,26 +76,6 @@
         <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x "></i>
         <nav id="navbar" class="navbar">
           <ul>
-            <li class="dropdown"><a href="#"><span>Meow me, you</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-              <ul>
-                <li><a href="#">사업소개</a></li>
-                <li><a href="#">후원내역</a></li>
-              </ul>
-            </li>
-            <li><a href="#">후원하기</a></li>
-            <li class="dropdown"><a href="#"><span>물품거래</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-              <ul>
-                <li><a href="#">무료 나눔</a></li>
-                <li><a href="#">중고 거래</a></li>
-              </ul>
-            </li>
-            <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-              <ul>
-                <li><a href="#">분양하기</a></li>
-                <li><a href="#">분양후기</a></li>
-                <li><a href="#">캣스타그램</a></li>
-              </ul>
-            </li>
             <li class="dropdown"><a href="#"><span>마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
                 <li><a href="#">내 글 모아보기</a></li>
@@ -106,7 +85,7 @@
                 <li><a href="#">회원정보 수정하기</a></li>
               </ul>
             </li>
-            <li><a class="get-a-quote" href="#">로그아웃</a></li>
+            <li><a class="get-a-quote" href="logout.meow">로그아웃</a></li>
           </ul>
         </nav>
         <!-- .navbar -->
@@ -120,128 +99,79 @@
         <img src="../img/parcel_review_menu.jpg" class="card-img rounded mx-auto d-block bg-menu" alt="커뮤니티설명" />
         <div class="card-img-overlay" id="community_type">
           <h5 class="card-title text-dark text-center fs-1">
-            후원목록 모아보기
+            글 목록
           </h5>
           <p class="card-text text-dark text-center fs-3">
-            Meow me you에 후원해주셔서 감사합니다!
+            ~~님의 글입니다.
           </p>
         </div>
       </div>
      </div>
   
     <section>
-      <div class="container" id="main_box">
-        <table class="table">
+      <div class="dropdown" id="top_dropdown">
+        <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          작성일자 순 정렬
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" href="#">조회수 많은 순 정렬</a></li>
+          <li><a class="dropdown-item" href="#">댓글 수 많은 순 정렬</a></li>
+          <li><a class="dropdown-item" href="#">좋아요 수 많은 순 정렬</a></li>
+          <li><a class="dropdown-item" href="#">커뮤니티 별 정렬</a></li>
+        </ul>
+      </div>
+  
+  
+      <div id="table_box">
+        <table class="table pad_4">
           <thead>
             <tr>
+              <th scope="col"></th>
               <th scope="col">번호</th>
-              <th scope="col">후원방식</th>
-              <th scope="col" colspan="3">후원금액</th>
-              <th scope="col">후원사업</th>
-              <th scope="col">결제방법</th>
-              <th scope="col">후원일자</th>
-              <th scope="col">상세보기</th>
+              <th scope="col">커뮤니티</th>
+              <th scope="col" colspan="3">글제목</th>
+              <th scope="col">조회 수</th>
+              <th scope="col">댓글 수</th>
+              <th scope="col">좋아요 수</th>
+              <th scope="col">작성자 닉네임</th>
+              <th scope="col">작성일자</th>
+  
             </tr>
           </thead>
           <tbody>
-            <tr th:if="${user.getUserNo()}==${donateMaster.getUserNo()}" th:each="donateMaster:${list}">
-              <th>1</th>
-              <td th:text="${donateMaster.}">고민호</td>
-              <td colspan="3">정기후원</td>
-              <td>30,000</td>
-              <td>발급</td>
-              <td><button type="button" class="btn btn-outline-success btn-sm">확정</button></td>
-              <td><button type="button" class="btn btn-outline-danger btn-sm">취소</button></td>
-              <td>보호센터 </td>
-              <td>2023.01.04</td>
-              <td>
-                <button type="button" class="w-10 btn btn-sm btn-primary marbot_5" data-toggle="modal"
-                  data-target="#myModal">상세보기
-                </button>
-              </td>
+            <tr th:each="postMaster: ${postList}">
+              <th scope="row">
+                <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+              </th>
+              <td th:text="${postMaster.getPostNo()}">번호</td>
+              <td th:text="${postMaster.getCommunityId()}">커뮤니티</td>
+              <td th:text="${postMaster.getSubject()}" colspan="3">제목</td>
+              <td th:text="${postMaster.getViewCount()}">조회수</td>
+              <td th:text="${postMaster.getViewCount()}">댓글수</td>
+              <td th:text="${postMaster.getViewCount()}">좋아요수</td>
+              <td th:text="${postMaster.getUserMaster().getNickName()}">작성자</td>
+              <td th:text="${postMaster.getCreatePostDate().toString().replace('T','  ')}">작성일</td>
             </tr>
-  
-  
-      
           </tbody>
         </table>
-  
-        <!--  상세보기 Modal -->
-        <div class="modal fade modal-center" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">상세보기</h4>
-              </div>
-              <table class="table table-bordered" id="modal_details">
-                <thead class="table-secondary">
-                  <tr>
-                    <th scope="col">후원번호</th>
-                    <th scope="col">11032</th>
-  
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">카드사</th>
-                    <td>국민카드</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">카드번호</th>
-                    <td>XXXX-XXXX-XXXX-XXXX</td>
-  
-                  </tr>
-                  <tr>
-                    <th scope="row">카드 소유주 실명</th>
-                    <td>고민호</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">카드 유효기간(MM/YY)</th>
-                    <td>02/24</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">CVC</th>
-                    <td>111</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">비고</th>
-                    <td>-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="modal-footer martop_30">
-                <button type="button" class="btn btn-outline-success" data-dismiss="modal">인쇄</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-              </div>
-  
-            </div>
+        <hr class="border border-white">
+      </div>
+      <div class="col" id="delete_btn_group">
+        <div class="input-group mb-3" id="search_box">
+          <input type="text" class="form-control" placeholder="검색하기" aria-label="Recipient's username"
+            aria-describedby="button-addon2">
+          <button class="btn btn-outline-dark" type="button" id="button-addon2">+</button>
+          &nbsp;&nbsp;
+          <div>
+            <button type="button" class="btn btn-outline-dark">선택 삭제</button>
+            <button type="button" class="btn btn-outline-danger">전체 삭제</button>
           </div>
         </div>
       </div>
-      <!-- 상세보기 modal - end  -->
-  
-      <div id="end_btn_group">
-        <button class="btn btn-outline-success ">선택삭제</button>
-        <button class="btn btn-outline-danger ">전체삭제</button>
-      </div>
-  
-  
-      <div id="search_box">
-        <form class="row">
-          <input class="form-control col-md-7" type="search" placeholder="검색" name="" aria-label="Search">
-          <button class="btn btn-dark col-md-6" type="submit">Search</button>
-        </form>
-      </div>
-  
-  
   
       <hr class="border border-white">
-      </div>
-  
-      <!-- 페이징 -->
-  
-      <hr class="border border-white">
-      <nav aria-label="Page navigation example" id="page_navbar">
+      <nav aria-label="Page navigation example" class="page_div">
         <ul class="pagination">
           <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
           <li class="page-item"><a class="page-link" href="#">1</a></li>

@@ -28,6 +28,16 @@ public class Reply {
     @Column(name = "REPLY_CONTENT")
     private String replyContent;
 
-    @Column(name="REPLY_USER_NO")
-    private Long replyUserNo;
+    @ManyToOne
+    @JoinColumn(name = "post_no" ,insertable = false, updatable = false)
+    private CommunityMaster communityMaster; // 커뮤니티 엔티티
+
+    @ManyToOne
+    @JoinColumn(name = "user_no", insertable = false, updatable = false)
+    private UserMaster userMaster; // 유저 엔티티
+
+    public void save(CommunityMaster communityMaster,UserMaster userMaster) {
+        this.userMaster=userMaster;
+        this.communityMaster=communityMaster;
+    }
 }

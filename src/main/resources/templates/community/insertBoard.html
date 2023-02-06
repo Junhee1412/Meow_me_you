@@ -131,7 +131,7 @@
         </div>
       </div>
      </div>
-    <form action="/board/writepro" method="post">
+    <form action="/board/writepro" method="post" enctype="multipart/form-data" onsubmit="imgChecked();">
     <div id="insert_text_box">
       <div class="row w-50 mb-3">
         <label for="inputEmail3" class="col-sm-2 col-form-label">제목 *</label>
@@ -162,47 +162,17 @@
     </div>
     <div id="insert_pic_box">
       <div class="row w-50 mb-3">
-        <label for="input-group-text" class="col-sm-2 col-form-label"
-          >사진첨부1</label
-        >
+        <label for="input-group-text" class="col-sm-2 col-form-label">사진첨부1</label>
         <div class="col-sm-10">
           <div class="input-group mb-3">
-            <input type="file" class="form-control" id="inputGroupFile02" />
-            <label class="input-group-text" for="inputGroupFile02"
-              >Upload</label
-            >
+            <input type="file" name="file" class="form-control" id="inputGroupFile02"  />
+            <label class="input-group-text" for="inputGroupFile02">Upload</label>
           </div>
+<!--          </form>-->
         </div>
       </div>
 
-      <div class="row w-50 mb-3">
-        <label for="input-group-text" class="col-sm-2 col-form-label"
-          >사진첨부2</label
-        >
-        <div class="col-sm-10">
-          <div class="input-group mb-3">
-            <input type="file" class="form-control" id="inputGroupFile02" />
-            <label class="input-group-text" for="inputGroupFile02"
-              >Upload</label
-            >
-          </div>
-        </div>
-      </div>
 
-      <div class="row w-50 mb-3">
-        <label for="input-group-text" class="col-sm-2 col-form-label"
-          >사진첨부3</label
-        >
-        <div class="col-sm-10">
-          <div class="input-group mb-3">
-            <input type="file" class="form-control" id="inputGroupFile02" />
-            <label class="input-group-text" for="inputGroupFile02"
-              >Upload</label
-            >
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="mx-auto" id="upload_info">
       <p>* 사진은 5개 까지 첨부할 수 있습니다.</p>

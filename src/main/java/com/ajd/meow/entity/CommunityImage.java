@@ -14,10 +14,11 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="CMNTY_IMG")
+@SequenceGenerator(name="IMG_NO_SEQ_GEN", sequenceName="IMG_NO_SEQ", initialValue=1, allocationSize=1)
 public class CommunityImage {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="IMG_NO_SEQ_GEN")
     @Column(name="IMG_NO")
     private Long imageNo;
 

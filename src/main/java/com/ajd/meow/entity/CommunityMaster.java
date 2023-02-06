@@ -23,6 +23,8 @@ public class CommunityMaster {
     private Long postNo;
 
     @Column(name="USER_NO")
+    //@ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name="USER_NO")
     private Long userNo;
 
     @Column(name="CMNTY_ID")
@@ -45,4 +47,7 @@ public class CommunityMaster {
     @Column(name="VIEW_COUNT")
     private int viewCount;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn( name="user_no" ,insertable = false, updatable = false)
+    private UserMaster userMaster;
 }

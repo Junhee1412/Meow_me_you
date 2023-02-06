@@ -71,36 +71,16 @@
         <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x "></i>
         <nav id="navbar" class="navbar">
           <ul>
-            <li class="dropdown"><a href="#"><span>Meow me, you</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <li class="dropdown"><a href="admin.meow"><span>관리자마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="#">사업소개</a></li>
-                <li><a href="#">후원내역</a></li>
+                <li><a href="admin.meow">관리자마이페이지</a></li>
+                <li><a href="userlist.meow">유저 리스트</a></li>
+                <li><a href="postmanage.meow">전체 글</a></li>
+                <li><a href="donatemanage.meow">후원 내역</a></li>
+                <li><a href="modifyadmin.meow">관리자 수정</a></li>
               </ul>
             </li>
-            <li><a href="#">후원하기</a></li>
-            <li class="dropdown"><a href="#"><span>물품거래</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-              <ul>
-                <li><a href="#">무료 나눔</a></li>
-                <li><a href="#">중고 거래</a></li>
-              </ul>
-            </li>
-            <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-              <ul>
-                <li><a href="#">분양하기</a></li>
-                <li><a href="#">분양후기</a></li>
-                <li><a href="#">캣스타그램</a></li>
-              </ul>
-            </li>
-            <li class="dropdown"><a href="#"><span>마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-              <ul>
-                <li><a href="#">내 글 모아보기</a></li>
-                <li><a href="#">내가 쓴 댓글 모아보기</a></li>
-                <li><a href="#">좋아요 목록 보기</a></li>
-                <li><a href="#">내 후원 목록보기</a></li>
-                <li><a href="#">회원정보 수정하기</a></li>
-              </ul>
-            </li>
-            <li><a class="get-a-quote" href="#">로그아웃</a></li>
+            <li><a class="get-a-quote" href="logout.meow">로그아웃</a></li>
           </ul>
         </nav>
         <!-- .navbar -->
@@ -112,16 +92,14 @@
      <div class="insert">
       <h3>회원정보수정하기</h3>
       <div class="thumb-wrapper stagger-item">
-        <a href="#"><img class="thumb" th:src="@{${user.profileImagePath}}" /></a>
+        <a href="#"><img class="thumb" src="../img/portfolio-2.jpg" /></a>
       </div>
      </div>
     <!-- 회원가입 -->
     <section>
       <div class="container py-4">
 
-        <form th:action="modifyUser.meow" method="post" enctype="multipart/form-data">
-          <input type="file" name="file">
-          <input type="hidden" th:value="${user.getUserId()}" name="userId">
+        <form th:action="modifyAdmin.meow" method="post">
           <div class="form-group">
             <label class="form-label mt-1">이름</label>
             <input type="text" class="form-control" id="sign_nick" name="userName" th:value="${user.getUserName()}" disabled>
@@ -196,7 +174,7 @@
   
             <div class="bot_btn_group">
               <button class="btn btn-dark btn-lg" type="submit" id="submitButton">변경</button>
-              <button class="btn btn-dark btn-lg" type="button"><a href="my.meow">취소</a></button>
+              <button class="btn btn-dark btn-lg" type="button"><a href="admin.meow">취소</a></button>
             </div>
   
         </form>

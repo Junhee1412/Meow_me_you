@@ -141,18 +141,46 @@ document.addEventListener('DOMContentLoaded', () => {
   
   });
 
-    $('#confirm_donate_btn').click(function(e){
-        if (confirm("후원을 정말 확정하시겠습니까?\n후원 상태는 변경되지 않습니다.")){    //확인
-            alert("해당 후원내역은 확정되었습니다!");
-         }else{
-            e.preventDefault();
-        };
-    });
-
-    $('#delete_donate_btn').click(function(e){
-        if (confirm("후원 정말 취소하시겠습니까??\n후원 내역은 복구되지 않습니다.")){    //확인
-            alert("해당 후원내역은 삭제되었습니다!");
-         }else{   //취소
-            e.preventDefault();
-        };
-    });
+  var cellPhone = document.getElementById('sign_ph');
+  cellPhone.onkeyup = function(event){
+  event = event || window.event;
+  var _val = this.value.trim();
+  this.value = autoHypenPhone(_val);
+  }
+  
+  
+  function ValidChecked() {
+  
+    var n_RegExp = /^[가-힣a-zA-Z\s]+$/;
+    var p_RegExp = /^(?:(010-\d{4})|(01[1|6|7|8|9]-\d{3,4}))-(\d{4})$/; // 아직 완성은 안됨!
+  
+  
+    var objName = document.getElementById("sign_name");
+    var objPhoneNumber = document.getElementById("sign_ph");
+  
+  
+         //이름 유효성 검사
+       if (objName.value == "") {
+         alert("이름을 입력하세요.");
+         objName.focus();
+         return false;
+       };
+       if (!n_RegExp.test(objName.value)) {
+         alert("이름은 한글 2~15자까지 가능합니다.");
+         objName.focus();
+         return false;
+       };
+  
+    //   휴대폰번호 유효성검사
+       /*if (objPhoneNumber.value == "") {
+            alert("휴대폰번호를 입력하세요.");
+            objPhoneNumber.focus();
+            return false;
+          };
+       if(!p_RegExp.test(objPhoneNumber)){
+           alert("휴대폰번호가 올바르지 않습니다.");
+           objPhoneNumber.focus();
+           return false;
+         }
+         return true;*/
+}

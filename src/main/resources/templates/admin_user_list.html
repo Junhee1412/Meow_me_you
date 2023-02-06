@@ -40,7 +40,7 @@
       type="image/x-icon"
       sizes="16x16"
     />
-    <title>내 글 목록 보기</title>
+    <title>회원 목록 보기</title>
     <!-- Font Awesome icons (free version)-->
     <script
       src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
@@ -58,7 +58,7 @@
       type="text/css"
     />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="../css/post_list.css" rel="stylesheet" />
+    <link href="../css/user_list.css" rel="stylesheet" />
   </head>
 
   <body id="page-top">
@@ -76,13 +76,13 @@
         <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x "></i>
         <nav id="navbar" class="navbar">
           <ul>
-            <li class="dropdown"><a href="#"><span>마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <li class="dropdown"><a href="admin.meow"><span>관리자마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="#">내 글 모아보기</a></li>
-                <li><a href="#">내가 쓴 댓글 모아보기</a></li>
-                <li><a href="#">좋아요 목록 보기</a></li>
-                <li><a href="#">내 후원 목록보기</a></li>
-                <li><a href="#">회원정보 수정하기</a></li>
+                <li><a href="admin.meow">관리자마이페이지</a></li>
+                <li><a href="userlist.meow">유저 리스트</a></li>
+                <li><a href="postmanage.meow">전체 글</a></li>
+                <li><a href="donatemanage.meow">후원 내역</a></li>
+                <li><a href="modifyadmin.meow">관리자 수정</a></li>
               </ul>
             </li>
             <li><a class="get-a-quote" href="logout.meow">로그아웃</a></li>
@@ -122,36 +122,34 @@
         </ul>
       </div>
   
-  
+  <form>
       <div id="table_box">
         <table class="table pad_4">
           <thead>
             <tr>
-              <th scope="col"></th>
-              <th scope="col">번호</th>
-              <th scope="col">커뮤니티</th>
-              <th scope="col" colspan="3">글제목</th>
-              <th scope="col">조회 수</th>
-              <th scope="col">댓글 수</th>
-              <th scope="col">좋아요 수</th>
-              <th scope="col">작성자 닉네임</th>
-              <th scope="col">작성일자</th>
+              <th scope="col">회원번호</th>
+              <th scope="col">회원아이디</th>
+              <th scope="col">회원이름</th>
+              <th scope="col">닉네임</th>
+              <th scope="col">상세조회</th>
+              <th scope="col">삭제</th>
+
   
             </tr>
           </thead>
           <tbody>
-            <tr th:each="postMaster: ${postList}">
-              <th scope="row">
-                <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
-              </th>
-              <td th:text="${postMaster.getPostNo()}">번호</td>
-              <td th:text="${postMaster.getCommunityId()}">커뮤니티</td>
-              <td th:text="${postMaster.getSubject()}" colspan="3">제목</td>
-              <td th:text="${postMaster.getViewCount()}">조회수</td>
-              <td th:text="${postMaster.getViewCount()}">댓글수</td>
-              <td th:text="${postMaster.getViewCount()}">좋아요수</td>
-              <td th:text="${postMaster.getUserMaster().getNickName()}">작성자</td>
-              <td th:text="${postMaster.getCreatePostDate().toString().replace('T','  ')}">작성일</td>
+            <tr th:each="userMaster: ${userList}">
+
+              <td th:text="${userMaster.getUserNo()}"></td>
+              <td th:text="${userMaster.getUserId()}"></td>
+              <td th:text="${userMaster.getUserName()}"></td>
+              <td th:text="${userMaster.getNickName()}"></td>
+              <td>
+                <a th:href="@{|/userMaster/${userMaster.getUserNo()}|}">조회</a>
+              </td>
+              <td>
+                <a th:href="@{|/userMaster/delete/${userMaster.getUserNo()}|}">삭제</a>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -194,7 +192,7 @@
     <footer class="py-5 bg-dark">
       <div class="container px-4">
         <p class="m-0 text-center text-white">
-          Copyright &copy; Your Website 2023
+          Copyright &copy; Your Website 2022
         </p>
       </div>
     </footer>

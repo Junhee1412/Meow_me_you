@@ -48,7 +48,7 @@ public class UserMaster {
     private String nickName;
 
     @Column(name = "ADDR")
-    private String Address;
+    private String address;
 
     @NotBlank(message = "통신사는 필수 입력값입니다.")
     @Column(name = "PHONE_TYPE")
@@ -68,7 +68,7 @@ public class UserMaster {
     private String profileImageName;
 
     @Column(name = "PRF_IMG_SIZE")
-    private String profileImageSize;
+    private String profileImagePath;
 
     @Column(name = "USER_JOIN_DATE")
     private LocalDateTime userJoinDate;

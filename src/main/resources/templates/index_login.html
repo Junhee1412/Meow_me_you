@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -72,7 +72,7 @@
                 <li><a href="#">후원내역</a></li>
               </ul>
             </li>
-            <li><a href="/donate.meow">후원하기</a></li>
+            <li><a href="#">후원하기</a></li>
             <li class="dropdown"><a href="#"><span>물품거래</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
                 <li><a href="#">무료 나눔</a></li>
@@ -81,17 +81,17 @@
             </li>
             <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a th:href="@{/board/list}">분양하기</a></li>
+                <li><a href="#">분양하기</a></li>
                 <li><a href="#">분양후기</a></li>
                 <li><a href="#">캣스타그램</a></li>
               </ul>
             </li>
-            <li class="dropdown"><a href="mypage/my.meow"><span>마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <li class="dropdown"><a href="my.meow"><span>마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
                 <li><a href="#">내 글 모아보기</a></li>
                 <li><a href="#">내가 쓴 댓글 모아보기</a></li>
                 <li><a href="#">좋아요 목록 보기</a></li>
-                <li><a href="/donatelist.meow">내 후원 목록보기</a></li>
+                <li><a href="#">내 후원 목록보기</a></li>
                 <li><a href="#">회원정보 수정하기</a></li>
               </ul>
             </li>
@@ -121,12 +121,13 @@
 
 
       <a
-              href="javascript:openDetail('/chat_btn')"
-              data-toggle="tooltip"
-              data-placement="top"
-              title="Chat"
-              class="enter_chat"
-              id="chat_btn"
+        href="../img/temp.png"
+        data-btn="regular"
+        data-alt-a="캠페인버튼클릭"
+        data-alt-b="girl22"
+        data-alt-c="quickb1"
+        class="btn_ga_send quicks"
+        id="chat_btn"
       >
         <img src="../img/chat.png" class="chat_img" alt="채팅상담"
       /></a>
@@ -171,13 +172,11 @@
         <a class="btn btn-outline-light btn-lg fs-5"  style=" border-radius: 25px;" href="#"
           >분양후기 바로가기</a
         >
-      </div>
-
       </section>
 
       <div id="aside_donate">
         <a
-          href="/donate.meow"
+          href="../img/temp.png"
           data-btn="regular"
           data-alt-a="캠페인버튼클릭"
           data-alt-b="girl22"
@@ -188,6 +187,18 @@
         <img src="../img/aside6.png" class="img_aside" alt="후원하기"
       /></a>
       </div>
+      <a
+        href="../img/temp.png"
+        data-btn="regular"
+        data-alt-a="캠페인버튼클릭"
+        data-alt-b="girl22"
+        data-alt-c="quickb1"
+        class="btn_ga_send quicks"
+        id="chat_btn"
+      >
+        <img src="../img/chat.png" class="chat_img" alt="채팅상담"
+      /></a>
+    </div>
 
     <!-- community -->
     <section class="content-section" id="catstar_commu">
@@ -286,15 +297,5 @@
     <!-- Core theme JS-->
     <script src="../js/index.js"></script>
     <script src="../js/map.js"></script>
-    <!-- button script -->
-    <script type="text/javascript">
-		function openDetail(url) {
-			var width = 768;
-			var height = 650;
-			var left = (window.screen.width - width) / 2;
-			var top = (window.screen.height - height) / 2;
-			window.open(url, 'detail', 'width=' + width +', height='+height +', left='+left +', top='+top +', location=no, status=no, scrollbar=yes');
-		}
-	</script><!-- 채팅상담 눌렀을때 채팅방 나오게 하는 링크-->
   </body>
 </html>

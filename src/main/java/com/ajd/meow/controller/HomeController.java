@@ -1,6 +1,7 @@
 package com.ajd.meow.controller;
 
 import com.ajd.meow.entity.UserMaster;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.support.SessionStatus;
@@ -16,7 +17,7 @@ public class HomeController {
         }else{
             UserMaster loginUser= (UserMaster)session.getAttribute("user");
             if(loginUser.getUserType().equals("ADMIN")){
-                return "index";// 어드민 페이지로 이동
+                return "index_admin";// 어드민 페이지로 이동
             }else{
                 return "index_login";
             }

@@ -145,7 +145,7 @@
                     <option>LG U+</option>
                     <option>KT</option>
                   </select>
-                  <input type="text" class="form-control findIdPhone" id="sign_ph" name="phoneNumber" required>
+                  <input type="text" class="form-control findIdPhone" id="sign_ph_find_id" name="phoneNumber" required>
                 </div>
 
                 <div id=find_idpw>
@@ -195,21 +195,26 @@
                 <input type="hidden" name="userId" id="sign_id">
                 <div class="form-group">
                   <label class="form-label mt-2">이름*</label>
-                  <input type="text" class="form-control resetPWName" id="sign_name" name="userName" required>
+                  <input type="text" class="form-control resetPWName" id="sign_name" required><!--name="userName"-->
                 </div>
                 <div class="form-group ">
                   <label class="form-label mt-2">핸드폰*</label>
-                  <select class="form-select resetPWType" id="sign_phone" name="phoneType">
+                  <select class="form-select resetPWType" id="sign_phone"><!--name="phoneType"-->
                     <option selected>SKT</option>
                     <option>LG U+</option>
                     <option>KT</option>
                   </select>
-                  <input type="text" class="form-control resetPWPhone" id="sign_ph" name="phoneNumber" required>
+                  <input type="text" class="form-control resetPWPhone" id="sign_ph_reset_pw" required>
+                  <!--name="phoneNumber"-->
                 </div>
                 <div><span id="checkinfo"></span></div>
 
                 <div id=find_idpw>
-                  <button class="w-30 btn btn-lg btn-dark mt-4" id="resetPW_btn" type="submit" disabled>비밀번호 찾기</button>
+                  <button class="w-30 btn btn-lg btn-dark mt-4" id="resetPW_btn" type="submit" disabled>회원정보확인</button>
+                  <form action="finalResetPW.meow" method="post">
+                    <input type="hidden" id="finalUserId" name="userId">
+                  <button class="w-30 btn btn-lg btn-dark mt-4" id="realresetPW_btn" type="submit">비밀번호재설정</button>
+                  </form>
               </div>
               <!--</form>-->
               </div>

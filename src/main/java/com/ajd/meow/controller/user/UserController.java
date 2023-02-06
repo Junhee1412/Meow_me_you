@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -60,16 +61,16 @@ public class UserController {
             System.out.println("유저없음");
             return "none";
         }else {
-            Optional<UserMaster>user=userRepository.findByUserName(name);
-            if(user.get().getPhoneNumber().equals(number)&&user.get().getPhoneType().equals(type)){
-                model.addAttribute("finduserId",user.get().getUserId());
-                System.out.println(user.get().getUserId());
-                return user.get().getUserId();
-            } else{
-                System.out.println("정보일치x");
-                model.addAttribute("errorMsg","정보가 일치하지않습니다.");
-                return "mismatch";
+            List<UserMaster> userInfo=userRepository.findAllByUserName(name);
+            String userRealId="";
+            for(UserMaster userIn:userInfo){
+                if(userIn.getPhoneType().equals(type)&&userIn.getPhoneNumber().equals(number)){
+                    userRealId=userIn.getUserId();
+                }
             }
+            if(userRealId.isEmpty()){
+                return "mismatch";
+            }else{return userRealId;}
         }
     }
 
@@ -89,17 +90,25 @@ public class UserController {
             }
         }
     }
-    @GetMapping("resetting_pw.meow/{resetid}") // resetting_pw.meow/${resetid}
-    public String resetPW(@PathVariable("resetid")String resetid, Model model){
-        model.addAttribute("userid",resetid);
+    @PostMapping("resetting_pw.meow") // resetting_pw.meow/${resetid}
+    public String resetPW(@RequestParam("userId")String userId, Model model){
+        model.addAttribute("userid",userId);
+        return "pwd_reset";
+    }
+    @PostMapping("finalResetPW.meow")
+    public String finalResetPWForm(@RequestParam("userId")String userId, Model model){
+        model.addAttribute("userid",userId);
         return "pwd_reset";
     }
 
     @PostMapping("changepw.meow")
     public String changepw(@RequestParam("userId")String userId, @RequestParam("userPassword")String password, Model model){
-        UserMaster user=userRepository.findByUserId(userId).get();
-        userService.updateMemberPassword(user);
-        model.addAttribute("userid",user.getUserId());
+        //UserMaster user=userRepository.findByUserId(userId).get();
+        //userService.updateMemberPassword(user);
+        userRepository.findByUserId(userId).get().setUserPassword(password);
+        userRepository.save(userRepository.findByUserId(userId).get());
+        //model.addAttribute("userid",user.getUserId());
+        model.addAttribute("userid",userRepository.findByUserId(userId));
         return "pwd_success";
     }
 }

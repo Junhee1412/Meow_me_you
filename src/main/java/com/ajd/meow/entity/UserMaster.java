@@ -7,6 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 //논리명 사용자정보
 @Entity
@@ -67,4 +68,8 @@ public class UserMaster {
 
     @Column(name = "USER_JOIN_DATE")
     private LocalDateTime userJoinDate;
+
+    @OneToMany(mappedBy = "userMaster" ,orphanRemoval = true)
+    private Set<CommunityMaster> communityMasters;
+
 }

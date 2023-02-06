@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -111,20 +111,21 @@
      <!-- section -->
      <section class="text-center">
       <main class="form-signin">
-        <form action="#" method="post">
+        <form action="changepw.meow" method="post" onsubmit="return ValidChecked();">
           <img class="mb-4 martop_30" src="../img/logo/logo1.png" alt="" width="200" height="100">
-          <h1 class="h3 mb-3 fw-normal fs-1 martop_30 padbot_30">비밀번호 변경</h1>
-  
+          <h1 class="h3 mb-3 fw-normal fs-1 martop_30 padbot_30"><p th:text="${userid}"></p>님의 비밀번호 변경</h1>
           <div class="form-floating">
-            <input type="text" class="form-control marbot_5" id="id" name="userPassword" placeholder="아이디 입력...">
+            <input type="password" class="form-control marbot_5" id="id" name="userPassword" placeholder="Password">
             <label for="id">새로운 비밀번호</label>
           </div>
+
+          <input type="hidden" name="userId" th:value="${userid}">
   
           <div class="form-floating">
             <input type="password" class="form-control" id="pwd" placeholder="Password">
             <label for="pwd">새로운 비밀번호 확인</label>
           </div>
-          <script type="text/javascript">
+          <!--<script type="text/javascript">
             let pass_word=document.getElementById('id');
             let pass_word_check=document.getElementById('pwd');
             function validatePassword(){
@@ -140,7 +141,7 @@
                 pass_word.setCustomValidity("영어대소문자,숫자,특수기호 적어도 1개 이상씩 적어야함");
               }else{pass_word_check.setCustomValidity('');}
             }
-        </script>
+        </script>-->
   
   
           <button class="w-100 btn btn-lg btn-dark fs-3 marbot_30" type="submit">비밀번호 재설정</button>
@@ -167,6 +168,6 @@
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="../js/template.js"></script>
+    <script src="../js/pwd_reset.js"></script>
   </body>
 </html>

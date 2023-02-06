@@ -174,40 +174,41 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img
-              src="../img/bg-callout.jpg"
-              class="d-block w-100"
-              alt="사진1"
-            />
-          </div>
-          <div class="carousel-item">
-            <img
-              src="../img/bg-masthead.jpg"
-              class="d-block w-100"
-              alt="사진2"
-            />
-          </div>
-          <div class="carousel-item">
-            <img
-              src="../img/parcel_review_menu.jpg"
-              class="d-block w-100"
-              alt="사진3"
-            />
-          </div>
-          <div class="carousel-item">
-            <img
-              src="../img/parcel_review_menu.jpg"
-              class="d-block w-100"
-              alt="사진3"
-            />
-          </div>
-          <div class="carousel-item">
-            <img
-              src="../img/parcel_review_menu.jpg"
-              class="d-block w-100"
-              alt="사진3"
-            />
-          </div>
+
+
+            <img th:if="${cimg!=null}" th:src="@{|/upload/${cimg}|}" class="d-block w-100" alt="사진1"  />
+            <img th:unless="${cimg!=null}" th:src="'../img/logo/logo4.png'" class="d-block w-100" alt="사진1"  />
+<!--
+
+<!--          </div>-->
+<!--          <div class="carousel-item">-->
+<!--            <img-->
+<!--              src="../img/bg-masthead.jpg"-->
+<!--              class="d-block w-100"-->
+<!--              alt="사진2"-->
+<!--            />-->
+<!--          </div>-->
+<!--          <div class="carousel-item">-->
+<!--            <img-->
+<!--              src="../img/parcel_review_menu.jpg"-->
+<!--              class="d-block w-100"-->
+<!--              alt="사진3"-->
+<!--            />-->
+<!--          </div>-->
+<!--          <div class="carousel-item">-->
+<!--            <img-->
+<!--              src="../img/parcel_review_menu.jpg"-->
+<!--              class="d-block w-100"-->
+<!--              alt="사진3"-->
+<!--            />-->
+<!--          </div>-->
+<!--          <div class="carousel-item">-->
+<!--            <img-->
+<!--              src="../img/parcel_review_menu.jpg"-->
+<!--              class="d-block w-100"-->
+<!--              alt="사진3"-->
+<!--            />-->
+<!--          </div>-->
         </div>
         <button
           class="carousel-control-prev"
@@ -228,6 +229,7 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
+      </div>
     </section>
     <section>
       <h1 class="text-dark fs-1" id="post_title" th:text="${board.subject}">제목입니다.</h1>
@@ -240,7 +242,7 @@
           />
         </div>
         <ul style="list-style:none;">
-          <li>작성자    : <span th:text="${user.getNickName()}" >작성자</span></li>
+          <li>작성자    : <span th:text="${board.getUserMaster().getNickName()}" >작성자</span></li>
           <li>작성일자  : <span th:text="${#temporals.format(board.createPostDate, 'yyyy-MM-dd HH:mm:ss')}">작성일자</span></li>
         </ul>
 <!--          작성자 : 미우미우<br />작성일자 :-->
@@ -290,28 +292,27 @@
         <div class="card-header bg-light">
           <i class="fa fa-comment fa"></i> 댓글
         </div>
+
         <form>
-          <div class="card-body">
-<!--            <input type="hidden" id="boardId" th:value="${communityMaster.postNo}">-->
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <textarea class="form-control" id="reply-content" rows="1"></textarea>
-                <button id="reply-btn-save" type="button" class="btn btn-dark mt-3">등록</button>
-              </li>
-            </ul>
-          </div>
+          <input type="hidden" id="postNo" th:value="${board.postNo}">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <textarea class="form-control" id="reply_content" rows="1"></textarea>
+              <button id="reply-btn-save" type="button" class="btn btn-dark mt-3">등록</button>
+            </li>
+          </ul>
+
         </form>
       </div>
-      <br>
       <div class="card"  >
         <div class="card-header" >댓글리스트</div>
-        <ul id="reply--box" class="list-group" th:each="reply : ${replyList}">
-          <li id="reply--1" class="list-group-item d-flex justify-content-between"  >
-          <div th:text ="${reply.replyContent}">댓글내용입니다</div>
-            <div class="d-flex">
-              <span class="text-monospace mr-1">작성자: </span><div class="text-monospace mr-1" th:text = "${reply.userMaster.nickName}"></div>
-              <button class="badge btn-warning">수정</button><span> | </span>
-              <button class="badge btn-danger">삭제</button>
+        <ul id="reply--box" class="list-group" >
+          <li id="reply--1" class="list-group-item d-flex justify-content-between"  th:each="reply : ${board.replyList}">
+          <div th:text="${reply.replyContent}">댓글내용입니다</div>
+            <div class="d-flex" >
+              <span class="text-monospace mr-1">작성자: </span><div class="text-monospace mr-1" th:text="${board.getUserMaster().getNickName()}"></div>
+              <button class="badge btn-primary" th:if="${board.userNo == user.userNo}">수정</button><span> | </span>
+              <button th:if="${reply.userNo == user.userNo}" th:onclick="|replyIndex.replyDelete('${board.postNo}', '${reply.replyNo}')|" class="badge btn-danger" style="margin-left: 10px;">삭제</button>
             </div>
           </li>
 
@@ -362,6 +363,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="../js/template.js"></script>
+    <script th:src="@{/js/reply.js}"></script>
+
+
+
+
+
 
   </body>
 </html>

@@ -5,10 +5,10 @@ import com.ajd.meow.repository.user.UserRepository;
 import com.ajd.meow.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 
@@ -25,40 +25,81 @@ public class UserController {
         return "sign";
     }
 
-    @PostMapping("sign_success.meow")
-    public String memberSignSuccess(/*@ModelAttribute */UserMaster user){
-        userService.insertMember(user);
-        return "sign_success";
+    @GetMapping("checkDuplication.meow/{userIdemail}") // 이메일 중복 체크
+    @ResponseBody
+    public String checkDuplication(@PathVariable String userIdemail){
+        if(userRepository.existsByUserId(userIdemail)){
+            return "unavailable";
+        }else{return "available";}
     }
 
-    /*
-    @GetMapping("findid.meow") // 아이디, 비번찾기
-    public String findId(){
-        return "find_id";
+    @GetMapping("checkDuplicationNickName.meow/{userNickName}") // 닉네임 중복체크
+    @ResponseBody
+    public String checkDuplicationNickName(@PathVariable String userNickName){
+        if(userRepository.existsByNickName(userNickName)){
+            return "unavailable";
+        }else{return "available";}
+    }
+
+    @PostMapping("sign_success.meow") //@ModelAttribute
+    public String memberSignSuccess(UserMaster user, MultipartFile file) throws Exception{
+        if(userRepository.existsByUserId(user.getUserId())){
+            return "index";
+            // 아마 이 화면 온거면 login안되잇을테니까 일단 걍 session 안받앗음.
+            // 새로고침 시 유저가 중복 추가되는거 방지용으로 넣었음 - 걍 홈으로 이동함니다.
+        }else{
+            userService.insertMember(user, file);
+            return "sign_success";
+        }
     }
 
     @PostMapping("findid.meow")
-    public String findID(@RequestParam String name, String email){
-        return "id_find";
+    @ResponseBody
+    public  String findId(Model model, @RequestParam("userName")String name, @RequestParam("phoneType")String type, @RequestParam("phoneNumber")String number){
+        if(!userRepository.existsByUserName(name)){
+            System.out.println("유저없음");
+            return "none";
+        }else {
+            Optional<UserMaster>user=userRepository.findByUserName(name);
+            if(user.get().getPhoneNumber().equals(number)&&user.get().getPhoneType().equals(type)){
+                model.addAttribute("finduserId",user.get().getUserId());
+                System.out.println(user.get().getUserId());
+                return user.get().getUserId();
+            } else{
+                System.out.println("정보일치x");
+                model.addAttribute("errorMsg","정보가 일치하지않습니다.");
+                return "mismatch";
+            }
+        }
     }
 
-    @PostMapping("findpw.meow")
-    public String findPW(){
-        return "리다이랙트:";
-    }
- */
     @PostMapping("resettingpw.meow")
-    public String resettingPW(UserMaster user, @RequestParam("confirmCode")String code, Model model){
-        Optional<UserMaster> finduser=userRepository.findByUserName(user.getUserName());
-        if(user.getUserId()!=null&&user.getUserName().equals(finduser.get().getUserName())){
-            return "pwd_reset";
-        }else if(user.getUserId()!=null&&!user.getUserName().equals(finduser.get().getUserName())){
-            model.addAttribute("mismatch","아이디와 이름이 매치되지않습니다.");
-            return ""; // 리다이렉트?
-        }else if(user.getUserId().isEmpty()){
-            model.addAttribute("nouser","해당 이메일의 유저가 존재하지않습니다.");
-            return ""; // 리다이렉트?
+    @ResponseBody
+    public String resettingPW(Model model, @RequestParam("userId")String userid, @RequestParam("userName")String name, @RequestParam("phoneType")String type, @RequestParam("phoneNumber")String number){
+        if(!userRepository.existsByUserId(userid)){
+            System.out.println("아이디가 존재하지않는다.");
+            return "none";
+        }else{
+            Optional<UserMaster> user=userRepository.findByUserId(userid);
+            if(user.get().getUserName().equals(name)&&user.get().getPhoneType().equals(type)&&user.get().getPhoneNumber().equals(number)){
+                model.addAttribute("userid",userid);
+                return "available";//"pwd_reset";
+            }else{
+                return "mismatch";
+            }
         }
-        return ""; // 뭐 적어야하지...
+    }
+    @GetMapping("resetting_pw.meow/{resetid}") // resetting_pw.meow/${resetid}
+    public String resetPW(@PathVariable("resetid")String resetid, Model model){
+        model.addAttribute("userid",resetid);
+        return "pwd_reset";
+    }
+
+    @PostMapping("changepw.meow")
+    public String changepw(@RequestParam("userId")String userId, @RequestParam("userPassword")String password, Model model){
+        UserMaster user=userRepository.findByUserId(userId).get();
+        userService.updateMemberPassword(user);
+        model.addAttribute("userid",user.getUserId());
+        return "pwd_success";
     }
 }

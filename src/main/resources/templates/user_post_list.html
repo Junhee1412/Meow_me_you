@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -76,13 +76,13 @@
         <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x "></i>
         <nav id="navbar" class="navbar">
           <ul>
-            <li class="dropdown"><a href="admin.meow"><span>관리자마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <li class="dropdown"><a href="#"><span>마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="admin.meow">관리자마이페이지</a></li>
-                <li><a href="userlist.meow">유저 리스트</a></li>
-                <li><a href="postmanage.meow">전체 글</a></li>
-                <li><a href="donatemanage.meow">후원 내역</a></li>
-                <li><a href="modifyadmin.meow">관리자 수정</a></li>
+                <li><a href="#">내 글 모아보기</a></li>
+                <li><a href="#">내가 쓴 댓글 모아보기</a></li>
+                <li><a href="#">좋아요 목록 보기</a></li>
+                <li><a href="#">내 후원 목록보기</a></li>
+                <li><a href="#">회원정보 수정하기</a></li>
               </ul>
             </li>
             <li><a class="get-a-quote" href="logout.meow">로그아웃</a></li>
@@ -140,135 +140,18 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr th:each="postMaster: ${postList}">
               <th scope="row">
                 <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
               </th>
-              <td>1</td>
-              <td>무료나눔</td>
-              <td colspan="3">무료로 캣타워 나눔합니다.</td>
-              <td>10</td>
-              <td>2</td>
-              <td>3</td>
-              <td>제주핵주먹</td>
-              <td>2023.01.04</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
-              </th>
-              <td>2</td>
-              <td>중고거래</td>
-              <td colspan="3">추르 10개입 중고거래합니다. </td>
-              <td>19</td>
-              <td>18</td>
-              <td>2</td>
-              <td>제주핵주먹</td>
-              <td>2023.01.03</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
-              </th>
-              <td>3</td>
-              <td>분양후기</td>
-              <td colspan="3">미유 데리고 첫 병원 방문!</td>
-              <td>11</td>
-              <td>23</td>
-              <td>3</td>
-              <td>제주핵주먹</td>
-              <td>2022.12.29</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
-              </th>
-              <td>4</td>
-              <td>분양후기</td>
-              <td colspan="3">고양이 무지 분양 후기~</td>
-              <td>11</td>
-              <td>11</td>
-              <td>11</td>
-              <td>제주핵주먹</td>
-              <td>2022.12.28</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
-              </th>
-              <td>5</td>
-              <td>분양후기</td>
-              <td colspan="3">고양이 미유 분양 후기!</td>
-              <td>11</td>
-              <td>11</td>
-              <td>11</td>
-              <td>제주핵주먹</td>
-              <td>2022.12.25</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
-              </th>
-              <td>6</td>
-              <td>캣스타그램</td>
-              <td colspan="3">우리집 고양이 미유!</td>
-              <td>112</td>
-              <td>21</td>
-              <td>33</td>
-              <td>제주핵주먹</td>
-              <td>2022.12.24</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
-              </th>
-              <td>7</td>
-              <td>캣스타그램</td>
-              <td colspan="3">고양이 무지 분양 후기~</td>
-              <td>110</td>
-              <td>10</td>
-              <td>551</td>
-              <td>제주핵주먹</td>
-              <td>2022.11.13</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
-              </th>
-              <td>8</td>
-              <td>캣스타그램</td>
-              <td colspan="3">사랑하는 우리 천사 무지</td>
-              <td>27</td>
-              <td>7</td>
-              <td>240</td>
-              <td>제주핵주먹</td>
-              <td>2022.10.10</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
-              </th>
-              <td>9</td>
-              <td>캣스타그램</td>
-              <td colspan="3">고양이 분양받고 싶습니다!</td>
-              <td>85</td>
-              <td>5</td>
-              <td>210</td>
-              <td>제주핵주먹</td>
-              <td>2022.10.08</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
-              </th>
-              <td>10</td>
-              <td>무료나눔</td>
-              <td colspan="3">캣타워 나눔합니다!</td>
-              <td>45</td>
-              <td>13</td>
-              <td>300</td>
-              <td>제주핵주먹</td>
-              <td>2022.10.08</td>
+              <td th:text="${postMaster.getPostNo()}">번호</td>
+              <td th:text="${postMaster.getCommunityId()}">커뮤니티</td>
+              <td th:text="${postMaster.getSubject()}" colspan="3">제목</td>
+              <td th:text="${postMaster.getViewCount()}">조회수</td>
+              <td th:text="${postMaster.getViewCount()}">댓글수</td>
+              <td th:text="${postMaster.getViewCount()}">좋아요수</td>
+              <td th:text="${postMaster.getUserMaster().getNickName()}">작성자</td>
+              <td th:text="${postMaster.getCreatePostDate().toString().replace('T','  ')}">작성일</td>
             </tr>
           </tbody>
         </table>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -15,7 +15,7 @@
     />
     <meta property="og:title" content="미유미유" />
     <meta property="og:description" content="너와 나의 이야기가 펼쳐지는 곳" />
-   <link href="../css/bootstrap-icons.css" rel="stylesheet">
+   <link href="/css/bootstrap-icons.css" rel="stylesheet">
     <meta
       property="og:image"
       content="http://mintable1.cafe24.com/Meow_me_you_front/img/kakao_preview.jpg"
@@ -71,36 +71,16 @@
         <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x "></i>
         <nav id="navbar" class="navbar">
           <ul>
-            <li class="dropdown"><a href="#"><span>Meow me, you</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <li class="dropdown"><a href="admin.meow"><span>관리자마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="#">사업소개</a></li>
-                <li><a href="#">후원내역</a></li>
+                <li><a href="admin.meow">관리자마이페이지</a></li>
+                <li><a href="userlist.meow">유저 리스트</a></li>
+                <li><a href="postmanage.meow">전체 글</a></li>
+                <li><a href="donatemanage.meow">후원 내역</a></li>
+                <li><a href="modifyadmin.meow">관리자 수정</a></li>
               </ul>
             </li>
-            <li><a href="#">후원하기</a></li>
-            <li class="dropdown"><a href="#"><span>물품거래</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-              <ul>
-                <li><a href="#">무료 나눔</a></li>
-                <li><a href="#">중고 거래</a></li>
-              </ul>
-            </li>
-            <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-              <ul>
-                <li><a href="#">분양하기</a></li>
-                <li><a href="#">분양후기</a></li>
-                <li><a href="#">캣스타그램</a></li>
-              </ul>
-            </li>
-            <li class="dropdown"><a href="#"><span>마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-              <ul>
-                <li><a href="#">내 글 모아보기</a></li>
-                <li><a href="#">내가 쓴 댓글 모아보기</a></li>
-                <li><a href="#">좋아요 목록 보기</a></li>
-                <li><a href="#">내 후원 목록보기</a></li>
-                <li><a href="#">회원정보 수정하기</a></li>
-              </ul>
-            </li>
-            <li><a class="get-a-quote" href="#">로그아웃</a></li>
+            <li><a class="get-a-quote" href="logout.meow">로그아웃</a></li>
           </ul>
         </nav>
         <!-- .navbar -->
@@ -117,12 +97,12 @@
       </div>
 
       <div class="text-area">
-        <h3 class="greeting stagger-item">박준성</h3>
+        <h3 class="greeting stagger-item"><p th:text="${user.getUserName()}"></p></h3>
         <div class="desc stagger-item" id="user_info_box">
           <div id="user_info">
             <p>
-              이름 : Meow@naver.com <br />
-              닉네임 : Meow_Admin<br />
+              이름 : <span th:text="${user.getUserId()}"></span><br />
+              닉네임 : <span th:text="${user.getNickName()}"></span><br />
             </p>
           </div>
         </div>
@@ -134,26 +114,79 @@
     
     <div class="list-group list_user">
       <span class="fw-bold fs-5 text-dark mb-3 mt-3" disabled>회원관리</span>
-      <a href="#" class="list-group-item list-group-item-action">회원 목록</a>
-      <a href="#" class="list-group-item list-group-item-action">게시글 관리</a>
-      <a href="#" class="list-group-item list-group-item-action">전체 메일 발송</a>
-      <a href="#" class="list-group-item list-group-item-action">탈퇴회원 관리</a>
-      <a href="#" class="list-group-item list-group-item-action">후원관리하기</a>
+      <a href="userlist.meow" class="list-group-item list-group-item-action">회원 목록</a>
+      <a href="postmanage.meow" class="list-group-item list-group-item-action">게시글 관리</a>
+      <a href="donatemanage.meow" class="list-group-item list-group-item-action">후원관리하기</a>
+      
+      
+      <a href="#" class="list-group-item list-group-item-action" data-toggle="modal"
+              data-target="#myModal">관리자생성하기</a>&nbsp;&nbsp;&nbsp;
+
+              <!--  어드민 등록 Modal -->
+        <div class="modal fade modal-center" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">ADMIN 생성</h4>
+              </div>
+              <div class="modal-body">
+                
+                <form action="createadminuser.meow" method="post" onsubmit="return ValidChecked();">
+                <div class="form-group">
+                  <label class="form-label mt-2">아이디*</label>
+                  <input type="text" class="form-control" id="sign_id" name="userId" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label mt-2">비번*</label>
+                  <input type="password" class="form-control" id="sign_id" name="userPassword" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label mt-2">비번확인*</label>
+                  <input type="text" class="form-control" id="sign_id" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label mt-2">이름*</label>
+                  <input type="text" class="form-control" id="sign_name" name="userName" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label mt-2">닉네임*</label>
+                  <input type="text" class="form-control" id="sign_nickname" name="nickName" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label mt-2">지역</label>
+                  <input type="text" class="form-control" id="sign_address" name="address" value="이젠아카데미" required>
+                </div>
+                <div class="form-group ">
+                  <label class="form-label mt-2">핸드폰*</label>
+                  <select class="form-select" id="sign_phone" name="phoneType">
+                    <option th:selected="${type}=='SKT'">SKT</option>
+                    <option th:selected="${type}=='LG U+'">LG U+</option>
+                    <option th:selected="${type}=='KT'">KT</option>
+                  </select>
+                  <input type="text" class="form-control " id="sign_ph" name="phoneNumber" required>
+                </div>
+
+                <div id=find_idpw>
+                  <button class="w-30 btn btn-lg btn-dark mt-4">등록</button><!--onclick="findID()"-->
+                </div>
+              </form>
+              </div>
+              <div class="modal-footer mt-3">
+                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
     </div>
       <div class="list-group list_admin">
         <span class="fw-bold fs-5 text-dark mb-3 mt-3" disabled>관리자메뉴</span>
         <a href="#" class="list-group-item list-group-item-action">관리자 채팅</a>
-        <a href="#" class="list-group-item list-group-item-action">후원사업변경</a>
-        <a href="#" class="list-group-item list-group-item-action">후원 사업게시</a>
-        <a href="#" class="list-group-item list-group-item-action">공지 글 작성</a>
-      </div>
-      <div class="list-group list_user">
-        <span class="fw-bold fs-5 text-dark mb-3 mt-3" disabled>회원관리</span>
-        <a href="#" class="list-group-item list-group-item-action">회원 목록</a>
-        <a href="#" class="list-group-item list-group-item-action">게시글 관리</a>
-        <a href="#" class="list-group-item list-group-item-action">전체 메일 발송</a>
-        <a href="#" class="list-group-item list-group-item-action">탈퇴회원 관리</a>
-        <a href="#" class="list-group-item list-group-item-action">후원관리하기</a>
+        <!--<a href="createdonateBS.meow" class="list-group-item list-group-item-action">후원 사업게시</a>
+        <a href="deletedonateBS.meow" class="list-group-item list-group-item-action">후원 사업삭제</a>--><!--비즈니스마스터-->
+        <a href="insertnotice.meow" class="list-group-item list-group-item-action">공지 글 작성</a>
       </div>
 
       
@@ -178,6 +211,6 @@
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="../js/template.js"></script>
+    <script src="../js/admin_my_page.js"></script>
   </body>
 </html>

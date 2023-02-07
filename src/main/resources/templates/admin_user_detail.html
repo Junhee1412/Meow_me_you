@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -119,15 +119,15 @@
           <tbody>
             <tr>
               <th scope="row">ID</th>
-              <td><p th:text="${user.getUserId()}"></p></td>
+              <td><span th:text="${user.getUserId()}"></span></td>
             </tr>
             <tr>
               <th scope="row">닉네임</th>
-              <td><p th:text="${user.getNickName()}"></p></td>
+              <td><span th:text="${user.getNickName()}"></span></td>
             </tr>
             <tr>
               <th scope="row">폰번호</th>
-              <td><p th:text="${user.getPhoneType()}"></p><p th:text="${user.getPhoneNumber()}"></p></td>
+              <td><span th:text="${user.getPhoneType()}"></span>&nbsp;&nbsp;<span th:text="${user.getPhoneNumber()}"></span></td>
             </tr>
           </tbody>
         </table>

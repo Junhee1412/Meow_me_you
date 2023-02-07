@@ -115,39 +115,36 @@
       </div>
   
       <div class="text-area">
-        <h3 class="greeting stagger-item"><p th:text="${user.getNickName()}"></p></h3>
+        <h3 class="greeting stagger-item"><span th:text="${user.getNickName()}"></span></h3>
         <div class="desc stagger-item" id="user_info_box">
           <div id="user_info">
             <table class="table">
               <tbody>
                 <tr>
                   <th scope="row">ID</th>
-                  <td><p th:text="${user.getUserId()}"></p></td>
+                  <td><span th:text="${user.getUserId()}"></span></td>
                 </tr>
                 <tr>
                   <th scope="row">이름</th>
-                  <td><p th:text="${user.getUserName()}"></p></td>
+                  <td><span th:text="${user.getUserName()}"></span></td>
                 </tr>
                 <tr>
                   <th scope="row">닉네임</th>
-                  <td><p th:text="${user.getNickName()}"></p></td>
+                  <td><span th:text="${user.getNickName()}"></span></td>
                 </tr>
                 <tr>
                   <th scope="row">핸드폰</th>
-                  <td><p th:text="${user.getPhoneNumber()}"></p></td>
+                  <td><span th:text="${user.getPhoneNumber()}"></span></td>
                 </tr>
                 <tr>
                   <th scope="row">소개</th>
-                  <td><p th:text="${user.getIntroduce()}"></p></td>
+                  <td><span th:text="${user.getIntroduce()}"></span></td>
                 </tr>
               </tbody>
             </table>
-
           </div>
         </div>
       </div>
-  
-
     </section>
     <!-- header - end -->
   
@@ -197,10 +194,10 @@
   
       <div class="text-center">
         <button class="w-30 btn btn-lg btn-dark mt-4" type="submit">
-          <a href="modifyUser.meow" style="text-decoration:none;">회원정보 변경하기</a>
+          <a class="text-white" href="modifyUser.meow" style="text-decoration:none;">회원정보 변경하기</a>
         </button>
         <button class="w-30 btn btn-lg btn-dark mt-4" type="submit">
-          <a href="deleteUser.meow" style="text-decoration:none;">탈퇴하기</a>
+          <a class="text-white" href="deleteUser.meow" style="text-decoration:none;">탈퇴하기</a>
         </button>
       </div>
     </section>

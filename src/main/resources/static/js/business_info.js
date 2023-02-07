@@ -277,9 +277,9 @@ var myChart = new Chart(petkeepctx, {
         label: "",
         data: [27.9, 28.6, 43.6],
         backgroundColor: [
-          "rgba(255, 99, 132, 0.6)",
-          "rgba(54, 162, 235, 0.6)",
-          "rgba(255, 205, 86, 0.6)"
+          "rgba(255, 99, 132, 0.5)",
+          "rgba(54, 162, 235, 0.5)",
+          "rgba(255, 205, 86, 0.5)"
         ],
         hoverBorderColor: [
           "rgba(255, 99, 132, 1)",

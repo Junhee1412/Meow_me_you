@@ -32,10 +32,11 @@ public class ReplyService {
         replyRepository.save(reply);
     }
 
-
-        @Transactional
-        public void replyDelete(Long replyNo) {
+    @Transactional
+    public void replyDelete(Long replyNo) {
             replyRepository.deleteById(replyNo);
         }
 
+    // 주희가 추가
+    public void deleteAllReplyByPostID(Long postNo){replyRepository.findAllByPostNo(postNo);}
 }

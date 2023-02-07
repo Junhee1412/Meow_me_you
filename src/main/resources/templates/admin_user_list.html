@@ -58,7 +58,7 @@
       type="text/css"
     />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="../css/post_list.css" rel="stylesheet" />
+    <link href="../css/admin_user_list.css" rel="stylesheet" />
   </head>
 
   <body id="page-top">
@@ -127,28 +127,25 @@
         <table class="table pad_4">
           <thead>
             <tr>
-              <th scope="col">회원번호</th>
+              <th class="text-center" scope="col">회원번호</th>
               <th scope="col">회원아이디</th>
-              <th scope="col">회원이름</th>
+              <th class="text-center" scope="col">회원이름</th>
               <th scope="col">닉네임</th>
-              <th scope="col">상세조회</th>
-              <th scope="col">삭제</th>
-
-  
+              <th class="text-center" scope="col">상세조회</th>
+              <th class="text-center" scope="col">삭제</th>
             </tr>
           </thead>
           <tbody>
             <tr th:each="userMaster: ${userList}">
-
-              <td th:text="${userMaster.getUserNo()}"></td>
+              <td class="text-center" th:text="${userMaster.getUserNo()}"></td>
               <td th:text="${userMaster.getUserId()}"></td>
-              <td th:text="${userMaster.getUserName()}"></td>
+              <td class="text-center" th:text="${userMaster.getUserName()}"></td>
               <td th:text="${userMaster.getNickName()}"></td>
-              <td>
-                <a th:href="@{|/userMaster/${userMaster.getUserNo()}|}">조회</a>
+              <td class="text-center">
+                <a class="btn btn-outline-dark" th:href="@{|/userDetail.meow?userNo=${userMaster.getUserNo()}|}">조회</a>
               </td>
-              <td>
-                <a th:href="@{|/userMaster/delete/${userMaster.getUserNo()}|}">삭제</a>
+              <td class="text-center">
+                <a class="btn btn-outline-danger" th:href="@{|/userDelet.meow?userNo=${userMaster.getUserNo()}|}">삭제</a>
               </td>
             </tr>
           </tbody>
@@ -161,10 +158,6 @@
             aria-describedby="button-addon2">
           <button class="btn btn-outline-dark" type="button" id="button-addon2">+</button>
           &nbsp;&nbsp;
-          <div>
-            <button type="button" class="btn btn-outline-dark">선택 삭제</button>
-            <button type="button" class="btn btn-outline-danger">전체 삭제</button>
-          </div>
         </div>
       </div>
   

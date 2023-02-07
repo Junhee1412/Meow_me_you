@@ -279,7 +279,6 @@ $('#resetPW_btn').click(function(){
       phoneNumber:resetphone
     },
     success:function(data){
-      console.log(resetid);
       if(data==='none'){
         $('#checkinfo').html('아이디가 존재하지않습니다.')
       }else if(data==='mismatch'){

@@ -69,12 +69,13 @@ public class CommunityMasterService {
 
 
 
-
+    // 유저번호로 게시글찾기
+    public Page<CommunityMaster> boardListByUserNO(Long userId, Pageable pageable){
+        return communityMasterRepository.findAllByUserNo(userId, pageable);
+    }
 
     // 게시글 리스트
-    public Page<CommunityMaster> boardList(Pageable pageable){
-        return communityMasterRepository.findAll(pageable);
-    }
+    public Page<CommunityMaster> boardList(Pageable pageable){return communityMasterRepository.findAll(pageable);}
 
     //특정 게시글 불러오기
     public CommunityMaster boardView(Long postNo){return communityMasterRepository.findById(postNo).get();

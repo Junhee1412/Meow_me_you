@@ -6,6 +6,7 @@ import com.ajd.meow.repository.donate.BankTransferRepository;
 import com.ajd.meow.repository.donate.CreditcardRepository;
 import com.ajd.meow.repository.donate.DonateRepository;
 import com.ajd.meow.service.donate.DonateService;
+import com.ajd.meow.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +26,8 @@ import java.util.Date;
 
 @Controller
 public class DonateController {
+    @Autowired
+    private UserService userService;
     @Autowired
     private DonateRepository donateRepository;
 
@@ -152,16 +155,24 @@ public class DonateController {
         return "spon_list";
     }
 
+    // 주희 수정 - 어드민이면 후원관리페이지로 이동하게 했음
     @GetMapping("/donatedelete.meow")
-    public String donateDelete(Long donateCode){
+    public String donateDelete(Long donateCode, HttpSession session){
         donateservice.deleteDonate(donateCode);
-        return "redirect:/donatelist.meow";
+        UserMaster user=userService.getUserMaster((UserMaster)session.getAttribute("user"));
+        if(user.getUserType().equals("ADMIN")){
+            return "redirect:/donatemanage.meow";
+        }else return "redirect:/donatelist.meow";
     }
 
+    // 주희 수정 - 어드민이면 후원관리페이지로 이동하게 했음
     @GetMapping("/donateconfirm.meow")
-    public String donateConfirm(Long donateCode) {
+    public String donateConfirm(Long donateCode, HttpSession session) {
         donateservice.confirmDonate(donateCode);
-        return "redirect:/donatelist.meow";
+        UserMaster user=userService.getUserMaster((UserMaster)session.getAttribute("user"));
+        if(user.getUserType().equals("ADMIN")){
+            return "redirect:/donatemanage.meow";
+        }else return "redirect:/donatelist.meow";
     }
 
 

@@ -2,17 +2,24 @@ package com.ajd.meow.controller.admin;
 
 
 import com.ajd.meow.entity.CommunityMaster;
+import com.ajd.meow.entity.DonateMaster;
 import com.ajd.meow.entity.UserMaster;
 import com.ajd.meow.repository.community.CommunityMasterRepository;
 import com.ajd.meow.repository.donate.DonateRepository;
 import com.ajd.meow.repository.user.UserRepository;
+import com.ajd.meow.service.donate.DonateService;
 import com.ajd.meow.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -31,6 +38,8 @@ public class AdminController {
     private CommunityMasterRepository communityMasterRepository;
     @Autowired
     private DonateRepository donateRepository;
+    @Autowired
+    private DonateService donateService;
 
     @GetMapping("admin.meow") // 어드민의 마이페이지로 이동
     public String adminmypage(HttpSession session, Model model){
@@ -107,15 +116,14 @@ public class AdminController {
         }
     }
 
-    @GetMapping("userMaster/{userNo}") // 해당 유저의 디테일 보기
-    public String userdetail(HttpSession session, Model model, @PathVariable Long userNo){
+    @GetMapping("userDetail.meow") // 해당 유저의 디테일 보기
+    public String userdetail(HttpSession session, Model model, Long userNo){
         if(session.getAttribute("user")==null){
             return "index";
         }else{
             UserMaster user=(UserMaster) session.getAttribute("user");
             if(user.getUserType().equals("ADMIN")){
                 if(userRepository.findById(userNo).isEmpty()){
-                    //model.addAttribute("err","해당유저가 존재하지않습니다.");
                     return "redirect:/userlist.meow";
                 }else{
                     UserMaster certainuser=userRepository.findById(userNo).get();
@@ -126,6 +134,12 @@ public class AdminController {
                 return "index_login";
             }
         }
+    }
+    @GetMapping("userDelet.meow")
+    @ResponseBody
+    public String deleteuserbyAdmin(HttpSession session, Model model, Long userNo){
+
+        return "redirect:/userlist.meow";
     }
 
     @GetMapping("{userNo}/postlist") // 해당 유저의 글 리스트
@@ -146,7 +160,7 @@ public class AdminController {
             }else{
                 return "index_login";
             }
-        }//return "post_list";
+        }
     }
 
     @GetMapping("postmanage.meow") // 모든 게시글 보기
@@ -172,14 +186,26 @@ public class AdminController {
     }
 
     @GetMapping("donatemanage.meow") // 모든 도네이트 보기
-    public String donatemanage(HttpSession session, Model model){
+    public String donatemanage(HttpSession session, Model model, @PageableDefault(page = 0,size = 10, sort = "donateCode", direction = Sort.Direction.DESC) Pageable pageable){
         if(session.getAttribute("user")==null){
             return "index";
         }else{
-            UserMaster user=(UserMaster)session.getAttribute("user");
+            UserMaster user=userService.getUserMaster((UserMaster)session.getAttribute("user"));
             if(user.getUserType().equals("ADMIN")){
-                // donateRepository.findAll(); // 모든 도네이트
-                return "admin_donate_list";
+                //List<DonateMaster> donateMaster=donateRepository.findAll(); // 모든 도네이트
+                Page<DonateMaster> donateMaster=donateService.donateList(pageable);
+
+                int nowPage = donateMaster.getPageable().getPageNumber()+1 ;
+                int startPage = Math.max(0 , 1);
+                int endPage = Math.min(nowPage + 10 , donateMaster.getTotalPages());
+
+                model.addAttribute("list",donateMaster);
+                model.addAttribute("nowPage", nowPage);
+                model.addAttribute("startPage", startPage);
+                model.addAttribute("endPage", endPage);
+                model.addAttribute("maxPage",10);
+
+                return "admin_spon_list";
             }else{
                 return "index_login";
             }

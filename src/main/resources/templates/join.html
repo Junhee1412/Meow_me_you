@@ -125,8 +125,8 @@
               data-target="#myModal">아이디찾기</a>&nbsp;&nbsp;&nbsp;
 
               <!--  아이디 찾기 Modal -->
-        <div class="modal fade modal-center" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-          <div class="modal-dialog" role="document">
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel">아이디 찾기</h4>
@@ -140,12 +140,14 @@
                 </div>
                 <div class="form-group">
                   <label class="form-label mt-2">핸드폰*</label>
-                  <select class="form-select findIdType" id="sign_phone" name="phoneType">
-                    <option selected>SKT</option>
-                    <option>LG U+</option>
-                    <option>KT</option>
-                  </select>
-                  <input type="text" class="form-control findIdPhone" id="sign_ph_find_id" name="phoneNumber" required>
+                  <div id="phone_input_box">
+                    <select class="form-select findIdType" id="sign_phone" name="phoneType">
+                      <option selected>SKT</option>
+                      <option>LG U+</option>
+                      <option>KT</option>
+                    </select>
+                    <input type="text" class="form-control findIdPhone" id="sign_ph_find_id" name="phoneNumber" required>
+                  </div>
                 </div>
 
                 <div id=find_idpw>
@@ -170,8 +172,8 @@
               data-target="#myModal1">비밀번호 찾기</a>&nbsp;&nbsp;&nbsp;
 
               <!--  비밀번호 찾기 Modal -->
-        <div class="modal fade modal-center" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-          <div class="modal-dialog" role="document">
+        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel">비밀번호 재설정하기</h4>
@@ -179,9 +181,11 @@
               <div class="modal-body">
  
                   <label class="form-label mt-2">아이디(이메일)*</label>
-                  <input type="email" class="form-control resetid" id="resetPW_id" required>
-                  <button type="submit" id="mail-Check-Btn">인증코드 받기</button>
-
+                  <div id="input_id_find_box">
+                    <input type="email" class="form-control resetid" id="resetPW_id" required>
+                    <button type="submit" class="btn btn-secondary btn-sm" id="mail-Check-Btn">인증코드 받기</button></input>
+                  </div>
+                  <label class="form-label mt-2">인증번호 입력*</label>
                 <input class="form-control mail-check-input" placeholder="인증번호 입력해주세요!" disabled="disabled" maxlength="10">
 
                   <span id="mail-check-warn"></span>
@@ -197,14 +201,16 @@
                   <label class="form-label mt-2">이름*</label>
                   <input type="text" class="form-control resetPWName" id="sign_name" required><!--name="userName"-->
                 </div>
-                <div class="form-group ">
+                <div class="form-group">
                   <label class="form-label mt-2">핸드폰*</label>
-                  <select class="form-select resetPWType" id="sign_phone"><!--name="phoneType"-->
-                    <option selected>SKT</option>
-                    <option>LG U+</option>
-                    <option>KT</option>
-                  </select>
-                  <input type="text" class="form-control resetPWPhone" id="sign_ph_reset_pw" required>
+                  <div id="phone_input_pw_box">
+                    <select class="form-select resetPWType" id="sign_phone"><!--name="phoneType"-->
+                      <option selected>SKT</option>
+                      <option>LG U+</option>
+                      <option>KT</option>
+                    </select>
+                    <input type="text" class="form-control resetPWPhone" id="sign_ph_reset_pw" required>
+                  </div>
                   <!--name="phoneNumber"-->
                 </div>
                 <div><span id="checkinfo"></span></div>

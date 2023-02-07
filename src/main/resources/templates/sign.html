@@ -116,28 +116,48 @@
             <img class="mb-4 martop_10" src="../img/logo/logo1.png" alt="" width="200" height="100" />
           </a>
         </div>
+        <div class="form-group">
         <label>아이디(email)*</label>
-        <input type="email" class="form-control" id="sign_id_email"/><!--name="userId"-->
-        <button type="submit" class="btn btn-warning" id="id-Check-Btn">중복확인</button>
-        <button type="submit" class="btn btn-warning" id="mail-Check-Btn" disabled>인증코드보내기</button>
-        <input class="form-control mail-check-input" placeholder="인증번호 입력해주세요!" disabled="disabled" maxlength="10">
-          </div>
+        <div class="mb-3" id="input_id_box">
+          <input type="email" class="form-control" id="sign_id_email"/><!--name="userId"-->
+          <button type="submit" class="btn btn-secondary" id="id-Check-Btn">중복확인</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>인증번호*</label>
+        <div class="mb-3"id="input_mail_check_box">
+          <input class="form-control mail-check-input" placeholder="인증번호 입력해주세요!" disabled="disabled" maxlength="10">
+          <button type="submit" class="btn btn-secondary" id="mail-Check-Btn" disabled>인증코드보내기</button>
+        </div>
+      </div>
             <span id="mail-check-warn"></span>
+
+        <div class="form-group">
+          <label>닉네임*</label>
+          <div class="mb-3"id="nickname_box">
+            <input type="text" class="form-control" id="userNickNameCheck" disabled>
+            <button type="submit" class="btn btn-secondary" id="nickName-Check-Btn" disabled>중복확인</button>
           </div>
-        <label>닉네임*</label>
-        <input type="text" class="form-control" id="userNickNameCheck" disabled>
-        <button type="submit" class="btn btn-warning" id="nickName-Check-Btn" disabled>중복확인</button>
-
-
+        </div>
 
         <form action="sign_success.meow" method="post" onsubmit="return ValidChecked();" enctype="multipart/form-data">
 
           <input type="hidden" id="userIdEmail" name="userId">
           <input type="hidden" id="sign_nick" name="nickName">
+          <div class="form-group">
 
           <label>프로필사진</label>
-          <input type="file" name="file">
-          <div class="form-group">
+
+          <div class="filebox">
+            <input class="form-control upload-name" placeholder="첨부파일">
+            <label class="btn btn-secondary" for="file">파일찾기</label> 
+            <input class="form-control" type="file" name="file" id="file">
+          </div>
+        </div>  
+          
+          
+          
+            <div class="form-group">
             <label class="form-label mt-2">이름*</label>
             <input type="text" class="form-control" id="sign_name" name="userName"/>
           </div>
@@ -148,9 +168,9 @@
           <div class="form-group has-success">
             <label class="form-label mt-2">비밀번호*</label>
             <input type="password" class="form-control" id="sign_pwd" name="userPassword"/>
+            <p class="text-muted">※ 비밀번호는 영문 대,소문자와 숫자, 특수기호가 적어도 1개 이상씩 포함된 8자 ~ 20자의 비밀번호여야 합니다.</p>
           </div>
-          <p style="font-size:8px;">※ 비밀번호는 영문 대,소문자와 숫자, 특수기호가 적어도 1개 이상씩 포함된 8자 ~ 20자의 비밀번호여야 합니다.</p>
-  
+          
           <div class="form-group has-danger">
             <label class="form-label mt-2" for="inputInvalid">비밀번호 재확인*</label>
             <input type="password" class="form-control" id="sign_pwd2"/>
@@ -174,13 +194,14 @@
             <label class="form-label mt-2">소개</label>
             <textarea type="text" class="form-control" id="introduce" name="introduce"></textarea>
           </div>
-          <div class="d-grid gap-2">
-            <button class="btn btn-dark btn-lg marbot_70" id="gotojoin_btn" type="submit" disabled>
+          <div class="d-grid gap-2 form-group">
+            <button class="btn btn-secondary btn-lg marbot_70" id="gotojoin_btn" type="submit" disabled>
               가입하기
             </button>
           </div>
         </form>
       </div>
+    </div>
     </section>
   <!-- section - end -->
 

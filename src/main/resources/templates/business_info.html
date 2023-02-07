@@ -118,13 +118,13 @@
 
      <!-- section -->
  
-    <section style="margin:150px 0;text-align: center;">
+    <section class="text-center">
       <div class="mb-5">
         <h1 class="mb-3">Meow, me, you</h1>
         <h5 class="mb-5">너와 나의 이야기가 펼쳐지는 곳</h5>
         <span class="fs-5">미유미유는 모든 생명의 존엄성이 지켜지는 세상</span><br>
         <span class="fs-5">외면받는 생명이 생기지 않는 세상을 만들고자 합니다.</span><br>
-        <span class="fs-5">차가운 거리에서 쓸쓸히 죽어가는 아이들의 울음소리와 </span><br>
+        <span class="fs-5">차가운 거리에서 쓸쓸히 죽어가는 아이들의 울음소리와</span><br>
         <span class="fs-5">여러분의 따뜻한 마음이 만나는 공간</span><br>
         <span class="fs-5">서로의 이야기가 펼쳐지는 공간을 만들고자 미유미유를 계획하게 되었습니다.</span><br><br><br><hr>
       </div>
@@ -133,12 +133,13 @@
         <h3 class="mt-5 mb-5">반려동물 양육 여부(%)</h3>
         <small class="text-muted">아래의 라벨을 클릭하시면 원하는 차트만 볼 수 있습니다.</small><br>
         <small class="text-muted">정확한 비율을 보고싶으시면 차트에 마우스 커서를 올려주세요</small><br>
-        <canvas id="PET_KEEP" style="margin:0 auto; height:70vh; width:70vw"></canvas>
+        <canvas id="PET_KEEP" style="margin: 0 auto; height: 60vh; width: 60vw;"></canvas>
         <small class="text-muted">자료 : 문화체육관광부</small><br>
-        <div style="margin:100px 0;">
-          <span class="fs-5">1인가구가 급증함에 따라</span><br>
-          <span class="fs-5">정서적 안정을 반려동물에게서 찾고 있는 사람들이 증가했습니다.</span><br>
-          <span class="fs-5">반려동물을 경험해본 사람은 대한민국 인구의 56.5%입니다.</span><br>
+        <div class="business_info_text_box">
+          <span class="fs-5">당신은 반려동물과 함께하나요?</span><br>
+          <span class="fs-5">1인 가구가 급증함에 따라 반려인구도 급증하는 추세입니다.</span><br>
+          <span class="fs-5">반려인구 1500만, 4가구 중 1가구는 반려동물을 키우는 시대입니다.</span><br>
+          <span class="fs-5 mark">그리고 오늘은 372마리의 반려동물이 유기동물이 되었습니다.</span><br>
         </div>
       </div>
       <hr>
@@ -146,12 +147,12 @@
       <div class="sa sa-up">
           <h3 class="mt-5 mb-5">필요하다고 생각하는 반려동물 관련 정책(%)</h3>
           <small class="text-muted">정확한 비율을 보고싶으시면 차트에 마우스 커서를 올려주세요</small><br>
-          <canvas id="PET_POLICY" style="margin:0 auto; height:70vh; width:70vw"></canvas>
+          <canvas id="PET_POLICY" style="margin: 0 auto; height: 50vh; width: 70vw;"></canvas>
           <small class="text-muted">자료 : 문화체육관광부</small><br>
-        <div style="margin:100px 0;">
+        <div class="business_info_text_box">
           <span class="fs-5">대부분의 선진국에서는 유기동물에 대한 처벌을</span><br>
           <span class="fs-5">아동학대 및 유기에 대한 처벌과 동일 시 합니다.</span><br>
-          <span class="fs-5">어쩌면 우리에게 가장 필요한 것은 성숙한 반려동물 문화가 아닐까요?</span><br>
+          <span class="fs-5">어쩌면 우리에게 가장 필요한 것은 <mark>성숙한 반려동물 문화</mark>가 아닐까요?</span><br>
         </div>
       </div>
     <hr>
@@ -159,41 +160,52 @@
         <h3 class="mt-5 mb-5">최근 5년간 국내 유기동물 보호형태 비율(%)</h3>
         <small class="text-muted">아래의 라벨을 클릭하시면 원하는 차트만 볼 수 있습니다.</small><br>
         <small class="text-muted">정확한 비율을 보고싶으시면 차트에 마우스 커서를 올려주세요</small><br>
-        <canvas id="ORG_ANM_PRTC_CHART" style="margin:0 auto; height:70vh; width:70vw"></canvas>
+        <canvas id="ORG_ANM_PRTC_CHART" style="margin: 0 auto; height: 60vh; width: 60vw;"></canvas>
         <small class="text-muted">자료 : 농림축산검역본부</small><br>
-        <div style="margin:100px 0;">
-          <span class="fs-5">유기동물은 보호소에 입소한 뒤 15일 안에 분양받거나 죽습니다.</span><br>
-          <span class="fs-5">아직도 길가에서 혹은 보호소에서 절반에 가까운 생명들이</span><br>
-          <span class="fs-5">쓸쓸하게 한 번 더 버림 받아 죽어나가고 있습니다.</span><br>
+        <div class="business_info_text_box">
+          <span class="fs-5">지난 10년간 보호소에 입소한 유기동물은 947,098마리</span><br>
+          <span class="fs-5">죽음을 맞이한 유기동물은 전체의 49.8%</span><br>          
+          <span class="fs-5">자연사가 아니라 교통사고, 백내장 등 질병에 고통스럽게 죽어가며 </span><br>
+          <span class="fs-5">인간의 죄책감을 덜기 위해 스스로 삶을 선택하지 못하고 안락사 당하고 있습니다.</span><br>
         </div>
       </div>
       <hr>
 
-
+      <div class="sa sa-up">
+        <h3 class="mt-5">자연사와 안락사의 비율</h3>
+        <div class="death_chart">
+          <img
+            src="../img/business_info_deathchart.jpg"
+            class="img-fluid img_deathchart" 
+            alt="커뮤니티설명"
+          />
+          <div>
+        <small class="text-muted">출처 : 2010.1. ~ 2020.6. 동물보호관리시스템, 마부작침 분석</small><br>
+        <div class="business_info_text_box">
+          <span class="fs-5">10년간 등록된 유기동물 947,098마리 중 <mark>특이사항으로 '질병'이 있는</mark></span><br>
+          <span class="fs-5">유기동물은 243,005마리, 4마리 중 1마리 꼴로 <mark>쉽게 질병을 확인할 수 있습니다.</mark></span><br>
+          <span class="fs-5">혼자서 살아갈 수 있는 능력이 부족한 고양이는 유기동물 중 가장 많은 비율로 죽음을 맞이하고</span><br><br>
+          <span class="fs-5">가족으로써 죽음을 맞이해 장례를 치르는 반려동물 뒤에는</span><br>
+          <span class="fs-5 mark">안락사한 의료폐기물과 질병사한 일반폐기물로 죽음을 맞이하는 유기동물이 있습니다.</span><br>
+        </div>
+      </div>
+      <hr>
 
         <div class="final_img sa sa-up">
+          <h1 class="mt-5 mb-5">미유미유가 꿈꾸는 미래</h1>
           <div class="bg-crop">
             <img
-              src="../img/business_info.png"
-              class="card-img rounded mx-auto d-block bg-menu"
+              src="../img/business_info.jpg"
+              class="img-fluid bg-menu front_img"
               alt="커뮤니티설명"
             />
-            <div class="card-img-overlay">
-             
-            </div>
           </div>
          </div>
-
-
+         <div class="btn_box">
+          <a type="button" href="/" class="btn btn-light btn-lg" id="foot_home_btn"><i class="bi bi-house-heart-fill"></i>미유미유 홈으로</a>
+        </div>  
     </section>
-    <div style="display:flex;margin-bottom:100px;">
-      <a type="button" href="/" class="btn btn-light btn-lg" id="foot_home_btn">미유미유 홈으로</a>
-      </div>
-
-
-
-
-
+    
 
   <!-- section - end -->
 

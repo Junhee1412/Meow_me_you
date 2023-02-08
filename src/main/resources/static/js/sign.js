@@ -321,6 +321,11 @@ function ValidChecked() {
     };
     return true;
 }
+
+$("#file").on('change',function(){
+  var fileName = $("#file").val();
+  $(".upload-name").val(fileName);
+});
 /*
 <script type="text/javascript" th:inline="javascript">
             let pass_word=document.getElementById('sign_pwd');

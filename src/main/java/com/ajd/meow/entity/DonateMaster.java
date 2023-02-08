@@ -3,7 +3,6 @@ package com.ajd.meow.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
@@ -57,9 +56,6 @@ public class DonateMaster {
 
     @Column(name="DNTN_WAYCODE")
     private String donateWayCode;
-
-    @Column(name="DNTN_RCPT_STATE")
-    private String donateReceiptState;
 
     @Column(name="DNTN_STATECODE")
     private String donateStateCode;

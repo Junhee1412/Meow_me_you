@@ -157,12 +157,3 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.appendChild(f);
       f.submit();
   }
-
-
-
-
-
-  function setA(donateBusinessCode){
-
-    localStorage.setItem('Cure','CURE_001');
-  }

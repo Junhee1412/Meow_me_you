@@ -1,10 +1,13 @@
 package com.ajd.meow.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 //논리명 커뮤니티글정보
@@ -23,8 +26,6 @@ public class CommunityMaster {
     private Long postNo;
 
     @Column(name="USER_NO")
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name="USER_NO")
     private Long userNo;
 
     @Column(name="CMNTY_ID")
@@ -47,7 +48,18 @@ public class CommunityMaster {
     @Column(name="VIEW_COUNT")
     private int viewCount;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn( name="user_no" ,insertable = false, updatable = false)
     private UserMaster userMaster;
+
+    @OrderBy("reply_no desc")
+    @OneToMany(mappedBy = "communityMaster",cascade = CascadeType.REMOVE,orphanRemoval = true)
+    @JsonIgnoreProperties({"communityMaster"})
+    private List<Reply> replyList;
+
+    @OneToMany(mappedBy = "communityMaster",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<CommunityImage> communityImageList = new ArrayList<>();
+
+
 }

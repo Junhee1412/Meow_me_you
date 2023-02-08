@@ -3,9 +3,12 @@ package com.ajd.meow.service.donate;
 import com.ajd.meow.entity.*;
 import com.ajd.meow.repository.donate.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DonateService implements DonateServiceImpl {
@@ -51,22 +54,43 @@ public class DonateService implements DonateServiceImpl {
         donateMaster.setDonateStateCode("DONATE_CPL");
     }
 
+
     //후원확정
-    public DonateMaster confirmDonate(Long donateCode){
-        return donateRepository.findById(donateCode).get();
+    public void confirmDonate(Long donateCode){
+        Optional<DonateMaster> donateMaster = donateRepository.findById(donateCode);
+        donateMaster.get().setDonateStateCode("DONATE_CNFRM");
+        donateRepository.save(donateMaster.get());
     }
 
     //후원취소
-    public DonateMaster cancelDonate(Long donateCode){
+    public void deleteDonate(Long donateCode){
+
+        String donateWayCode = donateRepository.findById(donateCode).get().getDonateWayCode();
+
+        switch(donateWayCode) {
+            case "BANK":
+                bankTransferRepository.deleteById(donateCode);
+                break;
+            case "CRCRD":
+                creditcardRepository.deleteById(donateCode);
+                break;
+            case "ACNT":
+                accountRepository.deleteById(donateCode);
+                break;
+        }
+        donateRepository.deleteById(donateCode);
+    }
+    // 게시글 리스트
+    public Page<DonateMaster> donateList(Pageable pageable){
+        return donateRepository.findAll(pageable);
+    }
+    // 특정 후원 기부금영수증(상세보기)
+    public DonateMaster donateReceipt(Long donateCode){
         return donateRepository.findById(donateCode).get();
     }
-
-    //MyPage 후원내역 보기
-    public List<DonateMaster> donateMyView(Long UserNo){ return donateRepository.findByUserNo(UserNo); }
 
     //관리자가 후원내역 보기
     public List<DonateMaster> donateList(){
         return donateRepository.findAll();
     }
-
 }

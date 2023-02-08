@@ -11686,3 +11686,20 @@ footer{
 .card-title{
   margin-top: 100px;
 }
+
+#donateCode{
+    display:hidden;
+}
+
+.page-item.disabled .page-link {
+  color: #fff;
+  pointer-events: none;
+  background-color: #5c636a;
+  border-color: #dee2e6;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="http://mintable1.cafe24.com/Meow_me_you_front/html/"
+    />
+    <meta property="og:title" content="미유미유" />
+    <meta property="og:description" content="너와 나의 이야기가 펼쳐지는 곳" />
+   <link href="../css/bootstrap-icons.css" rel="stylesheet">
+    <meta
+      property="og:image"
+      content="http://mintable1.cafe24.com/Meow_me_you_front/img/kakao_preview.jpg"
+    />
+    <meta
+      property="og:site_name"
+      content="유기묘 커뮤니티에 오신걸 환영합니다!"
+    />
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+    crossorigin="anonymous"
+  />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+  
+    <link
+      rel="icon"
+      href="../img/favicon/favicon-remove-bg.ico"
+      type="image/x-icon"
+      sizes="16x16"
+    />
+    <title>커뮤니티 글 목록</title>
+    <!-- Font Awesome icons (free version)-->
+    <script
+      src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Simple line icons-->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="../css/parcel_review_community.css" rel="stylesheet" />
+  </head>
+
+  <body id="page-top">
+    <!-- Navigation-->
+    <header id="header" class="header d-flex align-items-center fixed-top">
+      <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+  
+       
+          <!-- Uncomment the line below if you also wish to use an image logo -->
+          <!-- <img src="assets/img/logo.png" alt=""> -->
+          <a class="logo d-flex align-items-center" href="/"><img alt="Brand" src="../img/logo/logo4.png"></a>
+        </a>
+  
+        <i class="mobile-nav-toggle mobile-nav-show bi bi-list "></i>
+        <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x "></i>
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li class="dropdown"><a href="#"><span>Meow me, you</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+              <ul>
+                <li><a href="#">사업소개</a></li>
+                <li><a href="#">후원내역</a></li>
+              </ul>
+            </li>
+            <li><a href="#">후원하기</a></li>
+            <li class="dropdown"><a href="#"><span>물품거래</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+              <ul>
+                <li><a href="#">무료 나눔</a></li>
+                <li><a href="#">중고 거래</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+              <ul>
+                <li><a href="#" th:href="@{/board/list}">분양하기</a></li>
+                <li><a href="#">분양후기</a></li>
+                <li><a href="#">캣스타그램</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="#"><span>마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+              <ul>
+                <li><a href="#">내 글 모아보기</a></li>
+                <li><a href="#">내가 쓴 댓글 모아보기</a></li>
+                <li><a href="#">좋아요 목록 보기</a></li>
+                <li><a href="#">내 후원 목록보기</a></li>
+                <li><a href="#">회원정보 수정하기</a></li>
+              </ul>
+            </li>
+            <li><a class="get-a-quote" href="#">로그아웃</a></li>
+          </ul>
+        </nav>
+        <!-- .navbar -->
+  
+      </div>
+    </header><!-- End Header -->
+
+     <!-- section -->
+     <div class="header-card">
+      <div class="card bg-crop">
+        <img
+          src="../img/parcel_review_menu.jpg"
+          class="card-img rounded mx-auto d-block bg-menu"
+          alt="커뮤니티설명"
+        />
+        <div class="card-img-overlay">
+          <h5 class="card-title text-dark text-center fs-1">
+            분양하기 커뮤니티
+          </h5>
+          <p class="card-text text-dark text-center fs-3">
+            고양이를 분양을 하는 곳입니다. 새로운 가족을 찾아주세요~
+          </p>
+        </div>
+      </div>
+     </div>
+    <!-- 전체 글 보기 드롭다운 메뉴 -->
+      <div class="btn-group position-absolute top_btn">
+        <button
+          type="button"
+          class="btn btn-secondary dropdown-toggle fs-6"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          전체 글 보기
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item fs-6" href="#" aria-current="true"
+              >전체 글 보기</a
+            >
+          </li>
+          <li><a class="dropdown-item fs-6" href="#">분양 중인 고양이</a></li>
+          <li>
+            <a class="dropdown-item fs-6" href="#">분양이 종료된 고양이</a>
+          </li>
+        </ul>
+      </div>
+
+    <!-- 커뮤니티 첫번째 줄 444 -> 3333 -> 2*6 으로 줄어듬  -->
+    <section class="py-5">>
+      <div class="container px-4 px-lg-5 mt-5">
+        <div
+          class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
+        >
+          <div class="col mb-5" th:each="communityMaster : ${list}">
+            <div class="card h-100">
+              <!--  badge-->
+              <div class="badge bg-warning text-dark position-absolute fs-6">
+                분양 중
+              </div>
+              <!-- 분양후기 이미지 -->
+              <img
+                class="card-img-top"
+                th:src="@{/files/alan-veas-A5igs1vWQJU-unsplash.jpg}"
+                alt="..."
+              />
+              <!-- 분양후기 상세내용들 -->
+              <div class="card-body p-4">
+                <div class="text-center">
+                  <!-- 글 제목 -->
+                  <h5 class="fw-bolder" th:text="${communityMaster.subject}">길에서 만난 천사 미유</h5>
+                </div>
+              </div>
+              <!-- post actions-->
+              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                  <a class="btn btn-outline-dark mt-auto" th:href="@{/board/view(postNo=${communityMaster.postNo})}"
+                    >자세히 보기</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+    </section>
+
+    <a
+            type="button" style="text-align: center;"
+            class="btn btn-secondary  fs-5 right_18per position-absolute"
+            th:href="@{/board/write}">
+      글 쓰기
+    </a>
+
+
+
+    <!-- 페이지 -->
+    <nav class="marbot_100" aria-label="Page navigation example" >
+      <ul class="pagination">
+        <li class="page-item" th:classappend="${1 == nowPage} ? 'disabled'">
+          <a class="page-link" href="#" aria-label="Previous" th:href="@{/board/list(page=${startPage-1})}">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item" th:classappend="${1 == nowPage} ? 'disabled'">
+          <a class="page-link" href="#" aria-label="Previous" th:href="@{/board/list(page=${nowPage-2})}">
+            <span aria-hidden="true">&lt;</span>
+          </a>
+        </li>
+
+        <li class="page-item" th:classappend="${i == nowPage} ? 'disabled'" th:each="i : ${#numbers.sequence(startPage, endPage)}">
+          <a class="page-link" href="#"  th:href="@{/board/list(page=${i - 1})}" th:text="${i}">1</a></li>
+
+        <li class="page-item" th:classappend="${endPage == nowPage} ? 'disabled'">
+          <a class="page-link" href="#" aria-label="Next"  th:href="@{/board/list(page=${nowPage})}">
+            <span aria-hidden="true">&gt;</span>
+          </a>
+        <li class="page-item" th:classappend="${endPage == nowPage} ? 'disabled'">
+          <a class="page-link" href="#" aria-label="Next"  th:href="@{/board/list(page=${endPage-1})}">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  <!-- section - end -->
+
+   
+   
+
+    <!-- Footer-->
+    <footer class="py-5 bg-dark">
+      <div class="container px-4">
+        <p class="m-0 text-center text-white">
+          Copyright &copy; Your Website 2022
+        </p>
+      </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top"
+      ><i class="fas fa-angle-up"></i
+    ></a>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="../js/template.js"></script>
+  </body>
+</html>

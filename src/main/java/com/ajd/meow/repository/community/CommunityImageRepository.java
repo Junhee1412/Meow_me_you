@@ -13,6 +13,7 @@ public interface CommunityImageRepository extends JpaRepository<CommunityImage, 
 
     CommunityImage findByPostNo(Long postNo);
 
+    List<CommunityImage> findAllByPostNo(Long postNo);
 
-
+    void deleteAllByPostNo(Long postNo);
 }

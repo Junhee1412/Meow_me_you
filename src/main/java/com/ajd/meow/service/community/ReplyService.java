@@ -7,6 +7,8 @@ import com.ajd.meow.repository.community.CommunityMasterRepository;
 import com.ajd.meow.repository.community.ReplyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
@@ -28,15 +30,15 @@ public class ReplyService {
         reply.setUserMaster(userMaster);
         reply.setCommunityMaster(communityMaster);
 
-
         replyRepository.save(reply);
     }
 
     @Transactional
     public void replyDelete(Long replyNo) {
-            replyRepository.deleteById(replyNo);
-        }
+        replyRepository.deleteById(replyNo);
+    }
 
-    // 주희가 추가
-    public void deleteAllReplyByPostID(Long postNo){replyRepository.findAllByPostNo(postNo);}
+    public Page<Reply> getAllReplyByUserNo(Long userNo, Pageable pageable){
+        return replyRepository.findAllByUserNo(userNo, pageable);
+    }
 }

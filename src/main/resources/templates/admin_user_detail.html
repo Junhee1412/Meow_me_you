@@ -136,7 +136,7 @@
     <section id="admin_btn_group">
       <div class="list-group list_user">
         <span class="fw-bold fs-5 text-dark mb-3 mt-3" disabled>회원</span>
-        <a href="@{|/${userMaster.getUserNo()}}" class="list-group-item list-group-item-action">게시글보기</a>
+        <a th:href="@{/userAllPost.meow?(userNo=${user.getUserNo()})}" class="list-group-item list-group-item-action">게시글보기</a>
         <a href="#" class="list-group-item list-group-item-action">후원내역보기</a>
         <a href="#" class="list-group-item list-group-item-action">댓글보기</a>
       </div>

@@ -8,6 +8,9 @@ import java.util.List;
 
 @Repository
 public interface DonateRepository extends JpaRepository<DonateMaster, Long> {
-    List<DonateMaster> findByUserNo(Long UserNo);
+    //List<DonateMaster> findByUserNo(Long UserNo);
+    List<DonateMaster> findAllByUserNo(Long userNo);
+    boolean existsByUserNo(Long userNo);
+    void deleteAllByUserNo(Long userNo);
 
 }

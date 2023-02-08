@@ -133,14 +133,15 @@
               <th scope="col">조회 수</th>
               <!--<th scope="col">댓글 수</th>
               <th scope="col">좋아요 수</th>-->
+              <th scope="col">작성자</th>
               <th scope="col">작성일자</th>
   
             </tr>
           </thead>
           <tbody>
-            <tr th:each="postMaster: ${postList}">
+            <tr th:each="postMaster: ${replies}">
               <td th:text="${postMaster.getPostNo()}">번호</td>
-              <td th:switch="${postMaster.getCommunityId()}">
+              <td th:switch="${postMaster.getCommunityMaster().getCommunityId()}">
                 <span th:case="'ADP_ACT'">분양하기</span>
                 <span th:case="'ADP_REV'">분양후기</span>
                 <span th:case="'CAT_STR'">캣스타그램</span>
@@ -148,11 +149,12 @@
                 <span th:case="'FRE_SEL'">무료나눔</span>
                 <span th:case="'USD_TRN'">중고거래</span>
               </td>
-              <td colspan="3"><a th:href="@{/board/view?(postNo=${postMaster.postNo})}"><span th:text="${postMaster.getSubject()}"></span></a></td>
-              <td th:text="${postMaster.getViewCount()}">조회수</td>
-              <!--<td th:text="${postMaster.getViewCount()}">댓글수</td>
-              <td th:text="${postMaster.getViewCount()}">좋아요수</td>-->
-              <td th:text="${postMaster.getCreatePostDate().toString().replace('T','  ')}">작성일</td>
+              <td colspan="3"><a th:href="@{/board/view?(postNo=${postMaster.postNo})}"><span th:text="${postMaster.getCommunityMaster().getSubject()}"></span></a></td>
+              <td th:text="${postMaster.getCommunityMaster().getViewCount()}">조회수</td>
+              <!--<td th:text="${postMaster.getCommunityMaster().getViewCount()}">댓글수</td>
+              <td th:text="${postMaster.getCommunityMaster().getViewCount()}">좋아요수</td>-->
+              <td th:text="${postMaster.getCommunityMaster().getUserMaster().getNickName()}">작성자</td>
+              <td th:text="${postMaster.getCommunityMaster().getCreatePostDate().toString().replace('T','  ')}">작성일</td>
             </tr>
           </tbody>
         </table>

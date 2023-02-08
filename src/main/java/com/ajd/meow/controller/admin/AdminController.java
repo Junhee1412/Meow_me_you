@@ -7,6 +7,7 @@ import com.ajd.meow.entity.UserMaster;
 import com.ajd.meow.repository.community.CommunityMasterRepository;
 import com.ajd.meow.repository.donate.DonateRepository;
 import com.ajd.meow.repository.user.UserRepository;
+import com.ajd.meow.service.community.CommunityMasterService;
 import com.ajd.meow.service.donate.DonateService;
 import com.ajd.meow.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,39 +41,41 @@ public class AdminController {
     private DonateRepository donateRepository;
     @Autowired
     private DonateService donateService;
+    @Autowired
+    private CommunityMasterService communityMasterService;
 
     @GetMapping("admin.meow") // 어드민의 마이페이지로 이동
     public String adminmypage(HttpSession session, Model model){
         if(session.getAttribute("user")==null){
-            return "index"; // 로그인안된 상태면 걍 index로 이동
+            return "redirect:/"; // 로그인안된 상태면 걍 index로 이동
         }else{
             UserMaster user=(UserMaster)session.getAttribute("user");
             model.addAttribute("user",user);
             if(user.getUserType().equals("ADMIN")){
                 return "admin_my_page"; // 어드민 마이페이지로 이동
             }else{
-                return "my_page"; // 유저 마이페이지로 이동?
+                return "redirect:/my.meow"; // 유저 마이페이지로 이동?
             }
         }
     }
     @GetMapping("modifyadmin.meow") // 어드민 수정 폼
     public String modidyadminform(HttpSession session, Model model){
         if(session.getAttribute("user")==null){
-            return "index";
+            return "redirect:/";
         }else{
             UserMaster user=(UserMaster)session.getAttribute("user");
             model.addAttribute("user",user);
             if(user.getUserType().equals("ADMIN")){
                 return "admin_mypage_modify"; // 어드민 수정 페이지
             }else{
-                return "my_page"; // 유저 마이페이지로 이동
+                return "redirect:/my.meow"; // 유저 마이페이지로 이동
             }
         }
     }
     @PostMapping("modifyAdmin.meow") // 어드민 수정
     public String modidyadmin(UserMaster userMaster, HttpSession session, Model model, MultipartFile file) throws Exception{
         if(session.getAttribute("user")==null){
-            return "index";
+            return "redirect:/";
         }else{
             userService.updateMember(userMaster, file);
             Optional<UserMaster> userMM=userRepository.findByUserName(userMaster.getUserName());
@@ -80,14 +83,14 @@ public class AdminController {
             if(userMM.get().getUserType().equals("ADMIN")){
                 return "admin_my_page";
             }else{
-                return "my_page"; // 유저 마이페이지로 이동
+                return "redirect:/my.meow"; // 유저 마이페이지로 이동
             }
         }
     }
-    @PostMapping("createadminuser.meow") // 관리자 생성
+    @PostMapping("createadminuser.meow") // 관리자 생성 - 잘 되는지 확인
     public String createadminuserform(HttpSession session, Model model, UserMaster users){
         if(session.getAttribute("user")==null){
-            return "index";
+            return "redirect:/";
         }else{
             UserMaster userMaster=(UserMaster)session.getAttribute("user");
             if(userMaster.getUserType().equals("ADMIN")){
@@ -95,14 +98,14 @@ public class AdminController {
                 users.setUserJoinDate(LocalDateTime.now());
                 userRepository.save(users);
                 return "redirect:/admin.meow";
-            }else{return "my_page";}
+            }else{return "redirect:/my.meow";}
         }
     }
 
     @GetMapping("userlist.meow") // 유저리스트 보기
     public String userlist(HttpSession session, Model model){
         if(session.getAttribute("user")==null){
-            return "index";
+            return "redirect:/";
         }else{
             UserMaster user=(UserMaster)session.getAttribute("user");
             //model.addAttribute("user",user);
@@ -124,7 +127,7 @@ public class AdminController {
             UserMaster user=(UserMaster) session.getAttribute("user");
             if(user.getUserType().equals("ADMIN")){
                 if(userRepository.findById(userNo).isEmpty()){
-                    return "redirect:/userlist.meow";
+                    return "redirect:/userlist.meow"; // 없는 유저번호일 경우 이동
                 }else{
                     UserMaster certainuser=userRepository.findById(userNo).get();
                     model.addAttribute("user",certainuser);
@@ -135,50 +138,74 @@ public class AdminController {
             }
         }
     }
-    @GetMapping("userDelet.meow")
-    @ResponseBody
+    @GetMapping("userDelet.meow") // 유저 삭제 - 이거 얼러트 경고창 띄워야함! admin_user_list.js 삭제버튼 누르면 경고창 누르고 확인 취소 버튼 나오게
     public String deleteuserbyAdmin(HttpSession session, Model model, Long userNo){
-
-        return "redirect:/userlist.meow";
-    }
-
-    @GetMapping("{userNo}/postlist") // 해당 유저의 글 리스트
-    public String userpostlist(HttpSession session, @PathVariable Long userNo, Model model){
         if(session.getAttribute("user")==null){
             return "index";
+        }else{
+            if(userService.getUserMaster(((UserMaster)session.getAttribute("user"))).getUserType().equals("ADMIN")){
+                userService.deleteMember(userService.getUser(userNo));
+                return "redirect:/userlist.meow";
+            }else{
+                return "redirect:/my.meow";
+            }
+        }
+    }
+
+    @GetMapping("userAllPost.meow") // 해당 유저의 글 리스트
+    public String userpostlist(HttpSession session, Long userNo, Model model, @PageableDefault(page = 0,size = 10, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable){
+        if(session.getAttribute("user")==null){
+            return "redirect:/index";
         }else{
             UserMaster user=(UserMaster) session.getAttribute("user");
             if(user.getUserType().equals("ADMIN")){
                 if(userRepository.findById(userNo).isEmpty()){
-                    model.addAttribute("err","해당유저가 존재하지않습니다.");
-                    return "redirect:/";
+                    //model.addAttribute("err","해당유저가 존재하지않습니다.");
+                    return "redirect:/userlist.meow";
                 }else{
-                    List<CommunityMaster> com=communityMasterRepository.findAllById(Collections.singleton(userNo));
-                    model.addAttribute("postList",com);
-                    return "post_list";
+                    Page<CommunityMaster> boardListFindByUserNO= communityMasterService.boardListByUserNO(userNo, pageable);
+
+                    int nowPage = boardListFindByUserNO.getPageable().getPageNumber()+1 ;
+                    int startPage = Math.max(0 , 1);
+                    int endPage = Math.min(nowPage + 10 , boardListFindByUserNO.getTotalPages());
+
+                    model.addAttribute("nowPage", nowPage);
+                    model.addAttribute("startPage", startPage);
+                    model.addAttribute("endPage", endPage);
+                    model.addAttribute("maxPage",10);
+
+                    model.addAttribute("userNickName",userService.getUser(userNo).getNickName());
+                    model.addAttribute("postList",boardListFindByUserNO);
+                    return "user_post_list";
                 }
             }else{
-                return "index_login";
+                return "redirect:/";
             }
         }
     }
 
     @GetMapping("postmanage.meow") // 모든 게시글 보기
-    public String postmanage(HttpSession session, Model model){
+    public String postmanage(HttpSession session, Model model, @PageableDefault(page = 0,size = 10, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable){
         if(session.getAttribute("user")==null){
             return "index";
         }else{
-            UserMaster user=(UserMaster)session.getAttribute("user");
+            UserMaster user=userService.getUserMaster((UserMaster)session.getAttribute("user"));
             //model.addAttribute("user",user);
             if(user.getUserType().equals("ADMIN")){
-                List<Optional<UserMaster>> userINFO = null;
-                List<CommunityMaster> everyPost=communityMasterRepository.findAll();
-                for(CommunityMaster com:everyPost){
-                    userINFO= Collections.singletonList(userRepository.findById(com.getUserNo()));
-                }
+                Page<CommunityMaster> everyPost=communityMasterService.getEveryPost(pageable);
+
+                int nowPage = everyPost.getPageable().getPageNumber()+1 ;
+                int startPage = Math.max(0 , 1);
+                int endPage = Math.min(nowPage + 10 , everyPost.getTotalPages());
+
+                model.addAttribute("nowPage", nowPage);
+                model.addAttribute("startPage", startPage);
+                model.addAttribute("endPage", endPage);
+                model.addAttribute("maxPage",10);
+
                 model.addAttribute("postList",everyPost);
-                model.addAttribute("postUser",userINFO);
-                return "admin_post_list"; // 어드민 마이페이지로 이동
+                //return "admin_post_list"; // 어드민 마이페이지로 이동
+                return "user_post_list";
             }else{
                 return "index_login"; // 유저 마이페이지로 이동?
             }
@@ -222,12 +249,14 @@ public class AdminController {
     public String deletedonateBSform(HttpSession session, Model model){
         return "시간이 있으면 합시다!"; // ^ㅁ^
     }
+
+
     @GetMapping("insertnotice.meow")//공지적는 폼으로 이동
     public String insertnoticeform(HttpSession session, Model model){
         if(session.getAttribute("user")==null){
             return "index";
         }else{
-            UserMaster userMaster=(UserMaster)session.getAttribute("user");
+            UserMaster userMaster=userService.getUserMaster((UserMaster)session.getAttribute("user"));
             //model.addAttribute("user",userMaster);
             model.addAttribute("adminNo",userMaster.getUserNo());
             return "admin_post_insert";
@@ -238,7 +267,7 @@ public class AdminController {
         if(session.getAttribute("user")==null){
             return "index";
         }else{
-            UserMaster userMaster=(UserMaster)session.getAttribute("user");
+            UserMaster userMaster=userService.getUserMaster((UserMaster)session.getAttribute("user"));
             model.addAttribute("user",userMaster);
             com.setCreatePostDate(LocalDateTime.now());
             communityMasterRepository.save(com);

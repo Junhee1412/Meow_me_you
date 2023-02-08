@@ -73,6 +73,9 @@ public class CommunityMasterService {
     public Page<CommunityMaster> boardListByUserNO(Long userId, Pageable pageable){
         return communityMasterRepository.findAllByUserNo(userId, pageable);
     }
+    public Page<CommunityMaster> getEveryPost(Pageable pageable){
+        return communityMasterRepository.findAll(pageable);
+    }
 
     // 게시글 리스트
     public Page<CommunityMaster> boardList(Pageable pageable){return communityMasterRepository.findAll(pageable);}

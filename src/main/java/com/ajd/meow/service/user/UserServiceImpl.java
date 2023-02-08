@@ -1,13 +1,20 @@
 package com.ajd.meow.service.user;
 
+import com.ajd.meow.entity.CommunityMaster;
+import com.ajd.meow.entity.DonateMaster;
 import com.ajd.meow.entity.UserMaster;
+import com.ajd.meow.repository.community.*;
+import com.ajd.meow.repository.donate.DonateRepository;
 import com.ajd.meow.repository.user.UserRepository;
+import com.ajd.meow.service.donate.DonateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -16,6 +23,20 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private CommunityLikeRepository communityLikeRepository;
+    @Autowired
+    private ReplyRepository replyRepository;
+    @Autowired
+    private CommunityImageRepository communityImageRepository;
+    @Autowired
+    private CommunityMasterRepository communityMasterRepository;
+    @Autowired
+    SecondHandTradeRepository secondHandTradeRepository;
+    @Autowired
+    private DonateRepository donateRepository;
+    @Autowired
+    private DonateService donateService;
 
     @Override
     public void insertMember(UserMaster user, MultipartFile file) throws Exception {
@@ -46,7 +67,7 @@ public class UserServiceImpl implements UserService{
         File saveFile = new File(imgPath, fileName);
         file.transferTo(saveFile);
 
-        Optional<UserMaster> useruser=userRepository.findByUserId(user.getUserId());
+        Optional<UserMaster> useruser=userRepository.findByNickName(user.getNickName());
         useruser.get().setNickName(user.getNickName());
         useruser.get().setAddress(user.getAddress());
         useruser.get().setPhoneType(user.getPhoneType());
@@ -67,6 +88,36 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void deleteMember(UserMaster user) {
+        // 도네이트 지우기
+        if(donateRepository.existsByUserNo(user.getUserNo())){
+            for(DonateMaster donate:donateRepository.findAllByUserNo(user.getUserNo())){
+                donateService.deleteDonate(donate.getDonateCode());
+            }
+        }
+        // 커뮤니티 지우기
+        if(communityMasterRepository.existsByUserNo(user.getUserNo())){
+            for(CommunityMaster com:communityMasterRepository.findAllByUserNo(user.getUserNo())){
+
+                // 좋아요 삭제
+                if(communityLikeRepository.existsById(com.getPostNo())){
+                    communityLikeRepository.deleteAllById(Collections.singleton(com.getPostNo()));
+                }
+                // 이미지 삭제
+                if(communityImageRepository.existsById(com.getPostNo())){
+                    communityImageRepository.deleteAllByPostNo(com.getPostNo());
+                }
+                // 중고거래 삭제
+                if(com.getCommunityId().equals("USD_TRN")){
+                    secondHandTradeRepository.deleteById(com.getPostNo());
+                }
+                // 덧글 삭제
+                if(replyRepository.existsByPostNo(com.getPostNo())){
+                    replyRepository.deleteAllByPostNo(com.getPostNo());
+                }
+
+            } // for문 end
+        } // 커뮤니티 지우기 end
+        // 유저 지우기
         userRepository.deleteById(user.getUserNo());
     }
 
@@ -83,5 +134,9 @@ public class UserServiceImpl implements UserService{
         else {return null;}*/
         if(findUser.isPresent()){return findUser.get();}
         else {return null;}
+    }
+    @Override
+    public UserMaster getUser(Long userNo){
+        return userRepository.findById(userNo).get();
     }
 }

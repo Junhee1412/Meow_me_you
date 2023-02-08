@@ -99,16 +99,23 @@
     <section>
       <div class="container py-4">
 
-        <form th:action="modifyAdmin.meow" method="post">
+        <form th:action="modifyAdmin.meow" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label>프로필사진</label>
+            <div class="filebox">
+              <input class="form-control" type="file" name="file" id="file">
+            </div>
+          </div>
           <div class="form-group">
             <label class="form-label mt-1">이름</label>
-            <input type="text" class="form-control" id="sign_nick" name="userName" th:value="${user.getUserName()}" disabled>
-            <input type="hidden" class="form-control" id="sign_tel" name="userName" th:value="${user.getUserName()}">
+            <input type="text" class="form-control" id="sign_name" name="userName" th:value="${user.getUserName()}" readonly>
+            <!--<input type="hidden" class="form-control" id="sign_name" name="userName" th:value="${user.getUserName()}">-->
           </div>
   
           <div class="form-group">
             <label class="form-label mt-1">닉네임</label>
-            <input type="text" class="form-control" id="sign_nick" name="nickName" th:value="${user.getNickName()}" required>
+            <input type="text" class="form-control" id="sign_nick" name="nickName" th:value="${user.getNickName()}" readonly>
+            <!--<input type="hidden" class="form-control" id="sign_nick" name="nickName" th:value="${user.getNickName()}">-->
           </div>
           <div class="form-group">
             <label class="form-label mt-2">지역</label>

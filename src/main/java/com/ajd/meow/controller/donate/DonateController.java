@@ -65,7 +65,6 @@ public class DonateController {
                          BankTransfer bankTransfer, CreditcardPayment creditcardPayment, AccountTransfer accountTransfer,
                          RedirectAttributes redirectAttributes, Model model){
 
-        //신용카드 한도초과, 계좌이체 잔액부족일 경우는 결제 API를 구현하지 않을 예정이기 때문에 주석으로 코드만 작성
         UserMaster loginUser=(UserMaster)session.getAttribute("user");
         model.addAttribute("user",loginUser);
 
@@ -86,14 +85,12 @@ public class DonateController {
         donateMaster.setBirthDate(sqlDate);
         donateMaster.setDonateDate(java.sql.Date.valueOf(LocalDate.now()));
 
-
         donateservice.createDonate(donateMaster);
 
         switch(donateMaster.getDonateWayCode()) {
             case "BANK":
                 donateservice.updateDonateBankStateCode(donateMaster);
                 donateservice.createDonate(donateMaster);
-
                 bankTransfer.setDonateCode(donateMaster.getDonateCode());
                 bankTransfer.setUserNo(donateMaster.getUserNo());
                 donateservice.bankTransferDonate(bankTransfer);
@@ -101,28 +98,18 @@ public class DonateController {
 
             case "CRCRD":
                 donateservice.updateDonateCreditStateCode(donateMaster);
-//                if(한도초과일 시){
-//                donateMaster.setDonateStateCode("LIMIT_EXCDD");
-//                donateMaster.setDonateStateCode("DONATE_CPL");
                 donateservice.createDonate(donateMaster);
-
                 creditcardPayment.setDonateCode(donateMaster.getDonateCode());
                 creditcardPayment.setUserNo(donateMaster.getUserNo());
                 donateservice.creditcardDonate(creditcardPayment);
-
                 break;
 
             case "ACNT":
                 donateservice.updateDonateAccountStateCode(donateMaster);
-//                if(잔액부족일 시){
-//                donateMaster.setDonateStateCode("LCK_BLC");
-//                donateMaster.setDonateStateCode("DONATE_CPL");
                 donateservice.createDonate(donateMaster);
-
                 accountTransfer.setDonateCode(donateMaster.getDonateCode());
                 accountTransfer.setUserNo(donateMaster.getUserNo());
                 donateservice.accountDonate(accountTransfer);
-
                 break;
             }
             redirectAttributes.addAttribute("donatename", donateMaster.getDonateName());
@@ -132,9 +119,9 @@ public class DonateController {
     @GetMapping("/donatelist.meow")
     public String donatelistForm(@PageableDefault(page = 0,size = 10, sort = "donateCode", direction = Sort.Direction.DESC) Pageable pageable,
                                  HttpSession session, Model model){
+
         UserMaster loginUser=(UserMaster)session.getAttribute("user");
         model.addAttribute("user",loginUser);
-
         model.addAttribute("list", donateservice.donateList());
 
         Page<DonateMaster> lists = donateservice.donateList(pageable);

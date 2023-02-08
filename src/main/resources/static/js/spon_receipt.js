@@ -159,7 +159,7 @@ var initBody;
 
 function beforePrint() {
  initBodyHTML = document.body.innerHTML;
- document.body.innerHTML = document.getElementById('spon_receopt_box').innerHTML;
+ document.body.innerHTML = document.getElementById('spon_receipt_box').innerHTML;
 }
 function afterPrint() { 
  document.body.innerHTML = initBodyHTML;

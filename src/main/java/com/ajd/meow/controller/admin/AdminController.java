@@ -3,13 +3,16 @@ package com.ajd.meow.controller.admin;
 
 import com.ajd.meow.entity.CommunityMaster;
 import com.ajd.meow.entity.DonateMaster;
+import com.ajd.meow.entity.Reply;
 import com.ajd.meow.entity.UserMaster;
 import com.ajd.meow.repository.community.CommunityMasterRepository;
 import com.ajd.meow.repository.donate.DonateRepository;
 import com.ajd.meow.repository.user.UserRepository;
 import com.ajd.meow.service.community.CommunityMasterService;
+import com.ajd.meow.service.community.ReplyService;
 import com.ajd.meow.service.donate.DonateService;
 import com.ajd.meow.service.user.UserService;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -43,6 +46,8 @@ public class AdminController {
     private DonateService donateService;
     @Autowired
     private CommunityMasterService communityMasterService;
+    @Autowired
+    private ReplyService replyService;
 
     @GetMapping("admin.meow") // 어드민의 마이페이지로 이동
     public String adminmypage(HttpSession session, Model model){
@@ -138,8 +143,8 @@ public class AdminController {
             }
         }
     }
-    @GetMapping("userDelet.meow") // 유저 삭제 - 이거 얼러트 경고창 띄워야함! admin_user_list.js 삭제버튼 누르면 경고창 누르고 확인 취소 버튼 나오게
-    public String deleteuserbyAdmin(HttpSession session, Model model, Long userNo){
+    @GetMapping("userDelete.meow") // 해당 유저 삭제
+    public String userDelete(HttpSession session, Long userNo){
         if(session.getAttribute("user")==null){
             return "index";
         }else{
@@ -151,6 +156,8 @@ public class AdminController {
             }
         }
     }
+
+
 
     @GetMapping("userAllPost.meow") // 해당 유저의 글 리스트
     public String userpostlist(HttpSession session, Long userNo, Model model, @PageableDefault(page = 0,size = 10, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable){
@@ -184,10 +191,97 @@ public class AdminController {
         }
     }
 
+
+
+    @GetMapping("userAllDonate.meow") // 해당 유저의 도네이트(후원) 리스트
+    public String userAllDonate(HttpSession session, Long userNo, Model model, @PageableDefault(page = 0,size = 10, sort = "donateCode", direction = Sort.Direction.DESC) Pageable pageable){
+        if(session.getAttribute("user")==null){
+            return "redirect:/";
+        }else{
+            UserMaster user=userService.getUserMaster((UserMaster)session.getAttribute("user"));
+            if(user.getUserType().equals("ADMIN")){
+                //model.addAttribute("list", donateService.donateList());
+                Page<DonateMaster> userAllDonateList=donateService.donateList(pageable);
+
+                model.addAttribute("user",userService.getUser(userNo));
+                model.addAttribute("list", userAllDonateList);
+
+                int nowPage = userAllDonateList.getPageable().getPageNumber()+1 ;
+                int startPage = Math.max(0 , 1);
+                int endPage = Math.min(nowPage + 10 , userAllDonateList.getTotalPages());
+
+                model.addAttribute("nowPage", nowPage);
+                model.addAttribute("startPage", startPage);
+                model.addAttribute("endPage", endPage);
+                model.addAttribute("maxPage",10);
+
+                return "spon_list";
+            }else{
+                return "redirect:/donatelist.meow";
+            }
+        }
+    }
+
+
+
+    @GetMapping("userAllReply.meow") // 해당 유저의 덧글 리스트
+    public String userAllReply(HttpSession session, Long userNo, Model model, @PageableDefault(page = 0,size = 10, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable){
+        if(session.getAttribute("user")==null){
+            return "redirect:/";
+        }else{
+            UserMaster getSessionUser=userService.getUserMaster((UserMaster)session.getAttribute("user"));
+            if(getSessionUser.getUserType().equals("ADMIN")){
+                Page<Reply> userAllReplyList=replyService.getAllReplyByUserNo(userNo, pageable);
+
+                int nowPage = userAllReplyList.getPageable().getPageNumber()+1 ;
+                int startPage = Math.max(0 , 1);
+                int endPage = Math.min(nowPage + 10 , userAllReplyList.getTotalPages());
+
+                model.addAttribute("nowPage", nowPage);
+                model.addAttribute("startPage", startPage);
+                model.addAttribute("endPage", endPage);
+                model.addAttribute("maxPage",10);
+
+                model.addAttribute("userNickName",userService.getUser(userNo).getNickName());
+                model.addAttribute("replies",userAllReplyList);
+
+                return "user_reply_list";
+
+            }else{return "redirect:/myReply.meow";}
+        }
+    }
+
+
+
+    @GetMapping("userClassChange.meow") // 유저 등급 변경
+    public String userClassChange(HttpSession session, Long userNo){
+        if(session.getAttribute("user")==null){
+            return "redirect:/";
+        }else{
+            if(userService.getUserMaster((UserMaster)session.getAttribute("user")).getUserType().equals("ADMIN")){
+                if(userService.getUser(userNo).getUserType().equals("ADMIN")){
+                    if(userService.getUser(userNo).getUserId().equals("meow@gmail.com")){
+                        return "redirect:/userlist.meow";
+                    }else{
+                        userService.getUser(userNo).setUserType("MEMBER");
+                        userRepository.save(userService.getUser(userNo));
+                    }
+                }else{
+                    userService.getUser(userNo).setUserType("ADMIN");
+                    userRepository.save(userService.getUser(userNo));
+                }
+                return "redirect:/userlist.meow";
+            }else{return "redirect:/";}
+
+        }
+    }
+
+
+
     @GetMapping("postmanage.meow") // 모든 게시글 보기
     public String postmanage(HttpSession session, Model model, @PageableDefault(page = 0,size = 10, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable){
         if(session.getAttribute("user")==null){
-            return "index";
+            return "redirect:/";
         }else{
             UserMaster user=userService.getUserMaster((UserMaster)session.getAttribute("user"));
             //model.addAttribute("user",user);
@@ -207,7 +301,7 @@ public class AdminController {
                 //return "admin_post_list"; // 어드민 마이페이지로 이동
                 return "user_post_list";
             }else{
-                return "index_login"; // 유저 마이페이지로 이동?
+                return "redirect:/"; // 유저 마이페이지로 이동?
             }
         }
     }
@@ -215,11 +309,10 @@ public class AdminController {
     @GetMapping("donatemanage.meow") // 모든 도네이트 보기
     public String donatemanage(HttpSession session, Model model, @PageableDefault(page = 0,size = 10, sort = "donateCode", direction = Sort.Direction.DESC) Pageable pageable){
         if(session.getAttribute("user")==null){
-            return "index";
+            return "redirect:/";
         }else{
             UserMaster user=userService.getUserMaster((UserMaster)session.getAttribute("user"));
             if(user.getUserType().equals("ADMIN")){
-                //List<DonateMaster> donateMaster=donateRepository.findAll(); // 모든 도네이트
                 Page<DonateMaster> donateMaster=donateService.donateList(pageable);
 
                 int nowPage = donateMaster.getPageable().getPageNumber()+1 ;
@@ -234,10 +327,12 @@ public class AdminController {
 
                 return "admin_spon_list";
             }else{
-                return "index_login";
+                return "redirect:/";
             }
         }
     }
+
+
 
     //후원사업 개시
     @GetMapping("createdonateBS.meow")

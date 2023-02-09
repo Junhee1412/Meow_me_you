@@ -134,6 +134,7 @@
               <!--<th scope="col">댓글 수</th>
               <th scope="col">좋아요 수</th>-->
               <th scope="col">작성일자</th>
+              <th scope="col">삭제</th>
   
             </tr>
           </thead>
@@ -153,6 +154,7 @@
               <!--<td th:text="${postMaster.getViewCount()}">댓글수</td>
               <td th:text="${postMaster.getViewCount()}">좋아요수</td>-->
               <td th:text="${postMaster.getCreatePostDate().toString().replace('T','  ')}">작성일</td>
+              <td><a th:href="@{/board/delete?(postNo=${postMaster.postNo})}" type="button">삭제</a></td>
             </tr>
           </tbody>
         </table>

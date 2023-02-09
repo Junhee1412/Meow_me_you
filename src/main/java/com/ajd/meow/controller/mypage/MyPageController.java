@@ -30,6 +30,8 @@ public class MyPageController {
     @Autowired
     private ReplyService replyService;
 
+
+
     @GetMapping("my.meow") // 마이페이지로 이동
     public String my(HttpSession session, Model model){
         //user.setUserId(session.getId());
@@ -37,6 +39,8 @@ public class MyPageController {
         model.addAttribute("user",loginUser);
         return "my_page";
     }
+
+
 
     @GetMapping("myPost.meow") // 내글 모두보기
     public String myPost(HttpSession session, Model model, @PageableDefault(page = 0,size = 10, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable){
@@ -61,6 +65,9 @@ public class MyPageController {
             return "user_post_list";
         }
     }
+
+
+
     @GetMapping("myReply.meow") // 내 덧글 모아보기
     public String myReply(HttpSession session, Model model, @PageableDefault(page = 0,size = 10, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable){
         if(session.getAttribute("user")==null){
@@ -84,6 +91,9 @@ public class MyPageController {
             return "user_reply_list";
         }
     }
+
+
+
     @GetMapping("myHeart.meow") // 좋아요 모아보기 / 일단은 미룸
     public String myheart(HttpSession session, Model model, @PageableDefault(page = 0,size = 10, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable){
         if(session.getAttribute("user")==null){
@@ -93,6 +103,9 @@ public class MyPageController {
             return "user_reply_list";
         }
     }
+
+
+
     @GetMapping() // 내 후원 모아보기
     public String sdfsdf(HttpSession session, Model model, @PageableDefault(page = 0,size = 10, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable){
         if(session.getAttribute("user")==null){
@@ -102,6 +115,8 @@ public class MyPageController {
         }
         return "spon_list";
     }
+
+
 
     @GetMapping("modifyUser.meow") // 유저 수정 폼
     public String modifyUserForm(HttpSession session, Model model){
@@ -114,6 +129,8 @@ public class MyPageController {
         }
     }
 
+
+
     @PostMapping("modifyUser.meow") // 유저 수정
     public String modifyUser(UserMaster loginUser, Model model, MultipartFile file) throws  Exception{
         //UserMaster userModift=userRepository.save(loginUser);
@@ -121,6 +138,8 @@ public class MyPageController {
         model.addAttribute("user", loginUser);
         return "redirect:/my.meow";
     }
+
+
 
     @GetMapping("deleteUser.meow") // 회원탈퇴 폼
     public String deleteUserForm(HttpSession session, Model model){
@@ -132,6 +151,8 @@ public class MyPageController {
             return "delete_user";
         }
     }
+
+
 
     @PostMapping("deleteUser.meow") // 탈퇴완료
     public  String deleteUser(HttpSession session, @RequestParam("userPassword") String password, Model model){

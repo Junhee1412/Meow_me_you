@@ -9,6 +9,7 @@ import com.ajd.meow.repository.user.UserRepository;
 import com.ajd.meow.service.donate.DonateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -87,6 +88,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional // 이거 안넣어도 되나?
     public void deleteMember(UserMaster user) {
         // 도네이트 지우기
         if(donateRepository.existsByUserNo(user.getUserNo())){
@@ -96,7 +98,8 @@ public class UserServiceImpl implements UserService{
         }
         // 커뮤니티 지우기
         if(communityMasterRepository.existsByUserNo(user.getUserNo())){
-            for(CommunityMaster com:communityMasterRepository.findAllByUserNo(user.getUserNo())){
+            List<CommunityMaster> communityMaster=communityMasterRepository.findAllById(Collections.singleton(user.getUserNo()));
+            for(CommunityMaster com:communityMaster){
 
                 // 좋아요 삭제
                 if(communityLikeRepository.existsById(com.getPostNo())){
@@ -106,13 +109,13 @@ public class UserServiceImpl implements UserService{
                 if(communityImageRepository.existsById(com.getPostNo())){
                     communityImageRepository.deleteAllByPostNo(com.getPostNo());
                 }
-                // 중고거래 삭제
-                if(com.getCommunityId().equals("USD_TRN")){
-                    secondHandTradeRepository.deleteById(com.getPostNo());
-                }
                 // 덧글 삭제
                 if(replyRepository.existsByPostNo(com.getPostNo())){
                     replyRepository.deleteAllByPostNo(com.getPostNo());
+                }
+                // 중고거래 삭제
+                if(com.getCommunityId().equals("USD_TRN")){
+                    secondHandTradeRepository.deleteById(com.getPostNo());
                 }
 
             } // for문 end

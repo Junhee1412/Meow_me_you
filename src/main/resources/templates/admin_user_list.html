@@ -131,6 +131,7 @@
               <th scope="col">회원아이디</th>
               <th class="text-center" scope="col">회원이름</th>
               <th scope="col">닉네임</th>
+              <th scope="col">등급</th>
               <th class="text-center" scope="col">상세조회</th>
               <th class="text-center" scope="col">삭제</th>
             </tr>
@@ -141,11 +142,12 @@
               <td th:text="${userMaster.getUserId()}"></td>
               <td class="text-center" th:text="${userMaster.getUserName()}"></td>
               <td th:text="${userMaster.getNickName()}"></td>
+              <td th:text="${userMaster.getUserType()}"></td>
               <td class="text-center">
                 <a class="btn btn-outline-dark" th:href="@{|/userDetail.meow?userNo=${userMaster.getUserNo()}|}">조회</a>
               </td>
               <td class="text-center">
-                <a class="btn btn-outline-danger" th:href="@{|/userDelet.meow?userNo=${userMaster.getUserNo()}|}">삭제</a>
+                <a th:href="@{/userDelete.meow?(userNo=${userMaster.getUserNo()})}" type="button" id="confirm_deleteUser_btn" class="btn btn-outline-danger">삭제</a><!--onclick="checkcheck(e)"-->
               </td>
             </tr>
           </tbody>
@@ -196,6 +198,6 @@
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="../js/template.js"></script>
+    <script src="../js/admin_user_list.js"></script>
   </body>
 </html>

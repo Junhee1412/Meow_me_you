@@ -1,9 +1,6 @@
 package com.ajd.meow.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -37,8 +34,8 @@ public class CommunityImage {
     @Column(name="IMG_NAME")
     private String imgName;
 
-    @Column(name="IMG_SIZE")
-    private String imageSize;
+    @Column(name="IMG_ORGNAME")
+    private String imageOrgName;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_no" ,insertable = false, updatable = false)
@@ -48,4 +45,14 @@ public class CommunityImage {
     @JoinColumn(name = "user_no" ,insertable = false, updatable = false)
     private UserMaster userMaster; // 유저 엔티티
 
+    @Builder
+    public CommunityImage(Long imageNo, String imageOrgName, String imgName, String imgPath,Long userNo, Long postNo) {
+        this.imageNo = imageNo;
+        this.imageOrgName = imageOrgName;
+        this.imgName = imgName;
+        this.imgPath = imgPath;
+        this.userNo = userNo;
+        this.postNo = postNo;
+
+    }
 }

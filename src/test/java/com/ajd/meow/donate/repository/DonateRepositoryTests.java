@@ -43,7 +43,6 @@ public class DonateRepositoryTests extends MeowApplicationTests {
         donatemaster.setBirthDate(Date.valueOf("2014-02-02"));
         donatemaster.setGender("남자");
         donatemaster.setDonateWayCode("ACNT");
-        donatemaster.setDonateReceiptState("N");
         donatemaster.setDonateStateCode("BANK_WAIT");
         donatemaster.setDonateDate(Date.valueOf("2014-03-01"));
 
@@ -78,7 +77,6 @@ public class DonateRepositoryTests extends MeowApplicationTests {
         donateMaster.setBirthDate(Date.valueOf("2014-02-02"));
         donateMaster.setGender("남자");
         donateMaster.setDonateWayCode("ACNT");
-        donateMaster.setDonateReceiptState("N");
         donateMaster.setDonateStateCode("BANK_WAIT");
         donateMaster.setDonateDate(Date.valueOf("2014-03-01"));
 

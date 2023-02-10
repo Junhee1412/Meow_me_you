@@ -40,32 +40,31 @@ public class DonateController {
     @Autowired
     private DonateService donateservice;
 
-    @GetMapping("/donate.meow")
+    @GetMapping("/donatehome")
     public String donatehome(){
-        return "sponsor_main";
+        return "donate/donate_home";
     }
 
-    @GetMapping("/donatesuccess.meow")
+    @GetMapping("/donatesuccess")
     public String donateSuccess(HttpSession session, Model model){
         UserMaster loginUser=(UserMaster)session.getAttribute("user");
         model.addAttribute("user",loginUser);
 
-        return "spon_success";
+        return "donate/donate_success";
     }
 
-    @GetMapping("/donatecreate.meow")
+    @GetMapping("/donatecreate")
     public String donateCreateForm(HttpSession session, DonateMaster donateMaster, Model model){
         UserMaster loginUser=(UserMaster)session.getAttribute("user");
         model.addAttribute("user",loginUser);
-        return "sponsor";
+        return "donate/donate_insert";
     }
 
-    @PostMapping("/donatecreatedo.meow")
+    @PostMapping("/donatecreatedo")
     public String donate(HttpServletRequest request, HttpSession session, DonateMaster donateMaster,
                          BankTransfer bankTransfer, CreditcardPayment creditcardPayment, AccountTransfer accountTransfer,
                          RedirectAttributes redirectAttributes, Model model){
 
-        //신용카드 한도초과, 계좌이체 잔액부족일 경우는 결제 API를 구현하지 않을 예정이기 때문에 주석으로 코드만 작성
         UserMaster loginUser=(UserMaster)session.getAttribute("user");
         model.addAttribute("user",loginUser);
 
@@ -86,14 +85,12 @@ public class DonateController {
         donateMaster.setBirthDate(sqlDate);
         donateMaster.setDonateDate(java.sql.Date.valueOf(LocalDate.now()));
 
-
         donateservice.createDonate(donateMaster);
 
         switch(donateMaster.getDonateWayCode()) {
             case "BANK":
                 donateservice.updateDonateBankStateCode(donateMaster);
                 donateservice.createDonate(donateMaster);
-
                 bankTransfer.setDonateCode(donateMaster.getDonateCode());
                 bankTransfer.setUserNo(donateMaster.getUserNo());
                 donateservice.bankTransferDonate(bankTransfer);
@@ -101,40 +98,30 @@ public class DonateController {
 
             case "CRCRD":
                 donateservice.updateDonateCreditStateCode(donateMaster);
-//                if(한도초과일 시){
-//                donateMaster.setDonateStateCode("LIMIT_EXCDD");
-//                donateMaster.setDonateStateCode("DONATE_CPL");
                 donateservice.createDonate(donateMaster);
-
                 creditcardPayment.setDonateCode(donateMaster.getDonateCode());
                 creditcardPayment.setUserNo(donateMaster.getUserNo());
                 donateservice.creditcardDonate(creditcardPayment);
-
                 break;
 
             case "ACNT":
                 donateservice.updateDonateAccountStateCode(donateMaster);
-//                if(잔액부족일 시){
-//                donateMaster.setDonateStateCode("LCK_BLC");
-//                donateMaster.setDonateStateCode("DONATE_CPL");
                 donateservice.createDonate(donateMaster);
-
                 accountTransfer.setDonateCode(donateMaster.getDonateCode());
                 accountTransfer.setUserNo(donateMaster.getUserNo());
                 donateservice.accountDonate(accountTransfer);
-
                 break;
             }
             redirectAttributes.addAttribute("donatename", donateMaster.getDonateName());
-            return "redirect:donatesuccess.meow";
+            return "redirect:donatesuccess";
     }
 
-    @GetMapping("/donatelist.meow")
+    @GetMapping("/donatelist")
     public String donatelistForm(@PageableDefault(page = 0,size = 10, sort = "donateCode", direction = Sort.Direction.DESC) Pageable pageable,
                                  HttpSession session, Model model){
+
         UserMaster loginUser=(UserMaster)session.getAttribute("user");
         model.addAttribute("user",loginUser);
-
         model.addAttribute("list", donateservice.donateList());
 
         Page<DonateMaster> lists = donateservice.donateList(pageable);
@@ -149,23 +136,23 @@ public class DonateController {
         model.addAttribute("endPage", endPage);
         model.addAttribute("maxPage",10);
 
-        return "spon_list";
+        return "donate/my_donate_list";
     }
 
-    @GetMapping("/donatedelete.meow")
+    @GetMapping("/donatedelete")
     public String donateDelete(Long donateCode){
         donateservice.deleteDonate(donateCode);
-        return "redirect:/donatelist.meow";
+        return "redirect:donatelist";
     }
 
-    @GetMapping("/donateconfirm.meow")
+    @GetMapping("/donateconfirm")
     public String donateConfirm(Long donateCode) {
         donateservice.confirmDonate(donateCode);
-        return "redirect:/donatelist.meow";
+        return "redirect:donatelist";
     }
 
 
-    @GetMapping("/donateReceipt/{id}.meow")
+    @GetMapping("/donateReceipt/{id}")
     public String donateReceipt(@PathVariable("id") Long donateCode, HttpSession session, Model model) {
         UserMaster loginUser=(UserMaster)session.getAttribute("user");
         model.addAttribute("user",loginUser);
@@ -173,16 +160,16 @@ public class DonateController {
 
         model.addAttribute("donateReceipt", donateservice.donateReceipt(donateCode));
 
-        return "donateReceipt";
+        return "donate/donateReceipt";
     }
 
-    @GetMapping("/donateReceipt.meow")
+    @GetMapping("/donateReceipt")
     public String donateReceipt(HttpSession session, Model model, Long id){
         UserMaster loginUser=(UserMaster)session.getAttribute("user");
         model.addAttribute("user",loginUser);
 
         model.addAttribute("donateReceipt", donateservice.donateReceipt(id));
-        return "spon_receipt";
+        return "donate/donate_receipt";
     }
 
 }

@@ -1,96 +1,38 @@
 package com.ajd.meow.service.donate;
 
-import com.ajd.meow.entity.*;
-import com.ajd.meow.repository.donate.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.ajd.meow.entity.AccountTransfer;
+import com.ajd.meow.entity.BankTransfer;
+import com.ajd.meow.entity.CreditcardPayment;
+import com.ajd.meow.entity.DonateMaster;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
-@Service
-public class DonateService implements DonateServiceImpl {
+public interface DonateService {
 
-    @Autowired
-    private DonateRepository donateRepository;
-    @Autowired
-    private DonateWayRepository donateWayRepository;
-    @Autowired
-    private BankTransferRepository bankTransferRepository;
-    @Autowired
-    private CreditcardRepository creditcardRepository;
-    @Autowired
-    private AccountRepository accountRepository;
+    //후원 등록
+    void createDonate(DonateMaster donateMaster);
+    void bankTransferDonate(BankTransfer bankTransfer);
+    void creditcardDonate(CreditcardPayment creditcardPayment);
+    void accountDonate(AccountTransfer accountTransfer);
 
+    //후원등록 시 후원상태
+    void updateDonateBankStateCode(DonateMaster donateMaster);
+    void updateDonateCreditStateCode(DonateMaster donateMaster);
+    void updateDonateAccountStateCode(DonateMaster donateMaster);
 
-    //후원하기
-    public void createDonate(DonateMaster donateMaster){
-        donateRepository.save(donateMaster);
-    }
+    //후원 확정
+    void confirmDonate(Long donateCode);
+    //후원 취소
+    void deleteDonate(Long donateCode);
 
-    public void bankTransferDonate(BankTransfer bankTransfer){
-        bankTransferRepository.save(bankTransfer);
-    }
+    //후원페이징
+    Page<DonateMaster> donateList(Pageable pageable);
 
-    public void creditcardDonate(CreditcardPayment creditcardPayment){
-        creditcardRepository.save(creditcardPayment);
-    }
-
-    public void accountDonate(AccountTransfer accountTransfer){
-        accountRepository.save(accountTransfer);
-    }
-
-    public void updateDonateBankStateCode(DonateMaster donateMaster){
-        donateMaster.setDonateStateCode("BANK_WAIT");
-    }
-
-    public void updateDonateCreditStateCode(DonateMaster donateMaster){
-        donateMaster.setDonateStateCode("DONATE_CPL");
-    }
-
-    public void updateDonateAccountStateCode(DonateMaster donateMaster){
-        donateMaster.setDonateStateCode("DONATE_CPL");
-    }
-
-
-    //후원확정
-    public void confirmDonate(Long donateCode){
-        Optional<DonateMaster> donateMaster = donateRepository.findById(donateCode);
-        donateMaster.get().setDonateStateCode("DONATE_CNFRM");
-        donateRepository.save(donateMaster.get());
-    }
-
-    //후원취소
-    public void deleteDonate(Long donateCode){
-
-        String donateWayCode = donateRepository.findById(donateCode).get().getDonateWayCode();
-
-        switch(donateWayCode) {
-            case "BANK":
-                bankTransferRepository.deleteById(donateCode);
-                break;
-            case "CRCRD":
-                creditcardRepository.deleteById(donateCode);
-                break;
-            case "ACNT":
-                accountRepository.deleteById(donateCode);
-                break;
-        }
-        donateRepository.deleteById(donateCode);
-    }
-    // 게시글 리스트
-    public Page<DonateMaster> donateList(Pageable pageable){
-        return donateRepository.findAll(pageable);
-    }
     // 특정 후원 기부금영수증(상세보기)
-    public DonateMaster donateReceipt(Long donateCode){
-        return donateRepository.findById(donateCode).get();
-    }
+    DonateMaster donateReceipt(Long donateCode);
 
     //관리자가 후원내역 보기
-    public List<DonateMaster> donateList(){
-        return donateRepository.findAll();
-    }
+    List<DonateMaster> donateList();
 }

@@ -1,14 +1,18 @@
-package com.ajd.meow.community.repository;
+package com.ajd.meow.repository.community;
 
 import com.ajd.meow.entity.CommunityMaster;
-import com.ajd.meow.repository.community.CommunityMasterRepository;
-import com.ajd.meow.repository.community.ReplyRepository;
-import com.ajd.meow.repository.user.UserRepository;
+import com.ajd.meow.entity.Reply;
+import com.ajd.meow.entity.UserMaster;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Optional;
+import java.util.stream.IntStream;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class ReplyRepositoryTest {
@@ -20,7 +24,7 @@ class ReplyRepositoryTest {
     CommunityMasterRepository communityMasterRepository;
 
     @Autowired
-    UserRepository userRepository;
+    UserMasterRepository userMasterRepository;
 
     @Test
     public void read() {

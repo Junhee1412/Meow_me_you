@@ -48,6 +48,8 @@ public class CommunityMaster {
     @Column(name="VIEW_COUNT")
     private int viewCount;
 
+    @Column(name="SUM_IMG")
+    private String sumImg;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn( name="user_no" ,insertable = false, updatable = false)

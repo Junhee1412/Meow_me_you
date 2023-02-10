@@ -28,6 +28,9 @@ public class Reply {
     @Column(name = "REPLY_CONTENT")
     private String replyContent;
 
+    @Column(name = "USER_NICKNAME")
+    private String userNick;
+
     @ManyToOne
     @JoinColumn(name = "post_no" ,insertable = false, updatable = false)
     private CommunityMaster communityMaster; // 커뮤니티 엔티티

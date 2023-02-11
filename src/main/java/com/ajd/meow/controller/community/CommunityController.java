@@ -34,7 +34,7 @@ public class CommunityController {
         UserMaster loginUser = (UserMaster) session.getAttribute("user");
         model.addAttribute("user", loginUser);
 
-        return "community/insert_post";
+        return "community/post_insert";
     }
 
 

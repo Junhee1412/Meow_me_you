@@ -247,7 +247,7 @@
         </ul>
 <!--          작성자 : 미우미우<br />작성일자 :-->
         <div id="heart_box">
-          <i class="bi bi-heart"></i> <span class="fs-2" id="like_number">111150</span>
+          <a th:href="@{/countHeart.meow?(postNo=${board.postNo})}"><i class="bi bi-heart"></i></a><span class="fs-2" id="like_number" th:text="${numberOfHeart}">11115</span>
         </div>
         <script>
           var i = 0;

@@ -13,6 +13,8 @@ import java.util.Optional;
 @Repository
 public interface ReplyRepository extends JpaRepository<Reply,Long> {
     List<Reply> findAllByPostNo(Long postNo);
+    List<Reply> findAllByUserNo(Long userNo);
+    void deleteAllByUserNo(Long userNo);
     boolean existsByPostNo(Long postNo);
     void deleteAllByPostNo(Long postNo);
 

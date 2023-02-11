@@ -9,4 +9,5 @@ import java.util.List;
 
 @Repository
 public interface SecondHandTradeRepository extends JpaRepository<SecondHandTrade, Long> {
+    void deleteByPostNo(Long postNo);
 }

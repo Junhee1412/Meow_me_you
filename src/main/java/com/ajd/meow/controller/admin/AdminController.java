@@ -146,9 +146,10 @@ public class AdminController {
     @GetMapping("userDelete.meow") // 해당 유저 삭제
     public String userDelete(HttpSession session, Long userNo){
         if(session.getAttribute("user")==null){
-            return "index";
+            return "redirect:/index";
         }else{
-            if(userService.getUserMaster(((UserMaster)session.getAttribute("user"))).getUserType().equals("ADMIN")){
+            UserMaster loginuser=userService.getUserMaster((UserMaster)session.getAttribute("user"));
+            if(loginuser.getUserType().equals("ADMIN")){
                 userService.deleteMember(userService.getUser(userNo));
                 return "redirect:/userlist.meow";
             }else{
@@ -183,6 +184,7 @@ public class AdminController {
 
                     model.addAttribute("userNickName",userService.getUser(userNo).getNickName());
                     model.addAttribute("postList",boardListFindByUserNO);
+                    model.addAttribute("userType",user.getUserType());
                     return "user_post_list";
                 }
             }else{
@@ -270,7 +272,7 @@ public class AdminController {
                     userService.getUser(userNo).setUserType("ADMIN");
                     userRepository.save(userService.getUser(userNo));
                 }
-                return "redirect:/userlist.meow";
+                return "redirect:/userDetail.meow?userNo="+userNo;    // "redirect:/userDetail.meow?userNo="+userNo; / "userlist.meow";
             }else{return "redirect:/";}
 
         }
@@ -298,6 +300,7 @@ public class AdminController {
                 model.addAttribute("maxPage",10);
 
                 model.addAttribute("postList",everyPost);
+                model.addAttribute("userType",user.getUserType());
                 //return "admin_post_list"; // 어드민 마이페이지로 이동
                 return "user_post_list";
             }else{

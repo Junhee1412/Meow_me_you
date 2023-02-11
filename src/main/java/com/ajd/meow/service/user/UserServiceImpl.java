@@ -8,6 +8,7 @@ import com.ajd.meow.repository.donate.DonateRepository;
 import com.ajd.meow.repository.user.UserRepository;
 import com.ajd.meow.service.donate.DonateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -87,7 +88,13 @@ public class UserServiceImpl implements UserService{
         userRepository.save(useruser.get());
     }
 
+
+    // 주석처리 -
+
+
+
     @Override
+    @Modifying
     @Transactional // 이거 안넣어도 되나?
     public void deleteMember(UserMaster user) {
         // 도네이트 지우기
@@ -96,33 +103,43 @@ public class UserServiceImpl implements UserService{
                 donateService.deleteDonate(donate.getDonateCode());
             }
         }
-        // 커뮤니티 지우기
-        if(communityMasterRepository.existsByUserNo(user.getUserNo())){
-            List<CommunityMaster> communityMaster=communityMasterRepository.findAllById(Collections.singleton(user.getUserNo()));
+        // 유저의 좋아요 지우기
+        if(!communityLikeRepository.findAllByUserNo(user.getUserNo()).isEmpty()/*existsByUserNo(user.getUserNo())*/){
+            //communityLikeRepository.deleteAllByUserNo(user.getUserNo());
+            communityLikeRepository.deleteLikesByUser(user.getUserNo());
+        }
+        // 유저의 덧글 지우기
+        if(!replyRepository.findAllByUserNo(user.getUserNo()).isEmpty()){
+            replyRepository.deleteAllByUserNo(user.getUserNo());
+        }
+        // 유저의 커뮤니티 지우기
+        if(!communityMasterRepository.findAllByUserNo(user.getUserNo()).isEmpty()/*existsByUserNo(user.getUserNo())*/){
+            List<CommunityMaster> communityMaster=communityMasterRepository.findAllByUserNo(user.getUserNo());
             for(CommunityMaster com:communityMaster){
-
-                // 좋아요 삭제
-                if(communityLikeRepository.existsById(com.getPostNo())){
-                    communityLikeRepository.deleteAllById(Collections.singleton(com.getPostNo()));
+                // 게시글의 좋아요 삭제
+                if(!communityLikeRepository.findAllByPostNo(com.getPostNo()).isEmpty()/*existsByPostNo(com.getPostNo())*/){
+                    //communityLikeRepository.deleteAllByPostNo(com.getPostNo());
+                    communityLikeRepository.deleteLikesByPost(com.getPostNo());
                 }
-                // 이미지 삭제
-                if(communityImageRepository.existsById(com.getPostNo())){
+                // 게시글의 이미지 삭제
+                if(!communityImageRepository.findAllByPostNo(com.getPostNo()).isEmpty()/*existsById(com.getPostNo())*/){
                     communityImageRepository.deleteAllByPostNo(com.getPostNo());
                 }
-                // 덧글 삭제
-                if(replyRepository.existsByPostNo(com.getPostNo())){
+                // 게시글의 덧글 삭제
+                if(!replyRepository.findAllByPostNo(com.getPostNo()).isEmpty()/*existsByPostNo(com.getPostNo())*/){
                     replyRepository.deleteAllByPostNo(com.getPostNo());
                 }
-                // 중고거래 삭제
+                // 게시글 중 중고거래 삭제
                 if(com.getCommunityId().equals("USD_TRN")){
-                    secondHandTradeRepository.deleteById(com.getPostNo());
+                    secondHandTradeRepository.deleteByPostNo(com.getPostNo());
                 }
-
+                communityMasterRepository.delete(com);
             } // for문 end
         } // 커뮤니티 지우기 end
         // 유저 지우기
         userRepository.deleteById(user.getUserNo());
     }
+
 
     @Override
     public long getTotalRowCount() {

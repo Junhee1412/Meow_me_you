@@ -1,10 +1,13 @@
 package com.ajd.meow.controller.community;
 
 import com.ajd.meow.entity.CommunityImage;
+import com.ajd.meow.entity.CommunityLike;
 import com.ajd.meow.entity.CommunityMaster;
 import com.ajd.meow.entity.UserMaster;
 import com.ajd.meow.repository.community.CommunityImageRepository;
 import com.ajd.meow.service.community.CommunityMasterService;
+import com.ajd.meow.service.user.UserService;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,6 +29,9 @@ public class CommunityMasterController {
 
     @Autowired
     private CommunityImageRepository communityImageRepository;
+
+    @Autowired
+    private UserService userService;
 
 
 
@@ -92,6 +98,7 @@ public class CommunityMasterController {
             model.addAttribute("board", communityMasterService.boardView(postNo));
 
         }
+        model.addAttribute("numberOfHeart",communityMasterService.countNumberOfHeart(postNo));
 
 //        System.out.println("asdfasdfasdfasdfasdf" +communityMasterService.commuImg(postNo).getImgPath() );
         return "community/getBoard";
@@ -129,7 +136,23 @@ public class CommunityMasterController {
         return "community/boardMessage";
   }
 
+
+
+    // 주희 추가
+    @GetMapping("countHeart.meow")
+    public String countHeart(HttpSession session, Long postNo, Model model, CommunityLike communityLike){
+        if(session.getAttribute("user")==null){
+            return "rediect:/";
+        }
+        else{
+            UserMaster loginUser=userService.getUserMaster((UserMaster)session.getAttribute("user"));
+            communityMasterService.countHeart(postNo, loginUser.getUserNo());
+            return "redirect:/board/view?postNo="+postNo;
+        }
     }
+    // 주희 추가 끝
+
+}
 
 
 

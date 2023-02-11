@@ -41,4 +41,20 @@ public class ReplyService {
     public Page<Reply> getAllReplyByUserNo(Long userNo, Pageable pageable){
         return replyRepository.findAllByUserNo(userNo, pageable);
     }
+
+
+    //주희추가
+    // 유저번호로 덧글 지우기
+    public void deleteAllReplyByUserNo(Long userNo){
+        if(replyRepository.findAllByUserNo(userNo).isEmpty()){
+        }else{
+            replyRepository.deleteAllByUserNo(userNo);
+        }
+    }
+    // 글번호로 덧글 지우기
+    public void deleteAllReplyByPostNo(Long postNo){
+        if(replyRepository.findAllByPostNo(postNo).isEmpty()){}else{
+            replyRepository.deleteAllByPostNo(postNo);
+        }
+    }
 }

@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // 삭제 시 한번 확인!
-$('#confirm_deleteUser_btn').click(function(e){
+$('.confirm_deleteUser_btn').click(function(e){
   if (confirm("삭제")){    //확인
       alert("확인");
    }else{

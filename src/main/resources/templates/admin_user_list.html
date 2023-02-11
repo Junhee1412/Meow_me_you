@@ -99,11 +99,9 @@
         <img src="../img/parcel_review_menu.jpg" class="card-img rounded mx-auto d-block bg-menu" alt="커뮤니티설명" />
         <div class="card-img-overlay" id="community_type">
           <h5 class="card-title text-dark text-center fs-1">
-            글 목록
+            유저 목록
           </h5>
-          <p class="card-text text-dark text-center fs-3">
-            ~~님의 글입니다.
-          </p>
+          <!--<p class="card-text text-dark text-center fs-3">~~님의 글입니다.</p>-->
         </div>
       </div>
      </div>
@@ -112,13 +110,10 @@
       <div class="dropdown" id="top_dropdown">
         <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
           aria-expanded="false">
-          작성일자 순 정렬
+          정렬
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="#">조회수 많은 순 정렬</a></li>
-          <li><a class="dropdown-item" href="#">댓글 수 많은 순 정렬</a></li>
-          <li><a class="dropdown-item" href="#">좋아요 수 많은 순 정렬</a></li>
-          <li><a class="dropdown-item" href="#">커뮤니티 별 정렬</a></li>
+          <li><a class="dropdown-item" href="#">^ㅁ^</a></li>
         </ul>
       </div>
   
@@ -147,7 +142,7 @@
                 <a class="btn btn-outline-dark" th:href="@{|/userDetail.meow?userNo=${userMaster.getUserNo()}|}">조회</a>
               </td>
               <td class="text-center">
-                <a th:href="@{/userDelete.meow?(userNo=${userMaster.getUserNo()})}" type="button" id="confirm_deleteUser_btn" class="btn btn-outline-danger">삭제</a><!--onclick="checkcheck(e)"-->
+                <a th:if="${userMaster.getUserType()=='MEMBER'}" th:href="@{/userDelete.meow?(userNo=${userMaster.getUserNo()})}" type="button" id="confirm_deleteUser_btn" class="btn btn-outline-danger confirm_deleteUser_btn">삭제</a><!--onclick="checkcheck(e)"-->
               </td>
             </tr>
           </tbody>

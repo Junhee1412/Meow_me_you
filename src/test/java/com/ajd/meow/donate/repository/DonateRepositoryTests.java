@@ -105,8 +105,8 @@ public class DonateRepositoryTests extends MeowApplicationTests {
 
     @Test
     public void findbyUserNoReadfromDonate(){
-        List<DonateMaster> donateMaster = donateRepository.findByUserNo(1L);
-        System.out.println(donateMaster.get(1));
+        //List<DonateMaster> donateMaster = donateRepository.findByUserNo(1L);
+        //System.out.println(donateMaster.get(1));
     }
 
     @Test

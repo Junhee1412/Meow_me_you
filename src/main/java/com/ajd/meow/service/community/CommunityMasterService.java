@@ -2,8 +2,10 @@ package com.ajd.meow.service.community;
 
 
 import com.ajd.meow.entity.CommunityImage;
+import com.ajd.meow.entity.CommunityLike;
 import com.ajd.meow.entity.CommunityMaster;
 import com.ajd.meow.repository.community.CommunityImageRepository;
+import com.ajd.meow.repository.community.CommunityLikeRepository;
 import com.ajd.meow.repository.community.CommunityMasterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,8 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
-import java.util.List;
 
 @Service
 public class CommunityMasterService {
@@ -24,6 +26,9 @@ public class CommunityMasterService {
 
     @Autowired
     private CommunityImageRepository communityImageRepository;
+
+    @Autowired
+    private CommunityLikeRepository communityLikeRepository; // 주희 추가
 
 
     //글 작성
@@ -67,11 +72,13 @@ public class CommunityMasterService {
 
 
 
-
-
     // 유저번호로 게시글찾기
     public Page<CommunityMaster> boardListByUserNO(Long userId, Pageable pageable){
         return communityMasterRepository.findAllByUserNo(userId, pageable);
+    }
+    // 포스트번호로 게시글찾기
+    public CommunityMaster findPost(Long postNo){
+        return communityMasterRepository.findByPostNo(postNo);
     }
     public Page<CommunityMaster> getEveryPost(Pageable pageable){
         return communityMasterRepository.findAll(pageable);
@@ -99,4 +106,55 @@ public class CommunityMasterService {
     public CommunityImage commuImg(Long postNo){return communityImageRepository.findByPostNo(postNo);}
 
 
+
+
+
+    // 주희  추가
+    public Page<CommunityLike> getAllLikeByUserNo(Long userNo, Pageable pageable){
+        return communityLikeRepository.findAllByUserNo(userNo,pageable);
+    }
+
+
+    public void countHeart(Long postNo, Long userNo){
+        if(communityLikeRepository.existsByUserNoAndPostNo(userNo,postNo)){
+            communityLikeRepository.deleteHeart(postNo, userNo);
+        }else{
+            communityLikeRepository.insertHeart(postNo,userNo);
+        }
+    }
+
+    public Long countNumberOfHeart(Long postNo){
+        return communityLikeRepository.countByPostNo(postNo);
+    }
+
+    /*@Transactional
+    @Modifying
+    @Query(value = "insert into CommunityLike (postNo, userNo) values (:postNo,:userNo))", nativeQuery = true)
+    public void insertHeart(@Param("postNo")Long postNo, @Param("userNo")Long userNo){
+    }*/
+    // 주희 추가 끝
+
+
+    // 좋아요 삭제 - 유저이름으로 삭제
+    public void deleteAllLikeByUserNo(Long userNo){
+        if(communityLikeRepository.findAllByUserNo(userNo).isEmpty()){
+        }else{
+            communityLikeRepository.deleteAllByUserNo(userNo);
+        }
+    }
+    // 좋아요 삭제 - 포스트 번호로 삭제
+    public void deleteAllLikeByPostNo(Long postNo){
+        if(communityLikeRepository.findAllByPostNo(postNo).isEmpty()){
+        }else{
+            communityLikeRepository.deleteAllByPostNo(postNo);
+        }
+    }
+
+    // 커뮤니티 이미지 삭제
+    public void deleteAllcomIMG(Long postNo){
+        if(communityImageRepository.findAllByPostNo(postNo).isEmpty()){
+        }else{
+            communityImageRepository.deleteAllByPostNo(postNo);
+        }
+    }
 }

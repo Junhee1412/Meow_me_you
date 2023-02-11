@@ -122,12 +122,28 @@
               <td><span th:text="${user.getUserId()}"></span></td>
             </tr>
             <tr>
+              <th scope="row">이름</th>
+              <td><span th:text="${user.getUserName()}"></span></td>
+            </tr>
+            <tr>
               <th scope="row">닉네임</th>
               <td><span th:text="${user.getNickName()}"></span></td>
             </tr>
             <tr>
+              <th scope="row">지역</th>
+              <td><span th:text="${user.getAddress()}"></span></td>
+            </tr>
+            <tr>
               <th scope="row">폰번호</th>
               <td><span th:text="${user.getPhoneType()}"></span>&nbsp;&nbsp;<span th:text="${user.getPhoneNumber()}"></span></td>
+            </tr>
+            <tr>
+              <th scope="row">회원등급</th>
+              <td><span th:text="${user.getUserType()}"></span></td>
+            </tr>
+            <tr>
+              <th scope="row">가입일</th>
+              <td><span th:text="${user.getUserJoinDate().toString().substring(0,user.getUserJoinDate().toString().indexOf('T'))}"></span></td>
             </tr>
           </tbody>
         </table>
@@ -143,7 +159,7 @@
         <div class="list-group list_user">
           <span class="fw-bold fs-5 text-dark mb-3 mt-3" disabled>계정</span>
           <a th:href="@{/userDelete.meow?(userNo=${user.getUserNo()})}" type="button" id="confirm_deleteUser_btn" class="list-group-item list-group-item-action">계정탈퇴</a>
-          <a th:href="@{/userClassChange.meow?(userNo=${user.getUserNo()})}" class="list-group-item list-group-item-action">등급변경</a>
+          <a th:href="@{/userClassChange.meow?(userNo=${user.getUserNo()})}" type="button" id="confirm_changeUser_btn" class="list-group-item list-group-item-action">등급변경</a>
         </div>
       </section>
   

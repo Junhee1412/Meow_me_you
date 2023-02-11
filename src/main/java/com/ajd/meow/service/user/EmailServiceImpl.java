@@ -19,12 +19,11 @@ public class EmailServiceImpl implements EmailService{
     public static final String ePw = createKey();
 
     private MimeMessage createMessage(String to)throws Exception{
-        System.out.println("보내는 대상 : "+ to);
-        System.out.println("인증 번호 : "+ePw);
+        //System.out.println("보내는 대상 : "+ to);System.out.println("인증 번호 : "+ePw);
         MimeMessage message = emailSender.createMimeMessage();
 
         message.addRecipients(Message.RecipientType.TO, to);//보내는 대상
-        message.setSubject("이메일 인증 테스트");//제목
+        message.setSubject("~미우미우 회원가입 인증코드~");//제목
 
         String msgg="";
         msgg+= "<div style='margin:20px;'>";

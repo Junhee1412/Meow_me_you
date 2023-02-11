@@ -152,3 +152,11 @@ $('#confirm_deleteUser_btn').click(function(e){
       e.preventDefault();
   };
 });
+
+$('#confirm_changeUser_btn').click(function(e){
+  if (confirm("변경")){    //확인
+      alert("확인");
+   }else{
+      e.preventDefault();
+  };
+});

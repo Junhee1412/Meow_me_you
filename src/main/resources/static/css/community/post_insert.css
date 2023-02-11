@@ -11631,3 +11631,7 @@ footer{
 #upload_info {
   width: 33%;
 }
+
+a{
+text-decoration : none;
+}

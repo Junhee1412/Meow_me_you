@@ -163,10 +163,13 @@
         <div
           class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" >
           <div class="col mb-5" th:each="communityMaster ,status: ${list}"  style="height: 400px;">
-            <div class="card h-100" >
+            <div class="card h-100">
             <!--  badge-->
-              <div class="badge bg-warning text-dark position-absolute fs-5"  >분양 중</div>
-
+              <div th:switch="communityMaster.postId" style="border:1px solid black;">
+                <div th:case="'ADT_CMPL'" class="badge bg-secondary text-dark position-absolute fs-5">분양 완료</div>
+                <div th:case="'ADT_ING'" class="badge bg-warning text-dark position-absolute fs-5">분양 중</div>
+                <div th:case="'FOOD_SELL'" class="badge bg-secondary text-dark position-absolute fs-5">식사류 판매 중</div>
+              </div>
               <img th:if = "${communityMaster.sumImg != null}"  th:src="@{|/upload/${communityMaster.sumImg}|}" style="width:100%; height:250px;"/>
               <img th:unless="${communityMaster.sumImg != null}" src="../img/noimg.gif" style="width:100%; height:250px;"/>
 
@@ -181,9 +184,7 @@
               <!-- post actions-->
               <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                 <div class="text-center">
-                  <a class="btn btn-outline-dark mt-auto" th:href="@{/board/view(postNo=${communityMaster.postNo})}"
-                    >자세히 보기</a
-                  >
+                  <a class="btn btn-outline-dark mt-auto" th:href="@{/board/view(postNo=${communityMaster.postNo})}">자세히 보기</a>
                 </div>
               </div>
             </div>
@@ -195,9 +196,9 @@
 
     <div class="d-flex justify-content-end" style="margin-right:13.2%;">
     <a
-            type="button" style="text-align: center;"
-            class="btn btn-secondary  fs-5 btn-ll "
-            th:href="@{/board/write}">
+      type="button" style="text-align: center;"
+      class="btn btn-secondary fs-5 btn-lg"
+      th:href="@{/board/write}"><i class="bi bi-pencil-square"></i>
       게시글 작성
     </a>
     </div>

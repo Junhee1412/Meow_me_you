@@ -146,13 +146,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       let obj;
       obj = document.createElement('input');
-      obj.setAttribute('type', 'hidden');
       obj.setAttribute('name', 'donateBusinessCode');
       obj.setAttribute('value', donateCode);
 
       f.appendChild(obj);
       f.setAttribute('method', 'get');
-      f.setAttribute('action', 'donatecreate');
+      f.setAttribute('action', 'create');
 
       document.body.appendChild(f);
       f.submit();

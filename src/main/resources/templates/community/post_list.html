@@ -165,10 +165,28 @@
           <div class="col mb-5" th:each="communityMaster ,status: ${list}"  style="height: 400px;">
             <div class="card h-100">
             <!--  badge-->
-              <div th:switch="communityMaster.postId" style="border:1px solid black;">
-                <div th:case="'ADT_CMPL'" class="badge bg-secondary text-dark position-absolute fs-5">분양 완료</div>
+              <div th:switch="${communityMaster.postId}">
+                <div th:case="'ADT_CMPL'" class="badge bg-secondary position-absolute fs-5">분양 완료</div>
                 <div th:case="'ADT_ING'" class="badge bg-warning text-dark position-absolute fs-5">분양 중</div>
-                <div th:case="'FOOD_SELL'" class="badge bg-secondary text-dark position-absolute fs-5">식사류 판매 중</div>
+
+                <div th:case="'CTWR_SELL'" class="badge bg-primary position-absolute fs-5">캣타워판매글</div>
+                <div th:case="'FDST_SELL'" class="badge bg-success position-absolute fs-5">식사용품판매글</div>
+                <div th:case="'FOOD_SELL'" class="badge bg-success position-absolute fs-5">소모품(식사류)판매글</div>
+                <div th:case="'HSW_SELL'" class="badge bg-warning position-absolute fs-5">집사용품판매글</div>
+                <div th:case="'HYG_SELL'" class="badge bg-info position-absolute fs-5">위생용품판매글</div>
+                <div th:case="'WSH_SELL'" class="badge bg-info position-absolute fs-5">목욕용품판매글</div>
+                <div th:case="'SELL_CMPL'" class="badge bg-secondary position-absolute fs-5">판매완료</div>
+
+                <div th:case="'CTWR_FREE'" class="badge bg-primary position-absolute fs-5">캣타워무료나눔</div>
+                <div th:case="'FDST_FREE'" class="badge bg-success position-absolute fs-5">식사용품무료나눔</div>
+                <div th:case="'FOOD_FREE'" class="badge bg-success position-absolute fs-5">소모품(식사류)무료나눔</div>
+                <div th:case="'HSW_FREE'" class="badge bg-warning position-absolute fs-5">집사용품무료나눔</div>
+                <div th:case="'HYG_FREE'" class="badge bg-info position-absolute fs-5">위생용품무료나눔</div>
+                <div th:case="'FREE_CMPL'" class="badge bg-secondary position-absolute fs-5">무료나눔완료</div>
+
+                <div th:case="'GNR_POST'" class="badge bg-light position-absolute fs-5">일반글</div>
+                <div th:case="'NTC_POST'" class="badge bg-danger position-absolute fs-5">공지글</div>
+
               </div>
               <img th:if = "${communityMaster.sumImg != null}"  th:src="@{|/upload/${communityMaster.sumImg}|}" style="width:100%; height:250px;"/>
               <img th:unless="${communityMaster.sumImg != null}" src="../img/noimg.gif" style="width:100%; height:250px;"/>

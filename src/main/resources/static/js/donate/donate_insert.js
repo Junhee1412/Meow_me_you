@@ -232,7 +232,7 @@ function printdate()  {
 
 }
 
-function comma(str) {
+    function comma(str) {
         str = String(str);
         return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
     }
@@ -255,7 +255,7 @@ function comma(str) {
 	    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g,'$1');
 	}
 
-function removeComma(str){
+    function removeComma(str){
 		n = parseInt(str.replace(/,/g,""));
 		return n;
 	}

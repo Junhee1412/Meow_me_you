@@ -110,6 +110,11 @@ public class CommunityMasterService {
 
 
     // 주희  추가
+    // 230212 추가
+    public boolean getInfoAboutClickLike(Long userNo, Long postNo){
+        return communityLikeRepository.existsByUserNoAndPostNo(userNo, postNo);
+    }
+    // 230212 끝
     public Page<CommunityLike> getAllLikeByUserNo(Long userNo, Pageable pageable){
         return communityLikeRepository.findAllByUserNo(userNo,pageable);
     }

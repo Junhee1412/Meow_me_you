@@ -52,9 +52,15 @@ public class ReplyService {
         }
     }
     // 글번호로 덧글 지우기
+    @Transactional
     public void deleteAllReplyByPostNo(Long postNo){
-        if(replyRepository.findAllByPostNo(postNo).isEmpty()){}else{
+        if(replyRepository.findAllByPostNo(postNo).isEmpty()){
+        }else{
             replyRepository.deleteAllByPostNo(postNo);
         }
+    }
+
+    public Reply findReply(Long replyNo){
+        return replyRepository.findById(replyNo).get();
     }
 }

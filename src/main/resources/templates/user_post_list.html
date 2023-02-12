@@ -189,6 +189,7 @@
                 <span th:case="'DON_HST'">후원내역</span>
                 <span th:case="'FRE_SEL'">무료나눔</span>
                 <span th:case="'USD_TRN'">중고거래</span>
+                <span th:case="'NOTICE'">공지사항</span>
               </td>
               <td colspan="3"><a th:href="@{/board/view?(postNo=${postMaster.postNo})}"><span th:text="${postMaster.getSubject()}"></span></a></td>
               <td th:text="${postMaster.getViewCount()}">조회수</td>
@@ -196,7 +197,7 @@
               <!--<td th:text="${postMaster.getViewCount()}">댓글수</td>
               <td th:text="${postMaster.getViewCount()}">좋아요수</td>-->
               <td th:text="${postMaster.getCreatePostDate().toString().replace('T','  ')}">작성일</td>
-              <td><a th:href="@{/board/delete?(postNo=${postMaster.postNo})}" type="button" class="btn btn-outline-danger confirm_deletePost_btn">삭제</a></td>
+              <td><a th:href="@{/deletePostInMyPage.meow?(postNo=${postMaster.postNo})}" type="button" class="btn btn-outline-danger confirm_deletePost_btn">삭제</a></td>
             </tr>
           </tbody>
         </table>

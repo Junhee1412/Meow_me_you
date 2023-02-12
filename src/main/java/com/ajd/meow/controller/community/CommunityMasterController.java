@@ -86,21 +86,22 @@ public class CommunityMasterController {
         UserMaster loginUser=(UserMaster)session.getAttribute("user");
         model.addAttribute("user",loginUser);
 
-
-
-
         if(communityMasterService.commuImg(postNo) != null ) {
             model.addAttribute("board", communityMasterService.boardView(postNo));
             model.addAttribute("cimg", communityMasterService.commuImg(postNo).getImgPath());
-
         }else {
-
             model.addAttribute("board", communityMasterService.boardView(postNo));
-
         }
         model.addAttribute("numberOfHeart",communityMasterService.countNumberOfHeart(postNo));
 
-//        System.out.println("asdfasdfasdfasdfasdf" +communityMasterService.commuImg(postNo).getImgPath() );
+        // 주희 추가 230212
+        if(communityMasterService.getInfoAboutClickLike(loginUser.getUserNo(), postNo)){
+            System.out.println("색칠하트");
+            model.addAttribute("clickHeart",true);
+        }else{
+            System.out.println("빈하트");
+            model.addAttribute("clickHeart",false);
+        } //230212 end
         return "community/getBoard";
     }
 

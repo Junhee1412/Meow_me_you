@@ -40,6 +40,6 @@ public class LoginController {
     @GetMapping("/logout.meow")
     public String logout(SessionStatus status){
         status.setComplete();
-        return "index"; // 로그아웃 후 인덱스
+        return "redirect:/"; // 로그아웃 후 인덱스
     }
 }

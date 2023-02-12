@@ -36,7 +36,7 @@ public class MyPageController {
     @Autowired
     private ReplyService replyService;
     @Autowired
-    private CommunityLikeRepository communityLikeRepository;// 이거 좋아요 누른 게시글 모아보기에서만 사용된다.
+    private CommunityLikeRepository communityLikeRepository;// 이거 좋아요 누른 게시글 모아보기, 게시글 삭제하기에서 사용
     @Bean
     private List<CommunityMaster> makeList(){return new ArrayList<>();}
     @Bean
@@ -83,7 +83,27 @@ public class MyPageController {
 
 
 
-    @GetMapping("myReply.meow") // 내 덧글 모아보기 - 이거 지금 안되고 잇슴니다.
+    @GetMapping("deletePostInMyPage.meow") // 마이페이지에서 게시글 지우기 - 어드민도 공유
+    public String deletePostInMyPage(HttpSession session, Long postNo){
+        if(session.getAttribute("user")==null){
+            return "redirect:/";
+        }else{
+            Long usernumber=communityMasterService.findPost(postNo).getUserNo();
+            UserMaster userMaster=userService.getUserMaster((UserMaster)session.getAttribute("user"));
+            replyService.deleteAllReplyByPostNo(postNo);// 좋아요 지우기
+            communityLikeRepository.deleteLikesByPost(postNo);// 좋아요 지우기
+            communityMasterService.boardDelete(postNo); // 게시글 지우기
+            if(userMaster.getUserType().equals("ADMIN")){
+                return "redirect:/userAllPost.meow?userNo="+usernumber;
+            }else{
+                return "redirect:/myPost.meow";
+            }
+        }
+    }
+
+
+
+    @GetMapping("myReply.meow") // 내 덧글 모아보기
     public String myReply(HttpSession session, Model model, @PageableDefault(page = 0,size = 10, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable){
         if(session.getAttribute("user")==null){
             return "redirect:/";
@@ -101,25 +121,43 @@ public class MyPageController {
             model.addAttribute("maxPage",10);
 
             model.addAttribute("userNickName",loginUser.getNickName());
-            model.addAttribute("postList",replies);
-            //replies.getContent().get(0).g
+            model.addAttribute("replies",replies);
 
-            //return "user_reply_list";
-            return "user_post_list";
+            return "user_reply_list";
+            //return "user_post_list";
+        }
+    }
+
+
+
+    @GetMapping("deleteReplyInMyPage.meow") // 관리자(어드민), 일반유저가 마이페이지에서 리플(덧글) 삭제
+    public String deleteReplyInMyPage(HttpSession session, Long replyNo){
+        if(session.getAttribute("user")==null){
+            return "redirect:/";
+        }else{
+            UserMaster userMaster=userService.getUserMaster((UserMaster)session.getAttribute("user"));
+            Long usernumber=replyService.findReply(replyNo).getUserNo();
+            replyService.replyDelete(replyNo);
+            if(userMaster.getUserType().equals("ADMIN")){
+                return "redirect:/userAllReply.meow?userNo="+usernumber;
+            }else{
+                return "redirect:/myReply.meow";
+            }
         }
     }
 
 
 
     @GetMapping("myHeart.meow") // 좋아요 모아보기
-    public String myheart(HttpSession session, Model model, @PageableDefault(page = 0,size = 10, sort = "POST_NO", direction = Sort.Direction.DESC) Pageable pageable){
+    public String myheart(HttpSession session, Model model, @PageableDefault(page = 0,size = 10) Pageable pageable){
+        // , sort = "POST_NO", direction = Sort.Direction.DESC  <<  pageabledefault 괄호 안에 적는건데 적으면 오류남
         if(session.getAttribute("user")==null){
             return "redirect:/";
         }else{
             UserMaster loginUser=userService.getUserMaster((UserMaster)session.getAttribute("user"));
             Page<CommunityLike> likes=communityLikeRepository.selectLikesByUser(loginUser.getUserNo(),pageable);
             //communityMasterService.getAllLikeByUserNo(loginUser.getUserNo(), pageable);
-
+            System.out.println("------------------"+likes.getContent().size());
             List<CommunityMaster> comList=makeList();
             for(int i=0; i<likes.getContent().size(); i++){
                 comList.add(communityMasterService.findPost(likes.getContent().get(i).getPostNo()));
@@ -127,9 +165,9 @@ public class MyPageController {
             Page<CommunityMaster> comPage=makePage(comList);
 
 
-            int nowPage = comPage.getPageable().getPageNumber()+1 ;
+            int nowPage = likes.getPageable().getPageNumber()+1 ;
             int startPage = Math.max(0 , 1);
-            int endPage = Math.min(nowPage + 10 , comPage.getTotalPages());
+            int endPage = Math.min(nowPage + 10 , likes.getTotalPages());
 
             model.addAttribute("nowPage", nowPage);
             model.addAttribute("startPage", startPage);

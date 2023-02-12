@@ -247,9 +247,13 @@
         </ul>
 <!--          작성자 : 미우미우<br />작성일자 :-->
         <div id="heart_box">
-          <a th:href="@{/countHeart.meow?(postNo=${board.postNo})}"><i class="bi bi-heart"></i></a><span class="fs-2" id="like_number" th:text="${numberOfHeart}">11115</span>
+          <a th:href="@{/countHeart.meow?(postNo=${board.postNo})}">
+            <i th:if="${clickHeart}==false" class="bi bi-heart"></i>
+            <i th:if="${clickHeart}==true" class="bi bi-heart-fill"></i>
+          </a>
+          <span class="fs-2" id="like_number" th:text="${numberOfHeart}">11115</span>
         </div>
-        <script>
+        <!--<script>
           var i = 0;
           $(".bi-heart").on("click", function () {
             if (i == 0) {
@@ -270,7 +274,7 @@
               $(this).css("color", "crimson");
             }
           );
-        </script>
+        </script>-->
       </div>
       <p class="text-dark fs-6 text-break" id="community_content" th:text="${board.content}">
         고양이가 너무 흥분하거나 불안, 우울감을 느꼈을 때 기지개를 켜기도 해요.

@@ -23,4 +23,6 @@ public interface CommunityMasterRepository extends JpaRepository<CommunityMaster
     //boolean existsByUserNo(Long userNo);
     //Page<CommunityMaster> findAllByPostNo(Long postNo, Pageable  pageable);
     //Page<CommunityMaster> findByPostNo(Long postNo, Pageable  pageable);
+
+
 }

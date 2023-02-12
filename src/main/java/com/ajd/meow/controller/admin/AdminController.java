@@ -63,6 +63,9 @@ public class AdminController {
             }
         }
     }
+
+
+
     @GetMapping("modifyadmin.meow") // 어드민 수정 폼
     public String modidyadminform(HttpSession session, Model model){
         if(session.getAttribute("user")==null){
@@ -77,6 +80,9 @@ public class AdminController {
             }
         }
     }
+
+
+
     @PostMapping("modifyAdmin.meow") // 어드민 수정
     public String modidyadmin(UserMaster userMaster, HttpSession session, Model model, MultipartFile file) throws Exception{
         if(session.getAttribute("user")==null){
@@ -92,6 +98,9 @@ public class AdminController {
             }
         }
     }
+
+
+
     @PostMapping("createadminuser.meow") // 관리자 생성 - 잘 되는지 확인
     public String createadminuserform(HttpSession session, Model model, UserMaster users){
         if(session.getAttribute("user")==null){
@@ -106,6 +115,8 @@ public class AdminController {
             }else{return "redirect:/my.meow";}
         }
     }
+
+
 
     @GetMapping("userlist.meow") // 유저리스트 보기
     public String userlist(HttpSession session, Model model){
@@ -143,6 +154,9 @@ public class AdminController {
             }
         }
     }
+
+
+
     @GetMapping("userDelete.meow") // 해당 유저 삭제
     public String userDelete(HttpSession session, Long userNo){
         if(session.getAttribute("user")==null){
@@ -337,6 +351,36 @@ public class AdminController {
 
 
 
+    @GetMapping("insertnotice.meow")//공지적는 폼으로 이동
+    public String insertnoticeform(HttpSession session, Model model){
+        if(session.getAttribute("user")==null){
+            return "redirect:/";
+        }else{
+            UserMaster userMaster=userService.getUserMaster((UserMaster)session.getAttribute("user"));
+            //model.addAttribute("user",userMaster);
+            model.addAttribute("adminNo",userMaster.getUserNo());
+            return "admin_post_insert";
+        }
+    }
+
+
+
+    @PostMapping("insertnotice.meow")//공지등록
+    public String insertnotice(CommunityMaster com, HttpSession session/*, Model model*/){
+        if(session.getAttribute("user")==null){
+            return "redirect:/";
+        }else{
+            UserMaster userMaster=userService.getUserMaster((UserMaster)session.getAttribute("user"));
+            //model.addAttribute("user",userMaster);
+            com.setCreatePostDate(LocalDateTime.now());
+            communityMasterRepository.save(com);
+            return "redirect:/admin.meow"; // 새로고침해도 인서트되지않게끔 함니다.
+        }
+    }
+
+
+
+/*
     //후원사업 개시
     @GetMapping("createdonateBS.meow")
     public String createdonateBSform(HttpSession session, Model model){
@@ -347,29 +391,5 @@ public class AdminController {
     public String deletedonateBSform(HttpSession session, Model model){
         return "시간이 있으면 합시다!"; // ^ㅁ^
     }
-
-
-    @GetMapping("insertnotice.meow")//공지적는 폼으로 이동
-    public String insertnoticeform(HttpSession session, Model model){
-        if(session.getAttribute("user")==null){
-            return "index";
-        }else{
-            UserMaster userMaster=userService.getUserMaster((UserMaster)session.getAttribute("user"));
-            //model.addAttribute("user",userMaster);
-            model.addAttribute("adminNo",userMaster.getUserNo());
-            return "admin_post_insert";
-        }
-    }
-    @PostMapping("insertnotice.meow")//공지등록
-    public String insertnotice(CommunityMaster com, HttpSession session, Model model){
-        if(session.getAttribute("user")==null){
-            return "index";
-        }else{
-            UserMaster userMaster=userService.getUserMaster((UserMaster)session.getAttribute("user"));
-            model.addAttribute("user",userMaster);
-            com.setCreatePostDate(LocalDateTime.now());
-            communityMasterRepository.save(com);
-            return "redirect:/admin.meow"; // 새로고침해도 인서트되지않게끔 함니다.
-        }
-    }
+*/
 }

@@ -153,17 +153,16 @@
               <th scope="col">번호</th>
               <th scope="col">커뮤니티</th>
               <th scope="col" colspan="3">글제목</th>
-              <th th:if="${userType}=='ADMIN'" scope="col">조회 수</th>
+              <th scope="col">조회 수</th>
               <!--<th scope="col">댓글 수</th>
               <th scope="col">좋아요 수</th>-->
               <th scope="col">작성자</th>
               <th scope="col">작성일자</th>
-              <th scope="col">삭제</th>
   
             </tr>
           </thead>
           <tbody>
-            <tr th:each="like: ${likes}">
+            <tr th:each="likeList: ${likes}">
               <td th:text="${likeList.getPostNo()}">번호</td>
               <td th:switch="${likeList.getCommunityId()}">
                 <span th:case="'ADP_ACT'">분양하기</span>

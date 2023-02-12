@@ -41,7 +41,7 @@
       type="text/css"
     />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="../css/donate_insert.css" rel="stylesheet" />
+    <link href="../css/donate/donate_insert.css" rel="stylesheet" />
   </head>
 
   <body id="page-top">
@@ -104,7 +104,7 @@
             <img class="mb-4 martop_10" src="../img/logo/logo_text_bottom.png" alt="" width="200" height="100">
           </a>
         </div>
-        <form action="/donatecreatedo" method="post" onsubmit="return ValidChecked();">
+        <form action="/donate/createdo" method="post" onsubmit="return ValidChecked();">
           <div class="form-group">
             <label class="form-label mt-1">후원자명 * </label>
             <input name="donateName" type="text" class="form-control" id="sign_name">
@@ -112,14 +112,13 @@
 
           <div class="form-group">
             <input name="donateBusinessCode" type="hidden" class="form-control" value="" id="donateBusinessCode">
-
           </div>
           <input name="userNo" type="hidden" class="form-control" th:value="${user.getUserNo()}">
           <div class="bir_wrap">
             <label class="form-label mt-2">생년월일</label>
             <div class="bir_yy">
               <span class="ps_box">
-                <input onkeyup='printdate()' type="text" class="form-control" id="yy" placeholder="년(4자)" maxlength="4" min="1900" />
+                <input onkeyup='printdate()' type="text" class="form-control" id="yy" placeholder="년(4자)" maxlength="4"/>
               </span>
             </div>
             <div class="bir_mm">

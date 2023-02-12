@@ -37,7 +37,6 @@
   --bs-gray-800: #343a40;
   --bs-gray-900: #212529;
   --bs-primary: #1d809f;
-  --bs-secondary: #ecb807;
   --bs-success: #198754;
   --bs-info: #0dcaf0;
   --bs-warning: #ecb807;
@@ -45,7 +44,6 @@
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
   --bs-primary-rgb: 29, 128, 159;
-  --bs-secondary-rgb: 236, 184, 7;
   --bs-success-rgb: 25, 135, 84;
   --bs-info-rgb: 13, 202, 240;
   --bs-warning-rgb: 236, 184, 7;
@@ -7449,14 +7447,6 @@ fieldset:disabled .btn {
   ) !important;
 }
 
-.bg-secondary {
-  --bs-bg-opacity: 1;
-  background-color: rgba(
-    var(--bs-secondary-rgb),
-    var(--bs-bg-opacity)
-  ) !important;
-}
-
 .bg-success {
   --bs-bg-opacity: 1;
   background-color: rgba(
@@ -11655,4 +11645,3 @@ section{
     margin-top:-60px;
     margin-bottom:10px;
 }
-

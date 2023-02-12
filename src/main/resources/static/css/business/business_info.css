@@ -11554,10 +11554,6 @@ footer {
   opacity: 1;
   transform: none;
 }
-#foot_home_btn {
-  margin: 0 auto;
-}
-
 .front_img {
   width:70%;
   z-index: 99;
@@ -11575,12 +11571,17 @@ section {
   margin: 75px 0;
 }
 .btn_box{
-  display:flex;margin-top:100px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-top:100px;
 }
-.bi-house-heart-fill{
-  color:#D87E45;
+.foot_home_btn{
+  margin-right:10px;
 }
-
+.foot_top_btn{
+  margin-left:10px;
+}
 .img_deathchart{
   width:60%;
 }

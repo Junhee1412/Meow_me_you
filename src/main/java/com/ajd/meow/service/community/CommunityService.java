@@ -1,6 +1,7 @@
 package com.ajd.meow.service.community;
 
 import com.ajd.meow.entity.CommunityImage;
+import com.ajd.meow.entity.CommunityLike;
 import com.ajd.meow.entity.CommunityMaster;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,4 +33,24 @@ public interface CommunityService {
     Page<CommunityMaster> communitySearchKeyword(String searchKeyword,Pageable pageable);
     //글 삭제
     List<CommunityImage> deleteImg(Long postNo);
+
+    Page<CommunityMaster> boardListByUserNO(Long userId, Pageable pageable);
+
+    CommunityMaster findPost(Long postNo);
+
+    Page<CommunityMaster> getEveryPost(Pageable pageable);
+
+    boolean getInfoAboutClickLike(Long userNo, Long postNo);
+
+    Page<CommunityLike> getAllLikeByUserNo(Long userNo, Pageable pageable);
+
+    void countHeart(Long postNo, Long userNo);
+
+    Long countNumberOfHeart(Long postNo);
+
+    void deleteAllLikeByUserNo(Long userNo);
+
+    void deleteAllLikeByPostNo(Long postNo);
+
+    void deleteAllcomIMG(Long postNo);
 }

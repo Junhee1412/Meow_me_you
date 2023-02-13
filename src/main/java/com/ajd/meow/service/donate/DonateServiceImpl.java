@@ -29,15 +29,12 @@ public class DonateServiceImpl implements DonateService {
     public void createDonate(DonateMaster donateMaster){
         donateRepository.save(donateMaster);
     }
-
     public void bankTransferDonate(BankTransfer bankTransfer){
         bankTransferRepository.save(bankTransfer);
     }
-
     public void creditcardDonate(CreditcardPayment creditcardPayment){
         creditcardRepository.save(creditcardPayment);
     }
-
     public void accountDonate(AccountTransfer accountTransfer){
         accountRepository.save(accountTransfer);
     }
@@ -46,19 +43,16 @@ public class DonateServiceImpl implements DonateService {
     public void updateDonateBankStateCode(DonateMaster donateMaster){
         donateMaster.setDonateStateCode("BANK_WAIT");
     }
-
     public void updateDonateCreditStateCode(DonateMaster donateMaster){
         //if(한도초과일 시){
         //donateMaster.setDonateStateCode("LIMIT_EXCDD");
         donateMaster.setDonateStateCode("DONATE_CPL");
     }
-
     public void updateDonateAccountStateCode(DonateMaster donateMaster){
         //if(잔액부족일 시){
         //donateMaster.setDonateStateCode("LCK_BLC");
         donateMaster.setDonateStateCode("DONATE_CPL");
     }
-
 
     //후원확정
     public void confirmDonate(Long donateCode){
@@ -91,13 +85,18 @@ public class DonateServiceImpl implements DonateService {
         return donateRepository.findAll(pageable);
     }
 
+    //후원페이징
+    public Page<DonateMaster> donateMyList(Pageable pageable, Long userNo){
+        return donateRepository.findAllByUserNo(pageable, userNo);
+    }
+
+    //전체 후원목록 보기
+    public List<DonateMaster> donateList(){
+        return donateRepository.findAll();
+    }
+
     // 특정 후원 기부금영수증(상세보기)
     public DonateMaster donateReceipt(Long donateCode){
         return donateRepository.findById(donateCode).get();
-    }
-
-    //관리자가 후원내역 보기
-    public List<DonateMaster> donateList(){
-        return donateRepository.findAll();
     }
 }

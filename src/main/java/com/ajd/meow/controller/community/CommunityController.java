@@ -1,10 +1,12 @@
 package com.ajd.meow.controller.community;
 
 import com.ajd.meow.entity.CommunityImage;
+import com.ajd.meow.entity.CommunityLike;
 import com.ajd.meow.entity.CommunityMaster;
 import com.ajd.meow.entity.UserMaster;
 import com.ajd.meow.repository.community.CommunityImageRepository;
 import com.ajd.meow.service.community.CommunityService;
+import com.ajd.meow.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +29,9 @@ public class CommunityController {
 
     @Autowired
     private CommunityImageRepository communityImageRepository;
+
+    @Autowired
+    private UserService userService;
 
 
     @GetMapping("/board/write") //localhost:8080/board/write 작성시 이동
@@ -102,6 +107,16 @@ public class CommunityController {
         } else {
             model.addAttribute("board", communityService.communityPostView(postNo));
         }
+        model.addAttribute("numberOfHeart",communityService.countNumberOfHeart(postNo));
+
+        // 주희 추가 230212
+        if(communityService.getInfoAboutClickLike(loginUser.getUserNo(), postNo)){
+            System.out.println("색칠하트");
+            model.addAttribute("clickHeart",true);
+        }else{
+            System.out.println("빈하트");
+            model.addAttribute("clickHeart",false);
+        } //230212 end
         return "community/post_view";
     }
 
@@ -120,8 +135,7 @@ public class CommunityController {
         model.addAttribute("user", loginUser);
 
         model.addAttribute("board", communityService.communityPostView(postNo));
-        model.addAttribute("cimg", communityService.communityImgView(postNo));
-
+        model.addAttribute("orgName", communityService.communityImgFindByPostNo(postNo));
             return "community/post_modify";
     }
 
@@ -132,18 +146,23 @@ public class CommunityController {
         model.addAttribute("user", loginUser);
         CommunityMaster boardTemp = communityService.communityPostView(postNo);
 
-        // 수정버튼 클릭시 기존 이미지 제거 , 추후 이미지 파일 불러오기 작업
-        communityService.deleteImg(postNo);
-        communityMaster.setSumImg(null);
-
-        //파일업로드 반복문
-        for (MultipartFile ddd : files) {
-            communityService.saveFile(ddd, session, model, communityMaster);
+        int count = 0;
+        //파일 업로드 반복문
+        for (MultipartFile img : files) {
+            if (img.isEmpty()){
+            }else {
+                // 게시글 수정시 이미지 첨부가 있으면 기존에 있는 이미지 지우기위함.
+                if (count == 0) {
+                    communityService.deleteImg(postNo);
+                }
+                communityService.saveFile(img, session, model, communityMaster);
+                count++;
+                boardTemp.setSumImg(communityService.communityImgFindByPostNo(postNo).get(0).getImgPath());
+            }
         }
 
         boardTemp.setSubject(communityMaster.getSubject());
         boardTemp.setContent(communityMaster.getContent());
-//      boardTemp.setSumImg();
 
         communityService.communityPostModify(boardTemp);
 
@@ -153,4 +172,19 @@ public class CommunityController {
 
         return "community/community_message";
     }
+
+
+    // 주희 추가
+    @GetMapping("countHeart.meow")
+    public String countHeart(HttpSession session, Long postNo, Model model, CommunityLike communityLike){
+        if(session.getAttribute("user")==null){
+            return "rediect:/";
+        }
+        else{
+            UserMaster loginUser=userService.getUserMaster((UserMaster)session.getAttribute("user"));
+            communityService.countHeart(postNo, loginUser.getUserNo());
+            return "redirect:/board/view?postNo="+postNo;
+        }
+    }
+    // 주희 추가 끝
 }

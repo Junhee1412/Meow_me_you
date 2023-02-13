@@ -141,19 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   });
 
-  
-  // function printArea(){
-  //   var initBody = document.body.innerHTML;
-  //   printID1.style.display ="none";
-  //   printID2.style.display ="none";
-  //   window.onbeforeprint= function(){
-  //     document.body.innerHTML=document.getElementById('spon_receipt_box').innerHTML;
-  //   }
-  //   window.onafterprint=function(){
-  //     document.body.innerHTML=initBody;
-  //   }
-  //   window.print();  // 클릭액션 : 버튼클릭시 인쇄창팝업
-  //  };
+
 
 var initBody;
 

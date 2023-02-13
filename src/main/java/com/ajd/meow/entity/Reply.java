@@ -23,13 +23,10 @@ public class Reply {
     private Long userNo;
 
     @Column(name="POST_NO")
-    private Long PostNo;
+    private Long postNo;
 
     @Column(name = "REPLY_CONTENT")
     private String replyContent;
-
-    @Column(name = "USER_NICKNAME")
-    private String userNick;
 
     @ManyToOne
     @JoinColumn(name = "post_no" ,insertable = false, updatable = false)

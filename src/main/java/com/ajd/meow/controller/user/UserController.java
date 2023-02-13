@@ -45,7 +45,7 @@ public class UserController {
     @PostMapping("sign_success.meow") //@ModelAttribute
     public String memberSignSuccess(UserMaster user, MultipartFile file) throws Exception{
         if(userRepository.existsByUserId(user.getUserId())){
-            return "index";
+            return "redirect:/";
             // 아마 이 화면 온거면 login안되잇을테니까 일단 걍 session 안받앗음.
             // 새로고침 시 유저가 중복 추가되는거 방지용으로 넣었음 - 걍 홈으로 이동함니다.
         }else{

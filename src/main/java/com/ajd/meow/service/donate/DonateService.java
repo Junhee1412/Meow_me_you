@@ -30,9 +30,12 @@ public interface DonateService {
     //후원페이징
     Page<DonateMaster> donateList(Pageable pageable);
 
+    //후원페이징
+    Page<DonateMaster> donateMyList(Pageable pageable, Long userNo);
+
+    //전체 후원목록 보기
+    List<DonateMaster> donateList();
+
     // 특정 후원 기부금영수증(상세보기)
     DonateMaster donateReceipt(Long donateCode);
-
-    //관리자가 후원내역 보기
-    List<DonateMaster> donateList();
 }

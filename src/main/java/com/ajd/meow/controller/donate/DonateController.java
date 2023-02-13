@@ -6,6 +6,7 @@ import com.ajd.meow.repository.donate.BankTransferRepository;
 import com.ajd.meow.repository.donate.CreditcardRepository;
 import com.ajd.meow.repository.donate.DonateRepository;
 import com.ajd.meow.service.donate.DonateService;
+import com.ajd.meow.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,6 +40,9 @@ public class DonateController {
 
     @Autowired
     private DonateService donateservice;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/donate/home")
     public String donatehome(){
@@ -117,10 +121,10 @@ public class DonateController {
     }
 
     @GetMapping("/donate/list")
-    public String donatelistForm(@PageableDefault(page = 0,size = 10, sort = "donateCode", direction = Sort.Direction.DESC) Pageable pageable,
-                                 HttpSession session, Model model){
+    public String donatelistForm(@PageableDefault(page = 0,size = 10, sort = "donateCode", direction = Sort.Direction.DESC)
+                                     Pageable pageable, HttpSession session, Model model){
 
-        UserMaster loginUser=(UserMaster)session.getAttribute("user");
+        UserMaster loginUser=userService.getUserMaster((UserMaster)session.getAttribute("user"));
         model.addAttribute("user",loginUser);
         model.addAttribute("list", donateservice.donateList());
 
@@ -139,24 +143,22 @@ public class DonateController {
         return "donate/my_donate_list";
     }
 
-    @GetMapping("/donate/delete")
-    public String donateDelete(Long donateCode){
-        donateservice.deleteDonate(donateCode);
-        return "redirect:list";
-    }
-
     @GetMapping("/donate/confirm")
     public String donateConfirm(Long donateCode) {
         donateservice.confirmDonate(donateCode);
         return "redirect:list";
     }
 
+    @GetMapping("/donate/delete")
+    public String donateDelete(Long donateCode){
+        donateservice.deleteDonate(donateCode);
+        return "redirect:list";
+    }
 
     @GetMapping("/donate/receipt/{id}")
     public String donateReceipt(@PathVariable("id") Long donateCode, HttpSession session, Model model) {
         UserMaster loginUser=(UserMaster)session.getAttribute("user");
         model.addAttribute("user",loginUser);
-
 
         model.addAttribute("donateReceipt", donateservice.donateReceipt(donateCode));
 

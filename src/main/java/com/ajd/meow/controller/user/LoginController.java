@@ -30,7 +30,7 @@ public class LoginController {
             if(findUser.getUserType().equals("ADMIN")) {
                  return "index_admin"; // 어드민 페이지 따로 만드나유
             } else {
-                return "index_login"; // 로그인 후 index 페이지
+                return "redirect:/"; // 로그인 후 index 페이지
             }
         }else {
             model.addAttribute("errMsg", "로그인 실패! 다시 입력해주세요.");
@@ -40,6 +40,6 @@ public class LoginController {
     @GetMapping("/logout.meow")
     public String logout(SessionStatus status){
         status.setComplete();
-        return "index"; // 로그아웃 후 인덱스
+        return "redirect:/"; // 로그아웃 후 인덱스
     }
 }

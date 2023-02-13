@@ -2,9 +2,11 @@ package com.ajd.meow.service.community;
 
 
 import com.ajd.meow.entity.CommunityImage;
+import com.ajd.meow.entity.CommunityLike;
 import com.ajd.meow.entity.CommunityMaster;
 import com.ajd.meow.entity.UserMaster;
 import com.ajd.meow.repository.community.CommunityImageRepository;
+import com.ajd.meow.repository.community.CommunityLikeRepository;
 import com.ajd.meow.repository.community.CommunityMasterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +24,9 @@ import java.util.List;
 
 @Service
 public class CommunityServiceImpl implements CommunityService{
+
+    @Autowired
+    private CommunityLikeRepository communityLikeRepository; // 주희 추가
 
     @Autowired
     private CommunityMasterRepository communityMasterRepository;
@@ -69,11 +74,25 @@ public class CommunityServiceImpl implements CommunityService{
                 .build();
 
         files.transferTo(saveImg);
-        communityMaster.setSumImg(file.getImgName());
+        communityMaster.setSumImg(file.getImgPath());
         CommunityImage savedFile = communityImageRepository.save(file);
 
         System.out.println("asdfasfasdf" + communityMaster.getSumImg());
         return savedFile.getImageNo();
+    }
+
+    // 유저번호로 게시글찾기
+    public Page<CommunityMaster> boardListByUserNO(Long userId, Pageable pageable){
+        return communityMasterRepository.findAllByUserNo(userId, pageable);
+    }
+
+    // 포스트번호로 게시글찾기
+    public CommunityMaster findPost(Long postNo){
+        return communityMasterRepository.findByPostNo(postNo);
+    }
+
+    public Page<CommunityMaster> getEveryPost(Pageable pageable){
+        return communityMasterRepository.findAll(pageable);
     }
 
     // 게시글 리스트
@@ -93,7 +112,6 @@ public class CommunityServiceImpl implements CommunityService{
 
     //게시글 수정
     public void communityPostModify(CommunityMaster communityMaster){
-
         communityMasterRepository.save(communityMaster);
     }
 
@@ -106,6 +124,52 @@ public class CommunityServiceImpl implements CommunityService{
     }
 
     public List<CommunityImage> deleteImg(Long postNo) { return communityImageRepository.deleteByPostNo(postNo);
+    }
+
+    // 주희  추가
+    // 230212 추가
+    public boolean getInfoAboutClickLike(Long userNo, Long postNo){
+        return communityLikeRepository.existsByUserNoAndPostNo(userNo, postNo);
+    }
+    // 230212 끝
+    public Page<CommunityLike> getAllLikeByUserNo(Long userNo, Pageable pageable){
+        return communityLikeRepository.findAllByUserNo(userNo,pageable);
+    }
+
+
+    public void countHeart(Long postNo, Long userNo){
+        if(communityLikeRepository.existsByUserNoAndPostNo(userNo,postNo)){
+            communityLikeRepository.deleteHeart(postNo, userNo);
+        }else{
+            communityLikeRepository.insertHeart(postNo,userNo);
+        }
+    }
+
+    public Long countNumberOfHeart(Long postNo){
+        return communityLikeRepository.countByPostNo(postNo);
+    }
+
+    // 좋아요 삭제 - 유저이름으로 삭제
+    public void deleteAllLikeByUserNo(Long userNo){
+        if(communityLikeRepository.findAllByUserNo(userNo).isEmpty()){
+        }else{
+            communityLikeRepository.deleteAllByUserNo(userNo);
+        }
+    }
+    // 좋아요 삭제 - 포스트 번호로 삭제
+    public void deleteAllLikeByPostNo(Long postNo){
+        if(communityLikeRepository.findAllByPostNo(postNo).isEmpty()){
+        }else{
+            communityLikeRepository.deleteAllByPostNo(postNo);
+        }
+    }
+
+    // 커뮤니티 이미지 삭제
+    public void deleteAllcomIMG(Long postNo){
+        if(communityImageRepository.findAllByPostNo(postNo).isEmpty()){
+        }else{
+            communityImageRepository.deleteAllByPostNo(postNo);
+        }
     }
 }
 

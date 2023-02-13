@@ -3,7 +3,6 @@ package com.ajd.meow.controller.home;
 import com.ajd.meow.entity.UserMaster;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpSession;
 

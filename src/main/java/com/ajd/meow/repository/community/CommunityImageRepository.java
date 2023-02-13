@@ -14,13 +14,11 @@ public interface CommunityImageRepository extends JpaRepository<CommunityImage, 
 
     List<CommunityImage> findByPostNo(Long postNo);
 
-
-
     @Transactional
     List<CommunityImage> deleteByPostNo(Long postNo);
 
+    List<CommunityImage> findAllByPostNo(Long postNo);
 
-
-
+    void deleteAllByPostNo(Long postNo);
 
 }

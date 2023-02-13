@@ -21,7 +21,6 @@ public class ReplyApiController {
         UserMaster loginUser=(UserMaster)session.getAttribute("user");
         reply.setPostNo(postNo);
         reply.setUserNo(loginUser.getUserNo());
-        reply.setUserNick(loginUser.getNickName());
         System.out.println(reply);
         replyService.replySave(postNo, reply,loginUser);
 

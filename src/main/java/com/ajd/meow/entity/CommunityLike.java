@@ -22,4 +22,8 @@ public class CommunityLike {
 
     @Column(name="USER_NO")
     private Long userNo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_no", insertable = false, updatable = false)
+    private CommunityMaster communityMaster;
 }

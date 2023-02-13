@@ -24,11 +24,11 @@ public class EmailServiceImpl implements EmailService{
         MimeMessage message = emailSender.createMimeMessage();
 
         message.addRecipients(Message.RecipientType.TO, to);//보내는 대상
-        message.setSubject("이메일 인증 테스트");//제목
+        message.setSubject("Meow me you 회원가입 인증메일입니다.");//제목
 
         String msgg="";
         msgg+= "<div style='margin:20px;'>";
-        msgg+= "<h1> 안녕하세요 미우미우입니다. </h1>";
+        msgg+= "<h1> 안녕하세요 너와 나의 이야기가 시작되는 곳 미유미유입니다.</h1>";
         msgg+= "<br>";
         msgg+= "<p>아래 코드를 복사해 입력해주세요<p>";
         msgg+= "<br>";
@@ -41,7 +41,7 @@ public class EmailServiceImpl implements EmailService{
         msgg+= ePw+"</strong><div><br/> ";
         msgg+= "</div>";
         message.setText(msgg, "utf-8", "html");//내용
-        message.setFrom(new InternetAddress("platinum7011@gmail.com","미우미우"));//보내는 사람
+        message.setFrom(new InternetAddress("platinum7011@gmail.com","미유미유"));//보내는 사람
 
         return message;
     }

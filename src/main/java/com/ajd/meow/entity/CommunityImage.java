@@ -25,9 +25,6 @@ public class CommunityImage {
     @Column(name="USER_NO")
     private Long userNo;
 
-    @Column(name="THUM_NAIL_IMG_ADR")
-    private String thumbnailImageAddress;
-
     @Column(name="IMG_ADR")
     private String imgPath;
 

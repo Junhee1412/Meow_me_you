@@ -2,6 +2,8 @@ package com.ajd.meow.service.community;
 
 import com.ajd.meow.entity.Reply;
 import com.ajd.meow.entity.UserMaster;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface ReplyService {
 
@@ -9,4 +11,12 @@ public interface ReplyService {
     void replySave(Long postNo, Reply reply, UserMaster userMaster);
     //댓글 삭제
     void replyDelete(Long replyNo);
+
+    Page<Reply> getAllReplyByUserNo(Long userNo, Pageable pageable);
+
+    void deleteAllReplyByUserNo(Long userNo);
+
+    void deleteAllReplyByPostNo(Long postNo);
+
+    Reply findReply(Long replyNo);
 }

@@ -24,7 +24,7 @@ public class SecondHandTrade {
 
     @Id
     @Column(name="POST_NO")
-    private Long PostNo;
+    private Long postNo;
 
     @Positive(message = "금액은 0원 이상이어야 합니다!")
     @Column(name="PRICE")

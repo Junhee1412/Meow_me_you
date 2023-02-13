@@ -295,7 +295,6 @@ function ValidChecked() {
       //링크로 바로 오는 것을 방지(사업 선택하고 와야함)
       if (objdonateBusinessCode.value == "") {
           alert("후원 홈에서 후원 사업을 선택해주세요.");
-          objdonateBusinessCode.focus();
           return false;
         };
 
@@ -318,28 +317,28 @@ function ValidChecked() {
         return false;
       };
       if (objBirth.value.length <=8) {
-      if (1900 > objYear.value || objYear.value > yearNow){    // 연도의 경우 1900 보다 작거나 yearNow 보다 크다면 false를 반환합니다.
+      if (1900 > objYear.value || objYear.value > yearNow){
          alert("1900년 이전은 입력할 수 없습니다.");
          objYear.focus();
          return false;
       } else if (objMonth.value == "") {
         alert("월을 선택해주세요");
-        return false;
+         return false;
       } else if (objDay.value < 1 || objDay.value > 31) {
         alert("해당 월은 1일부터 31일까지 입력할 수 있습니다.");
         objDay.focus();
          return false;
       } else if ((objMonth.value==4 || objMonth.value==6 || objMonth.value==9 || objMonth.value==11) && objDay.value==31) {
-      alert("해당 월은 1일부터 30일까지 입력할 수 있습니다.");
-      objDay.focus();
+        alert("해당 월은 1일부터 30일까지 입력할 수 있습니다.");
+        objDay.focus();
          return false;
       } else if (objMonth.value == 2) { // 2월달일때
          // 2월 29일(윤년) 체크
-         const isleap = (objYear.value % 4 == 0 && (objYear.value % 100 != 0 || objYear.value % 400 == 0));
-         if (objDay.value>29 || (objDay.value==29 && !isleap)) {
-         alert("해당 월은 1일부터 28일까지 입력할 수 있습니다.");
-         objDay.focus();
-            return false;
+        const isleap = (objYear.value % 4 == 0 && (objYear.value % 100 != 0 || objYear.value % 400 == 0));
+        if (objDay.value>29 || (objDay.value==29 && !isleap)) {
+        alert("해당 월은 1일부터 28일까지 입력할 수 있습니다.");
+        objDay.focus();
+         return false;
          }
       }
    } else { // 입력된 생년월일이 8자 초과할때 : false
@@ -362,12 +361,11 @@ function ValidChecked() {
 
       // 계좌이체 결제 선택 시.
       if ($("input[name='donateWayCode']:checked").val() == 'ACNT') {
-
         document.querySelector('.noBank_view').value = "";
         document.querySelector('.creditcard_view').value = "";
 
         //계좌은행 선택 유효성검사
-           if (objAccountCompany.value == "") {
+         if (objAccountCompany.value == "") {
            alert("은행명을 선택하세요.");
            objAccountCompany.focus();
            return false;
@@ -375,15 +373,27 @@ function ValidChecked() {
 
         //계좌번호 입력 유효성 검사
         if (objAccountNumber.value == "") {
-            alert("계좌번호를 입력하세요.");
-            objAccountNumber.focus();
-            return false;
-          };
-          if (!account_RegExp.test(objAccountNumber.value)) {
-            alert("계좌번호가 유효하지 않습니다!\n국민 : 12, 14자리, 신한 : 11, 12자리, NH : 13자리");
-            objAccountNumber.focus();
-            return false;
-          };
+          alert("계좌번호를 입력하세요.");
+          objAccountNumber.focus();
+          return false;
+        };
+        if (!account_RegExp.test(objAccountNumber.value)) {
+          alert("계좌번호가 유효하지 않습니다!\n국민 : 12, 14자리, 신한 : 11, 12자리, NH : 13자리");
+          objAccountNumber.focus();
+          return false;
+        };
+
+        //계좌이체 비밀번호 유효성 검사
+        if (objAccountPassword.value == "") {
+          alert("비밀번호를 입력하세요.");
+          objAccountPassword.focus();
+          return false;
+        };
+        if (!pass_RegExp.test(objAccountPassword.value)) {
+          alert("비밀번호는 앞 2자리만 입력해주세요.");
+          objAccountPassword.focus();
+          return false;
+        };
       }
 
       // 무통장입금 결제 선택 시.
@@ -401,7 +411,6 @@ function ValidChecked() {
       }
 
       // 신용카드 결제 선택 시.
-
       else if ($("input[name='donateWayCode']:checked").val() == 'CRCRD') {
         document.querySelector('.noBank_view').value = "";
         document.querySelector('.account_view').value = "";
@@ -475,9 +484,7 @@ function ValidChecked() {
         return false;
         }
 
-
-
-   document.querySelector("input[name='donateAmount']").value = removeComma(objAmount.value);
+      document.querySelector("input[name='donateAmount']").value = removeComma(objAmount.value);
       return true;
    };
 

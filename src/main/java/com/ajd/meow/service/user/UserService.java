@@ -21,6 +21,7 @@ public interface UserService {
 
     UserMaster getUser(Long userNo); // 유저 정보 가져오기2
 
+    void updateNickName(Long userNo, String nickName); // 유저의 닉네임 변경
 
     //페이징
 }

@@ -67,10 +67,13 @@ public class UserServiceImpl implements UserService{
         UUID uuid = UUID.randomUUID();
         String fileName = uuid + "_" + file.getOriginalFilename();
         File saveFile = new File(imgPath, fileName);
+
+        user.setProfileImageName(fileName);
+        user.setProfileImagePath("/files/" + fileName);
+
         file.transferTo(saveFile);
 
-        Optional<UserMaster> useruser=userRepository.findByNickName(user.getNickName());
-        useruser.get().setNickName(user.getNickName());
+        Optional<UserMaster> useruser=userRepository.findByUserId(user.getUserId());
         useruser.get().setAddress(user.getAddress());
         useruser.get().setPhoneType(user.getPhoneType());
         useruser.get().setPhoneNumber(user.getPhoneNumber());
@@ -89,7 +92,13 @@ public class UserServiceImpl implements UserService{
     }
 
 
-    // 주석처리 -
+    @Override
+    public void updateNickName(Long userNo, String nickName){ // 유저 닉네임 업데이트
+        UserMaster user=userRepository.findById(userNo).get();
+        user.setNickName(nickName);
+        userRepository.save(user);
+    }
+
 
 
 

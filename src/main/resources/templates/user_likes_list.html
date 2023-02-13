@@ -164,20 +164,21 @@
           <tbody>
             <tr th:each="likeList: ${likes}">
               <td th:text="${likeList.getPostNo()}">번호</td>
-              <td th:switch="${likeList.getCommunityId()}">
+              <td th:switch="${likeList.getCommunityMaster().getCommunityId()}">
                 <span th:case="'ADP_ACT'">분양하기</span>
                 <span th:case="'ADP_REV'">분양후기</span>
                 <span th:case="'CAT_STR'">캣스타그램</span>
                 <span th:case="'DON_HST'">후원내역</span>
                 <span th:case="'FRE_SEL'">무료나눔</span>
                 <span th:case="'USD_TRN'">중고거래</span>
+                <span th:case="'NOTICE'">공지사항</span>
               </td>
-              <td colspan="3"><a th:href="@{/board/view?(postNo=${likeList.postNo})}"><span th:text="${likeList.getSubject()}"></span></a></td>
-              <td th:text="${likeList.getViewCount()}">조회수</td>
-              <td th:text="${likeList.getUserMaster().getNickName()}"></td>
+              <td colspan="3"><a th:href="@{/board/view?(postNo=${likeList.postNo})}"><span th:text="${likeList.getCommunityMaster().getSubject()}"></span></a></td>
+              <td th:text="${likeList.getCommunityMaster().getViewCount()}">조회수</td>
+              <td th:text="${likeList.getCommunityMaster().getUserMaster().getNickName()}"></td>
               <!--<td th:text="${postMaster.getViewCount()}">댓글수</td>
               <td th:text="${postMaster.getViewCount()}">좋아요수</td>-->
-              <td th:text="${likeList.getCreatePostDate().toString().replace('T','  ')}">작성일</td>
+              <td th:text="${likeList.getCommunityMaster().getCreatePostDate().toString().replace('T','  ')}">작성일</td>
               <!--<td><a th:href="@{/board/delete?(postNo=${postMaster.postNo})}" type="button" class="btn btn-outline-danger confirm_deletePost_btn">삭제</a></td>-->
             </tr>
           </tbody>

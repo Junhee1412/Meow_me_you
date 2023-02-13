@@ -5,13 +5,11 @@ import com.ajd.meow.entity.CommunityMaster;
 import com.ajd.meow.entity.Reply;
 import com.ajd.meow.entity.UserMaster;
 import com.ajd.meow.repository.community.CommunityLikeRepository;
-import com.ajd.meow.repository.community.CommunityMasterRepository;
 import com.ajd.meow.service.community.CommunityMasterService;
 import com.ajd.meow.service.community.ReplyService;
 import com.ajd.meow.service.donate.DonateService;
 import com.ajd.meow.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.*;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -22,6 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import java.beans.BeanProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -37,23 +37,33 @@ public class MyPageController {
     private ReplyService replyService;
     @Autowired
     private CommunityLikeRepository communityLikeRepository;// 이거 좋아요 누른 게시글 모아보기, 게시글 삭제하기에서 사용
-    @Bean
-    private List<CommunityMaster> makeList(){return new ArrayList<>();}
-    @Bean
-    private Page<CommunityMaster> makePage(List<CommunityMaster> com){
-        return new PageImpl<>(com);
-    }
 
 
 
     @GetMapping("my.meow") // 마이페이지로 이동
     public String my(HttpSession session, Model model){
-        //user.setUserId(session.getId());
-        UserMaster loginUser=userService.getUserMaster((UserMaster)session.getAttribute("user"));
-        model.addAttribute("user",loginUser);
-        return "my_page";
+        if(session.getAttribute("user")==null){
+            return "redirect:/";
+        }else{
+            UserMaster loginUser=userService.getUserMaster((UserMaster)session.getAttribute("user"));
+            model.addAttribute("user",loginUser);
+            return "my_page";
+        }
     }
 
+
+
+    // 닉네임 중복체크는 회원가입 시 쓰는 닉네임 중복체크꺼 가져다가 쓴다 - UserController 에 있음
+    @PostMapping("changeNickName.meow")
+    public String changeNickName(HttpSession session, @RequestParam("nickName")String nickName){
+        if(session.getAttribute("user")==null){
+            return "redirect:/";
+        }else{
+            UserMaster loginUser=userService.getUserMaster((UserMaster)session.getAttribute("user"));
+            userService.updateNickName(loginUser.getUserNo(),nickName);
+            return "redirect:/my.meow";
+        }
+    }
 
 
     @GetMapping("myPost.meow") // 내글 모두보기
@@ -150,20 +160,12 @@ public class MyPageController {
 
     @GetMapping("myHeart.meow") // 좋아요 모아보기
     public String myheart(HttpSession session, Model model, @PageableDefault(page = 0,size = 10) Pageable pageable){
-        // , sort = "POST_NO", direction = Sort.Direction.DESC  <<  pageabledefault 괄호 안에 적는건데 적으면 오류남
+        // , sort = "postNo", direction = Sort.Direction.DESC  <<  pageabledefault 괄호 안에 적는건데 적으면 오류남 - 쿼리문에 적음
         if(session.getAttribute("user")==null){
             return "redirect:/";
         }else{
             UserMaster loginUser=userService.getUserMaster((UserMaster)session.getAttribute("user"));
             Page<CommunityLike> likes=communityLikeRepository.selectLikesByUser(loginUser.getUserNo(),pageable);
-            //communityMasterService.getAllLikeByUserNo(loginUser.getUserNo(), pageable);
-            System.out.println("------------------"+likes.getContent().size());
-            List<CommunityMaster> comList=makeList();
-            for(int i=0; i<likes.getContent().size(); i++){
-                comList.add(communityMasterService.findPost(likes.getContent().get(i).getPostNo()));
-            }
-            Page<CommunityMaster> comPage=makePage(comList);
-
 
             int nowPage = likes.getPageable().getPageNumber()+1 ;
             int startPage = Math.max(0 , 1);
@@ -175,8 +177,7 @@ public class MyPageController {
             model.addAttribute("maxPage",10);
 
             model.addAttribute("userNickName",loginUser.getNickName());
-            //model.addAttribute("com",com);
-            model.addAttribute("likes",comPage);
+            model.addAttribute("likes",likes);
 
             return "user_likes_list";
         }

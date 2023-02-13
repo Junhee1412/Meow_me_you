@@ -54,11 +54,18 @@ public interface CommunityLikeRepository extends JpaRepository<CommunityLike, Lo
     @Query(value = "delete from CMNTY_LIKE where POST_NO=:postNo", nativeQuery = true)
     void deleteLikesByPost(@Param("postNo")Long postNo);
 
-    //유저번호로 좋아요 찾기
+    //유저번호로 좋아요 찾기 - 페이징
     @Transactional
     //@Modifying
-    @Query(value = "select * from CMNTY_LIKE where USER_NO=:userNo order by POST_NO", nativeQuery = true)
+    @Query(value = "select * from CMNTY_LIKE where USER_NO=:userNo order by POST_NO DESC", nativeQuery = true) // order by POST_NO
     Page<CommunityLike> selectLikesByUser(@Param("userNo")Long userNo, Pageable pageable);
+
+
+    //유저번호로 좋아요 찾기 - 페이징
+    /*@Transactional
+    //@Modifying
+    @Query(value = "select * from CMNTY_LIKE where USER_NO=:userNo order by POST_NO", nativeQuery = true)
+    List<CommunityLike> selectLikesByUser(@Param("userNo")Long userNo);*/
 
 
 

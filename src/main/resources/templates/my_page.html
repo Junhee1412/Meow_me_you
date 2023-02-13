@@ -25,7 +25,7 @@
       content="유기묘 커뮤니티에 오신걸 환영합니다!"
     />
     
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
   
@@ -111,7 +111,7 @@
      <!-- section -->
      <section class="sec-header">
       <div class="thumb-wrapper stagger-item">
-        <a href="#"><img class="thumb" th:src="@{${user.profileImagePath}}" /></a>
+        <a href="#"><img class="thumb" th:src="@{|/upload/${user.profileImagePath}|}" /></a>
       </div>
   
       <div class="text-area">
@@ -130,7 +130,9 @@
                 </tr>
                 <tr>
                   <th scope="row">닉네임</th>
-                  <td><span th:text="${user.getNickName()}"></span></td>
+                  <td><span th:text="${user.getNickName()}"></span>&nbsp;&nbsp;&nbsp;
+                    <a href="#" data-toggle="modal" data-target="#changeNickNameModal" class="btn btn-secondary">변경</a>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">핸드폰</th>
@@ -203,8 +205,54 @@
     </section>
   <!-- section - end -->
 
+ 
+  
+
+
+
+
+  <!--  닉네임 변경 Modal -->
+  <div class="modal fade" id="changeNickNameModal" tabindex="-1" role="dialog" aria-labelledby="changeNickNameModalLabel">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="changeNickNameModalLabel">닉네임 변경하기</h4>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label class="form-label mt-2">현재 닉네임</label>
+            <input type="text" class="form-control findIdName" th:value="${user.getNickName()}" disabled>
+          </div>
+
+          <form action="changeNickName.meow" method="post">
+            <div class="form-group">
+              <label class="form-label mt-2">변경할 닉네임*</label>
+              <input type="text" class="form-control findIdName" id="sign_nick" name="nickName" maxlength="10" required>
+            </div>
+            <div><span id="checkNickNameDuplication_span"></span></div>
+            <button type="submit" id="changeNickNameBtn" class="btn btn-secondary">변경하기</button>
+          </form>
+          <button class="w-30 btn btn-lg btn-dark mt-4" id="checkNickNameDuplication_Btn">중복검사</button>
+
+          <div><span id="findUserId"></span></div>
+
+        </div><!--modal-body end-->
+        
+        <div class="modal-footer mt-3">
+          <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 닉네임 변경 modal - end  -->
    
-   
+
+
+
+
+
 
     <!-- Footer-->
     <footer class="py-5 bg-dark">
@@ -221,6 +269,6 @@
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="../js/template.js"></script>
+    <script src="../js/my_page.js"></script>
   </body>
 </html>

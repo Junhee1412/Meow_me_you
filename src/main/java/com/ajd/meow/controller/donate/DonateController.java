@@ -117,7 +117,7 @@ public class DonateController {
                 break;
             }
             redirectAttributes.addAttribute("donatename", donateMaster.getDonateName());
-            return "redirect:success";
+            return "redirect:donatesuccess";
     }
 
     @GetMapping("/donatelist")

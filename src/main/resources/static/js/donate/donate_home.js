@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       f.appendChild(obj);
       f.setAttribute('method', 'get');
-      f.setAttribute('action', 'create');
+      f.setAttribute('action', 'donatecreate');
 
       document.body.appendChild(f);
       f.submit();

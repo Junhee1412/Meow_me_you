@@ -74,20 +74,56 @@
   
         <i class="mobile-nav-toggle mobile-nav-show bi bi-list "></i>
         <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x "></i>
-        <nav id="navbar" class="navbar">
+        <nav th:if="${userType}=='MEMBER'" id="navbar" class="navbar">
           <ul>
-            <li class="dropdown"><a href="#"><span>마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <li class="dropdown"><a href="/"><span>Meow me, you</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="#">내 글 모아보기</a></li>
-                <li><a href="#">내가 쓴 댓글 모아보기</a></li>
-                <li><a href="#">좋아요 목록 보기</a></li>
-                <li><a href="#">내 후원 목록보기</a></li>
-                <li><a href="#">회원정보 수정하기</a></li>
+                <li><a href="business">사업소개</a></li>
+                <li><a href="#">후원내역</a></li>
+              </ul>
+            </li>
+            <li><a href="donatehome">후원하기</a></li>
+            <li class="dropdown"><a href="#"><span>물품거래</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+              <ul>
+                <li><a href="#">무료 나눔</a></li>
+                <li><a href="#">중고 거래</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+              <ul>
+                <li><a href="boardlist">분양하기</a></li>
+                <li><a href="#">분양후기</a></li>
+                <li><a href="#">캣스타그램</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="my_page"><span>마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+              <ul>
+                <li><a href="myPost">내 글 모아보기</a></li>
+                <li><a href="myReply">내가 쓴 댓글 모아보기</a></li>
+                <li><a href="myHeart">좋아요 목록 보기</a></li>
+                <li><a href="donatelist">내 후원 목록보기</a></li>
+                <li><a href="modifyUser">회원정보 수정하기</a></li>
               </ul>
             </li>
             <li><a class="get-a-quote" href="logout">로그아웃</a></li>
           </ul>
         </nav>
+        <!-- .navbar -->
+        <nav th:if="${userType}=='ADMIN'" id="navbar" class="navbar">
+          <ul>
+            <li class="dropdown"><a href="adminMypage"><span>관리자마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+              <ul>
+                <li><a href="adminMypage">관리자마이페이지</a></li>
+                <li><a href="adminUserList">유저 리스트</a></li>
+                <li><a href="adminPostManage">전체 글</a></li>
+                <li><a href="adminDonatemanage">후원 내역</a></li>
+                <li><a href="adminModify">관리자 수정</a></li>
+              </ul>
+            </li>
+            <li><a class="get-a-quote" href="logout">로그아웃</a></li>
+          </ul>
+        </nav>
+        <!-- .navbar -->
         <!-- .navbar -->
   
       </div>
@@ -96,7 +132,7 @@
      <!-- section -->
      <div class="header-card">
       <div class="card bg-crop">
-        <img src="../img/parcel_review_menu.jpg" class="card-img rounded mx-auto d-block bg-menu" alt="커뮤니티설명" />
+        <img src="../img/mypost/my_Reply.jpg" class="card-img rounded mx-auto d-block bg-menu" alt="커뮤니티설명" />
         <div class="card-img-overlay" id="community_type">
           <h5 class="card-title text-dark text-center fs-1">
             글 목록
@@ -109,19 +145,6 @@
      </div>
   
     <section>
-      <div class="dropdown" id="top_dropdown">
-        <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-          aria-expanded="false">
-          작성일자 순 정렬
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="#">조회수 많은 순 정렬</a></li>
-          <!--<li><a class="dropdown-item" href="#">댓글 수 많은 순 정렬</a></li>
-          <li><a class="dropdown-item" href="#">좋아요 수 많은 순 정렬</a></li>-->
-          <li><a class="dropdown-item" href="#">커뮤니티 별 정렬</a></li>
-        </ul>
-      </div>
-  
   
       <div id="table_box">
         <table class="table pad_4">
@@ -151,7 +174,7 @@
                 <span th:case="'USD_TRN'">중고거래</span>
                 <span th:case="'NOTICE'">공지사항</span>
               </td>
-              <td><a th:href="@{/boardview?(postNo=${postMaster.postNo})}"><span th:text="${postMaster.getCommunityMaster().getSubject()}"></span></a></td>
+              <td><a style="text-decoration: none;" th:href="@{/boardview?(postNo=${postMaster.postNo})}"><span th:text="${postMaster.getCommunityMaster().getSubject()}"></span></a></td>
               <td>
                 <th:block th:if="${postMaster.replyContent.length >= 10}">
                   <span th:text="${postMaster.replyContent.substring(0,10)}+'...'"></span>
@@ -164,32 +187,56 @@
               <td th:text="${postMaster.getCommunityMaster().getViewCount()}">좋아요수</td>-->
               <td th:text="${postMaster.getCommunityMaster().getUserMaster().getNickName()}">작성자</td>
               <!--<td th:text="${postMaster.getCommunityMaster().getCreatePostDate().toString().replace('T','  ')}">작성일</td>-->
-              <td><a th:href="@{/deleteReplyInMyPage?(replyNo=${postMaster.replyNo})}" type="button" class="btn btn-outline-danger confirm_deleteReply_btn">삭제</a></td>
+              <td><a th:href="@{/deleteReplyInMyPage?(replyNo=${postMaster.replyNo})}" type="button" class="btn btn-outline-danger btn-sm confirm_deleteReply_btn">삭제</a></td>
             </tr>
           </tbody>
         </table>
         <hr class="border border-white">
       </div>
-      <div class="col" id="delete_btn_group">
-        <div class="input-group mb-3" id="search_box">
-          <input type="text" class="form-control" placeholder="검색하기" aria-label="Recipient's username"
-            aria-describedby="button-addon2">
-          <button class="btn btn-outline-dark" type="button" id="button-addon2">+</button>
-          &nbsp;&nbsp;
-        </div>
+
+<!--   검색하기   -->
+      <div  style="margin: 0 auto; width: 25%; ">
+        <form th:action="@{/boardlist}" method="get">
+          <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+            <div class="input-group">
+              <input type="search" name="searchKeyword" placeholder="제목을 입력하세요" aria-describedby="button-addon1" class="form-control border-0 bg-light">
+              <div class="input-group-append">
+                <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
   
       <hr class="border border-white">
-      <nav aria-label="Page navigation example" class="page_div">
+      <!--페이지-->
+
+      <nav  class="marbot_100" aria-label="Page navigation example" >
         <ul class="pagination">
-          <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item"><a class="page-link" href="#">4</a></li>
-          <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+          <li class="page-item" th:classappend="${1 == nowPage} ? 'disabled'">
+            <a class="page-link" th:if="${userType}=='ADMIN'" href="#" aria-label="Previous" th:href="@{/adminUserReply(userNo=${userNo},page=${startPage-1})}"><span aria-hidden="true">&laquo;</span></a>
+            <a class="page-link" th:if="${userType}=='MEMBER'" href="#" aria-label="Previous" th:href="@{/myReply(page=${startPage-1})}"><span aria-hidden="true">&laquo;</span></a>
+          </li>
+          <li class="page-item" th:classappend="${1 == nowPage} ? 'disabled'">
+            <a class="page-link" th:if="${userType}=='ADMIN'" href="#" aria-label="Previous" th:href="@{/adminUserReply(userNo=${userNo},page=${nowPage-2})}"><span aria-hidden="true">&lt;</span></a>
+            <a class="page-link" th:if="${userType}=='MEMBER'" href="#" aria-label="Previous" th:href="@{/myReply(page=${nowPage-2})}"><span aria-hidden="true">&lt;</span></a>
+          </li>
+          <li class="page-item" th:classappend="${i == nowPage} ? 'disabled'" th:each="i : ${#numbers.sequence(startPage, endPage)}" th:if="${i >= nowPage-5 and i <= nowPage+4}" >
+            <a class="page-link" th:if="${userType}=='ADMIN'" href="#"  th:href="@{/adminUserReply(userNo=${userNo},page=${i - 1})}" th:text="${i}">1</a>
+            <a class="page-link" th:if="${userType}=='MEMBER'" href="#"  th:href="@{/myReply(page=${i - 1})}" th:text="${i}">1</a>
+          </li>
+
+          <li class="page-item" th:classappend="${endPage == nowPage} ? 'disabled'">
+            <a class="page-link" th:if="${userType}=='ADMIN'" href="#" aria-label="Next"  th:href="@{/adminUserReply(userNo=${userNo},page=${nowPage})}"><span aria-hidden="true">&gt;</span></a>
+            <a class="page-link" th:if="${userType}=='MEMBER'" href="#" aria-label="Next"  th:href="@{/myReply(page=${nowPage})}"><span aria-hidden="true">&gt;</span></a>
+          </li>
+          <li class="page-item" th:classappend="${endPage == nowPage} ? 'disabled'">
+            <a class="page-link" th:if="${userType}=='ADMIN'" href="#" aria-label="Next"  th:href="@{/adminUserReply(userNo=${userNo},page=${endPage-1})}"><span aria-hidden="true">&raquo;</span></a>
+            <a class="page-link" th:if="${userType}=='MEMBER'" href="#" aria-label="Next"  th:href="@{/myReply(page=${endPage-1})}"><span aria-hidden="true">&raquo;</span></a>
+          </li>
         </ul>
       </nav>
+      <!--페이지 end-->
       <hr class="border border-white">
   
   

@@ -15,7 +15,7 @@ public class HomeController {
         }else{
             UserMaster loginUser= (UserMaster)session.getAttribute("user");
             if(loginUser.getUserType().equals("ADMIN")){
-                return "index";// 어드민 페이지로 이동
+                return "admin/admin_index";// 어드민 페이지로 이동
             }else{
                 return "user/index_login";
             }

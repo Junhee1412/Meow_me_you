@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebMvcConfig implements WebMvcConfigurer {
 
     private String resourcePath= "/upload/**"; //뷰에서 접근할 경로
-    private String savePaths = "file:///C:/Users/JunHee/develop/Github/meow/src/main/resources/static/files"; //실제파일 경로
+    private String savePaths = "file:///C:/Users/User/Desktop/meow_me_you-main/meow_me_you-main/src/main/resources/static/files"; //실제파일 경로
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry){

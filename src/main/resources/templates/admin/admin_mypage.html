@@ -71,13 +71,13 @@
         <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x "></i>
         <nav id="navbar" class="navbar">
           <ul>
-            <li class="dropdown"><a href="admin/mypage"><span>관리자마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <li class="dropdown"><a href="adminMypage"><span>관리자마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="admin/mypage">관리자마이페이지</a></li>
-                <li><a href="admin/userlist">유저 리스트</a></li>
-                <li><a href="admin/postmanage">전체 글</a></li>
-                <li><a href="admin/donatemanage">후원 내역</a></li>
-                <li><a href="admin/modify">관리자 수정</a></li>
+                <li><a href="adminMypage">관리자마이페이지</a></li>
+                <li><a href="adminUserList">유저 리스트</a></li>
+                <li><a href="adminPostManage">전체 글</a></li>
+                <li><a href="adminDonatemanage">후원 내역</a></li>
+                <li><a href="adminModify">관리자 수정</a></li>
               </ul>
             </li>
             <li><a class="get-a-quote" href="logout">로그아웃</a></li>
@@ -114,9 +114,9 @@
     
     <div class="list-group list_user">
       <span class="fw-bold fs-5 text-dark mb-3 mt-3" disabled>회원관리</span>
-      <a href="admin/userlist" class="list-group-item list-group-item-action">회원 목록</a>
-      <a href="admin/postmanage" class="list-group-item list-group-item-action">게시글 관리</a>
-      <a href="admin/donatemanage" class="list-group-item list-group-item-action">후원관리하기</a>
+      <a href="adminUserList" class="list-group-item list-group-item-action">회원 목록</a>
+      <a href="adminPostManage" class="list-group-item list-group-item-action">게시글 관리</a>
+      <a href="adminDonatemanage" class="list-group-item list-group-item-action">후원관리하기</a>
       
       
       <a href="#" class="list-group-item list-group-item-action" data-toggle="modal"
@@ -131,7 +131,7 @@
               </div>
               <div class="modal-body">
                 
-                <form action="admin/create" method="post" onsubmit="return ValidChecked();" enctype="multipart/form-data">
+                <form action="adminCreate" method="post" onsubmit="return ValidChecked();" enctype="multipart/form-data">
 
 
                   <div class="form-group">
@@ -187,10 +187,10 @@
     </div>
       <div class="list-group list_admin">
         <span class="fw-bold fs-5 text-dark mb-3 mt-3" disabled>관리자메뉴</span>
-        <a href="admin/chat/master" class="list-group-item list-group-item-action">관리자 채팅</a>
+        <a href="javascript:openDetail('/chat?id=master')" data-toggle="tooltip" data-placement="top" id="chat_btn" title="Chat" class="list-group-item list-group-item-action enter_chat">관리자 채팅</a>
         <!--<a href="createdonateBS.meow" class="list-group-item list-group-item-action">후원 사업게시</a>
         <a href="deletedonateBS.meow" class="list-group-item list-group-item-action">후원 사업삭제</a>--><!--비즈니스마스터-->
-        <a href="admin/insertnotice" class="list-group-item list-group-item-action">공지 글 작성</a>
+        <a href="adminInsertNotice" class="list-group-item list-group-item-action">공지 글 작성</a>
       </div>
 
       
@@ -212,9 +212,13 @@
     <a class="scroll-to-top rounded" href="#page-top"
       ><i class="fas fa-angle-up"></i
     ></a>
-    <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="../js/admin/admin_mypage.js"></script>
+     <!-- Bootstrap core JS-->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+     <!-- Core JS-->
+     <script src="js/scripts.js"></script>
   </body>
 </html>

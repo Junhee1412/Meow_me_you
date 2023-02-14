@@ -4357,7 +4357,9 @@ fieldset:disabled .btn {
 }
 
 .pagination {
-  display: flex;
+      display: flex;
+      align-items: center;
+      justify-content: center;
   padding-left: 0;
   list-style: none;
 }
@@ -4401,9 +4403,9 @@ fieldset:disabled .btn {
   border-color: #1d809f;
 }
 .page-item.disabled .page-link {
-  color: #6c757d;
+  color: #fff;
   pointer-events: none;
-  background-color: #fff;
+  background-color: #5c636a;
   border-color: #dee2e6;
 }
 

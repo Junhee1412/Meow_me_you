@@ -73,35 +73,24 @@
           <ul>
             <li class="dropdown"><a href="/"><span>Meow me, you</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="business">사업소개</a></li>
+                <li><a href="/loginpage">사업소개</a></li>
                 <li><a href="#">후원내역</a></li>
               </ul>
             </li>
-            <li><a href="donatehome">후원하기</a></li>
+            <li><a href="/loginpage">후원하기</a></li>
             <li class="dropdown"><a href="#"><span>물품거래</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="#">무료 나눔</a></li>
-                <li><a href="#">중고 거래</a></li>
+                <li><a href="/loginpage">무료 나눔</a></li>
+                <li><a href="/loginpage">중고 거래</a></li>
               </ul>
             </li>
             <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="boardlist">분양하기</a></li>
-                <li><a href="#">분양후기</a></li>
-                <li><a href="#">캣스타그램</a></li>
+                <li><a href="/loginpage">분양하기</a></li>
+                <li><a href="/loginpage">분양후기</a></li>
+                <li><a href="/loginpage">캣스타그램</a></li>
               </ul>
             </li>
-            <li class="dropdown"><a href="my_page"><span>마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-              <ul>
-                <li><a href="myPost">내 글 모아보기</a></li>
-                <li><a href="myReply">내가 쓴 댓글 모아보기</a></li>
-                <li><a href="myHeart">좋아요 목록 보기</a></li>
-                <li><a href="donatelist">내 후원 목록보기</a></li>
-                <li><a href="modifyUser">회원정보 수정하기</a></li>
-              </ul>
-            </li>
-            <li><a class="get-a-quote" href="logout">로그아웃</a></li>
-          </ul>
         </nav>
         <!-- .navbar -->
   
@@ -361,7 +350,7 @@
               <tr>
                 <td>
                   <div class="left">
-                    <input type="checkbox" value="">이용약관에 동의합니다.
+                    <input type="checkbox" value="" class="checkOne checkcheck">이용약관에 동의합니다.
                   </div>
                   <br><br><br>
                 </td>
@@ -482,7 +471,7 @@
               <tr>
                 <td>
                   <div class="left">
-                    <input type="checkbox" value="">개인정보 수집 및 이용에 대한 안내에 동의합니다.
+                    <input type="checkbox" value="" class="checkTwo checkcheck">개인정보 수집 및 이용에 대한 안내에 동의합니다.
                   </div>
                 </td>
               </tr>
@@ -497,10 +486,27 @@
   
       </section>
       <div class="bot_btn_group">
-        <button class="btn btn-dark marright_10" type="button">가입하기</button>
-        <button class="btn btn-dark" type="button">뒤로가기</button>
+        <button class="btn btn-dark marright_10" type="button" id="goToJoin" disabled ><a href="sign_user" >가입하기</a></button>
+        <button class="btn btn-dark" type="button" onclick="history.back()">뒤로가기</button>
       </div>
-  
+
+       <script>
+      $('.checkcheck').click(function(){
+          var tmpp = $(this).prop('checked');
+          var ss = $(".checkcheck:checked").length;
+
+          //선택한 체크박스 값이 true 이거나 체크박스 1개 이상 체크시 버튼 활성화시키기
+          if(tmpp==true && ss>1){
+            $('#goToJoin').attr('disabled',false);
+          }
+          else{
+            $('#goToJoin').attr('disabled',true);
+          }
+      });
+      </script>
+
+
+
   <!-- section - end -->
 
    

@@ -99,7 +99,7 @@ public class MyPageController {
             communityLikeRepository.deleteLikesByPost(postNo);// 좋아요 지우기
             communityService.communityPostDelete(postNo); // 게시글 지우기
             if(userMaster.getUserType().equals("ADMIN")){
-                return "redirect:/admin/userPost?userNo="+usernumber;
+                return "redirect:/adminUserPost?userNo="+usernumber;
             }else{
                 return "redirect:/myPost";
             }
@@ -128,6 +128,8 @@ public class MyPageController {
             model.addAttribute("userNickName",loginUser.getNickName());
             model.addAttribute("replies",replies);
 
+            model.addAttribute("userType", loginUser.getUserType());
+
             return "user/user_reply_list";
             //return "user/user_post_list";
         }
@@ -144,7 +146,7 @@ public class MyPageController {
             Long usernumber=replyService.findReply(replyNo).getUserNo();
             replyService.replyDelete(replyNo);
             if(userMaster.getUserType().equals("ADMIN")){
-                return "redirect:/admin/userReply?userNo="+usernumber;
+                return "redirect:/adminUserReply?userNo="+usernumber;
             }else{
                 return "redirect:/myReply";
             }

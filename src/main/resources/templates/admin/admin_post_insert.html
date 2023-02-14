@@ -76,13 +76,13 @@
         <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x "></i>
         <nav id="navbar" class="navbar">
           <ul>
-            <li class="dropdown"><a href="admin/mypage"><span>관리자마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <li class="dropdown"><a href="adminMypage"><span>관리자마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="admin/mypage">관리자마이페이지</a></li>
-                <li><a href="admin/userlist">유저 리스트</a></li>
-                <li><a href="admin/postmanage">전체 글</a></li>
-                <li><a href="admin/donatemanage">후원 내역</a></li>
-                <li><a href="admin/modify">관리자 수정</a></li>
+                <li><a href="adminMypage">관리자마이페이지</a></li>
+                <li><a href="adminUserList">유저 리스트</a></li>
+                <li><a href="adminPostManage">전체 글</a></li>
+                <li><a href="adminDonatemanage">후원 내역</a></li>
+                <li><a href="adminModify">관리자 수정</a></li>
               </ul>
             </li>
             <li><a class="get-a-quote" href="logout">로그아웃</a></li>
@@ -112,7 +112,7 @@
       </div>
      </div>
 
-     <form th:action="admin/insertnotice" method="post">
+     <form th:action="adminInsertNotice" method="post">
     <input type="hidden" name="communityId" value="NOTICE">
     <input type="hidden" name="userNo" th:value="${adminNo}">
     <input type="hidden" name="postId" value="NTC_POST">

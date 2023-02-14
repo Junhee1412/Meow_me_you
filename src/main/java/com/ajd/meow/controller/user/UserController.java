@@ -21,12 +21,12 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("sign.meow")
+    @GetMapping("sign_user")
     public String memberSign(){
-        return "sign";
+        return "user/sign_page";
     }
 
-    @GetMapping("checkDuplication.meow/{userIdemail}") // 이메일 중복 체크
+    @GetMapping("checkDuplication/{userIdemail}") // 이메일 중복 체크
     @ResponseBody
     public String checkDuplication(@PathVariable String userIdemail){
         if(userRepository.existsByUserId(userIdemail)){
@@ -34,7 +34,7 @@ public class UserController {
         }else{return "available";}
     }
 
-    @GetMapping("checkDuplicationNickName.meow/{userNickName}") // 닉네임 중복체크
+    @GetMapping("checkDuplicationNickName/{userNickName}") // 닉네임 중복체크
     @ResponseBody
     public String checkDuplicationNickName(@PathVariable String userNickName){
         if(userRepository.existsByNickName(userNickName)){
@@ -42,7 +42,7 @@ public class UserController {
         }else{return "available";}
     }
 
-    @PostMapping("sign_success.meow") //@ModelAttribute
+    @PostMapping("sign_success") //@ModelAttribute
     public String memberSignSuccess(UserMaster user, MultipartFile file) throws Exception{
         if(userRepository.existsByUserId(user.getUserId())){
             return "redirect:/";
@@ -50,11 +50,11 @@ public class UserController {
             // 새로고침 시 유저가 중복 추가되는거 방지용으로 넣었음 - 걍 홈으로 이동함니다.
         }else{
             userService.insertMember(user, file);
-            return "sign_success";
+            return "user/sign_success";
         }
     }
 
-    @PostMapping("findid.meow")
+    @PostMapping("findid")
     @ResponseBody
     public  String findId(Model model, @RequestParam("userName")String name, @RequestParam("phoneType")String type, @RequestParam("phoneNumber")String number){
         if(!userRepository.existsByUserName(name)){
@@ -74,7 +74,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("resettingpw.meow")
+    @PostMapping("resettingpw")
     @ResponseBody
     public String resettingPW(Model model, @RequestParam("userId")String userid, @RequestParam("userName")String name, @RequestParam("phoneType")String type, @RequestParam("phoneNumber")String number){
         if(!userRepository.existsByUserId(userid)){
@@ -84,24 +84,24 @@ public class UserController {
             Optional<UserMaster> user=userRepository.findByUserId(userid);
             if(user.get().getUserName().equals(name)&&user.get().getPhoneType().equals(type)&&user.get().getPhoneNumber().equals(number)){
                 model.addAttribute("userid",userid);
-                return "available";//"pwd_reset";
+                return "available";//"user/pwd_reset";
             }else{
                 return "mismatch";
             }
         }
     }
-    @PostMapping("resetting_pw.meow") // resetting_pw.meow/${resetid}
+    @PostMapping("resetting_pw") // resetting_pw/${resetid}
     public String resetPW(@RequestParam("userId")String userId, Model model){
         model.addAttribute("userid",userId);
-        return "pwd_reset";
+        return "user/pwd_reset";
     }
-    @PostMapping("finalResetPW.meow")
+    @PostMapping("finalResetPW")
     public String finalResetPWForm(@RequestParam("userId")String userId, Model model){
         model.addAttribute("userid",userId);
-        return "pwd_reset";
+        return "user/pwd_reset";
     }
 
-    @PostMapping("changepw.meow")
+    @PostMapping("changepw")
     public String changepw(@RequestParam("userId")String userId, @RequestParam("userPassword")String password, Model model){
         //UserMaster user=userRepository.findByUserId(userId).get();
         //userService.updateMemberPassword(user);
@@ -109,6 +109,6 @@ public class UserController {
         userRepository.save(userRepository.findByUserId(userId).get());
         //model.addAttribute("userid",user.getUserId());
         model.addAttribute("userid",userRepository.findByUserId(userId));
-        return "pwd_success";
+        return "user/pwd_success";
     }
 }

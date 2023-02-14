@@ -44,12 +44,12 @@ public class DonateController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/donate/home")
+    @GetMapping("/donatehome")
     public String donatehome(){
         return "donate/donate_home";
     }
 
-    @GetMapping("/donate/success")
+    @GetMapping("/donatesuccess")
     public String donateSuccess(HttpSession session, Model model){
         UserMaster loginUser=(UserMaster)session.getAttribute("user");
         model.addAttribute("user",loginUser);
@@ -57,14 +57,14 @@ public class DonateController {
         return "donate/donate_success";
     }
 
-    @GetMapping("/donate/create")
+    @GetMapping("/donatecreate")
     public String donateCreateForm(HttpSession session, DonateMaster donateMaster, Model model){
         UserMaster loginUser=(UserMaster)session.getAttribute("user");
         model.addAttribute("user",loginUser);
         return "donate/donate_insert";
     }
 
-    @PostMapping("/donate/createdo")
+    @PostMapping("/donatecreatedo")
     public String donate(HttpServletRequest request, HttpSession session, DonateMaster donateMaster,
                          BankTransfer bankTransfer, CreditcardPayment creditcardPayment, AccountTransfer accountTransfer,
                          RedirectAttributes redirectAttributes, Model model){
@@ -120,7 +120,7 @@ public class DonateController {
             return "redirect:success";
     }
 
-    @GetMapping("/donate/list")
+    @GetMapping("/donatelist")
     public String donatelistForm(@PageableDefault(page = 0,size = 10, sort = "donateCode", direction = Sort.Direction.DESC)
                                      Pageable pageable, HttpSession session, Model model){
 
@@ -143,29 +143,29 @@ public class DonateController {
         return "donate/my_donate_list";
     }
 
-    @GetMapping("/donate/confirm")
+    @GetMapping("/donateconfirm")
     public String donateConfirm(Long donateCode) {
         donateservice.confirmDonate(donateCode);
         return "redirect:list";
     }
 
-    @GetMapping("/donate/delete")
+    @GetMapping("/donatedelete")
     public String donateDelete(Long donateCode){
         donateservice.deleteDonate(donateCode);
         return "redirect:list";
     }
 
-    @GetMapping("/donate/receipt/{id}")
+    @GetMapping("/donatereceipt/{id}")
     public String donateReceipt(@PathVariable("id") Long donateCode, HttpSession session, Model model) {
         UserMaster loginUser=(UserMaster)session.getAttribute("user");
         model.addAttribute("user",loginUser);
 
         model.addAttribute("donateReceipt", donateservice.donateReceipt(donateCode));
 
-        return "donate/receipt";
+        return "donatereceipt";
     }
 
-    @GetMapping("/donate/receipt")
+    @GetMapping("/donatereceipt")
     public String donateReceipt(HttpSession session, Model model, Long id){
         UserMaster loginUser=(UserMaster)session.getAttribute("user");
         model.addAttribute("user",loginUser);

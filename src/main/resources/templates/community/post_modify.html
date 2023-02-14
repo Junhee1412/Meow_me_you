@@ -91,7 +91,7 @@
             </li>
             <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="#" th:href="@{/board/list}">분양하기</a></li>
+                <li><a href="#" th:href="@{/boardlist}">분양하기</a></li>
                 <li><a href="#">분양후기</a></li>
                 <li><a href="#">캣스타그램</a></li>
               </ul>
@@ -130,7 +130,7 @@
         </div>
       </div>
      </div>
-    <form id="frm" th:action="@{/board/update/{postNo}(postNo=${board.postNo})}" method="post" enctype="multipart/form-data">
+    <form id="frm" th:action="@{/boardupdate/{postNo}(postNo=${board.postNo})}" method="post" enctype="multipart/form-data">
     <div id="insert_text_box">
       <div class="row w-50 mb-3">
         <label for="formTextContent" class="col-sm-2 col-form-label">제목 *</label>
@@ -192,7 +192,7 @@
         <button class="btn btn-dark" >수정 하기</button>
 
         <button type="button" class="btn btn-outline-dark">
-          <a href="/board/list"> <i class="bi bi-list"></i> 목록으로</a>
+          <a href="/boardlist"> <i class="bi bi-list"></i> 목록으로</a>
         </button>
       </div>
     </form>

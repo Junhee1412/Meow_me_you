@@ -89,7 +89,7 @@
             </li>
             <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="#" th:href="@{/board/list}">분양하기</a></li>
+                <li><a href="#" th:href="@{/boardlist}">분양하기</a></li>
                 <li><a href="#">분양후기</a></li>
                 <li><a href="#">캣스타그램</a></li>
               </ul>
@@ -219,10 +219,11 @@
         <ul>
           <li>작성자    : <span th:text="${board.getUserMaster().getNickName()}" >작성자</span></li>
           <li>작성일자  : <span th:text="${#temporals.format(board.createPostDate, 'yyyy-MM-dd HH:mm:ss')}">작성일자</span></li>
+          <li>조회수    : <span th:text="${board.getViewCount()}"></span></li>
         </ul>
 <!--          작성자 : 미우미우<br />작성일자 :-->
           <div id="heart_box">
-              <a th:href="@{/countHeart.meow?(postNo=${board.postNo})}">
+              <a th:href="@{/countHeart?(postNo=${board.postNo})}">
                   <i th:if="${clickHeart}==false" class="bi bi-heart"></i>
                   <i th:if="${clickHeart}==true" class="bi bi-heart-fill"></i>
               </a>
@@ -291,16 +292,16 @@
       </button>
     </div>
     <div class="footer-btn-group" id="post_button_group">
-      <a type="button" class="btn btn-outline-primary" style="margin-right : 10px" th:if="${board.userNo == user.userNo}" th:href="@{/board/modify/{postNo}(postNo=${board.postNo})}">
+      <a type="button" class="btn btn-outline-primary" style="margin-right : 10px" th:if="${board.userNo == user.userNo}" th:href="@{/boardmodify/{postNo}(postNo=${board.postNo})}">
 
         <i class="bi bi-pencil-square"></i> 수정하기
       </a>
       </a>
-      <a type="button" class="btn btn-outline-danger confirm_btn" th:if="${board.userNo == user.userNo}" th:href="@{/board/delete?(postNo=${board.postNo})}">
+      <a type="button" class="btn btn-outline-danger confirm_btn" th:if="${board.userNo == user.userNo}" th:href="@{/boarddelete?(postNo=${board.postNo})}">
         <i class="bi bi-trash-fill"></i> 삭제하기
       </a>
       <button type="button" class="btn btn-outline-dark">
-        <a href="/board/list"> <i class="bi bi-list"></i> 목록으로</a>
+        <a href="/boardlist"> <i class="bi bi-list"></i> 목록으로</a>
       </button>
     </div>
    

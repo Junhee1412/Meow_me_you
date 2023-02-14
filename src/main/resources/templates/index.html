@@ -67,28 +67,28 @@
         <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x "></i>
         <nav id="navbar" class="navbar">
           <ul>
-            <li class="dropdown"><a href="#"><span>Meow me, you</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <li class="dropdown"><a href="loginpage"><span>Meow me, you</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="#">사업소개</a></li>
-                <li><a href="#">후원내역</a></li>
+                <li><a href="business">사업소개</a></li>
+                <li><a href="loginpage">후원내역</a></li>
               </ul>
             </li>
-            <li><a href="#">후원하기</a></li>
-            <li class="dropdown"><a href="#"><span>물품거래</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <li><a href="loginpage">후원하기</a></li>
+            <li class="dropdown"><a href="loginpage"><span>물품거래</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="#">무료 나눔</a></li>
-                <li><a href="#">중고 거래</a></li>
+                <li><a href="loginpage">무료 나눔</a></li>
+                <li><a href="loginpage">중고 거래</a></li>
               </ul>
             </li>
-            <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <li class="dropdown"><a href="loginpage"><span>커뮤니티</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a th:href="@{/board/list}">분양하기</a></li>
-                <li><a href="#">분양후기</a></li>
-                <li><a href="#">캣스타그램</a></li>
+                <li><a th:href="loginpage">분양하기</a></li>
+                <li><a href="loginpage">분양후기</a></li>
+                <li><a href="loginpage">캣스타그램</a></li>
               </ul>
             </li>
             
-            <li><a class="get-a-quote" href="login.meow">로그인</a></li>
+            <li><a class="get-a-quote" href="loginpage">로그인</a></li>
           </ul>
         </nav>
         <!-- .navbar -->
@@ -106,7 +106,7 @@
         <p class="mb-4 fs-5">
           내일을 기대할 수 있게 해주세요
         </p>
-        <a class="btn btn-outline-dark btn-lg fs-5 mb-3 mt-5" href="#"
+        <a class="btn btn-outline-dark btn-lg fs-5 mb-3 mt-5" href="loginpage"
           >Meow me, you 후원내역보기</a
         ><br />
       </div>
@@ -122,7 +122,7 @@
         class="btn_ga_send quicks"
         id="chat_btn"
       >
-        <img src="../img/chat.png" class="chat_img" alt="채팅상담"
+        <img src="../img/aside/chat_aside.png" class="chat_img" alt="채팅상담"
       /></a>
     </section>
     <!-- trade-->
@@ -141,10 +141,10 @@
               다양한 물건을 판매하고 구매할 수 있는 공간!
             </p>
             <div class="row d-flex justify-content-center">
-            <a class="btn btn-outline-dark btn-sm fs-5 col-2 mt-4" href="#"
+            <a class="btn btn-outline-dark btn-sm fs-5 col-2 mt-4" href="loginpage"
               >중고거래</a
             ><br />
-            <a class="btn btn-outline-dark btn-sm fs-5 col-2 mt-4" href="#"
+            <a class="btn btn-outline-dark btn-sm fs-5 col-2 mt-4" href="loginpage"
               >무료나눔</a
             >
           </div>
@@ -159,17 +159,17 @@
         <h3 class="mb-3">유리창 너머를 꿈꾸는 아이들에게</h3>
         <h3 class="mb-5">당신이라는 꿈을 선물해주세요</h3>
 
-        <a class="btn btn-outline-light btn-lg fs-5 mb-3" style=" border-radius: 25px;" href="#"
+        <a class="btn btn-outline-light btn-lg fs-5 mb-3" style=" border-radius: 25px;" href="loginpage"
           >분양하기 바로가기</a
         ><br />
-        <a class="btn btn-outline-light btn-lg fs-5"  style=" border-radius: 25px;" href="#"
+        <a class="btn btn-outline-light btn-lg fs-5"  style=" border-radius: 25px;" href="loginpage"
           >분양후기 바로가기</a
         >
       </section>
 
       <div id="aside_donate">
         <a
-          href="../img/temp.png"
+          href="loginpage"
           data-btn="regular"
           data-alt-a="캠페인버튼클릭"
           data-alt-b="girl22"
@@ -177,11 +177,11 @@
           class="btn_ga_send quicks"
           id="aside_banner"
         >
-        <img src="../img/aside6.png" class="img_aside" alt="후원하기"
+        <img src="../img/aside/donate_aside.png" class="img_aside" alt="후원하기"
       /></a>
       </div>
       <a
-        href="../img/temp.png"
+        href="loginpage"
         data-btn="regular"
         data-alt-a="캠페인버튼클릭"
         data-alt-b="girl22"
@@ -189,7 +189,7 @@
         class="btn_ga_send quicks"
         id="chat_btn"
       >
-        <img src="../img/chat.png" class="chat_img" alt="채팅상담"
+        <img src="../img/aside/chat_aside.png" class="chat_img" alt="채팅상담"
       /></a>
     </div>
 
@@ -202,7 +202,7 @@
         </div>
         <div class="row gx-0">
           <div class="col-lg-6">
-            <a class="catstar_item" href="#">
+            <a class="catstar_item" href="loginpage">
               <div class="caption">
                 <div class="caption-content">
                   <div class="h2">미유집사</div>
@@ -213,7 +213,7 @@
             </a>
           </div>
           <div class="col-lg-6">
-            <a class="catstar_item" href="#">
+            <a class="catstar_item" href="loginpage">
               <div class="caption">
                 <div class="caption-content">
                   <div class="h2">미노미노</div>
@@ -224,7 +224,7 @@
             </a>
           </div>
           <div class="col-lg-6">
-            <a class="catstar_item" href="#">
+            <a class="catstar_item" href="loginpage">
               <div class="caption">
                 <div class="caption-content">
                   <div class="h2">코리누나</div>
@@ -235,7 +235,7 @@
             </a>
           </div>
           <div class="col-lg-6">
-            <a class="catstar_item" href="#">
+            <a class="catstar_item" href="loginpage">
               <div class="caption">
                 <div class="caption-content">
                   <div class="h2">애플이네</div>
@@ -247,7 +247,7 @@
           </div>
           <a class="btn btn-outline-secondary btn-sm fs-6"
             id="catstargram_btn"
-            href="#">더 보기</a>
+            href="loginpage">더 보기</a>
         </div>
       </div>
     </section>

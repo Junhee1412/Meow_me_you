@@ -18,11 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
-import java.beans.BeanProperty;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
 
 @Controller
 @SessionAttributes("user")
@@ -40,33 +35,33 @@ public class MyPageController {
 
 
 
-    @GetMapping("my.meow") // 마이페이지로 이동
+    @GetMapping("my_page") // 마이페이지로 이동
     public String my(HttpSession session, Model model){
         if(session.getAttribute("user")==null){
             return "redirect:/";
         }else{
             UserMaster loginUser=userService.getUserMaster((UserMaster)session.getAttribute("user"));
             model.addAttribute("user",loginUser);
-            return "my_page";
+            return "user/mypage";
         }
     }
 
 
 
     // 닉네임 중복체크는 회원가입 시 쓰는 닉네임 중복체크꺼 가져다가 쓴다 - UserController 에 있음
-    @PostMapping("changeNickName.meow")
+    @PostMapping("changeNickName")
     public String changeNickName(HttpSession session, @RequestParam("nickName")String nickName){
         if(session.getAttribute("user")==null){
             return "redirect:/";
         }else{
             UserMaster loginUser=userService.getUserMaster((UserMaster)session.getAttribute("user"));
             userService.updateNickName(loginUser.getUserNo(),nickName);
-            return "redirect:/my.meow";
+            return "redirect:/my_page";
         }
     }
 
 
-    @GetMapping("myPost.meow") // 내글 모두보기
+    @GetMapping("myPost") // 내글 모두보기
     public String myPost(HttpSession session, Model model, @PageableDefault(page = 0,size = 10, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable){
         if(session.getAttribute("user")==null){
             return "redirect:/"; // 홈으로
@@ -87,13 +82,13 @@ public class MyPageController {
             model.addAttribute("userNickName",loginUser.getNickName());
             model.addAttribute("postList",boardListFindByUserNO);
             model.addAttribute("userType",loginUser.getUserType());
-            return "user_post_list";
+            return "user/user_post_list";
         }
     }
 
 
 
-    @GetMapping("deletePostInMyPage.meow") // 마이페이지에서 게시글 지우기 - 어드민도 공유
+    @GetMapping("deletePostInMyPage") // 마이페이지에서 게시글 지우기 - 어드민도 공유
     public String deletePostInMyPage(HttpSession session, Long postNo){
         if(session.getAttribute("user")==null){
             return "redirect:/";
@@ -104,16 +99,16 @@ public class MyPageController {
             communityLikeRepository.deleteLikesByPost(postNo);// 좋아요 지우기
             communityService.communityPostDelete(postNo); // 게시글 지우기
             if(userMaster.getUserType().equals("ADMIN")){
-                return "redirect:/userAllPost.meow?userNo="+usernumber;
+                return "redirect:/admin/userPost?userNo="+usernumber;
             }else{
-                return "redirect:/myPost.meow";
+                return "redirect:/myPost";
             }
         }
     }
 
 
 
-    @GetMapping("myReply.meow") // 내 덧글 모아보기
+    @GetMapping("myReply") // 내 덧글 모아보기
     public String myReply(HttpSession session, Model model, @PageableDefault(page = 0,size = 10, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable){
         if(session.getAttribute("user")==null){
             return "redirect:/";
@@ -133,14 +128,14 @@ public class MyPageController {
             model.addAttribute("userNickName",loginUser.getNickName());
             model.addAttribute("replies",replies);
 
-            return "user_reply_list";
-            //return "user_post_list";
+            return "user/user_reply_list";
+            //return "user/user_post_list";
         }
     }
 
 
 
-    @GetMapping("deleteReplyInMyPage.meow") // 관리자(어드민), 일반유저가 마이페이지에서 리플(덧글) 삭제
+    @GetMapping("deleteReplyInMyPage") // 관리자(어드민), 일반유저가 마이페이지에서 리플(덧글) 삭제
     public String deleteReplyInMyPage(HttpSession session, Long replyNo){
         if(session.getAttribute("user")==null){
             return "redirect:/";
@@ -149,16 +144,16 @@ public class MyPageController {
             Long usernumber=replyService.findReply(replyNo).getUserNo();
             replyService.replyDelete(replyNo);
             if(userMaster.getUserType().equals("ADMIN")){
-                return "redirect:/userAllReply.meow?userNo="+usernumber;
+                return "redirect:/admin/userReply?userNo="+usernumber;
             }else{
-                return "redirect:/myReply.meow";
+                return "redirect:/myReply";
             }
         }
     }
 
 
 
-    @GetMapping("myHeart.meow") // 좋아요 모아보기
+    @GetMapping("myHeart") // 좋아요 모아보기
     public String myheart(HttpSession session, Model model, @PageableDefault(page = 0,size = 10) Pageable pageable){
         // , sort = "postNo", direction = Sort.Direction.DESC  <<  pageabledefault 괄호 안에 적는건데 적으면 오류남 - 쿼리문에 적음
         if(session.getAttribute("user")==null){
@@ -179,7 +174,7 @@ public class MyPageController {
             model.addAttribute("userNickName",loginUser.getNickName());
             model.addAttribute("likes",likes);
 
-            return "user_likes_list";
+            return "user/user_likes_list";
         }
     }
 
@@ -197,43 +192,43 @@ public class MyPageController {
 
 
 
-    @GetMapping("modifyUser.meow") // 유저 수정 폼
+    @GetMapping("modifyUser") // 유저 수정 폼
     public String modifyUserForm(HttpSession session, Model model){
         if(session.getAttribute("user")==null){
             return "redirect:/";
         }else{
             UserMaster loginUser=userService.getUserMaster((UserMaster)session.getAttribute("user"));
             model.addAttribute("user",loginUser);
-            return "mypage_modify";
+            return "user/mypage_modify";
         }
     }
 
 
 
-    @PostMapping("modifyUser.meow") // 유저 수정
+    @PostMapping("modifyUser") // 유저 수정
     public String modifyUser(UserMaster loginUser, Model model, MultipartFile file) throws  Exception{
         //UserMaster userModift=userRepository.save(loginUser);
         userService.updateMember(loginUser, file);
         model.addAttribute("user", loginUser);
-        return "redirect:/my.meow";
+        return "redirect:/my_page";
     }
 
 
 
-    @GetMapping("deleteUser.meow") // 회원탈퇴 폼
+    @GetMapping("deleteUser") // 회원탈퇴 폼
     public String deleteUserForm(HttpSession session, Model model){
         if(session.getAttribute("user")==null){
             return "redirect:/";
         }else{
             UserMaster loginUser=userService.getUserMaster((UserMaster)session.getAttribute("user"));
             model.addAttribute("user", loginUser);
-            return "delete_user";
+            return "user/delete_user";
         }
     }
 
 
 
-    @PostMapping("deleteUser.meow") // 탈퇴완료
+    @PostMapping("deleteUser") // 탈퇴완료
     public  String deleteUser(HttpSession session, @RequestParam("userPassword") String password, Model model, SessionStatus status){
         // ☆ 메모장에 복사해둠!
         if(session.getAttribute("user")==null){
@@ -247,7 +242,7 @@ public class MyPageController {
                 return "redirect:/";
             }else{
                 model.addAttribute("dontpatchpassword","비밀번호가 틀립니다.");
-                return "delete_user";
+                return "user/delete_user";
             }
         }
     }

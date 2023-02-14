@@ -16,14 +16,14 @@ public class EmailController {
     @Autowired
     public EmailController(EmailService emailService){this.emailService=emailService;}
 
-    @GetMapping("emailConfirm.meow/{useremail}")
+    @GetMapping("emailConfirm/{useremail}")
     @ResponseBody
     public String emailConfirm(@PathVariable String useremail) throws Exception {
         confirm = emailService.sendSimpleMessage(useremail);
         email=useremail;
         return confirm;
     }
-    @PostMapping("checkCode.meow")
+    @PostMapping("checkCode")
     public void checkCode(@RequestParam String checkCode, Model model){
         if(confirm.equals(checkCode)){
             model.addAttribute("successemail", email);

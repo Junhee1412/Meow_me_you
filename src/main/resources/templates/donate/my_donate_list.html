@@ -78,13 +78,13 @@
         <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x "></i>
         <nav id="navbar" class="navbar">
           <ul>
-            <li class="dropdown"><a href="#"><span>Meow me, you</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <li class="dropdown"><a href="/"><span>Meow me, you</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="#">사업소개</a></li>
+                <li><a href="business">사업소개</a></li>
                 <li><a href="#">후원내역</a></li>
               </ul>
             </li>
-            <li><a href="#">후원하기</a></li>
+            <li><a href="donatehome">후원하기</a></li>
             <li class="dropdown"><a href="#"><span>물품거래</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
                 <li><a href="#">무료 나눔</a></li>
@@ -93,21 +93,21 @@
             </li>
             <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="#">분양하기</a></li>
+                <li><a href="boardlist">분양하기</a></li>
                 <li><a href="#">분양후기</a></li>
                 <li><a href="#">캣스타그램</a></li>
               </ul>
             </li>
-            <li class="dropdown"><a href="#"><span>마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <li class="dropdown"><a href="my_page"><span>마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="#">내 글 모아보기</a></li>
-                <li><a href="#">내가 쓴 댓글 모아보기</a></li>
-                <li><a href="#">좋아요 목록 보기</a></li>
-                <li><a href="#">내 후원 목록보기</a></li>
-                <li><a href="#">회원정보 수정하기</a></li>
+                <li><a href="myPost">내 글 모아보기</a></li>
+                <li><a href="myReply">내가 쓴 댓글 모아보기</a></li>
+                <li><a href="myHeart">좋아요 목록 보기</a></li>
+                <li><a href="donatelist">내 후원 목록보기</a></li>
+                <li><a href="modifyUser">회원정보 수정하기</a></li>
               </ul>
             </li>
-            <li><a class="get-a-quote" href="#">로그아웃</a></li>
+            <li><a class="get-a-quote" href="logout">로그아웃</a></li>
           </ul>
         </nav>
         <!-- .navbar -->
@@ -157,8 +157,8 @@
               </td>
               <td th:switch="${donateList.donateStateCode}">
                 <div th:case="'DONATE_CPL'">
-                  <a th:href="@{|/donate/confirm?donateCode=${donateList.donateCode}}|" type="button" class="btn btn-outline-success btn-sm confirm_btn" id="confirm_donate_btn">확정</a>
-                  <a th:href="@{|/donate/delete?donateCode=${donateList.donateCode}}|" type="button" class="btn btn-outline-danger btn-sm delete_btn" id="delete_donate_btn">취소</a>
+                  <a th:href="@{|/donateconfirm?donateCode=${donateList.donateCode}}|" type="button" class="btn btn-outline-success btn-sm confirm_btn" id="confirm_donate_btn">확정</a>
+                  <a th:href="@{|/donatedelete?donateCode=${donateList.donateCode}}|" type="button" class="btn btn-outline-danger btn-sm delete_btn" id="delete_donate_btn">취소</a>
                 </div>
                 <span th:case="'DONATE_CNFRM'">후원확정</span>
                 <span th:case="'BANK_WAIT'">입금대기중</span>
@@ -171,7 +171,7 @@
               </td>
               <td th:text="${donateList.donateDate}"></td>
               <td>
-                  <a type="button" class="btn btn-outline-success btn-sm" th:href="@{/donate/receipt(id=${donateList.donateCode})}" th:if="${donateList.donateStateCode}=='DONATE_CNFRM'">영수증 발급</a>
+                  <a type="button" class="btn btn-outline-success btn-sm" th:href="@{/donatereceipt(id=${donateList.donateCode})}" th:if="${donateList.donateStateCode}=='DONATE_CNFRM'">영수증 발급</a>
                   <span th:unless="${donateList.donateStateCode}=='DONATE_CNFRM'">발급불가</span>
               </td>
             </tr>
@@ -183,24 +183,24 @@
       <nav class="marbot_100" aria-label="Page navigation example" >
         <ul class="pagination">
           <li class="page-item" th:classappend="${1 == nowPage} ? 'disabled'">
-            <a class="page-link" href="#" aria-label="Previous" th:href="@{/donate/list(page=${startPage-1})}">
+            <a class="page-link" href="#" aria-label="Previous" th:href="@{/donatelist(page=${startPage-1})}">
               <span aria-hidden="true">&laquo;</span>
             </a>
           </li>
           <li class="page-item" th:classappend="${1 == nowPage} ? 'disabled'">
-            <a class="page-link" href="#" aria-label="Previous" th:href="@{/donate/list(page=${nowPage-2})}">
+            <a class="page-link" href="#" aria-label="Previous" th:href="@{/donatelist(page=${nowPage-2})}">
               <span aria-hidden="true">&lt;</span>
             </a>
           </li>
           <li class="page-item" th:classappend="${i == nowPage} ? 'disabled'" th:each="i : ${#numbers.sequence(startPage, endPage)}">
-            <a class="page-link" href="#"  th:href="@{/donate/list(page=${i - 1})}" th:text="${i}">1</a></li>
+            <a class="page-link" href="#"  th:href="@{/donatelist(page=${i - 1})}" th:text="${i}">1</a></li>
 
           <li class="page-item" th:classappend="${endPage == nowPage} ? 'disabled'">
-            <a class="page-link" href="#" aria-label="Next"  th:href="@{/donate/list(page=${nowPage})}">
+            <a class="page-link" href="#" aria-label="Next"  th:href="@{/donatelist(page=${nowPage})}">
               <span aria-hidden="true">&gt;</span>
             </a>
           <li class="page-item" th:classappend="${endPage == nowPage} ? 'disabled'">
-            <a class="page-link" href="#" aria-label="Next"  th:href="@{/donate/list(page=${endPage-1})}">
+            <a class="page-link" href="#" aria-label="Next"  th:href="@{/donatelist(page=${endPage-1})}">
               <span aria-hidden="true">&raquo;</span>
             </a>
           </li>

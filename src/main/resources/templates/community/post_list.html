@@ -91,7 +91,7 @@
             </li>
             <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="#" th:href="@{/board/list}">분양하기</a></li>
+                <li><a href="#" th:href="@{/boardlist}">분양하기</a></li>
                 <li><a href="#">분양후기</a></li>
                 <li><a href="#">캣스타그램</a></li>
               </ul>
@@ -137,7 +137,7 @@
 
 <!--        <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
 
-<!--          <form class="d-flex"th:action="@{/board/list}" method="get">-->
+<!--          <form class="d-flex"th:action="@{/boardlist}" method="get">-->
 <!--            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchKeyword">-->
 <!--            <button class="btn btn-outline-success" type="submit">Search</button>-->
 <!--          </form>-->
@@ -146,10 +146,10 @@
 <!--    </nav>-->
 
     <div  style="margin: 0 auto; width: 25%; ">
-      <form th:action="@{/board/list}" method="get">
+      <form th:action="@{/boardlist}" method="get">
         <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
           <div class="input-group">
-            <input type="search" name="searchKeyword" placeholder="제목 검색하기!" aria-describedby="button-addon1" class="form-control border-0 bg-light">
+            <input type="search" name="searchKeyword" placeholder="제목을 입력하세요" aria-describedby="button-addon1" class="form-control border-0 bg-light">
             <div class="input-group-append">
               <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
             </div>
@@ -199,10 +199,13 @@
                   <h5 class="fw-bolder"  th:text="${communityMaster.subject}">길에서 만난 천사 미유</h5>
                 </div>
               </div>
+              <div class="text-center">
+                <h6>조회수 <span th:text="${communityMaster.viewCount}"></span></h6>
+              </div>
               <!-- post actions-->
               <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                 <div class="text-center">
-                  <a class="btn btn-outline-dark mt-auto" th:href="@{/board/view(postNo=${communityMaster.postNo})}">자세히 보기</a>
+                  <a class="btn btn-outline-dark mt-auto" th:href="@{/boardview(postNo=${communityMaster.postNo})}">자세히 보기</a>
                 </div>
               </div>
             </div>
@@ -216,7 +219,7 @@
     <a
       type="button" style="text-align: center;"
       class="btn btn-secondary fs-5 btn-lg"
-      th:href="@{/board/write}"><i class="bi bi-pencil-square"></i>
+      th:href="@{/boardwrite}"><i class="bi bi-pencil-square"></i>
       게시글 작성
     </a>
     </div>
@@ -226,25 +229,25 @@
     <nav class="marbot_100" aria-label="Page navigation example" >
       <ul class="pagination">
         <li class="page-item" th:classappend="${1 == nowPage} ? 'disabled'">
-          <a class="page-link" href="#" aria-label="Previous" th:href="@{/board/list(page=${startPage-1})}">
+          <a class="page-link" href="#" aria-label="Previous" th:href="@{/boardlist(page=${startPage-1})}">
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
         <li class="page-item" th:classappend="${1 == nowPage} ? 'disabled'">
-          <a class="page-link" href="#" aria-label="Previous" th:href="@{/board/list(page=${nowPage-2})}">
+          <a class="page-link" href="#" aria-label="Previous" th:href="@{/boardlist(page=${nowPage-2})}">
             <span aria-hidden="true">&lt;</span>
           </a>
         </li>
 
         <li class="page-item" th:classappend="${i == nowPage} ? 'disabled'" th:each="i : ${#numbers.sequence(startPage, endPage)}">
-          <a class="page-link" href="#"  th:href="@{/board/list(page=${i - 1},serchKeyword = ${param.searchKeyword})}" th:text="${i}">1</a></li>
+          <a class="page-link" href="#"  th:href="@{/boardlist(page=${i - 1},serchKeyword = ${param.searchKeyword})}" th:text="${i}">1</a></li>
 
         <li class="page-item" th:classappend="${endPage == nowPage} ? 'disabled'">
-          <a class="page-link" href="#" aria-label="Next"  th:href="@{/board/list(page=${nowPage})}">
+          <a class="page-link" href="#" aria-label="Next"  th:href="@{/boardlist(page=${nowPage})}">
             <span aria-hidden="true">&gt;</span>
           </a>
         <li class="page-item" th:classappend="${endPage == nowPage} ? 'disabled'">
-          <a class="page-link" href="#" aria-label="Next"  th:href="@{/board/list(page=${endPage-1})}">
+          <a class="page-link" href="#" aria-label="Next"  th:href="@{/boardlist(page=${endPage-1})}">
             <span aria-hidden="true">&raquo;</span>
           </a>
         </li>

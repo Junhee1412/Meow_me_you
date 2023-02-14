@@ -1,7 +1,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <!-- style -->
-    <link href="css/chatStyle.css" rel="stylesheet"/> <!-- css 위치 및 적용 -->
+    <link href="css/chat/chat.css" rel="stylesheet"/> <!-- css 위치 및 적용 -->
 
     <!-- bootstrap, jquery -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -33,27 +33,27 @@
                     <div class="chat-history">
                         <div style="overflow: scroll; height: 100%;" id="chat-content" class="m-b-0">
                             <div class="my-3">
-                                <div class="form-check-inline selecotr-item">
+                                <div class="form-check-inline selector-item">
                                     <input type="radio" id="chat_Q" name="chatbtn" class="selector_radio" value="자주묻는질문">
                                     <label for="chat_Q" class="selector_label">자주묻는질문</label>
                                 </div>
-                                <div class="form-check-inline selecotr-item">
+                                <div class="form-check-inline selector-item">
                                     <input type="radio" id="chat_S" class="selector_radio" name="chatbtn" value="후원">
                                     <label for="chat_S" class="selector_label">후원</label>
                                 </div>
-                                <div class="form-check-inline selecotr-item">
+                                <div class="form-check-inline selector-item">
                                     <input type="radio" id="chat_C" class="selector_radio" name="chatbtn" value="센터찾기">
                                     <label for="chat_C" class="selector_label">센터찾기</label>
                                 </div>
-                                <div class="form-check-inline selecotr-item">
+                                <div class="form-check-inline selector-item">
                                     <input type="radio" id="chat_Id" class="selector_radio" name="chatbtn" value="계정찾기">
                                     <label for="chat_Id" class="selector_label">계정</label>
                                 </div>
-                                <div class="form-check-inline selecotr-item">
+                                <div class="form-check-inline selector-item">
                                     <input type="radio" id="chat_Pw" class="selector_radio" name="chatbtn" value="비밀번호찾기">
                                     <label for="chat_Pw" class="selector_label">비밀번호</label>
                                 </div>
-                                <div class="form-check-inline selecotr-item">
+                                <div class="form-check-inline selector-item">
                                     <input type="radio" id="chat_M" class="selector_radio" name="chatbtn" value="관리자와채팅">
                                     <label for="chat_M" class="selector_label">관리자와채팅</label>
                                 </div>

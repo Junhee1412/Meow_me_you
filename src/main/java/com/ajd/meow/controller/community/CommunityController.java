@@ -5,6 +5,7 @@ import com.ajd.meow.entity.CommunityLike;
 import com.ajd.meow.entity.CommunityMaster;
 import com.ajd.meow.entity.UserMaster;
 import com.ajd.meow.repository.community.CommunityImageRepository;
+import com.ajd.meow.repository.community.CommunityMasterRepository;
 import com.ajd.meow.service.community.CommunityService;
 import com.ajd.meow.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +29,16 @@ public class CommunityController {
     private CommunityService communityService;
 
     @Autowired
+    private CommunityMasterRepository communityMasterRepository;
+
+    @Autowired
     private CommunityImageRepository communityImageRepository;
 
     @Autowired
     private UserService userService;
 
 
-    @GetMapping("/board/write") //localhost:8080/board/write 작성시 이동
+    @GetMapping("/boardwrite") //localhost:8080/boardwrite 작성시 이동
     public String boardWriteForm(HttpSession session, Model model) {
         UserMaster loginUser = (UserMaster) session.getAttribute("user");
         model.addAttribute("user", loginUser);
@@ -43,7 +47,7 @@ public class CommunityController {
     }
 
 
-    @PostMapping("/board/writepro")
+    @PostMapping("/boardwritepro")
     public String boardWritePro(HttpSession session, Model model, CommunityMaster communityMaster,
                                 @RequestParam("files") List<MultipartFile> files) throws Exception {
 
@@ -59,12 +63,12 @@ public class CommunityController {
             communityService.saveFile(ddd, session, model, communityMaster);
         }
             model.addAttribute("message", "글 작성 완료.");
-            model.addAttribute("SearchUrl", "/board/list");
-//        return "redirect:/board/list";
+            model.addAttribute("SearchUrl", "/boardlist");
+//        return "redirect:/boardlist";
         return "community/community_message";
     }
 
-    @GetMapping("/board/list")
+    @GetMapping("/boardlist")
     public String communityList(@PageableDefault(page = 0, size = 12, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable, HttpSession session, Model model,
                             CommunityMaster communityMaster, String searchKeyword) {
 
@@ -94,10 +98,13 @@ public class CommunityController {
         return "community/post_list";
     }
 
-    @GetMapping("/board/view") //localhost:8080/post/view?postNo=1
+    @GetMapping("/boardview") //localhost:8080/post/view?postNo=1
     public String communityPostView(HttpSession session, Model model, Long postNo, CommunityImage communityImage) {
         UserMaster loginUser = (UserMaster) session.getAttribute("user");
         model.addAttribute("user", loginUser);
+
+        CommunityMaster communityMaster = communityMasterRepository.findById(postNo).get();
+        communityMaster.setViewCount(communityMaster.getViewCount() + 1);
 
         List<CommunityImage> filess = communityImageRepository.findByPostNo(postNo);
 
@@ -120,16 +127,16 @@ public class CommunityController {
         return "community/post_view";
     }
 
-    @GetMapping("/board/delete")
+    @GetMapping("/boarddelete")
     public String communityPostDelete(HttpSession session, Model model, Long postNo) {
         UserMaster loginUser = (UserMaster) session.getAttribute("user");
         model.addAttribute("user", loginUser);
 
         communityService.communityPostDelete(postNo);
-        return "redirect:/board/list";
+        return "redirect:/boardlist";
     }
 
-    @GetMapping("/board/modify/{postNo}")
+    @GetMapping("/boardmodify/{postNo}")
     public String boardModify(@PathVariable("postNo") Long postNo, HttpSession session, Model model,CommunityImage communityImage) {
         UserMaster loginUser = (UserMaster) session.getAttribute("user");
         model.addAttribute("user", loginUser);
@@ -139,7 +146,7 @@ public class CommunityController {
             return "community/post_modify";
     }
 
-    @PostMapping("/board/update/{postNo}")
+    @PostMapping("/boardupdate/{postNo}")
     public String communityPostModify(@PathVariable("postNo") Long postNo, HttpSession session, CommunityMaster communityMaster, Model model, @RequestParam("files") List<MultipartFile> files,CommunityImage communityImage) throws Exception {
         UserMaster loginUser = (UserMaster) session.getAttribute("user");
 
@@ -168,14 +175,14 @@ public class CommunityController {
 
         // 글 작성 완료 안내문
         model.addAttribute("message", "글 수정 완료.");
-        model.addAttribute("SearchUrl", "/board/list");
+        model.addAttribute("SearchUrl", "/boardlist");
 
         return "community/community_message";
     }
 
 
     // 주희 추가
-    @GetMapping("countHeart.meow")
+    @GetMapping("countHeart")
     public String countHeart(HttpSession session, Long postNo, Model model, CommunityLike communityLike){
         if(session.getAttribute("user")==null){
             return "rediect:/";
@@ -183,7 +190,7 @@ public class CommunityController {
         else{
             UserMaster loginUser=userService.getUserMaster((UserMaster)session.getAttribute("user"));
             communityService.countHeart(postNo, loginUser.getUserNo());
-            return "redirect:/board/view?postNo="+postNo;
+            return "redirect:/boardview?postNo="+postNo;
         }
     }
     // 주희 추가 끝

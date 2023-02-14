@@ -21,7 +21,7 @@ let replyIndex = {
             dataType: "text"
         }).done(function (res) {
             alert("댓글작성이 완료되었습니다.");
-            location.href = `/board/view?postNo=${postNo}`;  //완료후 이동 경로
+            location.href = `/boardview?postNo=${postNo}`;  //완료후 이동 경로
         }).fail(function (err) {
             alert(JSON.stringify(err));
         });
@@ -34,7 +34,7 @@ let replyIndex = {
                 dataType: "text"
             }).done(function (res) {
                 alert("댓글삭제가 완료되었습니다.");
-                location.href = `/board/view?postNo=${postNo}`;
+                location.href = `/boardview?postNo=${postNo}`;
             }).fail(function (err) {
                 alert(JSON.stringify(err));
             });

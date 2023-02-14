@@ -18,26 +18,26 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/login.meow")
+    @GetMapping("/loginpage")
     public String login(){
-        return "join";
+        return "user/login_page";
     }
-    @PostMapping("/login.meow")
+    @PostMapping("/loginpage")
     public String login(UserMaster user, Model model){
         UserMaster findUser=userService.getUserMaster(user);
         if(findUser!=null && findUser.getUserPassword().equals(user.getUserPassword())){
             model.addAttribute("user",findUser);
             if(findUser.getUserType().equals("ADMIN")) {
-                 return "index_admin"; // 어드민 페이지 따로 만드나유
+                 return "admin/admin_index"; // 어드민 페이지 따로 만드나유
             } else {
                 return "redirect:/"; // 로그인 후 index 페이지
             }
         }else {
             model.addAttribute("errMsg", "로그인 실패! 다시 입력해주세요.");
-            return "join";}
+            return "user/login_page";}
     }
 
-    @GetMapping("/logout.meow")
+    @GetMapping("/logout")
     public String logout(SessionStatus status){
         status.setComplete();
         return "redirect:/"; // 로그아웃 후 인덱스

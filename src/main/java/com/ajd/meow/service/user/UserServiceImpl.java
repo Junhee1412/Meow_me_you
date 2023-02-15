@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Modifying
-    @Transactional // 이거 안넣어도 되나?
+    @Transactional
     public void deleteMember(UserMaster user) {
         // 도네이트 지우기
         if(donateRepository.existsByUserNo(user.getUserNo())){

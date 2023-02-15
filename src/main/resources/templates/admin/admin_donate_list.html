@@ -137,11 +137,15 @@
               </td>
               <td th:switch="${donateList.donateStateCode}">
                 <div th:case="'DONATE_CPL'" >
-                  <a th:href="@{|/donateconfirm.meow?donateCode=${donateList.donateCode}}|" type="button" class="btn btn-outline-success btn-sm" id="confirm_donate_btn">확정</a>
-                  <a th:href="@{|/donatedelete.meow?donateCode=${donateList.donateCode}}|" type="button" class="btn btn-outline-danger btn-sm" id="delete_donate_btn">취소</a>
+                  <a th:href="@{|/donateconfirm?donateCode=${donateList.donateCode}}|" type="button" class="btn btn-outline-success btn-sm confirm_donate_btn">확정</a>
+                  <a th:href="@{|/donatedelete?donateCode=${donateList.donateCode}}|" type="button" class="btn btn-outline-danger btn-sm delete_donate_btn">취소</a>
                 </div>
                 <p th:case="'DONATE_CNFRM'">후원확정</p>
-                <p th:case="'BANK_WAIT'">입금대기중</p>
+                <div th:case="'BANK_WAIT'" >
+                  <span>입금대기중</span>
+                  <a th:href="@{|/donateconfirm?donateCode=${donateList.donateCode}}|" type="button" class="btn btn-outline-success btn-sm confirm_donate_btn">확정</a>
+                  <a th:href="@{|/donatedelete?donateCode=${donateList.donateCode}}|" type="button" class="btn btn-outline-danger btn-sm delete_donate_btn">취소</a>
+                </div>
                 <p th:case="'LCK_BLC'">계좌잔액부족</p>
                 <p th:case="'LIMIT_EXCDD'">한도초과</p>
               </td>

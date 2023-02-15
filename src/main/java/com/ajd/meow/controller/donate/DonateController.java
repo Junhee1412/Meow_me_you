@@ -145,15 +145,32 @@ public class DonateController {
     }
 
     @GetMapping("/donateconfirm")
-    public String donateConfirm(Long donateCode) {
+    public String donateConfirm( HttpSession session, Model model, Long donateCode) {
+        UserMaster loginUser=(UserMaster)session.getAttribute("user");
+        model.addAttribute("user",loginUser);
+
+        if(loginUser.getUserType().equals("ADMIN")){
         donateservice.confirmDonate(donateCode);
-        return "redirect:donatelist";
+        return "redirect:adminDonatemanage";
+        } else{
+        donateservice.confirmDonate(donateCode);
+            return "redirect:donatelist";
+        }
     }
 
     @GetMapping("/donatedelete")
-    public String donateDelete(Long donateCode){
-        donateservice.deleteDonate(donateCode);
-        return "redirect:donatelist";
+    public String donateDelete(HttpSession session, Model model, Long donateCode){
+
+        UserMaster loginUser=(UserMaster)session.getAttribute("user");
+        model.addAttribute("user",loginUser);
+
+        if(loginUser.getUserType().equals("ADMIN")){
+            donateservice.deleteDonate(donateCode);
+            return "redirect:adminDonatemanage";
+        } else{
+            donateservice.deleteDonate(donateCode);
+            return "redirect:donatelist";
+        }
     }
 
     @GetMapping("/donatereceipt/{id}")

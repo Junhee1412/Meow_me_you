@@ -11241,7 +11241,7 @@ footer.footer .social-link:hover {
       rgba(255, 255, 255, 0.1) 0%,
       rgba(255, 255, 255, 0.1) 100%
     ),
-    url("../img/bg-masthead.jpg");
+    url("../img/index/main_top.jpg");
   background-position: center center;
   background-position: 50% 20%;
   background-repeat: no-repeat;
@@ -11419,7 +11419,7 @@ footer.footer .social-link:hover {
       rgba(255, 255, 255, 0.1) 0%,
       rgba(255, 255, 255, 0.1) 100%
     ),
-    url("../img/bg-callout.jpg");
+    url("../img/index/main_middle.jpg");
   background-position: 50% 20%;
   background-repeat: no-repeat;
   background-size: cover;

@@ -26,6 +26,7 @@ import java.util.Date;
 
 @Controller
 public class DonateController {
+
     @Autowired
     private DonateRepository donateRepository;
 
@@ -146,13 +147,13 @@ public class DonateController {
     @GetMapping("/donateconfirm")
     public String donateConfirm(Long donateCode) {
         donateservice.confirmDonate(donateCode);
-        return "redirect:list";
+        return "redirect:donatelist";
     }
 
     @GetMapping("/donatedelete")
     public String donateDelete(Long donateCode){
         donateservice.deleteDonate(donateCode);
-        return "redirect:list";
+        return "redirect:donatelist";
     }
 
     @GetMapping("/donatereceipt/{id}")

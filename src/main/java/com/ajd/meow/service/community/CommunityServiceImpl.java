@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -39,7 +40,7 @@ public class CommunityServiceImpl implements CommunityService{
     public void write(CommunityMaster communityMaster){
 
         communityMaster.setCommunityId("ADP_ACT");
-        communityMaster.setPostId("FOOD_SELL");
+        communityMaster.setPostId("ADT_ING");
         communityMaster.setCreatePostDate(LocalDateTime.now());
 
         communityMasterRepository.save(communityMaster);
@@ -77,7 +78,6 @@ public class CommunityServiceImpl implements CommunityService{
         communityMaster.setSumImg(file.getImgPath());
         CommunityImage savedFile = communityImageRepository.save(file);
 
-        System.out.println("asdfasfasdf" + communityMaster.getSumImg());
         return savedFile.getImageNo();
     }
 
@@ -96,10 +96,16 @@ public class CommunityServiceImpl implements CommunityService{
     }
 
     // 게시글 리스트
-    public Page<CommunityMaster> communityList(Pageable pageable){ return communityMasterRepository.findAll(pageable); }
+    public Page<CommunityMaster> communityList(Pageable pageable){
+        return communityMasterRepository.findAll(pageable);
+    }
 
     //특정 게시글 불러오기
-    public CommunityMaster communityPostView(Long postNo){return communityMasterRepository.findById(postNo).get();
+    @Transactional
+    public CommunityMaster communityPostView(Long postNo){
+        CommunityMaster communityMaster = communityMasterRepository.findById(postNo).orElseThrow();
+        communityMaster.setViewCount(communityMaster.getViewCount() +1 );
+        return  communityMasterRepository.findById(postNo).get();
     }
 
     public CommunityImage communityImgView(Long postNo){return communityImageRepository.findById(postNo).get();

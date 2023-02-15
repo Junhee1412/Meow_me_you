@@ -271,7 +271,7 @@ sup {
 }
 
 a {
-  color: #1d809f;
+  color: #aaa;
   text-decoration: underline;
 }
 a:hover {
@@ -3704,7 +3704,7 @@ fieldset:disabled .btn {
 }
 
 .btn-outline-dark {
-  color: #212529;
+  color: #fff;
   border-color: #212529;
 }
 .btn-outline-dark:hover {
@@ -11773,3 +11773,6 @@ font-family: "Noto Sans KR"
 width:100%;
 margin: 0 auto;
 font-family: "Noto Sans KR"}
+
+li{
+list-style:none;}

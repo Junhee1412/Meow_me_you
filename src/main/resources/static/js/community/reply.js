@@ -1,4 +1,4 @@
-let replyIndex = {
+    let replyIndex = {
     init: function () {
         $("#reply-btn-save").on("click", () => {
             this.replySave();
@@ -27,7 +27,7 @@ let replyIndex = {
         });
     },
 
-    replyDelete: function (postNo, replyNo) {
+            replyDelete: function (postNo, replyNo) {
             $.ajax({
                 type: "DELETE",
                 url: `/api/v1/board/${postNo}/reply/${replyNo}`,

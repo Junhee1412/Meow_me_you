@@ -19,4 +19,6 @@ public interface ReplyService {
     void deleteAllReplyByPostNo(Long postNo);
 
     Reply findReply(Long replyNo);
+
+    Page<Reply> replySearchKeyword(String searchKeyword, Pageable pageable);
 }

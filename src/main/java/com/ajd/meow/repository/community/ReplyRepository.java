@@ -18,7 +18,7 @@ public interface ReplyRepository extends JpaRepository<Reply,Long> {
     void deleteAllByPostNo(Long postNo);
 
     Page<Reply> findAllByUserNo(Long userNo, Pageable pageable);
-
+    Page<Reply> findByReplyContentContaining(String searchKeyword, Pageable pageable);
     // 230212 주희 추가
     Reply findByReplyNo(Long replyNo);
 }

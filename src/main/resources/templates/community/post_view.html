@@ -72,40 +72,40 @@
   
         <i class="mobile-nav-toggle mobile-nav-show bi bi-list "></i>
         <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x "></i>
-        <nav id="navbar" class="navbar">
-          <ul>
-            <li class="dropdown"><a href="#"><span>Meow me, you</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <nav id="navbar" class="navbar">
               <ul>
-                <li><a href="#">사업소개</a></li>
-                <li><a href="#">후원내역</a></li>
+                  <li class="dropdown"><a href="/"><span>Meow me, you</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                      <ul>
+                          <li><a href="business">사업소개</a></li>
+                          <li><a href="#">후원내역</a></li>
+                      </ul>
+                  </li>
+                  <li><a href="donatehome">후원하기</a></li>
+                  <li class="dropdown"><a href="#"><span>물품거래</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                      <ul>
+                          <li><a href="#">무료 나눔</a></li>
+                          <li><a href="#">중고 거래</a></li>
+                      </ul>
+                  </li>
+                  <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                      <ul>
+                          <li><a href="boardlist">분양하기</a></li>
+                          <li><a href="#">분양후기</a></li>
+                          <li><a href="#">캣스타그램</a></li>
+                      </ul>
+                  </li>
+                  <li class="dropdown"><a href="my_page"><span>마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                      <ul>
+                          <li><a href="myPost">내 글 모아보기</a></li>
+                          <li><a href="myReply">내가 쓴 댓글 모아보기</a></li>
+                          <li><a href="myHeart">좋아요 목록 보기</a></li>
+                          <li><a href="donatelist">내 후원 목록보기</a></li>
+                          <li><a href="modifyUser">회원정보 수정하기</a></li>
+                      </ul>
+                  </li>
+                  <li><a class="get-a-quote" href="logout">로그아웃</a></li>
               </ul>
-            </li>
-            <li><a href="#">후원하기</a></li>
-            <li class="dropdown"><a href="#"><span>물품거래</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-              <ul>
-                <li><a href="#">무료 나눔</a></li>
-                <li><a href="#">중고 거래</a></li>
-              </ul>
-            </li>
-            <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-              <ul>
-                <li><a href="#" th:href="@{/boardlist}">분양하기</a></li>
-                <li><a href="#">분양후기</a></li>
-                <li><a href="#">캣스타그램</a></li>
-              </ul>
-            </li>
-            <li class="dropdown"><a href="#"><span>마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-              <ul>
-                <li><a href="#">내 글 모아보기</a></li>
-                <li><a href="#">내가 쓴 댓글 모아보기</a></li>
-                <li><a href="#">좋아요 목록 보기</a></li>
-                <li><a href="#">내 후원 목록보기</a></li>
-                <li><a href="#">회원정보 수정하기</a></li>
-              </ul>
-            </li>
-            <li><a class="get-a-quote" href="#">로그아웃</a></li>
-          </ul>
-        </nav>
+          </nav>
         <!-- .navbar -->
   
       </div>
@@ -116,7 +116,7 @@
     <div class="header-card">
       <div class="card bg-crop">
         <img
-          src="../img/parcel_review_menu.jpg"
+          src="../img/mypost/post.jpg"
           class="card-img rounded mx-auto d-block bg-menu"
           alt="커뮤니티설명"
         />
@@ -175,11 +175,12 @@
                 ></button>
             </div>
             <div class="carousel-inner">
-                <div class="carousel-item" th:each="communityImage,iterStat : ${cimg}"  th:classappend="${iterStat.first} ? active" >
+                <div class="carousel-item" th:each="communityImage,iterStat : ${cimg}"
+                     th:classappend="${iterStat.first} ? active" >
                     <img style="width:100%; height:750px;"
-                            th:src="@{|/upload/${communityImage.imgPath}|}"
-                            class="d-block w-100"
-                            alt="사진1"
+                         th:src="@{|/upload/${communityImage.imgPath}|}"
+                         class="d-block w-100"
+                         alt="사진1"
                     />
                 </div>
             </div>
@@ -210,16 +211,19 @@
       <h1 class="text-dark fs-1" id="post_title" th:text="${board.subject}">제목입니다.</h1>
       <div class="heart">
         <div class="flex-shrink-0">
-          <img
-            class="rounded-circle"
-            src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-            alt="..."
-          />
+<!--          <img-->
+<!--            class="rounded-circle" style="width:70px;,height:70px;"-->
+<!--            th:src="@{|/upload/${board.getUserMaster().getProfileImagePath()}|}"-->
+<!--            alt="..."-->
+<!--          />-->
+
+            <img th:if = "${board.getUserMaster().getProfileImagePath() != null}"  th:src="@{|/upload/${board.getUserMaster().getProfileImagePath()}|}" style="width:70px;,height:70px;" class="rounded-circle"/>
+            <img th:unless="${board.getUserMaster().getProfileImagePath() != null}" src="../img/noimg.gif" style="width:100px;,height:100px;" class="rounded-circle"/>
         </div>
         <ul>
           <li>작성자    : <span th:text="${board.getUserMaster().getNickName()}" >작성자</span></li>
           <li>작성일자  : <span th:text="${#temporals.format(board.createPostDate, 'yyyy-MM-dd HH:mm:ss')}">작성일자</span></li>
-          <li>조회수    : <span th:text="${board.getViewCount()}"></span></li>
+          <li>조회수    : <span th:text="${board.viewCount}"></span></li>
         </ul>
 <!--          작성자 : 미우미우<br />작성일자 :-->
           <div id="heart_box">
@@ -229,31 +233,35 @@
               </a>
               <span class="fs-2" id="like_number" th:text="${numberOfHeart}">11115</span>
           </div>
-      <p class="text-dark fs-6 text-break" id="community_content" th:text="${board.content}">
-        고양이가 너무 흥분하거나 불안, 우울감을 느꼈을 때 기지개를 켜기도 해요.
-        특히, 사냥 놀이를 할 때 고양이가 갑자기 기지개를 켜기도 합니다. 이는
-        고양이가 놀이가 지루해서 그런 게 아니라, 극도로 흥분한 나머지 마음을
-        다잡기 위해 하는 행동이라고 합니다. 그리고 고양이가 사냥감을 놓치거나,
-        발을 헛디뎌 미끄러졌을 때 민망하고 부끄러움을 감추기 위해서도 기지개를
-        켠다고 해요. 갑자기 고양이가 두 발로 얼굴을 감싸 그루밍하거나 기지개를
-        켠다면, 모른 척 지나가 줍시다.
-      </p>
+    
         </div>
 
-
+        <div style="width: 100%;">
+          <p class="text-dark fs-6 text-break" id="community_content" th:text="${board.content}">
+            고양이가 너무 흥분하거나 불안, 우울감을 느꼈을 때 기지개를 켜기도 해요.
+            특히, 사냥 놀이를 할 때 고양이가 갑자기 기지개를 켜기도 합니다. 이는
+            고양이가 놀이가 지루해서 그런 게 아니라, 극도로 흥분한 나머지 마음을
+            다잡기 위해 하는 행동이라고 합니다. 그리고 고양이가 사냥감을 놓치거나,
+            발을 헛디뎌 미끄러졌을 때 민망하고 부끄러움을 감추기 위해서도 기지개를
+            켠다고 해요. 갑자기 고양이가 두 발로 얼굴을 감싸 그루밍하거나 기지개를
+            켠다면, 모른 척 지나가 줍시다.
+          </p>
+              </div>
     <!-- Comments section-->
 
     <div class="reply_auto">
-
-
       <div class="card"  >
         <div class="card-header" >Reply List</div>
         <ul id="reply--box" class="list-group" >
-          <li id="reply--1" class="list-group-item d-flex justify-content-between"  th:each="reply : ${board.replyList}">
+          <li id="reply--1" class="list-group-item d-flex justify-content-between"
+              th:each="reply : ${board.replyList}">
           <div th:text="${reply.replyContent}">댓글내용입니다</div>
             <div class="d-flex" >
-              <span class="text-monospace mr-1">작성자: </span><div class="text-monospace mr-1" th:text="${reply.getUserMaster().getNickName()}"></div>
-              <button th:if="${reply.userNo == user.userNo}" th:onclick="|replyIndex.replyDelete('${board.postNo}', '${reply.replyNo}')|" class="badge btn-danger" style="margin-left: 10px;">삭제</button>
+              <span class="text-monospace mr-1">작성자: </span><div class="text-monospace mr-1"
+                      th:text="${reply.getUserMaster().getNickName()}"></div>
+              <button th:if="${reply.userNo == user.userNo}"
+                      th:onclick="|replyIndex.replyDelete('${board.postNo}', '${reply.replyNo}')|"
+                      class="badge btn-danger" style="margin-left: 10px;">삭제</button>
             </div>
           </li>
 
@@ -283,14 +291,7 @@
 
     </div>
 
-    <div class="footer-btn-group" id="list_button_group" >
-      <button type="button" class="btn btn-outline-dark">
-        <i class="bi bi-arrow-left-circle"></i> 이전글
-      </button>
-      <button type="button" class="btn btn-outline-dark">
-        <i class="bi bi-arrow-right-circle"></i> 다음글
-      </button>
-    </div>
+
     <div class="footer-btn-group" id="post_button_group">
       <a type="button" class="btn btn-outline-primary" style="margin-right : 10px" th:if="${board.userNo == user.userNo}" th:href="@{/boardmodify/{postNo}(postNo=${board.postNo})}">
 

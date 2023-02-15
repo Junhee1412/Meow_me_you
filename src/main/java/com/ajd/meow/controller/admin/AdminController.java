@@ -25,7 +25,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -45,8 +44,10 @@ public class AdminController {
     @Autowired
     private ReplyService replyService;
 
-    @GetMapping("admin/mypage") // 어드민의 마이페이지로 이동
-    public String adminmypage(HttpSession session, Model model){
+
+
+    @GetMapping("adminMypage") // 어드민의 마이페이지로 이동
+    public String adminMypage(HttpSession session, Model model){
         if(session.getAttribute("user")==null){
             return "redirect:/"; // 로그인안된 상태면 걍 index로 이동
         }else{
@@ -62,8 +63,8 @@ public class AdminController {
 
 
 
-    @GetMapping("admin/modify") // 어드민 수정 폼
-    public String modidyadminform(HttpSession session, Model model){
+    @GetMapping("adminModify") // 어드민 수정 폼
+    public String modifyAdminForm(HttpSession session, Model model){
         if(session.getAttribute("user")==null){
             return "redirect:/";
         }else{
@@ -72,33 +73,33 @@ public class AdminController {
             if(user.getUserType().equals("ADMIN")){
                 return "admin/admin_mypage_modify"; // 어드민 수정 페이지
             }else{
-                return "redirect:/my_page"; // 유저 마이페이지로 이동
+                return "redirect:/";
             }
         }
     }
 
 
 
-    @PostMapping("admin/modify") // 어드민 수정
-    public String modidyadmin(UserMaster userMaster, HttpSession session, Model model, MultipartFile file) throws Exception{
+    @PostMapping("adminModify") // 어드민 수정
+    public String modifyAdmin(UserMaster userMaster, HttpSession session, Model model, MultipartFile file) throws Exception{
         if(session.getAttribute("user")==null){
             return "redirect:/";
         }else{
             userService.updateMember(userMaster, file);
-            Optional<UserMaster> userMM=userRepository.findByUserName(userMaster.getUserName());
+            Optional<UserMaster> userMM=userRepository.findByUserId(userMaster.getUserId());
             model.addAttribute("user",userMM.get());
             if(userMM.get().getUserType().equals("ADMIN")){
-                return "admin/admin_mypage";
+                return "redirect:/adminMypage";//"admin/admin_mypage";
             }else{
-                return "redirect:/my_page"; // 유저 마이페이지로 이동
+                return "redirect:/";
             }
         }
     }
 
 
 
-    @PostMapping("admin/create") // 관리자 생성 - 잘 되는지 확인
-    public String createadminuserform(HttpSession session, Model model, UserMaster users){
+    @PostMapping("adminCreate") // 관리자 생성 - 잘 되는지 확인
+    public String createAdminUserForm(HttpSession session, Model model, UserMaster users){
         if(session.getAttribute("user")==null){
             return "redirect:/";
         }else{
@@ -107,53 +108,63 @@ public class AdminController {
                 users.setUserType("ADMIN");
                 users.setUserJoinDate(LocalDateTime.now());
                 userRepository.save(users);
-                return "redirect:admin/mypage";
+                return "redirect:adminMypage";
             }else{return "redirect:/my_page";}
         }
     }
 
 
 
-    @GetMapping("admin/userlist") // 유저리스트 보기
-    public String userlist(HttpSession session, Model model){
+    @GetMapping("adminUserList") // 유저리스트 보기
+    public String userList(HttpSession session, Model model, @PageableDefault(page = 0,size = 10, sort = "userNo", direction = Sort.Direction.DESC) Pageable pageable){
         if(session.getAttribute("user")==null){
             return "redirect:/";
         }else{
             UserMaster user=(UserMaster)session.getAttribute("user");
             //model.addAttribute("user",user);
             if(user.getUserType().equals("ADMIN")){
-                List<UserMaster> everyUser=userRepository.findAll();
+                Page<UserMaster> everyUser=userRepository.findAll(pageable);//userRepository.findAll();
+
+                int nowPage = everyUser.getPageable().getPageNumber()+1 ;
+                int startPage = Math.max(0 , 1);
+                int endPage = Math.min(nowPage + 10 , everyUser.getTotalPages());
+
+                model.addAttribute("nowPage", nowPage);
+                model.addAttribute("startPage", startPage);
+                model.addAttribute("endPage", endPage);
+                model.addAttribute("maxPage",10);
+
                 model.addAttribute("userList",everyUser);
                 return "admin/admin_user_list"; // 어드민 마이페이지로 이동
             }else{
-                return "user/index_login"; // 유저 마이페이지로 이동?
+                return "redirect:/";
             }
         }
     }
 
-    @GetMapping("admin/userDetail") // 해당 유저의 디테일 보기
-    public String userdetail(HttpSession session, Model model, Long userNo){
+    @GetMapping("adminUserDetail") // 해당 유저의 디테일 보기
+    public String userDetail(HttpSession session, Model model, Long userNo){
         if(session.getAttribute("user")==null){
-            return "index";
+            return "redirect:/";
         }else{
             UserMaster user=(UserMaster) session.getAttribute("user");
             if(user.getUserType().equals("ADMIN")){
                 if(userRepository.findById(userNo).isEmpty()){
-                    return "redirect:/admin/userlist"; // 없는 유저번호일 경우 이동
+                    return "redirect:/adminUserList"; // 없는 유저번호일 경우 이동
                 }else{
                     UserMaster certainuser=userRepository.findById(userNo).get();
                     model.addAttribute("user",certainuser);
                     return "admin/admin_user_detail";
                 }
             }else{
-                return "user/index_login";
+                return "redirect:/";
             }
         }
     }
 
 
 
-    @GetMapping("admin/userDelete") // 해당 유저 삭제
+    @GetMapping("adminUserDelete") // 해당 유저 삭제
     public String userDelete(HttpSession session, Long userNo){
         if(session.getAttribute("user")==null){
             return "redirect:/index";
@@ -161,7 +172,7 @@ public class AdminController {
             UserMaster loginuser=userService.getUserMaster((UserMaster)session.getAttribute("user"));
             if(loginuser.getUserType().equals("ADMIN")){
                 userService.deleteMember(userService.getUser(userNo));
-                return "redirect:/admin/userlist";
+                return "redirect:/adminUserList";
             }else{
                 return "redirect:/my_page";
             }
@@ -170,16 +181,16 @@ public class AdminController {
 
 
 
-    @GetMapping("admin/userPost") // 해당 유저의 글 리스트
-    public String userpostlist(HttpSession session, Long userNo, Model model, @PageableDefault(page = 0,size = 10, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable){
+    @GetMapping("adminUserPost") // 해당 유저의 글 리스트
+    public String userPostList(HttpSession session, Long userNo, Model model, @PageableDefault(page = 0,size = 10, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable){
         if(session.getAttribute("user")==null){
-            return "redirect:/index";
+            return "redirect:/";
         }else{
             UserMaster user=(UserMaster) session.getAttribute("user");
             if(user.getUserType().equals("ADMIN")){
                 if(userRepository.findById(userNo).isEmpty()){
                     //model.addAttribute("err","해당유저가 존재하지않습니다.");
-                    return "redirect:/admin/userlist";
+                    return "redirect:/adminUserList";
                 }else{
                     Page<CommunityMaster> boardListFindByUserNO= communityService.boardListByUserNO(userNo, pageable);
 
@@ -195,6 +206,9 @@ public class AdminController {
                     model.addAttribute("userNickName",userService.getUser(userNo).getNickName());
                     model.addAttribute("postList",boardListFindByUserNO);
                     model.addAttribute("userType",user.getUserType());
+
+                    // 추가
+                    model.addAttribute("userNo",userNo);
                     return "user/user_post_list";
                 }
             }else{
@@ -205,7 +219,7 @@ public class AdminController {
 
 
 
-    @GetMapping("admin/userDonate") // 해당 유저의 도네이트(후원) 리스트
+    @GetMapping("adminUserDonate") // 해당 유저의 도네이트(후원) 리스트
     public String userAllDonate(HttpSession session, Long userNo, Model model, @PageableDefault(page = 0,size = 10, sort = "donateCode", direction = Sort.Direction.DESC) Pageable pageable){
         if(session.getAttribute("user")==null){
             return "redirect:/";
@@ -227,16 +241,19 @@ public class AdminController {
                 model.addAttribute("endPage", endPage);
                 model.addAttribute("maxPage",10);
 
-                return "redirect:/donatelist";//"donate/my_donate_list";
+                //추가
+                model.addAttribute("userType", userService.getUser(userNo).getUserType());
+
+                return "admin/admin_donate_list";//"donate/my_donate_list";
             }else{
-                return "redirect:/donatelist.meow";
+                return "redirect:/";
             }
         }
     }
 
 
 
-    @GetMapping("admin/userReply") // 해당 유저의 덧글 리스트
+    @GetMapping("adminUserReply") // 해당 유저의 덧글 리스트
     public String userAllReply(HttpSession session, Long userNo, Model model, @PageableDefault(page = 0,size = 10, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable){
         if(session.getAttribute("user")==null){
             return "redirect:/";
@@ -257,15 +274,18 @@ public class AdminController {
                 model.addAttribute("userNickName",userService.getUser(userNo).getNickName());
                 model.addAttribute("replies",userAllReplyList);
 
+                model.addAttribute("userType", getSessionUser.getUserType());
+                model.addAttribute("userNo",userNo); // 추가
+
                 return "user/user_reply_list";
 
-            }else{return "redirect:/myReply";}
+            }else{return "redirect:/";}
         }
     }
 
 
 
-    @GetMapping("admin/userTypeChange") // 유저 등급 변경
+    @GetMapping("adminUserTypeChange") // 유저 등급 변경
     public String userClassChange(HttpSession session, Long userNo){
         if(session.getAttribute("user")==null){
             return "redirect:/";
@@ -273,7 +293,7 @@ public class AdminController {
             if(userService.getUserMaster((UserMaster)session.getAttribute("user")).getUserType().equals("ADMIN")){
                 if(userService.getUser(userNo).getUserType().equals("ADMIN")){
                     if(userService.getUser(userNo).getUserId().equals("meow@gmail.com")){
-                        return "redirect:/admin/userlist";
+                        return "redirect:/adminUserList";
                     }else{
                         userService.getUser(userNo).setUserType("MEMBER");
                         userRepository.save(userService.getUser(userNo));
@@ -282,7 +302,7 @@ public class AdminController {
                     userService.getUser(userNo).setUserType("ADMIN");
                     userRepository.save(userService.getUser(userNo));
                 }
-                return "redirect:/admin/userDetail?userNo="+userNo;    // "redirect:/admin/userDetail?userNo="+userNo; / "admin/userlist";
+                return "redirect:/adminUserDetail?userNo="+userNo;    // "redirect:/adminUserDetail?userNo="+userNo; / "adminUserList";
             }else{return "redirect:/";}
 
         }
@@ -290,8 +310,8 @@ public class AdminController {
 
 
 
-    @GetMapping("admin/postmanage") // 모든 게시글 보기
-    public String postmanage(HttpSession session, Model model, @PageableDefault(page = 0,size = 10, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable){
+    @GetMapping("adminPostManage") // 모든 게시글 보기
+    public String postManage(HttpSession session, Model model, @PageableDefault(page = 0,size = 10, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable){
         if(session.getAttribute("user")==null){
             return "redirect:/";
         }else{
@@ -319,8 +339,8 @@ public class AdminController {
         }
     }
 
-    @GetMapping("admin/donatemanage") // 모든 도네이트 보기
-    public String donatemanage(HttpSession session, Model model, @PageableDefault(page = 0,size = 10, sort = "donateCode", direction = Sort.Direction.DESC) Pageable pageable){
+    @GetMapping("adminDonatemanage") // 모든 도네이트 보기
+    public String donateManage(HttpSession session, Model model, @PageableDefault(page = 0,size = 10, sort = "donateCode", direction = Sort.Direction.DESC) Pageable pageable){
         if(session.getAttribute("user")==null){
             return "redirect:/";
         }else{
@@ -338,6 +358,9 @@ public class AdminController {
                 model.addAttribute("endPage", endPage);
                 model.addAttribute("maxPage",10);
 
+                //추가
+                model.addAttribute("userType",user.getUserType());
+
                 return "admin/admin_donate_list";
             }else{
                 return "redirect:/";
@@ -347,8 +370,8 @@ public class AdminController {
 
 
 
-    @GetMapping("admin/insertnotice")//공지적는 폼으로 이동
-    public String insertnoticeform(HttpSession session, Model model){
+    @GetMapping("adminInsertNotice")//공지적는 폼으로 이동
+    public String insertNoticeForm(HttpSession session, Model model){
         if(session.getAttribute("user")==null){
             return "redirect:/";
         }else{
@@ -361,8 +384,8 @@ public class AdminController {
 
 
 
-    @PostMapping("admin/insertnotice")//공지등록
-    public String insertnotice(CommunityMaster com, HttpSession session/*, Model model*/){
+    @PostMapping("adminInsertNotice")//공지등록
+    public String insertNotice(CommunityMaster com, HttpSession session/*, Model model*/){
         if(session.getAttribute("user")==null){
             return "redirect:/";
         }else{
@@ -370,7 +393,7 @@ public class AdminController {
             //model.addAttribute("user",userMaster);
             com.setCreatePostDate(LocalDateTime.now());
             communityMasterRepository.save(com);
-            return "redirect:admin/mypage"; // 새로고침해도 인서트되지않게끔 함니다.
+            return "redirect:adminMypage"; // 새로고침해도 인서트되지않게끔 함니다.
         }
     }
 }

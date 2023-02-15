@@ -53,4 +53,5 @@ public interface CommunityService {
     void deleteAllLikeByPostNo(Long postNo);
 
     void deleteAllcomIMG(Long postNo);
+
 }

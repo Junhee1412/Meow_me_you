@@ -71,13 +71,13 @@
         <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x "></i>
         <nav id="navbar" class="navbar">
           <ul>
-            <li class="dropdown"><a href="#"><span>Meow me, you</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <li class="dropdown"><a href="/"><span>Meow me, you</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="#">사업소개</a></li>
+                <li><a href="business">사업소개</a></li>
                 <li><a href="#">후원내역</a></li>
               </ul>
             </li>
-            <li><a href="#">후원하기</a></li>
+            <li><a href="donatehome">후원하기</a></li>
             <li class="dropdown"><a href="#"><span>물품거래</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
                 <li><a href="#">무료 나눔</a></li>
@@ -86,18 +86,18 @@
             </li>
             <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="#">분양하기</a></li>
+                <li><a href="boardlist">분양하기</a></li>
                 <li><a href="#">분양후기</a></li>
                 <li><a href="#">캣스타그램</a></li>
               </ul>
             </li>
-            <li class="dropdown"><a href="#"><span>마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <li class="dropdown"><a href="my_page"><span>마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="#">내 글 모아보기</a></li>
-                <li><a href="#">내가 쓴 댓글 모아보기</a></li>
-                <li><a href="#">좋아요 목록 보기</a></li>
-                <li><a href="#">내 후원 목록보기</a></li>
-                <li><a href="#">회원정보 수정하기</a></li>
+                <li><a href="myPost">내 글 모아보기</a></li>
+                <li><a href="myReply">내가 쓴 댓글 모아보기</a></li>
+                <li><a href="myHeart">좋아요 목록 보기</a></li>
+                <li><a href="donatelist">내 후원 목록보기</a></li>
+                <li><a href="modifyUser">회원정보 수정하기</a></li>
               </ul>
             </li>
             <li><a class="get-a-quote" href="logout">로그아웃</a></li>
@@ -131,7 +131,7 @@
                 <tr>
                   <th scope="row">닉네임</th>
                   <td><span th:text="${user.getNickName()}"></span>&nbsp;&nbsp;&nbsp;
-                    <a href="#" data-toggle="modal" data-target="#changeNickNameModal" class="btn btn-secondary">변경</a>
+                    <a href="#" data-toggle="modal" data-target="#changeNickNameModal" class="btn btn-outline-success btn-sm">닉네임 변경하기</a>
                   </td>
                 </tr>
                 <tr>
@@ -234,7 +234,7 @@
             <div><span id="checkNickNameDuplication_span"></span></div>
             <button type="submit" id="changeNickNameBtn" class="btn btn-secondary" disabled>변경하기</button>
           </form>
-          <button class="w-30 btn btn-lg btn-dark mt-4" id="checkNickNameDuplication_Btn">중복검사</button>
+          <button class="w-30 btn btn-lg btn-dark mt-4 btn-outline-danger " id="checkNickNameDuplication_Btn">중복검사</button>
 
           <div><span id="findUserId"></span></div>
 

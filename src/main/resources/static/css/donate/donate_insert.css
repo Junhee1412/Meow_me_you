@@ -11582,7 +11582,7 @@ footer{
 .bir_yy,
 .bir_mm,
 .bir_dd {
-  width: 160px;
+  width: 250px;
   display: table-cell;
 }
 .bir_mm + .bir_dd,
@@ -11632,7 +11632,7 @@ section{
   cursor: pointer;
 }
 form{
-  width:400px;
+  width:500px;
   margin:0 auto;
 }
 

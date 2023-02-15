@@ -131,32 +131,32 @@
               <td th:text="${donateList.donateType}"></td>
               <td th:text="${#numbers.formatInteger(donateList.donateAmount, 0, 'COMMA')+'원'}"></td>
               <td th:switch="${donateList.donateWayCode}">
-                <p th:case="'ACNT'">계좌이체</p>
-                <p th:case="'BANK'">무통장입금</p>
-                <p th:case="'CRCRD'">신용카드</p>
+                <span th:case="'ACNT'">계좌이체</span>
+                <span th:case="'BANK'">무통장입금</span>
+                <span th:case="'CRCRD'">신용카드</span>
               </td>
               <td th:switch="${donateList.donateStateCode}">
                 <div th:case="'DONATE_CPL'" >
                   <a th:href="@{|/donateconfirm?donateCode=${donateList.donateCode}}|" type="button" class="btn btn-outline-success btn-sm confirm_donate_btn">확정</a>
                   <a th:href="@{|/donatedelete?donateCode=${donateList.donateCode}}|" type="button" class="btn btn-outline-danger btn-sm delete_donate_btn">취소</a>
                 </div>
-                <p th:case="'DONATE_CNFRM'">후원확정</p>
+                <span th:case="'DONATE_CNFRM'">후원확정</span>
                 <div th:case="'BANK_WAIT'" >
                   <span>입금대기중</span>
                   <a th:href="@{|/donateconfirm?donateCode=${donateList.donateCode}}|" type="button" class="btn btn-outline-success btn-sm confirm_donate_btn">확정</a>
                   <a th:href="@{|/donatedelete?donateCode=${donateList.donateCode}}|" type="button" class="btn btn-outline-danger btn-sm delete_donate_btn">취소</a>
                 </div>
-                <p th:case="'LCK_BLC'">계좌잔액부족</p>
-                <p th:case="'LIMIT_EXCDD'">한도초과</p>
+                <span th:case="'LCK_BLC'">계좌잔액부족</span>
+                <span th:case="'LIMIT_EXCDD'">한도초과</span>
               </td>
               <td>
-                <p th:if="${donateList.donateStateCode}=='DONATE_CNFRM'">가능</p>
-                <p th:unless="${donateList.donateStateCode}=='DONATE_CNFRM'">불가능</p>
+                <span th:if="${donateList.donateStateCode}=='DONATE_CNFRM'">가능</span>
+                <span th:unless="${donateList.donateStateCode}=='DONATE_CNFRM'">불가능</span>
               </td>
               <td th:text="${donateList.donateDate}"></td>
               <td>
                   <a type="button" class="btn btn-outline-success btn-sm" th:href="@{/donateReceipt.meow(id=${donateList.donateCode})}" th:if="${donateList.donateStateCode}=='DONATE_CNFRM'">영수증 발급</a>
-                  <p th:unless="${donateList.donateStateCode}=='DONATE_CNFRM'">발급불가</p>
+                  <span th:unless="${donateList.donateStateCode}=='DONATE_CNFRM'">발급불가</span>
               </td>
             </tr>
           </tbody>

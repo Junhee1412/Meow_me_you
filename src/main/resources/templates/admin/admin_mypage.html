@@ -91,11 +91,8 @@
      <!-- section -->
      <div class="header-card">
       <div class="thumb-wrapper stagger-item">
-        <a href="#"
-          ><img style="width:200px; height:200px;"
-                th:src="@{|/upload/${user.profileImagePath}|}"
-                class="d-block w-100"
-                alt="사진1"/></a>
+          <img th:if = "${user.profileImagePath != null}"  th:src="@{|/upload/${user.profileImagePath}|}" style="width:150px;,height:150px;" class="rounded-circle"/>
+          <img th:unless="${user.profileImagePath != null}" src="../img/noimg.gif" style="width:150px;,height:150px;" class="rounded-circle"/>
       </div>
 
       <div class="text-area">

@@ -252,26 +252,36 @@
       </div>
     </section>
 
-
     <!-- Map-->
     <div class="map_wrap">
-      <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-      <div id="menu_wrap" class="bg_white">
-        <div class="option">
-          <div>
-            <form onsubmit="searchPlaces(); return false;">
-              키워드 : <input type="text" value="서울 동물보호센터" id="keyword" size="15">
-              <button class="serchbtn" type="submit">검색하기</button>
-            </form>
-          </div>
-        </div>
-        <hr>
-        <ul id="placesList"></ul>
-        <div id="pagination"></div>
+      <div id="map" ></div>
+      <div class="option">
+        <select id="area" onchange="selectArea()"> <!--aria-label=".form-select-lg example-->
+          <option selected>지역을 선택해주세요.</option>
+          <option value="서울">서울</option>
+          <option value="경기">경기도</option>
+          <option value="인천">인천</option>
+          <option value="대전">대전</option>
+          <option value="대구">대구</option>
+          <option value="부산">부산</option>
+          <option value="울산">울산</option>
+          <option value="광주">광주</option>
+          <option value="제주">제주</option>
+        </select>
+        <!--<div>
+          <form onsubmit="searchPlaces(); return false;">
+            키워드 : <input type="text" value="서울 동물보호센터" id="keyword" size="15">
+            <button class="serchbtn" type="submit">검색하기</button>
+          </form>
+        </div>-->
       </div>
+      <hr>
+      <ul id="placesList"></ul>
+      <div id="pagination"></div>
     </div>
     <!--    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=680531978ab426a7e809968516cc71d7"></script>-->
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=680531978ab426a7e809968516cc71d7&libraries=services"></script>
+    <!--<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=680531978ab426a7e809968516cc71d7&libraries=services"></script>-->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=680531978ab426a7e809968516cc71d7"></script>
 
     <!-- Footer-->
     <footer class="py-5 bg-dark">

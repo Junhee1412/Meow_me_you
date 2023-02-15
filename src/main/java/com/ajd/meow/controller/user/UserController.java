@@ -21,6 +21,11 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @GetMapping("goToTerms")
+    public String goToTerms(){
+        return "user/terms";
+    }
+
     @GetMapping("sign_user")
     public String memberSign(){
         return "user/sign_page";

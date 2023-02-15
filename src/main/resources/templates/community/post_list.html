@@ -76,13 +76,13 @@
         <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x "></i>
         <nav id="navbar" class="navbar">
           <ul>
-            <li class="dropdown"><a href="#"><span>Meow me, you</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <li class="dropdown"><a href="/"><span>Meow me, you</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="#">사업소개</a></li>
+                <li><a href="business">사업소개</a></li>
                 <li><a href="#">후원내역</a></li>
               </ul>
             </li>
-            <li><a href="#">후원하기</a></li>
+            <li><a href="donatehome">후원하기</a></li>
             <li class="dropdown"><a href="#"><span>물품거래</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
                 <li><a href="#">무료 나눔</a></li>
@@ -91,21 +91,21 @@
             </li>
             <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="#" th:href="@{/boardlist}">분양하기</a></li>
+                <li><a href="boardlist">분양하기</a></li>
                 <li><a href="#">분양후기</a></li>
                 <li><a href="#">캣스타그램</a></li>
               </ul>
             </li>
-            <li class="dropdown"><a href="#"><span>마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <li class="dropdown"><a href="my_page"><span>마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="#">내 글 모아보기</a></li>
-                <li><a href="#">내가 쓴 댓글 모아보기</a></li>
-                <li><a href="#">좋아요 목록 보기</a></li>
-                <li><a href="#">내 후원 목록보기</a></li>
-                <li><a href="#">회원정보 수정하기</a></li>
+                <li><a href="myPost">내 글 모아보기</a></li>
+                <li><a href="myReply">내가 쓴 댓글 모아보기</a></li>
+                <li><a href="myHeart">좋아요 목록 보기</a></li>
+                <li><a href="donatelist">내 후원 목록보기</a></li>
+                <li><a href="modifyUser">회원정보 수정하기</a></li>
               </ul>
             </li>
-            <li><a class="get-a-quote" href="#">로그아웃</a></li>
+            <li><a class="get-a-quote" href="logout">로그아웃</a></li>
           </ul>
         </nav>
         <!-- .navbar -->
@@ -117,7 +117,7 @@
      <div class="header-card">
       <div class="card bg-crop">
         <img
-          src="../img/parcel_review_menu.jpg"
+          src="../img/mypost/post.jpg"
           class="card-img rounded mx-auto d-block bg-menu"
           alt="커뮤니티설명"
         />
@@ -188,7 +188,8 @@
                 <div th:case="'NTC_POST'" class="badge bg-danger position-absolute fs-5">공지글</div>
 
               </div>
-              <img th:if = "${communityMaster.sumImg != null}"  th:src="@{|/upload/${communityMaster.sumImg}|}" style="width:100%; height:250px;"/>
+
+              <img th:if = "${communityMaster.sumImg != null}"  th:src="@{|/upload/${communityMaster.sumImg}|}" style="width:100%; height:230px;"/>
               <img th:unless="${communityMaster.sumImg != null}" src="../img/noimg.gif" style="width:100%; height:250px;"/>
 
 
@@ -229,18 +230,24 @@
     <nav class="marbot_100" aria-label="Page navigation example" >
       <ul class="pagination">
         <li class="page-item" th:classappend="${1 == nowPage} ? 'disabled'">
-          <a class="page-link" href="#" aria-label="Previous" th:href="@{/boardlist(page=${startPage-1})}">
+          <a class="page-link" href="#" aria-label="Previous"
+             th:href="@{/boardlist(page=${startPage-1})}">
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
         <li class="page-item" th:classappend="${1 == nowPage} ? 'disabled'">
-          <a class="page-link" href="#" aria-label="Previous" th:href="@{/boardlist(page=${nowPage-2})}">
+          <a class="page-link" href="#" aria-label="Previous"
+             th:href="@{/boardlist(page=${nowPage-2})}">
             <span aria-hidden="true">&lt;</span>
           </a>
         </li>
 
-        <li class="page-item" th:classappend="${i == nowPage} ? 'disabled'" th:each="i : ${#numbers.sequence(startPage, endPage)}">
-          <a class="page-link" href="#"  th:href="@{/boardlist(page=${i - 1},serchKeyword = ${param.searchKeyword})}" th:text="${i}">1</a></li>
+        <li class="page-item" th:classappend="${i == nowPage} ? 'disabled'"
+            th:each="i : ${#numbers.sequence(startPage, endPage)}"
+            th:if="${i >= nowPage-5 and i <= nowPage+4}">
+          <a class="page-link" href="#"
+             th:href="@{/boardlist(page=${i - 1},searchKeyword = ${param.searchKeyword})}"
+             th:text="${i}">1</a></li>
 
         <li class="page-item" th:classappend="${endPage == nowPage} ? 'disabled'">
           <a class="page-link" href="#" aria-label="Next"  th:href="@{/boardlist(page=${nowPage})}">

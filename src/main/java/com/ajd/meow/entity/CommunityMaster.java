@@ -64,4 +64,7 @@ public class CommunityMaster {
     private List<CommunityImage> communityImageList = new ArrayList<>();
 
 
+    @OneToMany(mappedBy = "communityMaster",cascade = CascadeType.REMOVE,orphanRemoval = true)
+    @JsonIgnoreProperties({"communityMaster"})
+    private List<CommunityLike> communityLikes;
 }

@@ -62,13 +62,21 @@ public class MyPageController {
 
 
     @GetMapping("myPost") // 내글 모두보기
-    public String myPost(HttpSession session, Model model, @PageableDefault(page = 0,size = 10, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable){
+    public String myPost(HttpSession session, Model model, @PageableDefault(page = 0,size = 10, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable, String searchKeyword){
         if(session.getAttribute("user")==null){
             return "redirect:/"; // 홈으로
         }else{
             UserMaster loginUser=userService.getUserMaster((UserMaster)session.getAttribute("user"));
             //List<CommunityMaster> com=communityMasterRepository.findAllById(Collections.singleton(loginUser.getUserNo()));
-            Page<CommunityMaster> boardListFindByUserNO= communityService.boardListByUserNO(loginUser.getUserNo(), pageable);
+//            Page<CommunityMaster> boardListFindByUserNO= communityService.boardListByUserNO(loginUser.getUserNo(), pageable);
+
+            Page<CommunityMaster> boardListFindByUserNO = null;
+
+            if(searchKeyword == null ) {
+                boardListFindByUserNO=  communityService.boardListByUserNO(loginUser.getUserNo(), pageable);
+            }else {
+                boardListFindByUserNO= communityService.communitySearchKeyword(searchKeyword,pageable);
+            }
 
             int nowPage = boardListFindByUserNO.getPageable().getPageNumber()+1 ;
             int startPage = Math.max(0 , 1);
@@ -99,7 +107,7 @@ public class MyPageController {
             communityLikeRepository.deleteLikesByPost(postNo);// 좋아요 지우기
             communityService.communityPostDelete(postNo); // 게시글 지우기
             if(userMaster.getUserType().equals("ADMIN")){
-                return "redirect:/admin/userPost?userNo="+usernumber;
+                return "redirect:/adminUserPost?userNo="+usernumber;
             }else{
                 return "redirect:/myPost";
             }
@@ -109,12 +117,21 @@ public class MyPageController {
 
 
     @GetMapping("myReply") // 내 덧글 모아보기
-    public String myReply(HttpSession session, Model model, @PageableDefault(page = 0,size = 10, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable){
+    public String myReply(HttpSession session, Model model, @PageableDefault(page = 0,size = 10, sort = "postNo",
+             direction = Sort.Direction.DESC) Pageable pageable, String searchKeyword){
         if(session.getAttribute("user")==null){
             return "redirect:/";
         }else{
             UserMaster loginUser=userService.getUserMaster((UserMaster)session.getAttribute("user"));
-            Page<Reply> replies=replyService.getAllReplyByUserNo(loginUser.getUserNo(), pageable);
+//            Page<Reply> replies=replyService.getAllReplyByUserNo(loginUser.getUserNo(), pageable);
+
+            Page<Reply> replies = null;
+
+            if(searchKeyword == null ) {
+                replies= replyService.getAllReplyByUserNo(loginUser.getUserNo(), pageable);
+            }else {
+                replies= replyService.replySearchKeyword(searchKeyword,pageable);
+            }
 
             int nowPage = replies.getPageable().getPageNumber()+1 ;
             int startPage = Math.max(0 , 1);
@@ -127,6 +144,8 @@ public class MyPageController {
 
             model.addAttribute("userNickName",loginUser.getNickName());
             model.addAttribute("replies",replies);
+
+            model.addAttribute("userType", loginUser.getUserType());
 
             return "user/user_reply_list";
             //return "user/user_post_list";
@@ -144,7 +163,7 @@ public class MyPageController {
             Long usernumber=replyService.findReply(replyNo).getUserNo();
             replyService.replyDelete(replyNo);
             if(userMaster.getUserType().equals("ADMIN")){
-                return "redirect:/admin/userReply?userNo="+usernumber;
+                return "redirect:/adminUserReply?userNo="+usernumber;
             }else{
                 return "redirect:/myReply";
             }

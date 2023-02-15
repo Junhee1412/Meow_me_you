@@ -57,8 +57,6 @@ public class ChatHandler extends TextWebSocketHandler {
         String senderId = (String) session.getAttributes().get("sessionId");
         String payload = message.getPayload();
 
-        System.out.println("payload >>> " + payload);
-
         dataMap = jsonToMap(payload);
         dataMap.put("senderId", senderId);
         dataMap.put("time", time);
@@ -70,7 +68,6 @@ public class ChatHandler extends TextWebSocketHandler {
         log.info("final dataMap >>> " + dataMap);
 
         // send a message
-        System.out.println("receiver session >>> " + userSession.get(receiverId));
         String msg = json.writeValueAsString(dataMap);
 
         if (userSession.get(receiverId) != null) {
@@ -95,12 +92,10 @@ public class ChatHandler extends TextWebSocketHandler {
         log.info("sessionId >>> " + senderId);
         onlineList.add(senderId);
         userSession.put(senderId, session);
-
         // as master send message to all
         if (senderId.equals("master")) {
             TextMessage msg = new TextMessage(senderId + " 님이 접속했습니다.");
             sendToAll(msg, senderId);
-
         } else {
             Map<String, Object> data = new HashMap<>();
             data.put("message", senderId + "님이 어서오세요 meow me you 입니다.");
@@ -110,7 +105,6 @@ public class ChatHandler extends TextWebSocketHandler {
             TextMessage msgToMaster = new TextMessage(json.writeValueAsString(data));
             handleMessage(session, msgToMaster);
         }
-
         log.info(session + " client connected");
     }
 
@@ -138,9 +132,6 @@ public class ChatHandler extends TextWebSocketHandler {
             TextMessage msg = new TextMessage(json.writeValueAsString(data));
             handleMessage(session, msg);
         }
-
-
-
         log.info(session + "client disconnected");
     }
 

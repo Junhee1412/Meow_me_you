@@ -64,4 +64,9 @@ public class ReplyServiceImpl implements ReplyService{
         return replyRepository.findById(replyNo).get();
     }
 
+
+    public Page<Reply> replySearchKeyword(String searchKeyword, Pageable pageable){
+        return replyRepository.findByReplyContentContaining(searchKeyword, pageable);
+    }
+
 }

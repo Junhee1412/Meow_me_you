@@ -15,7 +15,7 @@ public class ContactController {
     ChatRepository repository;
 
     @Autowired
-    ChatService service;
+    ChatService chatService;
 
     // get contact
     @PostMapping("/contact")
@@ -24,7 +24,7 @@ public class ContactController {
         Chat data = repository.findTop1ByUserNoOrderByChatDateDesc(param.getUserNo());
 
         if(data == null) {
-            service.insert(param);
+            chatService.insert(param);
             return null;
         } else {
             return data;
@@ -34,6 +34,6 @@ public class ContactController {
     // insert DB
     @PostMapping("/contact/insert")
     public void save(@RequestBody Chat param) {
-        service.insert(param);
+        chatService.insert(param);
     }
 }

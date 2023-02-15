@@ -270,7 +270,7 @@ sup {
 }
 
 a {
-  color: #1d809f;
+  color: #000;
   text-decoration: underline;
 }
 a:hover {
@@ -3702,7 +3702,7 @@ fieldset:disabled .btn {
 }
 
 .btn-outline-dark {
-  color: #212529;
+  color: #fff;
   border-color: #212529;
 }
 .btn-outline-dark:hover {
@@ -3758,8 +3758,8 @@ fieldset:disabled .btn {
 
 .btn-sm,
 .btn-group-sm > .btn {
-  padding: 0.25rem 0.5rem;
-  font-size: 0.875rem;
+  padding: 0.15rem 0.25rem;
+  font-size: 0.7rem;
   border-radius: 0.2rem;
 }
 
@@ -4357,9 +4357,12 @@ fieldset:disabled .btn {
 }
 
 .pagination {
-  display: flex;
+     display: flex;
+      align-items: center;
+      justify-content: center;
   padding-left: 0;
   list-style: none;
+
 }
 
 .page-link {
@@ -4401,9 +4404,9 @@ fieldset:disabled .btn {
   border-color: #1d809f;
 }
 .page-item.disabled .page-link {
-  color: #6c757d;
+  color: #fff;
   pointer-events: none;
-  background-color: #fff;
+  background-color: #5c636a;
   border-color: #dee2e6;
 }
 
@@ -11635,3 +11638,8 @@ footer{
   width:70%;
   margin:0 auto;
 }
+
+
+.text-start a {padding-left : 25%; text-decoration: none;}
+
+section{margin-top : 30px;}

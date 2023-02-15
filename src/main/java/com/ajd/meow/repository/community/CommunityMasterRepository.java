@@ -21,6 +21,7 @@ public interface CommunityMasterRepository extends JpaRepository<CommunityMaster
     List<CommunityMaster> findAllByUserNo(Long userNo); // 유저넘버로 게시글 찾기
     CommunityMaster findByPostNo(Long postNo);
 
+
     @Override
     <S extends CommunityMaster> Page<S> findAll(Example<S> example, Pageable pageable);
 }

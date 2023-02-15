@@ -76,13 +76,13 @@
         <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x "></i>
         <nav id="navbar" class="navbar">
           <ul>
-            <li class="dropdown"><a href="#"><span>Meow me, you</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <li class="dropdown"><a href="/"><span>Meow me, you</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="#">사업소개</a></li>
+                <li><a href="business">사업소개</a></li>
                 <li><a href="#">후원내역</a></li>
               </ul>
             </li>
-            <li><a href="#">후원하기</a></li>
+            <li><a href="donatehome">후원하기</a></li>
             <li class="dropdown"><a href="#"><span>물품거래</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
                 <li><a href="#">무료 나눔</a></li>
@@ -91,21 +91,21 @@
             </li>
             <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="#" th:href="@{/boardlist}">분양하기</a></li>
+                <li><a href="boardlist">분양하기</a></li>
                 <li><a href="#">분양후기</a></li>
                 <li><a href="#">캣스타그램</a></li>
               </ul>
             </li>
-            <li class="dropdown"><a href="#"><span>마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <li class="dropdown"><a href="my_page"><span>마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="#">내 글 모아보기</a></li>
-                <li><a href="#">내가 쓴 댓글 모아보기</a></li>
-                <li><a href="#">좋아요 목록 보기</a></li>
-                <li><a href="#">내 후원 목록보기</a></li>
-                <li><a href="#">회원정보 수정하기</a></li>
+                <li><a href="myPost">내 글 모아보기</a></li>
+                <li><a href="myReply">내가 쓴 댓글 모아보기</a></li>
+                <li><a href="myHeart">좋아요 목록 보기</a></li>
+                <li><a href="donatelist">내 후원 목록보기</a></li>
+                <li><a href="modifyUser">회원정보 수정하기</a></li>
               </ul>
             </li>
-            <li><a class="get-a-quote" href="#">로그아웃</a></li>
+            <li><a class="get-a-quote" href="logout">로그아웃</a></li>
           </ul>
         </nav>
         <!-- .navbar -->
@@ -117,7 +117,7 @@
      <div class="header-card">
       <div class="card bg-crop">
         <img
-          src="../img/parcel_review_menu.jpg"
+          src="../img/mypost/post.jpg"
           class="card-img rounded mx-auto d-block bg-menu"
           alt="커뮤니티설명"
         />
@@ -134,35 +134,35 @@
     <form action="/boardwritepro" method="post" enctype="multipart/form-data" >
     <div id="insert_text_box">
       <div class="row w-50 mb-3">
-        <label for="inputEmail3" class="col-sm-2 col-form-label">제목 *</label>
+        <label for="formTextContent" class="col-sm-2 col-form-label">제목 *</label>
         <div class="col-sm-10">
 
-          <input
+          <input maxlength="20"
             type="text" name="subject"
             class="form-control"
             id="formTextContent"
-            placeholder="제목을 입력해주세요."
+            placeholder="제목을 입력해주세요.(20자 이하로 작성해주세요)"
           />
           <input name="userNo" type="hidden" class="form-control" th:value="${user.getUserNo()}">
         </div>
       </div>
       <div class="row w-50 mb-5">
-        <label for="inputPassword3" class="col-sm-2 col-form-label"
+        <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label"
           >내용 *</label
         >
         <div class="col-sm-10">
-          <textarea
+          <textarea maxlength="500"
             class="form-control" name="content"
             id="exampleFormControlTextarea1"
             rows="10"
-            placeholder="내용을 입력해주세요."
+            placeholder="내용을 입력해주세요. (500자 이하로 작성해주세요)"
           ></textarea>
         </div>
       </div>
     </div>
     <div id="insert_pic_box">
       <div class="row w-50 mb-3">
-        <label for="input-group-text" class="col-sm-2 col-form-label">이미지첨부</label>
+        <label for="inputGroupFile02" class="col-sm-2 col-form-label">이미지첨부</label>
         <div class="col-sm-10">
           <div class="input-group mb-3">
             <input type="file" name="files" multiple="multiple" class="form-control" id="inputGroupFile02"  />
@@ -184,8 +184,8 @@
     <hr class="border border-white" />
 
     <div class="bot_btn_group">
-      <button class="btn btn-dark mr-5"><i class="bi bi-pencil-square"></i>등록하기</button>
-      <button type="button" class="btn btn-dark ml-5">
+      <button class="btn btn-dark mr-5" style="margin-right:10px;"><i class="bi bi-pencil-square"></i>등록하기</button>
+      <button type="button" class="btn btn-dark ml-5" style="margin-left:10px;">
         <a href="/boardlist" class="text-white"><i class="bi bi-list"></i> 목록으로</a>
       </button>
     </div>

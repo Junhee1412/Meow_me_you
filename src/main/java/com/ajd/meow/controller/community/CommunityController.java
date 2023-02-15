@@ -56,11 +56,11 @@ public class CommunityController {
 
         communityService.write(communityMaster);
 
-        for (MultipartFile ddd : files) {
+        for (MultipartFile img : files) {
             communityMaster.setPostNo(communityMaster.getPostNo());
             communityMaster.setUserNo(loginUser.getUserNo());
 
-            communityService.saveFile(ddd, session, model, communityMaster);
+            communityService.saveFile(img, session, model, communityMaster);
         }
             model.addAttribute("message", "글 작성 완료.");
             model.addAttribute("SearchUrl", "/boardlist");
@@ -86,7 +86,6 @@ public class CommunityController {
 
         int nowPage = lists.getPageable().getPageNumber() + 1;
         int startPage = Math.max(0, 1);
-
         int endPage = Math.min(nowPage + 10, lists.getTotalPages());
 
         model.addAttribute("list", lists);
@@ -103,9 +102,6 @@ public class CommunityController {
         UserMaster loginUser = (UserMaster) session.getAttribute("user");
         model.addAttribute("user", loginUser);
 
-        CommunityMaster communityMaster = communityMasterRepository.findById(postNo).get();
-        communityMaster.setViewCount(communityMaster.getViewCount() + 1);
-
         List<CommunityImage> filess = communityImageRepository.findByPostNo(postNo);
 
         if (communityService.communityImgFindByPostNo(postNo) != null) {
@@ -116,14 +112,13 @@ public class CommunityController {
         }
         model.addAttribute("numberOfHeart",communityService.countNumberOfHeart(postNo));
 
-        // 주희 추가 230212
         if(communityService.getInfoAboutClickLike(loginUser.getUserNo(), postNo)){
             System.out.println("색칠하트");
             model.addAttribute("clickHeart",true);
         }else{
             System.out.println("빈하트");
             model.addAttribute("clickHeart",false);
-        } //230212 end
+        }
         return "community/post_view";
     }
 

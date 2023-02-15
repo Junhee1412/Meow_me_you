@@ -168,7 +168,7 @@
               <option th:selected="${user.getPhoneType()}=='LG U+'">LG U+</option>
               <option th:selected="${user.getPhoneType()}=='SKT'">SKT</option>
             </select>
-            <input type="text" class="form-control " id="sign_ph" name="phoneNumber" th:value="${user.getPhoneNumber()}" required>
+            <input type="text" class="form-control" id="sign_ph" name="phoneNumber" th:value="${user.getPhoneNumber()}" maxlength="13" required>
           </div>
 
             <div class="form-group">

@@ -22,15 +22,16 @@ public class LoginController {
     public String login(){
         return "user/login_page";
     }
+
     @PostMapping("/loginpage")
     public String login(UserMaster user, Model model){
         UserMaster findUser=userService.getUserMaster(user);
         if(findUser!=null && findUser.getUserPassword().equals(user.getUserPassword())){
             model.addAttribute("user",findUser);
             if(findUser.getUserType().equals("ADMIN")) {
-                 return "admin/admin_index"; // 어드민 페이지 따로 만드나유
+                 return "redirect:/"; // 어드민 홈으로 이동
             } else {
-                return "redirect:/"; // 로그인 후 index 페이지
+                return "redirect:/"; // 일반유저 홈으로 이동
             }
         }else {
             model.addAttribute("errMsg", "로그인 실패! 다시 입력해주세요.");

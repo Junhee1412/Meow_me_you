@@ -92,8 +92,10 @@
      <div class="header-card">
       <div class="thumb-wrapper stagger-item">
         <a href="#"
-          ><img class="thumb" src="../img/admin_mypage_profile.jpg"
-        /></a>
+          ><img style="width:200px; height:200px;"
+                th:src="@{|/upload/${user.profileImagePath}|}"
+                class="d-block w-100"
+                alt="사진1"/></a>
       </div>
 
       <div class="text-area">
@@ -119,8 +121,7 @@
       <a href="adminDonatemanage" class="list-group-item list-group-item-action">후원관리하기</a>
       
       
-      <a href="#" class="list-group-item list-group-item-action" data-toggle="modal"
-              data-target="#myModal">관리자생성하기</a>&nbsp;&nbsp;&nbsp;
+
 
               <!--  어드민 등록 Modal -->
         <div class="modal fade modal-center" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -134,38 +135,40 @@
                 <form action="adminCreate" method="post" onsubmit="return ValidChecked();" enctype="multipart/form-data">
 
 
-                  <div class="form-group">
+                  <div class="form-group text-start">
                     <label class="form-label mt-2">아이디*</label>
                     <input type="text" class="form-control" id="sign_id" name="userId" required>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group text-start">
                     <label class="form-label mt-2">비번*</label>
                     <input type="password" class="form-control" id="sign_pwd" name="userPassword" required>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group text-start">
                     <label class="form-label mt-2">비번확인*</label>
                     <input type="password" class="form-control" id="sign_pwd2" required>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group text-start">
                     <label class="form-label mt-2">이름*</label>
                     <input type="text" class="form-control" id="sign_name" name="userName" required>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group text-start">
                     <label class="form-label mt-2">닉네임*</label>
                     <input type="text" class="form-control" id="sign_nickname" name="nickName" required>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group text-start">
                     <label class="form-label mt-2">지역</label>
                     <input type="text" class="form-control" id="sign_address" name="address" value="이젠아카데미" required>
                   </div>
-                  <div class="form-group ">
+                  <div class="form-group text-start" >
                     <label class="form-label mt-2">핸드폰*</label>
-                    <select class="form-select" id="sign_phone" name="phoneType">
+                      <div id="phone_box" style="display:flex;">
+                    <select class="form-select" id="sign_phone" name="phoneType" style="width:20%;">
                       <option th:selected="${type}=='SKT'">SKT</option>
                       <option th:selected="${type}=='LG U+'">LG U+</option>
                       <option th:selected="${type}=='KT'">KT</option>
                     </select>
-                    <input type="text" class="form-control " id="sign_ph" name="phoneNumber" required>
+                    <input type="text" class="form-control " id="sign_ph" name="phoneNumber" style="width:75%; margin-left:20px;" maxlength="13" required>
+                      </div>
                   </div>
 
                 <div id=find_idpw>
@@ -176,7 +179,7 @@
               </form>
               </div>
               <div class="modal-footer mt-3">
-                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><span style="padding-left:100px;">닫기</span></button>
               </div>
             </div>
           </div>
@@ -191,6 +194,7 @@
         <!--<a href="createdonateBS.meow" class="list-group-item list-group-item-action">후원 사업게시</a>
         <a href="deletedonateBS.meow" class="list-group-item list-group-item-action">후원 사업삭제</a>--><!--비즈니스마스터-->
         <a href="adminInsertNotice" class="list-group-item list-group-item-action">공지 글 작성</a>
+          <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#myModal">관리자생성하기</a>&nbsp;&nbsp;&nbsp;
       </div>
 
       

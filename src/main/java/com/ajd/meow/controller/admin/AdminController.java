@@ -85,7 +85,13 @@ public class AdminController {
         if(session.getAttribute("user")==null){
             return "redirect:/";
         }else{
-            userService.updateMember(userMaster, file);
+            if(userMaster.getProfileImagePath()!=null) {
+                return null;
+            }else {
+                userMaster.setProfileImagePath(null);
+                userMaster.setProfileImageName(null);
+                userService.updateMember(userMaster, file);
+            }
             Optional<UserMaster> userMM=userRepository.findByUserId(userMaster.getUserId());
             model.addAttribute("user",userMM.get());
             if(userMM.get().getUserType().equals("ADMIN")){

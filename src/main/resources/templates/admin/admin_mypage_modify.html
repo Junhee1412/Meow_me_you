@@ -92,7 +92,10 @@
 <div class="insert">
     <h3>회원정보수정하기</h3>
     <div class="thumb-wrapper stagger-item">
-        <a href="#"><img class="thumb" src="../img/portfolio-2.jpg" /></a>
+        <a href="#"><img style="width:200px; height:200px;"
+                         th:src="@{|/upload/${user.profileImagePath}|}"
+                         class="d-block w-100"
+                         alt="사진1"/></a>
     </div>
 </div>
 <section>

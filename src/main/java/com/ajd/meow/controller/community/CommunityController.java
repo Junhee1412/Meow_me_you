@@ -70,11 +70,15 @@ public class CommunityController {
 
     @GetMapping("/boardlist")
     public String communityList(@PageableDefault(page = 0, size = 12, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable, HttpSession session, Model model,
-                            CommunityMaster communityMaster, String searchKeyword) {
+                            String id, CommunityMaster communityMaster, String searchKeyword) {
 
         UserMaster loginUser = (UserMaster) session.getAttribute("user");
         model.addAttribute("user", loginUser);
 
+
+        if(id=="ADP_ACT"){
+            communityService.communityList(pageable);
+        }
         //검색
         Page<CommunityMaster> lists = null;
 

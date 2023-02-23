@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -69,21 +69,21 @@
             <li class="dropdown"><a href="/"><span>Meow me, you</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
                 <li><a href="business">사업소개</a></li>
-                <li><a href="#">후원내역</a></li>
+                <li><a th:href="@{/boardlist?(id=ADP_REV)}">후원내역</a></li>
               </ul>
             </li>
             <li><a href="donatehome">후원하기</a></li>
             <li class="dropdown"><a href="#"><span>물품거래</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="#">무료 나눔</a></li>
-                <li><a href="#">중고 거래</a></li>
+                <li><a th:href="@{/boardlist?(id=FRE_SEL)}">무료 나눔</a></li>
+                <li><a th:href="@{/boardlist?(id=USD_TRN)}">중고 거래</a></li>
               </ul>
             </li>
             <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="boardlist?id=ADP_ACT">분양하기</a></li>
-                <li><a href="boardlist?id=ADP_REV">분양후기</a></li>
-                <li><a href="boardlist?id=CAT_STR">캣스타그램</a></li>
+                <li><a th:href="@{/boardlist?(id=ADP_ACT)}">분양하기</a></li>
+                <li><a th:href="@{/boardlist?(id=ADP_REV)}">분양후기</a></li>
+                <li><a th:href="@{/boardlist?(id=CAT_STR)}">캣스타그램</a></li>
               </ul>
             </li>
             <li class="dropdown"><a href="my_page"><span>마이페이지</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>

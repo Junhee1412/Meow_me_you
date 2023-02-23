@@ -27,7 +27,7 @@ public class ReplyApiController {
     }
 
     @DeleteMapping("/api/v1/board/{postNo}/reply/{replyNo}")
-    public void delete(@PathVariable Long replyNo ,HttpSession session) {
+    public void delete(@PathVariable Long replyNo) {
         System.out.println(replyNo);
 
         replyService.replyDelete(replyNo);

@@ -68,25 +68,54 @@ public class CommunityController {
         return "community/community_message";
     }
 
-    @GetMapping("/boardlist")
-    public String communityList(@PageableDefault(page = 0, size = 12, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable, HttpSession session, Model model,
-                            String id, CommunityMaster communityMaster, String searchKeyword) {
-
-        UserMaster loginUser = (UserMaster) session.getAttribute("user");
+//    @GetMapping("/boardlist")
+//    public String communityList(@PageableDefault(page = 0, size = 12, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable, HttpSession session, Model model,
+//                            String id, CommunityMaster communityMaster, String searchKeyword) {
+//
+//        UserMaster loginUser = (UserMaster) session.getAttribute("user");
+//        model.addAttribute("user", loginUser);
+//
+//
+//        if(id=="ADP_ACT"){
+//            communityService.communityList(pageable);
+//        }
+//        //검색
+//        Page<CommunityMaster> lists = null;
+//
+//            if(searchKeyword == null ) {
+//                 lists = communityService.communityList(pageable);
+//            }else {
+//                lists = communityService.communitySearchKeyword(searchKeyword,pageable);
+//            }
+//
+//        int nowPage = lists.getPageable().getPageNumber() + 1;
+//        int startPage = Math.max(0, 1);
+//        int endPage = Math.min(nowPage + 10, lists.getTotalPages());
+//
+//        model.addAttribute("list", lists);
+//        model.addAttribute("nowPage", nowPage);
+//        model.addAttribute("startPage", startPage);
+//        model.addAttribute("endPage", endPage);
+//        model.addAttribute("maxPage", 10);
+//
+//        return "community/post_list";
+//    }
+    @GetMapping("boardlist") // 내가 해보고 잇는거 230223 추가
+    public String communityList(String id, @PageableDefault(page = 0, size = 12, sort = "postNo", direction = Sort.Direction.DESC) Pageable pageable, HttpSession session, Model model, String searchKeyword){
+        if(session.getAttribute("user")==null){
+            return "redirect:/";
+        }else{
+        UserMaster loginUser=userService.getUserMaster((UserMaster)session.getAttribute("user"));
         model.addAttribute("user", loginUser);
 
-
-        if(id=="ADP_ACT"){
-            communityService.communityList(pageable);
-        }
         //검색
         Page<CommunityMaster> lists = null;
 
-            if(searchKeyword == null ) {
-                 lists = communityService.communityList(pageable);
-            }else {
-                lists = communityService.communitySearchKeyword(searchKeyword,pageable);
-            }
+        if(searchKeyword == null ) {
+            lists = communityMasterRepository.findAllByCommunityId(id, pageable);
+        }else {
+            lists = communityService.communitySearchKeyword(searchKeyword,pageable); // 수정해야함.
+        } // 검색 끝?
 
         int nowPage = lists.getPageable().getPageNumber() + 1;
         int startPage = Math.max(0, 1);
@@ -97,9 +126,12 @@ public class CommunityController {
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
         model.addAttribute("maxPage", 10);
+        model.addAttribute("comid", id);
 
         return "community/post_list";
+
     }
+}
 
     @GetMapping("/boardview") //localhost:8080/post/view?postNo=1
     public String communityPostView(HttpSession session, Model model, Long postNo, CommunityImage communityImage) {

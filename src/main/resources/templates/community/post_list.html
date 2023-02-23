@@ -197,7 +197,7 @@
               <div class="card-body p-4">
                 <div class="text-center">
                   <!-- 글 제목 -->
-                  <h5 class="fw-bolder"  th:text="${communityMaster.subject}">길에서 만난 천사 미유</h5>
+                  <h5 class="fw-bolder" th:text="${communityMaster.subject}">길에서 만난 천사 미유</h5>
                 </div>
               </div>
               <div class="text-center">
@@ -231,13 +231,13 @@
       <ul class="pagination">
         <li class="page-item" th:classappend="${1 == nowPage} ? 'disabled'">
           <a class="page-link" href="#" aria-label="Previous"
-             th:href="@{/boardlist(page=${startPage-1})}">
+             th:href="@{/boardlist(id=${comid},page=${startPage-1})}">
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
         <li class="page-item" th:classappend="${1 == nowPage} ? 'disabled'">
           <a class="page-link" href="#" aria-label="Previous"
-             th:href="@{/boardlist(page=${nowPage-2})}">
+             th:href="@{/boardlist(id=${comid},page=${nowPage-2})}">
             <span aria-hidden="true">&lt;</span>
           </a>
         </li>
@@ -246,21 +246,21 @@
             th:each="i : ${#numbers.sequence(startPage, endPage)}"
             th:if="${i >= nowPage-5 and i <= nowPage+4}">
           <a class="page-link" href="#"
-             th:href="@{/boardlist(page=${i - 1},searchKeyword = ${param.searchKeyword})}"
+             th:href="@{/boardlist(id=${comid},page=${i - 1},searchKeyword = ${param.searchKeyword})}"
              th:text="${i}">1</a></li>
 
         <li class="page-item" th:classappend="${endPage == nowPage} ? 'disabled'">
-          <a class="page-link" href="#" aria-label="Next"  th:href="@{/boardlist(page=${nowPage})}">
+          <a class="page-link" href="#" aria-label="Next"  th:href="@{/boardlist(id=${comid},page=${nowPage})}">
             <span aria-hidden="true">&gt;</span>
           </a>
         <li class="page-item" th:classappend="${endPage == nowPage} ? 'disabled'">
-          <a class="page-link" href="#" aria-label="Next"  th:href="@{/boardlist(page=${endPage-1})}">
+          <a class="page-link" href="#" aria-label="Next"  th:href="@{/boardlist(id=${comid},page=${endPage-1})}">
             <span aria-hidden="true">&raquo;</span>
           </a>
         </li>
       </ul>
     </nav>
-  <!-- section - end -->
+    <!-- section - end -->
 
 
    
